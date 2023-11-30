@@ -52,11 +52,12 @@
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
 ;;
-;;
-;;
 
 (load! "cc-init" (expand-file-name "core" doom-user-dir))
 (message "Loading core modules...done")
+
+(load! "cc-init" (expand-file-name "org" doom-user-dir))
+(message "Loading org modules...done")
 
 (load! "cc-init" (expand-file-name "languages" doom-user-dir))
 (message "Loading language modules...done")

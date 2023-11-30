@@ -1,4 +1,6 @@
 ;;; core/cc-better-defaults.el -*- lexical-binding: t; -*-
+;; TODO: May be try to use Hydra
+;; TODO: May be define function cc/kill-and-del-other-window
 
 ;; Fullscreen on startup
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
