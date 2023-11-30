@@ -77,3 +77,13 @@
 ;;
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
+;;
+;;
+(defvar cc-core-dir (expand-file-name "core" doom-user-dir))
+(defvar cc-languages-dir (expand-file-name "languages" doom-user-dir))
+
+(load! "cc-init" (expand-file-name "core" doom-user-dir))
+(message "Loading core modules...done")
+
+(load! "cc-init" (expand-file-name "languages" doom-user-dir))
+(message "Loading language modules...done")
