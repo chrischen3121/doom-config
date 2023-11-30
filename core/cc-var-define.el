@@ -1,11 +1,11 @@
 ;;; core/cc-var-define.el -*- lexical-binding: t; -*-
-(defcustom cc/default-font-size 180
-  "Adjust this font size for your system."
+(defcustom cc/default-font-size 20
+  "Adjust default font size."
   :type 'integer
   :group 'cc-config)
 
-(defcustom cc/default-variable-font-size 180
-  "Adjust this font size for your system."
+(defcustom cc/default-unicode-font-size 20
+  "Adjust unicode font size for your system."
   :type 'integer
   :group 'cc-config)
 
@@ -29,5 +29,3 @@
   "Agenda habits filename"
   :type 'string
   :group 'cc-agenda-config)
-
-(provide 'cc-var-define)
