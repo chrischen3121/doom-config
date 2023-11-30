@@ -6,18 +6,18 @@
 
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets. It is optional.
-(setq user-full-name "Chris Chen"
+(setq! user-full-name "Chris Chen"
       user-mail-address "chrischen3121@gmail.com")
 
 
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
-(setq display-line-numbers-type t)
+;; (setq! display-line-numbers-type t)
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
-(setq org-directory "~/org/")
+(setq! org-directory "~/org/")
 
 
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
@@ -53,8 +53,7 @@
 ;; they are implemented.
 ;;
 ;;
-(defvar cc-core-dir (expand-file-name "core" doom-user-dir))
-(defvar cc-languages-dir (expand-file-name "languages" doom-user-dir))
+;;
 
 (load! "cc-init" (expand-file-name "core" doom-user-dir))
 (message "Loading core modules...done")

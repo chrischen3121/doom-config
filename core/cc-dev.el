@@ -1,8 +1,6 @@
 ;;; core/cc-dev.el -*- lexical-binding: t; -*-
 
-
 (use-package! copilot
-  :defer t
   ;; :config
   ;; (setq! copilot-indent-warning-suppress t)
   :hook

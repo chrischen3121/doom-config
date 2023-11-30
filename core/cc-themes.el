@@ -27,16 +27,16 @@
 
 
 ;; just for debuging
-(defun describe-font-of-region-or-point ()
-  "Describe the font of the selected region or at point."
-  (interactive)
-  (let* ((pos (if (use-region-p)
-                  (region-beginning)
-                (point)))
-         (face (or (get-char-property pos 'read-face-name)
-                   (get-char-property pos 'face)
-                   'default)))
-    (describe-face face)))
+;; (defun describe-font-of-region-or-point ()
+;;   "Describe the font of the selected region or at point."
+;;   (interactive)
+;;   (let* ((pos (if (use-region-p)
+;;                   (region-beginning)
+;;                 (point)))
+;;          (face (or (get-char-property pos 'read-face-name)
+;;                    (get-char-property pos 'face)
+;;                    'default)))
+;;     (describe-face face)))
 
 ;; TODO: need to fix
 ;; (defun set-chinese-font (eng-font chs-font eng-size chs-size)
@@ -65,7 +65,7 @@
 (defun cc/set-default-theme-by-time ()
   """Set theme based on time of day"""
   (let ((hour (string-to-number (substring (current-time-string) 11 13))))
-    (if (or (< hour 6) (> hour 18))
+    (if (or (< hour 6) (> hour 19))
         (load-theme cc/dark-theme t)
       (load-theme cc/light-theme t))))
 

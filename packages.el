@@ -51,6 +51,11 @@
 
 (disable-packages! evil)
 
+;; Better defaults
+(package! ace-jump-mode)
+(package! whole-line-or-region)
+
+;; Development
 (package! copilot
   :recipe (:host github
            :repo "zerolfx/copilot.el"
