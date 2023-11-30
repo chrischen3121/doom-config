@@ -3,8 +3,8 @@
 
 (use-package! copilot
   :defer t
-  :config
-  (setq! copilot-indent-warning-suppress t)
+  ;; :config
+  ;; (setq! copilot-indent-warning-suppress t)
   :hook
   ((prog-mode . copilot-mode)
    (git-commit-setup . copilot-mode))

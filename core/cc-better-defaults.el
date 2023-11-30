@@ -3,3 +3,4 @@
 (map! :after vertico
       :map vertico-map
       "C-l" #'vertico-directory-delete-char)
+
