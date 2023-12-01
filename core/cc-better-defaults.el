@@ -5,6 +5,9 @@
 ;; Fullscreen on startup
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 
+;; Global which-key
+(which-key-add-key-based-replacements "C-c m" "modmap")
+
 ;; Change ace-window leading char face
 (after! ace-window
   (custom-set-faces!
