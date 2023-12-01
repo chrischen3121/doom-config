@@ -55,6 +55,9 @@
 (package! ace-jump-mode)
 (package! whole-line-or-region)
 
+;; Org
+(package! org-superstar)
+
 ;; Development
 (package! copilot
   :recipe (:host github

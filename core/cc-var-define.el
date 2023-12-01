@@ -9,11 +9,6 @@
   :type 'integer
   :group 'cc-config)
 
-(defcustom cc/frame-transparency '(90 . 90)
-  "Make frame transparency overridable."
-  :type '(cons integer integer)
-  :group 'cc-config)
-
 ;; agenda configiration
 (defcustom cc/agenda-home-dir "~/TODOs"
   "Agenda home directory"
@@ -27,5 +22,10 @@
 
 (defcustom cc/org-habits-filename "habits.org"
   "Agenda habits filename"
+  :type 'string
+  :group 'cc-agenda-config)
+
+(defcustom cc/org-quicknotes-filename "notes.org"
+  "org quicknotes filename"
   :type 'string
   :group 'cc-agenda-config)

@@ -53,6 +53,8 @@
 ;; they are implemented.
 ;;
 
+(load! "mycustom")
+
 (load! "cc-init" (expand-file-name "core" doom-user-dir))
 (message "Loading core modules...done")
 

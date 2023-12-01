@@ -79,3 +79,6 @@
         "C-c m p" #'org-set-property-and-value
         "C-c m l" #'org-latex-preview
         "C-c m i" #'org-toggle-inline-images))
+
+(use-package! org-superstar
+  :hook (org-mode . org-superstar-mode))
