@@ -11,4 +11,5 @@
         ("<tab>" . copilot-accept-completion)
         ("M-n" . copilot-next-completion)
         ("M-p" . copilot-previous-completion)
+        ("M-l" . copilot-accept-completion-by-line)
         ))

@@ -10,22 +10,22 @@
   :group 'cc-config)
 
 ;; agenda configiration
-(defcustom cc/agenda-home-dir "~/TODOs"
+(defcustom cc/org-home-dir "~/org/"
   "Agenda home directory"
   :type 'string
   :group 'cc-agenda-config)
 
-(defcustom cc/org-todo-filename "todo.org"
-  "Agenda todo filename"
-  :type 'string
-  :group 'cc-agenda-config)
+;; (defcustom cc/org-todo-filename "todo.org"
+;;   "Agenda todo filename"
+;;   :type 'string
+;;   :group 'cc-agenda-config)
 
-(defcustom cc/org-habits-filename "habits.org"
-  "Agenda habits filename"
-  :type 'string
-  :group 'cc-agenda-config)
+;; (defcustom cc/org-habits-filename "habits.org"
+;;   "Agenda habits filename"
+;;   :type 'string
+;;   :group 'cc-agenda-config)
 
-(defcustom cc/org-quicknotes-filename "notes.org"
-  "org quicknotes filename"
-  :type 'string
-  :group 'cc-agenda-config)
+;; (defcustom cc/org-quicknotes-filename "notes.org"
+;;   "org quicknotes filename"
+;;   :type 'string
+;;   :group 'cc-agenda-config)

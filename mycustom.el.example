@@ -2,7 +2,5 @@
 
 (setq! cc/default-font-size 20
        cc/default-unicode-font-size 20
-       cc/agenda-home-dir "~/TODOs"
-       cc/org-todo-filename "todo.org"
-       cc/org-habits-filename "habits.org"
+       cc/org-home-dir "~/orgs/"
        )

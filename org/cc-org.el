@@ -72,13 +72,38 @@
              ("shell" . "src shell")
              ("conf" . "src conf")))
     (add-to-list 'org-structure-template-alist lang))
-  (map! :map org-mode-map
-        "M-S-<return>" #'org-table-copy-down
-        "S-<return>" #'org-insert-todo-heading
-        "C-c m s" #'org-insert-structure-template
-        "C-c m p" #'org-set-property-and-value
-        "C-c m l" #'org-latex-preview
-        "C-c m i" #'org-toggle-inline-images))
+  (which-key-add-keymap-based-replacements org-mode-map "C-c m I" "org-id")
+  )
+
+;; Keybindings
+(map! :after org
+      :map org-mode-map
+      "M-S-<return>" #'org-table-copy-down
+      "S-<return>" #'org-insert-todo-heading
+      "C-c m s" #'org-insert-structure-template
+      "C-c m p" #'org-set-property
+      "C-c m I c" #'org-id-get-create
+      "C-c m I g" #'org-id-goto
+      "C-c m I w" #'org-id-copy
+      "C-c m I l" #'org-id-store-link
+      "C-c m l" #'org-latex-preview
+      "C-c m i" #'org-toggle-inline-images)
+
+;; org-tag-alist
+;; '(("Learning" . ?l)
+;;   ("ML" . ?L)
+;;   ("Hobby" . ?h)
+;;   ("Housekeeping" . ?k)
+;;   ("English" . ?e)
+;;   ("Child" . ?c)
+;;   ("CS" . ?s)
+;;   ("Finance" . ?f)
+;;   ("CPP" . ?+)
+;;   ("Python" . ?p)
+;;   ("Math" . ?M)
+;;   ("Frontend" . ?F)
+;;   ("Backend" . ?b)
+;;   ("Database" . ?d))
 
 (use-package! org-superstar
   :hook (org-mode . org-superstar-mode))

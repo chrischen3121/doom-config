@@ -8,6 +8,12 @@
 ;; Global which-key
 (which-key-add-key-based-replacements "C-c m" "modmap")
 
+;; Dired
+(map! :after dired
+      :map dired-mode-map
+      "C-l" #'dired-up-directory)
+
+
 ;; Change ace-window leading char face
 (after! ace-window
   (custom-set-faces!

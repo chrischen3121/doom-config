@@ -1,165 +1,186 @@
 ;;; org/cc-agenda.el -*- lexical-binding: t; -*-
-;; TODO: think and change
+;;
+;; DOOM org-todo-keywords explanation
+;;
+;; ----------------------------------------
+;; Group 1
+;; This sequence is used for projects
+;;
+;; TODO: A task that needs to be done.
+;; PROJ: A project, which is a collection of tasks.
+;; LOOP: A recurring task.
+;; STRT: A task that has been started.
+;; WAIT: A task that is waiting on something or someone.
+;; HOLD: A task that is on hold.
+;; IDEA: An idea that might be turned into a task later.
+;; ---------
+;; DONE: A task that has been completed.
+;; KILL: A task that has been cancelled or is no longer applicable.
+;;
+;; ----------------------------------------
+;; Group 2
+;; This sequence is used for tasks
+;;
+;; [ ]: An incomplete checklist item.
+;; [-]: A checklist item that is in progress.
+;; [?]: A checklist item that is in a state of uncertainty or waiting.
+;; ---------
+;; [X]: A completed checklist item.
+;;
+;; ----------------------------------------
+;; Group 3
+;; This sequence is likely used for items that represent a decision or an approval process
+;; OKAY: An item that is deemed okay or acceptable.
+;; YES: An affirmative decision.
+;; NO: A negative decision.
 
-(setq! org-directory cc/agenda-home-dir
-       cc/org-todo-file
-       (expand-file-name cc/org-todo-filename cc/agenda-home-dir)
-       cc/org-quicknotes-file
-       (expand-file-name cc/org-quicknotes-filename cc/agenda-home-dir)
-       cc/org-habits-file
-       (expand-file-name cc/org-habits-filename cc/agenda-home-dir))
+(setq! org-directory cc/org-home-dir
+       org-agenda-files `(,cc/org-home-dir))
 
-(after! recentf
-  (add-to-list 'recentf-exclude cc/org-todo-file)
-  (add-to-list 'recentf-exclude cc/org-quicknotes-file)
-  (add-to-list 'recentf-exclude cc/org-habits-file))
+(after! org
+  (setq! org-log-repeat nil
+         +org-capture-journal-file (expand-file-name "journal.org" org-directory)
+         cc/org-capture-habits-file "habits.org"
+         org-deadline-warning-days 5
+         org-log-done 'time
+         org-log-into-drawer t)
+
+  (setq! org-capture-templates
+         '(("t" "Quick todo" entry
+            (file+headline +org-capture-todo-file "Quick Tasks")
+            "* [ ] %?\n%U\n" :prepend t)
+           ("s" "Quick start" entry
+            (file+headline +org-capture-todo-file "Quick Tasks")
+            "* [-] %?\n%U\n"
+            :clock-in t :clock-keep t prepend t)
+           ("n" "Quick ideas" entry
+            (file+headline +org-capture-notes-file "Ideas")
+            "* %u %?\n%i\n" :prepend t)
+           ("c" "Start a cource" entry
+            (file+headline +org-capture-todo-file "Courses")
+            "* PROJ %^{Course name}\n%i\nSTARTED:%u\n\n** TODO L1%?"
+            :prepend t :empty-lines 1)
+           ("b" "Start a book" entry
+            (file+headline +org-capture-todo-file "Books")
+            "* PROJ %^{Book name}\n%i\nSTARTED:%u\n** TODO C1%?"
+            :empty-lines 1)
+           ("p" "Personal projects" entry
+            (file+headline +org-capture-todo-file "Projects")
+            "* PROJ %^{Project name}\n%i\nCREATED:%u\n** TODO Task1%?"
+            :prepend t :empty-lines 1)
+           ("l" "Templates for local projects")
+           ("lt" "Project-local todo" entry
+            (file+headline +org-capture-project-todo-file "TODOs")
+            "* [ ] %?\n%i\n" :prepend t)
+           ("ln" "Project-local notes" entry
+            (file+headline +org-capture-project-notes-file "Notes")
+            "* %U %?\n%i\n" :prepend t)
+           ("lc" "Project-local changelog" entry
+            (file+headline +org-capture-project-changelog-file "Unreleased")
+            "* %U %?\n%i\n%a" :prepend t)
+           ("j" "Journal" entry
+            (file+olp+datetree +org-capture-journal-file)
+            "* %u %?\n%i\n" :prepend t)
+           ("h" "Create a habit")
+           ("hd" "Daily habit" entry
+            (file+headline cc/org-capture-habits-file "Habits")
+            "* [ ] [#C] %^{Habit Name}\nSCHEDULED: <%<%Y-%m-%d %a> .+1d>\n"
+            :prepend t :empty-lines 1
+            )
+           ("hw" "Weekly habit" entry
+            (file+headline cc/org-capture-habits-file "Habits")
+            "* [ ] [#C] %^{Habit Name}\nSCHEDULED: <%<%Y-%m-%d %a> .+1w>\n"
+            :prepend t :empty-lines 1
+            )
+           ("hm" "Monthly habit" entry
+            (file+headline cc/org-capture-habits-file "Habits")
+            "* [ ] [#C] %^{Habit Name}\nSCHEDULED: <%<%Y-%m-%d %a> .+1m>\n"
+            :prepend t :empty-lines 1
+            )
+           )
+         )
+  )
 
 (after! org-agenda
-  (setq! org-agenda-files
-         (directory-files-recursively cc/agenda-home-dir "\\.org$")
-         org-default-notes-file cc/org-quicknotes-file
-         org-capture-templates
-         '(("p" "Project" entry
-            (file+headline cc/org-todo-file "Projects")
-            "* TODO %^{Project Name}\n%U\n\n** Tasks\n\n%?"
-            :empty-lines 1)
-           ("h" "Habit" entry
-            (file+headline cc/org-habits-file "Habits")
-            "* HABIT [#C] %^{Habit}\nSCHEDULED:%T\n" :empty-lines 1)
-           ("b" "Book" entry
-            (file+headline cc/org-todo-file "Books")
-            "* TODO %^{Book Name}%^g\n%U\n" :empty-lines 1)
-           ("c" "Course" entry
-            (file+headline cc/org-todo-file "Courses")
-            "* TODO %^{Course Name}%^g\n%U\n" :empty-lines 1)
-           ("w" "Work" entry
-            (file+headline cc/org-todo-file "Work")
-            "* TODO %?%^g\n%U\n" :empty-lines 1)
-           ("m" "Meeting" entry
-            (file+olp cc/org-todo-file "Work" "Meetings")
-            "* TODO %?\n%U\n"
-            :clock-in :clock-resume
-            :empty-lines 1))
-         org-refile-targets
-         '((nil :level . 1)
-           (org-agenda-files :level . 1))
-         org-export-with-todo-keywords nil
-         org-todo-keywords
-         '((sequence "TODO(t)" "NEXT(n)" "HOLD(h)"  "|" "DONE(d!)" "CANCELED(c)")
-           (sequence "BUG(b)" "REPORT(r)" "REVIEW(w)" "ISSUE(i)" "WARNING(w)" "|" "FIXED(f" "CANCELED(c")
-           (sequence "HABIT(h)" "|" "DONE(d!)" "CANCELED(c")
-           )
-         org-todo-keyword-faces
-         '(("TODO" . "dark salmon")
-           ("NEXT" . "light blue")
-           ("HOLD" . "medium purple")
-           ("DONE" . "light green")
-           ("CANCELED" .  "dark gray")
-           ("BUG" . "red")
-           ("REPORT" . "blue")
-           ("REVIEW" . "purple")
-           ("ISSUE" . "magenta")
-           ("WARNING" . "orange")
-           ("HABIT" . "dark green")
-           ("FIXED" . "light green")
-           ("CANCELED" . "dark gray")
-           )
+  (setq! org-agenda-start-with-log-mode t)
+  (map! :map org-agenda-mode-map
+        "C" #'org-agenda-columns))
 
-         org-clock-in-switch-to-state "NEXT"
+(after! org-clock
+  (defun cc/org-clock-in-switch-state (state)
+    "Switch to a new task state while clocking in, depending on the current STATE."
+    (cond
+     ((equal state "TODO") "STRT")
+     ((equal state "[ ]") "[-]")
+     ;; Otherwise, do not change the state
+     (t state)))
 
-         ;; Clock configuration
-         org-deadline-warning-days 5
-         org-clock-out-remove-zero-time-clocks t
-         org-clock-out-when-done t
-         org-clock-in-resume t
-         org-clock-report-include-clocking-task t
-         org-log-done 'time
-         org-log-into-drawer t
-         org-clock-persist t
-         org-clock-persist-query-resume nil ; Do not prompt to resume an active clock
+  (setq! org-clock-in-switch-to-state #'cc/org-clock-in-switch-state
+         org-clock-report-include-clocking-task t)
+  )
 
-         ;; Agenda configuration
-         org-tag-alist
-         '(("Learning" . ?l)
-           ("ML" . ?L)
-           ("Hobby" . ?h)
-           ("Housekeeping" . ?k)
-           ("English" . ?e)
-           ("Child" . ?c)
-           ("CS" . ?s)
-           ("Finance" . ?f)
-           ("CPP" . ?+)
-           ("Python" . ?p)
-           ("Math" . ?M)
-           ("Frontend" . ?F)
-           ("Backend" . ?b)
-           ("Database" . ?d))
-         org-agenda-custom-commands
-         '(;; Daily dashboard
-           ("d" "Dashboard"
-            ((agenda "" ((org-deadline-warning-days 5)
-                         (org-agenda-span 3)
-                         (org-agenda-repeating-timestamp-show-all t)))
-             (todo "NEXT"
-                   ((org-agenda-overriding-header "Next Tasks")
-                    (org-agenda-sorting-strategy '(priority-up effort-down))))
-             (stuck "") ; review stuck projects as designated by org-stuck-projects
-             ))
+(after! org
+  (which-key-add-keymap-based-replacements org-mode-map "C-c m c" "org-clock")
+  (map!
+   :map org-mode-map
+   "C-c m c e" #'org-set-effort
+   "C-c m c E" #'org-clock-modify-effort-estimate
+   "C-c m c c" #'org-clock-cancel
+   "C-c m c g" #'org-clock-goto
+   "C-c m c i" #'org-clock-in
+   "C-c m c o" #'org-clock-out))
 
-           ;; Weekly review
-           ("r" "Weekly Review"
-            ((agenda "" ((org-deadline-warning-days 15)
-                         (org-agenda-span 7)
-                         (org-agenda-sorting-strategy '(priority-up effort-down))))
-             (stuck "")
-             (todo "DONE")))
+;; ;; Agenda configuration
+;; org-agenda-custom-commands
+;; '(;; Daily dashboard
+;;   ("d" "Dashboard"
+;;    ((agenda "" ((org-deadline-warning-days 5)
+;;                 (org-agenda-span 3)
+;;                 (org-agenda-repeating-timestamp-show-all t)))
+;;     (todo "NEXT"
+;;           ((org-agenda-overriding-header "Next Tasks")
+;;            (org-agenda-sorting-strategy '(priority-up effort-down))))
+;;     (stuck "") ; review stuck projects as designated by org-stuck-projects
+;;     ))
 
-           ;; tags-todo
-           ("g" "GTD Tagged Agenda"
-            ((tags-todo "Work")
-             (tags-todo "Learning")
-             (tags-todo "Project")
-             (tags-todo "Child")
-             (tags-todo "English"))
-            nil)
+;;   ;; Weekly review
+;;   ("r" "Weekly Review"
+;;    ((agenda "" ((org-deadline-warning-days 15)
+;;                 (org-agenda-span 7)
+;;                 (org-agenda-sorting-strategy '(priority-up effort-down))))
+;;     (stuck "")
+;;     (todo "DONE")))
 
-           ;; Upcoming deadlines
-           ("D" "Upcoming Deadlines" agenda ""
-            ((org-agenda-entry-types '(:deadline))
-             (org-agenda-span 1)
-             (org-deadline-warning-days 90)
-             (org-agenda-time-grid nil)))
+;;   ;; tags-todo
+;;   ("g" "GTD Tagged Agenda"
+;;    ((tags-todo "Work")
+;;     (tags-todo "Learning")
+;;     (tags-todo "Project")
+;;     (tags-todo "Child")
+;;     (tags-todo "English"))
+;;    nil)
 
-           ;; Archive search
-           ("A" "Archive Search" search ""
-            ((org-agenda-files (directory-files-recursively cc/agenda-home-dir ".org_archive$"))))
+;;   ;; Upcoming deadlines
+;;   ("D" "Upcoming Deadlines" agenda ""
+;;    ((org-agenda-entry-types '(:deadline))
+;;     (org-agenda-span 1)
+;;     (org-deadline-warning-days 90)
+;;     (org-agenda-time-grid nil)))
 
-           ;; Effort
-           ("t" "Effort Table" alltodo ""; "DONE"
-            ((org-columns-default-format-for-agenda
-              "%10CATEGORY %15ITEM(TASK) %2PRIORITY %5TODO %SCHEDULED %DEADLINE %5EFFORT(ESTIMATED){:} %5CLOCKSUM(SPENT)")
-             (org-agenda-view-columns-initially t)
-             (org-agenda-span 30)))
+;;   ;; Archive search
+;;   ("A" "Archive Search" search ""
+;;    ((org-agenda-files (directory-files-recursively cc/org-home-dir ".org_archive$"))))
 
-           ;; Low-effort next actions
-           ("e" tags-todo "+TODO=\"NEXT\"+Effort<30&+Effort>0"
-            ((org-agenda-overriding-header "Low Effort Tasks")
-             (org-agenda-max-todos 15)
-             (org-agenda-files org-agenda-files))))
-         org-agenda-start-with-log-mode t
-         ))
+;;   ;; Effort
+;;   ("t" "Effort Table" alltodo ""; "DONE"
+;;    ((org-columns-default-format-for-agenda
+;;      "%10CATEGORY %15ITEM(TASK) %2PRIORITY %5TODO %SCHEDULED %DEADLINE %5EFFORT(ESTIMATED){:} %5CLOCKSUM(SPENT)")
+;;     (org-agenda-view-columns-initially t)
+;;     (org-agenda-span 30)))
 
-(after! org-superstar
-  (setq! org-superstar-special-todo-items t
-         org-superstar-todo-bullet-alist
-         '(("TODO" . ?☐)
-           ("NEXT" . ?➡)
-           ("HOLD" . ?⧖)
-           ("DONE" . ?✔)
-           ("CANCELED" . ?✘)
-           ("BUG" . ?)
-           ("REPORT" . ?)
-           ("REVIEW" . ?)
-           ("ISSUE" . ?)
-           ("WARNING" . ?)
-           ("HABIT" . ?))))
+;;   ;; Low-effort next actions
+;;   ("e" tags-todo "+TODO=\"NEXT\"+Effort<30&+Effort>0"
+;;    ((org-agenda-overriding-header "Low Effort Tasks")
+;;     (org-agenda-max-todos 15)
+;;     (org-agenda-files org-agenda-files))))
+;; )
