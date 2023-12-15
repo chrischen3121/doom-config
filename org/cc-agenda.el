@@ -102,10 +102,58 @@
   )
 
 (after! org-agenda
+  ;; Customized agenda views
+  (setq! org-agenda-custom-commands
+         '(
+           ;; Daily review
+           ("d" "Daily Dashboard"
+                 ((todo "STRT|[-]"
+                        ((org-agenda-overriding-header "In Progress")
+                         (org-agenda-sorting-strategy '(priority-up effort-down))))
+                  (agenda ""
+                          ((org-agenda-span 3)
+                           (org-agenda-start-day "0d") ; "-1d" for yesterday
+                           (org-deadline-warning-days 5)
+                           (org-agenda-overriding-header "Today's Agenda")))
+                  ))
+
+           ;; Weekly review
+           ("r" "Weekly Review"
+                 ((agenda ""
+                          ((org-agenda-span 10)
+                           (org-agenda-start-day "-7d")
+                           (org-deadline-warning-days 7)
+                           (org-agenda-overriding-header "Weekly Review")
+                           ))
+                  (stuck ""
+                         ((org-agenda-overriding-header "Stuck Projects")
+                          ))
+                  (todo "DONE"
+                        ((org-agenda-overriding-header "Completed Tasks")
+                         (org-agenda-sorting-strategy '(priority-up effort-down))
+                         ))
+                  ))
+
+           ;; Archive search
+           ("A" "Archive Search" search ""
+            ((org-agenda-files (directory-files-recursively cc/org-home-dir ".org_archive$"))))
+
+           ;; Effort review
+           ("t" "Effort Table" alltodo ""
+            ((org-columns-default-format-for-agenda
+              "%10CATEGORY %15ITEM(TASK) %2PRIORITY %5TODO %SCHEDULED %DEADLINE %5EFFORT(ESTIMATED){:} %5CLOCKSUM(SPENT)")
+             (org-agenda-view-columns-initially t)
+             (org-agenda-start-day "-7d")
+             (org-agenda-span 10)))
+           )
+         )
+
   (setq! org-agenda-start-with-log-mode t
          org-agenda-show-future-repeats nil)
   (map! :map org-agenda-mode-map
-        "C" #'org-agenda-columns))
+        "C" #'org-agenda-columns)
+  )
+
 
 (after! org-clock
   (defun cc/org-clock-in-switch-state (state)
@@ -132,15 +180,7 @@
    "C-c m c o" #'org-clock-out))
 
 ;; append to the global org-agenda-custom-commands list
-(add-to-list 'org-agenda-custom-commands
-             '("d" "Daily Dashboard"
-               ((todo "STRT|[-]"
-                      ((org-agenda-overriding-header "In Progress")
-                       (org-agenda-sorting-strategy '(priority-up effort-down))))
-                (agenda "" ((org-agenda-span 3)
-                            (org-deadline-warning-days 5)
-                            (org-agenda-overriding-header "Today's Agenda")))
-                )))
+
 
 ;; ;; Agenda configuration
 ;; org-agenda-custom-commands
