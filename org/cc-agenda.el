@@ -40,7 +40,7 @@
 (after! org
   (setq! org-log-repeat nil
          +org-capture-journal-file (expand-file-name "journal.org" org-directory)
-         cc/org-capture-habits-file "habits.org"
+         cc/org-capture-habits-file (expand-file-name "habits.org" org-directory)
          org-deadline-warning-days 5
          org-log-done 'time
          org-log-into-drawer t)
@@ -102,7 +102,8 @@
   )
 
 (after! org-agenda
-  (setq! org-agenda-start-with-log-mode t)
+  (setq! org-agenda-start-with-log-mode t
+         org-agenda-show-future-repeats nil)
   (map! :map org-agenda-mode-map
         "C" #'org-agenda-columns))
 
@@ -129,6 +130,17 @@
    "C-c m c g" #'org-clock-goto
    "C-c m c i" #'org-clock-in
    "C-c m c o" #'org-clock-out))
+
+;; append to the global org-agenda-custom-commands list
+(add-to-list 'org-agenda-custom-commands
+             '("d" "Daily Dashboard"
+               ((todo "STRT|[-]"
+                      ((org-agenda-overriding-header "In Progress")
+                       (org-agenda-sorting-strategy '(priority-up effort-down))))
+                (agenda "" ((org-agenda-span 3)
+                            (org-deadline-warning-days 5)
+                            (org-agenda-overriding-header "Today's Agenda")))
+                )))
 
 ;; ;; Agenda configuration
 ;; org-agenda-custom-commands
