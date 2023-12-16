@@ -56,6 +56,7 @@
 (package! whole-line-or-region)
 
 ;; Org
+(package! anki-editor)
 (package! org-superstar)
 
 ;; Development

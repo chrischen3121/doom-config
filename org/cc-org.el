@@ -89,6 +89,47 @@
       "C-c m l" #'org-latex-preview
       "C-c m i" #'org-toggle-inline-images)
 
+;; org-protocol configuration for Logseq
+(use-package! org-protocol
+  :after org
+  :config
+  (add-to-list 'org-protocol-protocol-alist
+               '("org-protocol-logseq" :protocol "find-file" :function org-protocol-logseq :kill-client nil))
+  (defun org-protocol-logseq (fname)
+    "Process org-protocol://find-file?path= style URL."
+    (let ((f (plist-get (org-protocol-parse-parameters fname nil '(:path)) :path)))
+      (find-file f)
+      (raise-frame)
+      (select-frame-set-input-focus (selected-frame)))))
+
+;; anki-editor
+(use-package! anki-editor
+  :after org
+  :config
+  (setq! cc/org-anki-file (expand-file-name "anki.org" org-directory))
+  (setq! anki-editor-create-decks t
+         anki-editor-org-tags-as-anki-tags t
+         anki-editor-use-math-jax t
+         anki-editor-export-preamble nil
+         anki-editor-export-index t
+         anki-editor-org-file cc/org-anki-file
+         anki-editor-new-notes-format "* %s :drill:\n:PROPERTIES:\n:ANKI_NOTE_TYPE: Basic\n:ANKI_DECK: %s\n:END:\n** Front\n%s\n** Back\n%s"
+         anki-editor-cloze-delete-func 'anki-editor-cloze-delete-blank
+         anki-editor-cloze-delete-blank 'anki-editor-cloze-delete-blank
+         anki-editor-cloze-delete-all 'anki-editor-cloze-delete-all
+         anki-editor-cloze-delete-region 'anki-editor-cloze-delete-region)
+  (which-key-add-keymap-based-replacements org-mode-map "C-c k" "anki")
+  :bind (:map org-mode-map
+              ("C-c k p" . anki-editor-push-notes)
+              ("C-c k c" . anki-editor-cloze-dwim)
+              ("C-c k i" . anki-editor-insert-note)
+              ("C-c k u" . anki-editor-update-note)
+              ("C-c k 0" . anki-editor-clear-cloze))
+  )
+
+(use-package! org-superstar
+  :hook (org-mode . org-superstar-mode))
+
 ;; org-tag-alist
 ;; '(("Learning" . ?l)
 ;;   ("ML" . ?L)
@@ -104,6 +145,3 @@
 ;;   ("Frontend" . ?F)
 ;;   ("Backend" . ?b)
 ;;   ("Database" . ?d))
-
-(use-package! org-superstar
-  :hook (org-mode . org-superstar-mode))
