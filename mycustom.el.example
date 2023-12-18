@@ -3,4 +3,5 @@
 (setq! cc/default-font-size 20
        cc/default-unicode-font-size 20
        cc/org-home-dir "~/orgs/"
+       cc/spell-personal-dictionary "~/en.pws"
        )

@@ -2,10 +2,43 @@
 ;; TODO: May be try to use Hydra
 ;; TODO: May be define function cc/kill-and-del-other-window
 
+
 ;; Fullscreen on startup
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 
+;; Disable "continue comments" functionality
 (advice-remove 'newline-and-indent '+default--newline-indent-and-continue-comments-a)
+
+;; +calendar
+(after! calfw
+  (setq! calendar-week-start-day 1))
+
+;; ;; checkers
+;; (use-package! langtool
+;;   :init
+;;   (which-key-add-key-based-replacements "C-c ! l" "langtool")
+;;   :bind
+;;   (:map mode-specific-map
+;;         ("! l !" . langtool-check)
+;;         ("! l c" . langtool-correct-buffer)))
+
+;; (add-hook! spell-fu-mode-hook
+;;   (spell-fu-dictionary-add
+;;    (spell-fu-get-personal-dictionary "en-personal" cc/spell-personal-dictionary)))
+
+;; (after! spell-fu
+;;   (defface my-spell-fu-incorrect-face
+;;     '((t :underline (:color "LightBlue" :style wave)))
+;;     "Face for spell-fu incorrect words."
+;;     :group 'spell-fu)
+;;   (setq! spell-fu-idle-delay 0.5)
+;;   (which-key-add-key-based-replacements "C-c ! s" "spell")
+;;   (map! :map mode-specific-map
+;;         "! s n" #'spell-fu-goto-next-error
+;;         "! s p" #'spell-fu-goto-previous-error
+;;         "! s c" #'+spell/correct
+;;         "! s a" #'+spell/add-word
+;;         "! s r" #'+spell/remove-word))
 
 ;; Global which-key
 (which-key-add-key-based-replacements "C-c m" "modmap")
@@ -14,7 +47,6 @@
 (map! :after dired
       :map dired-mode-map
       "C-l" #'dired-up-directory)
-
 
 ;; Change ace-window leading char face
 (after! ace-window
