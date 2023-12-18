@@ -5,6 +5,8 @@
 ;; Fullscreen on startup
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 
+(advice-remove 'newline-and-indent '+default--newline-indent-and-continue-comments-a)
+
 ;; Global which-key
 (which-key-add-key-based-replacements "C-c m" "modmap")
 

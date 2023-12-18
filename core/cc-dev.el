@@ -1,24 +1,34 @@
 ;;; core/cc-dev.el -*- lexical-binding: t; -*-
 
-;; enhanced company-yasnippet
-(defun cc/company-to-yasnippet ()
-  "Abort company completion and start Yasnippet selection."
-  (interactive)
-  (when (company-manual-begin)  ; Check if company is active
-    (company-abort)            ; Abort company completion
-    (company-yasnippet)))      ; Start Yasnippet selection
+;; outline settings
+(after! outline
+  (which-key-add-key-based-replacements "C-c @" "outline"))
 
+;; company settings
 (map! :map prog-mode-map
       "M-/" #'company-yasnippet
+      "M-<RET>" #'+default--newline-indent-and-continue-comments-a
       :map company-active-map
-      "M-/" #'cc/company-to-yasnippet)
+      "M-/" #'company-abort)
 
-;; TODO: cancel company-popup and pop up yasnippet menu
-;; (def advice/company-yasnippet
-;;   (around company-yasnippet-popup-adv activate)
-;;   (let ((company-tooltip-limit 1))
-;;     ad-do-it))
 
+(defun cc/set-default-text-backends ()
+  (setq-local company-backends
+              '(company-capf
+                company-files
+                (:separate company-dabbrev company-yasnippet company-ispell))
+              ))
+
+(defun cc/set-default-code-backends ()
+  (setq-local company-backends
+              '((:separate company-capf company-yasnippet) company-yasnippet company-files)
+              ))
+
+(add-hook! 'prog-mode-hook #'cc/set-default-code-backends)
+(add-hook! 'text-mode-hook #'cc/set-default-text-backends)
+
+
+;; copilot
 (use-package! copilot
   ;; :config
   ;; (setq! copilot-indent-warning-suppress t)
