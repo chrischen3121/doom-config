@@ -58,7 +58,8 @@
 ;; (setq! doom-theme 'doom-gruvbox)
 ;; (setq! doom-theme 'doom-tomorrow-day)
 
-(defvar cc/light-theme 'doom-tomorrow-day)
+;; (defvar cc/light-theme 'doom-tomorrow-day)
+(defvar cc/light-theme 'doom-gruvbox-light)
 (defvar cc/dark-theme 'doom-palenight)
 
 ;; Set default theme to light if it's daytime, dark if it's night
