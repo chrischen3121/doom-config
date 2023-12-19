@@ -10,30 +10,31 @@
   (map! "C-c o c" #'+calendar/open-calendar))
 
 ;; :checkers
-;; langtool for grammer check
+;; langtool for grammar check
 (when (modulep! :checkers grammar)
   (which-key-add-key-based-replacements "C-c ! l" "langtool")
-  (map! "C-c ! l !" #'langtool-check
-        "C-c ! l c" #'langtool-correct-buffer))
+  (map! :map mode-specific-map
+        "! l !" #'langtool-check
+        "! l c" #'langtool-correct-buffer))
 
-;; (add-hook! spell-fu-mode-hook
-;;   (spell-fu-dictionary-add
-;;    (spell-fu-get-personal-dictionary "en-personal" cc/spell-personal-dictionary)))
+;; spell-fu
+(after! spell-fu
+  (custom-set-faces!
+    '(spell-fu-incorrect-face :underline (:color "cyan" :style wave)))
+  (setq! spell-fu-idle-delay 0.5)
+  (add-hook! spell-fu-mode
+    (spell-fu-dictionary-add
+     (spell-fu-get-personal-dictionary
+      "en-personal" cc/spell-personal-dictionary)))
+  (map! :map mode-specific-map
+        "! s n" #'spell-fu-goto-next-error
+        "! s p" #'spell-fu-goto-previous-error
+        "! s c" #'+spell/correct
+        "! s a" #'+spell/add-word
+        "! s r" #'+spell/remove-word))
 
-;; (after! spell-fu
-;;   (defface my-spell-fu-incorrect-face
-;;     '((t :underline (:color "LightBlue" :style wave)))
-;;     "Face for spell-fu incorrect words."
-;;     :group 'spell-fu)
-;;   (setq! spell-fu-idle-delay 0.5)
-;;   (which-key-add-key-based-replacements "C-c ! s" "spell")
-;;   (map! :map mode-specific-map
-;;         "! s n" #'spell-fu-goto-next-error
-;;         "! s p" #'spell-fu-goto-previous-error
-;;         "! s c" #'+spell/correct
-;;         "! s a" #'+spell/add-word
-;;         "! s r" #'+spell/remove-word))
 
+;; TODO: next
 ;; Global which-key
 (which-key-add-key-based-replacements "C-c m" "modmap")
 
