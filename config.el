@@ -58,8 +58,8 @@
 (load! "cc-init" (expand-file-name "core" doom-user-dir))
 (message "Loading core modules...done")
 
-(load! "cc-init" (expand-file-name "org" doom-user-dir))
-(message "Loading org modules...done")
+;; (load! "cc-init" (expand-file-name "org" doom-user-dir))
+;; (message "Loading org modules...done")
 
-(load! "cc-init" (expand-file-name "languages" doom-user-dir))
-(message "Loading language modules...done")
+;; (load! "cc-init" (expand-file-name "languages" doom-user-dir))
+;; (message "Loading language modules...done")

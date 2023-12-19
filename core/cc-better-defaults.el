@@ -2,25 +2,19 @@
 ;; TODO: May be try to use Hydra
 ;; TODO: May be define function cc/kill-and-del-other-window
 
-
-;; Fullscreen on startup
-(add-to-list 'default-frame-alist '(fullscreen . maximized))
-
-;; Disable "continue comments" functionality
-(advice-remove 'newline-and-indent '+default--newline-indent-and-continue-comments-a)
-
+;; :app
 ;; +calendar
-(after! calfw
-  (setq! calendar-week-start-day 1))
+(when (modulep! :app calendar)
+  (setq! calendar-week-start-day 1)
+  (which-key-add-key-based-replacements "C-c o c" "Calendar")
+  (map! "C-c o c" #'+calendar/open-calendar))
 
-;; ;; checkers
-;; (use-package! langtool
-;;   :init
-;;   (which-key-add-key-based-replacements "C-c ! l" "langtool")
-;;   :bind
-;;   (:map mode-specific-map
-;;         ("! l !" . langtool-check)
-;;         ("! l c" . langtool-correct-buffer)))
+;; :checkers
+;; langtool for grammer check
+(when (modulep! :checkers grammar)
+  (which-key-add-key-based-replacements "C-c ! l" "langtool")
+  (map! "C-c ! l !" #'langtool-check
+        "C-c ! l c" #'langtool-correct-buffer))
 
 ;; (add-hook! spell-fu-mode-hook
 ;;   (spell-fu-dictionary-add

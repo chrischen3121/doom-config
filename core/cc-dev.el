@@ -12,6 +12,7 @@
       "M-/" #'company-abort)
 
 
+;; TODO: setting company-backends doesn't work
 (defun cc/set-default-text-backends ()
   (setq-local company-backends
               '(company-capf
