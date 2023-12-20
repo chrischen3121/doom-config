@@ -9,8 +9,8 @@
   :type 'integer
   :group 'cc-config)
 
-(defcustom cc/spell-personal-dictionary "~/en.pws"
-  "Personal dictionary for spell checking."
+(defcustom cc/personal-dictionary-dir "~/dicts/"
+  "Personal dictionary directory."
   :type 'string
   :group 'cc-config)
 

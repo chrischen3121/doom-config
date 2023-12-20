@@ -1,6 +1,6 @@
 ;;; core/cc-dev.el -*- lexical-binding: t; -*-
 
-;; outline settings
+;; outline settings (hide/show)
 (after! outline
   (which-key-add-key-based-replacements "C-c @" "outline"))
 
@@ -11,22 +11,36 @@
       :map company-active-map
       "M-/" #'company-abort)
 
+;; TODO: not exactly same
+;; setting default company backends
+(after! prog-mode
+  (set-company-backend! 'prog-mode
+    '(:separate company-capf company-yasnippet)
+    'company-yasnippet 'company-files))
 
-;; TODO: setting company-backends doesn't work
-(defun cc/set-default-text-backends ()
-  (setq-local company-backends
-              '(company-capf
-                company-files
-                (:separate company-dabbrev company-yasnippet company-ispell))
-              ))
+;; (set-company-backend! 'js2-mode 'company-tide 'company-yasnippet))
 
-(defun cc/set-default-code-backends ()
-  (setq-local company-backends
-              '((:separate company-capf company-yasnippet) company-yasnippet company-files)
-              ))
+(after! text-mode
+  (set-company-backend! 'text-mode
+    '(:separate company-dabbrev company-yasnippet company-ispell)
+    'company-yasnippet 'company-files))
 
-(add-hook! 'prog-mode-hook #'cc/set-default-code-backends)
-(add-hook! 'text-mode-hook #'cc/set-default-text-backends)
+
+;; ;; TODO: setting company-backends doesn't work
+;; (defun cc/set-default-text-backends ()
+;;   (setq-local company-backends
+;;               '(company-capf
+;;                 company-files
+;;                 (:separate company-dabbrev company-yasnippet company-ispell))
+;;               ))
+
+;; (defun cc/set-default-code-backends ()
+;;   (setq-local company-backends
+;;               '((:separate company-capf company-yasnippet) company-yasnippet company-files)
+;;               ))
+
+;; (add-hook! 'prog-mode-hook #'cc/set-default-code-backends)
+;; (add-hook! 'text-mode-hook #'cc/set-default-text-backends)
 
 
 ;; copilot

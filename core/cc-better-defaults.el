@@ -21,17 +21,42 @@
 (after! spell-fu
   (custom-set-faces!
     '(spell-fu-incorrect-face :underline (:color "cyan" :style wave)))
-  (setq! spell-fu-idle-delay 0.5)
-  (add-hook! spell-fu-mode
-    (spell-fu-dictionary-add
-     (spell-fu-get-personal-dictionary
-      "en-personal" cc/spell-personal-dictionary)))
+  (setq! spell-fu-idle-delay 0.5
+         spell-fu-faces-exclude '(font-lock-string-face)) ; TODO: not working
   (map! :map mode-specific-map
         "! s n" #'spell-fu-goto-next-error
         "! s p" #'spell-fu-goto-previous-error
         "! s c" #'+spell/correct
         "! s a" #'+spell/add-word
-        "! s r" #'+spell/remove-word))
+        "! s r" #'+spell/remove-word)
+
+  ;; add personal dictionaries
+  (setq! cc/en-personal-dictionary
+         (expand-file-name "en.pws" cc/personal-dictionary-dir)
+         cc/elisp-personal-dictionary
+         (expand-file-name "elisp.pws" cc/personal-dictionary-dir)
+         cc/python-personal-dictionary
+         (expand-file-name "python.pws" cc/personal-dictionary-dir)
+         cc/cpp-personal-dictionary
+         (expand-file-name "cpp.pws" cc/personal-dictionary-dir))
+
+  ;; TODO: the original dictionary disappear for text-mode (org and txt)
+  (add-hook! text-mode
+    (spell-fu-dictionary-add
+     (spell-fu-get-personal-dictionary
+      "en" cc/en-personal-dictionary)))
+  (add-hook! emacs-lisp-mode
+    (spell-fu-dictionary-add
+     (spell-fu-get-personal-dictionary
+      "elisp" cc/elisp-personal-dictionary)))
+  (add-hook! python-mode
+    (spell-fu-dictionary-add
+     (spell-fu-get-personal-dictionary
+      "python" cc/python-personal-dictionary)))
+  (add-hook! c++-mode
+    (spell-fu-dictionary-add
+     (spell-fu-get-personal-dictionary
+      "cpp" cc/cpp-personal-dictionary))))
 
 
 ;; TODO: next
