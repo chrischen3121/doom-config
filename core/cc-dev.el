@@ -13,17 +13,16 @@
 
 ;; TODO: not exactly same
 ;; setting default company backends
-(after! prog-mode
-  (set-company-backend! 'prog-mode
-    '(:separate company-capf company-yasnippet)
-    'company-yasnippet 'company-files))
+
+(set-company-backend! 'prog-mode
+  '(:separate company-capf company-yasnippet)
+  'company-yasnippet 'company-files)
 
 ;; (set-company-backend! 'js2-mode 'company-tide 'company-yasnippet))
 
-(after! text-mode
-  (set-company-backend! 'text-mode
-    '(:separate company-dabbrev company-yasnippet company-ispell)
-    'company-yasnippet 'company-files))
+(set-company-backend! 'text-mode
+  '(:separate company-dabbrev company-yasnippet company-ispell)
+    'company-yasnippet 'company-files)
 
 
 ;; ;; TODO: setting company-backends doesn't work

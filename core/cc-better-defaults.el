@@ -19,10 +19,13 @@
 
 ;; spell-fu
 (after! spell-fu
+  (setq! spell-fu-idle-delay 0.5)
   (custom-set-faces!
     '(spell-fu-incorrect-face :underline (:color "cyan" :style wave)))
-  (setq! spell-fu-idle-delay 0.5
-         spell-fu-faces-exclude '(font-lock-string-face)) ; TODO: not working
+  ;; TODO: still not work
+  ;; but the variable `+spell-excluded-faces-alist` and `spell-fu-excluded-faces` are correct
+  (setf (alist-get 'prog-mode +spell-excluded-faces-alist)
+        '(font-lock-string-face))
   (map! :map mode-specific-map
         "! s n" #'spell-fu-goto-next-error
         "! s p" #'spell-fu-goto-previous-error
@@ -40,11 +43,17 @@
          cc/cpp-personal-dictionary
          (expand-file-name "cpp.pws" cc/personal-dictionary-dir))
 
-  ;; TODO: the original dictionary disappear for text-mode (org and txt)
-  (add-hook! text-mode
+  ;; text modes
+  (add-hook! org-mode
     (spell-fu-dictionary-add
      (spell-fu-get-personal-dictionary
       "en" cc/en-personal-dictionary)))
+  (add-hook! markdown-mode
+    (spell-fu-dictionary-add
+     (spell-fu-get-personal-dictionary
+      "en" cc/en-personal-dictionary)))
+
+  ;; prog modes
   (add-hook! emacs-lisp-mode
     (spell-fu-dictionary-add
      (spell-fu-get-personal-dictionary
