@@ -2,70 +2,50 @@
 ;; TODO: May be try to use Hydra
 ;; TODO: May be define function cc/kill-and-del-other-window
 
+
+
 ;; :app
 ;; +calendar
 (when (modulep! :app calendar)
   (setq! calendar-week-start-day 1)
-  (which-key-add-key-based-replacements "C-c o c" "Calendar")
-  (map! "C-c o c" #'+calendar/open-calendar))
+  (map! :prefix "C-c o"
+        :desc "Calendar"
+        "c" #'+calendar/open-calendar))
+
+
 
 ;; :checkers
-;; langtool for grammar check
+;; +grammar
 (when (modulep! :checkers grammar)
-  (which-key-add-key-based-replacements "C-c ! l" "langtool")
-  (map! :map mode-specific-map
-        "! l !" #'langtool-check
-        "! l c" #'langtool-correct-buffer))
+  (map!
+   :map (text-mode-map org-mode-map)
+   :prefix ("C-c ! g" . "grammar")
+   :desc "Check buffer" "c" #'langtool-check
+   :desc "Correct buffer" "C" #'langtool-correct-buffer))
 
-;; spell-fu
-(after! spell-fu
-  (setq! spell-fu-idle-delay 0.5)
-  (custom-set-faces!
-    '(spell-fu-incorrect-face :underline (:color "cyan" :style wave)))
-  ;; TODO: still not work
-  ;; but the variable `+spell-excluded-faces-alist` and `spell-fu-excluded-faces` are correct
-  (setf (alist-get 'prog-mode +spell-excluded-faces-alist)
-        '(font-lock-string-face))
-  (map! :map mode-specific-map
-        "! s n" #'spell-fu-goto-next-error
-        "! s p" #'spell-fu-goto-previous-error
-        "! s c" #'+spell/correct
-        "! s a" #'+spell/add-word
-        "! s r" #'+spell/remove-word)
 
-  ;; add personal dictionaries
+;; +spell
+(when (modulep! :checkers spell)
+  (setf
+   (alist-get 'prog-mode +spell-excluded-faces-alist)
+   '(font-lock-string-face))
   (setq! cc/en-personal-dictionary
-         (expand-file-name "en.pws" cc/personal-dictionary-dir)
-         cc/elisp-personal-dictionary
-         (expand-file-name "elisp.pws" cc/personal-dictionary-dir)
-         cc/python-personal-dictionary
-         (expand-file-name "python.pws" cc/personal-dictionary-dir)
-         cc/cpp-personal-dictionary
-         (expand-file-name "cpp.pws" cc/personal-dictionary-dir))
-
-  ;; text modes
-  (add-hook! org-mode
+         (expand-file-name "en.pws" cc/personal-dictionary-dir))
+  (add-hook! spell-fu-mode
     (spell-fu-dictionary-add
-     (spell-fu-get-personal-dictionary
-      "en" cc/en-personal-dictionary)))
-  (add-hook! markdown-mode
-    (spell-fu-dictionary-add
-     (spell-fu-get-personal-dictionary
-      "en" cc/en-personal-dictionary)))
-
-  ;; prog modes
-  (add-hook! emacs-lisp-mode
-    (spell-fu-dictionary-add
-     (spell-fu-get-personal-dictionary
-      "elisp" cc/elisp-personal-dictionary)))
-  (add-hook! python-mode
-    (spell-fu-dictionary-add
-     (spell-fu-get-personal-dictionary
-      "python" cc/python-personal-dictionary)))
-  (add-hook! c++-mode
-    (spell-fu-dictionary-add
-     (spell-fu-get-personal-dictionary
-      "cpp" cc/cpp-personal-dictionary))))
+     (spell-fu-get-personal-dictionary "en" cc/en-personal-dictionary)))
+  ;; spell-fu
+  (after! spell-fu
+    (setq! spell-fu-idle-delay 0.5)
+    (custom-set-faces!
+      '(spell-fu-incorrect-face :underline (:color "cyan" :style wave)))
+    (map!
+     :prefix ("C-c ! s" . "spell")
+     :desc "Correct word at point" "c" #'+spell/correct
+     :desc "Add word at point" "a" #'+spell/add-word
+     :desc "Remove word at point" "r" #'+spell/remove-word
+     :desc "Goto next error" "n" #'spell-fu-goto-next-error
+     :desc "Goto previous error" "p" #'spell-fu-goto-previous-error)))
 
 
 ;; TODO: next

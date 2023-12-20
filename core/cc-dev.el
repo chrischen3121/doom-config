@@ -23,7 +23,7 @@
 (set-company-backend! 'text-mode
   '(:separate company-dabbrev company-yasnippet company-ispell)
     'company-yasnippet 'company-files)
-
+;; TODO set company-box delay
 
 ;; ;; TODO: setting company-backends doesn't work
 ;; (defun cc/set-default-text-backends ()
