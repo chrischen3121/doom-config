@@ -60,6 +60,11 @@
       "C-c u r" #'undo-fu-only-redo
       "C-c u a" #'undo-fu-only-redo-all)
 
+;; :term
+;; vterm
+;; Install vterm-module by `M-x vterm-module-compile`
+;; C-c o t/T Open vterm
+
 ;; TODO: next
 ;; Global which-key
 (which-key-add-key-based-replacements "C-c m" "mode-commands")
