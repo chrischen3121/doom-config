@@ -11,7 +11,6 @@
         "c" #'+calendar/open-calendar))
 
 
-
 ;; :checkers
 ;; +grammar
 (when (modulep! :checkers grammar)
@@ -45,6 +44,9 @@
      :desc "Goto next error" "n" #'spell-fu-goto-next-error
      :desc "Goto previous error" "p" #'spell-fu-goto-previous-error)))
 
+
+;; :emacs
+;;
 
 ;; TODO: next
 ;; Global which-key
