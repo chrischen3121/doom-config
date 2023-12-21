@@ -2,6 +2,6 @@
 
 (setq! cc/default-font-size 20
        cc/default-unicode-font-size 20
-       cc/org-home-dir "~/orgs/"
+       cc/org-home-dir "~/org/"
        cc/personal-dictionary-dir "~/dicts/"
        )

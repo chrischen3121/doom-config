@@ -2,8 +2,6 @@
 ;; TODO: May be try to use Hydra
 ;; TODO: May be define function cc/kill-and-del-other-window
 
-
-
 ;; :app
 ;; +calendar
 (when (modulep! :app calendar)
