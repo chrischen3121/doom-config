@@ -29,16 +29,27 @@
 ;; fold (outline hide/show)
 ;; C-c C-f - fold commands prefix
 (when (modulep! :editor fold)
-  (after! outline
-    (which-key-add-key-based-replacements "C-c @" "outline")
-    (which-key-add-key-based-replacements "C-c C-f C-a" "outline-all")
-    (map! "C-c C-f o" #'+fold-open-all
-          "C-c C-f c" #'+fold-close-all
-          "C-c C-f d" #'+fold-toggle-all)))
+  (map! "C-c C-f o" #'+fold-open-all
+        "C-c C-f c" #'+fold-close-all
+        "C-c C-f d" #'+fold-toggle-all)
+  (which-key-add-key-based-replacements "C-c @" "outline")
+  (which-key-add-key-based-replacements "C-c C-f C-a" "outline-all"))
 
+
+;; :tools
+;; TODO: eval
+;; (when (modulep! :tools eval)
+;;   (map! :map prog-mode-map
+;;         :prefix ("C-c e" . "eval")
+;;         :desc "Eval line" "l" #'+eval/line-or-region
+;;         :desc "Eval buffer" "b" #'+eval/buffer-or-region
+;;         :desc "Region and replace" "r" #'+eval/region-and-replace
+;;         :desc "Region to REPL" "s" #'+eval/send-region-to-repl
+;;         :desc "Open REPL same window" "c" #'+eval/open-repl-same-window
+;;         :desc "Open REPL other window" "w" #'+eval/open-repl-other-window))
 
 ;; copilot
-(add-hook! (prog-mode git-commit-setup) #'copilot-mode)
+(add-hook! (prog-mode git-commit-setup conf-mode yaml-mode) #'copilot-mode)
 (map! :after copilot
       :map copilot-completion-map
       "<backtab>" #'copilot-accept-completion
@@ -47,3 +58,8 @@
       "M-p" #'copilot-previous-completion
       "M-l" #'copilot-accept-completion-by-line
       "M-o" #'copilot-panel-complete)
+
+
+;; TODO try ein and move to python.el
+;; (after! ein
+;;   (setq! ein:jupyter-server-use-subcommand "server"))

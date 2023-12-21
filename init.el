@@ -91,8 +91,8 @@
        (debugger +lsp)         ; FIXME stepping through code, to help you add bugs
        ;;direnv            ; direnv is an environment switcher for the shell.
        (docker +lsp)
-       ;;editorconfig      ; let someone else argue about tabs vs spaces
-       ;;ein               ; tame Jupyter notebooks with emacs
+       editorconfig      ; let someone else argue about tabs vs spaces
+       ;; ein               ; TODO: try Jupyter notebooks with emacs
        (eval +overlay)     ; run code, run (also, repls)
        ;;gist              ; interacting with github gists
        lookup              ; navigate your code and its documentation

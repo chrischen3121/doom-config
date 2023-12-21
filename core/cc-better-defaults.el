@@ -56,9 +56,9 @@
 ;; undo
 (map! :after undo-fu
       :prefix ("C-c u" . "undo")
-      "C-c u u" #'undo-fu-only-undo
-      "C-c u r" #'undo-fu-only-redo
-      "C-c u a" #'undo-fu-only-redo-all)
+      "u" #'undo-fu-only-undo
+      "r" #'undo-fu-only-redo
+      "a" #'undo-fu-only-redo-all)
 
 ;; :term
 ;; vterm
