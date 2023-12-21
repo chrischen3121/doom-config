@@ -38,12 +38,12 @@
 
 
 ;; copilot
-(after! copilot
-  (add-hook! (prog-mode git-commit-setup) #'copilot-mode)
-  (map! :map copilot-completion-map
-        "<backtab>" #'copilot-accept-completion
-        "M-j" #'copilot-accept-completion
-        "M-n" #'copilot-next-completion
-        "M-p" #'copilot-previous-completion
-        "M-l" #'copilot-accept-completion-by-line
-        "M-o" #'copilot-panel-complete))
+(add-hook! (prog-mode git-commit-setup) #'copilot-mode)
+(map! :after copilot
+      :map copilot-completion-map
+      "<backtab>" #'copilot-accept-completion
+      "M-j" #'copilot-accept-completion
+      "M-n" #'copilot-next-completion
+      "M-p" #'copilot-previous-completion
+      "M-l" #'copilot-accept-completion-by-line
+      "M-o" #'copilot-panel-complete)

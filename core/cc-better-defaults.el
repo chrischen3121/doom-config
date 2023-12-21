@@ -46,16 +46,25 @@
 
 
 ;; :emacs
-;;
-
-;; TODO: next
-;; Global which-key
-(which-key-add-key-based-replacements "C-c m" "modmap")
-
-;; Dired
+;; dired
+;; C-c C-r Rsync to ...
+;; C-c C-e Rename entries
 (map! :after dired
       :map dired-mode-map
       "C-l" #'dired-up-directory)
+
+;; undo
+(map! :after undo-fu
+      :prefix ("C-c u" . "undo")
+      "C-c u u" #'undo-fu-only-undo
+      "C-c u r" #'undo-fu-only-redo
+      "C-c u a" #'undo-fu-only-redo-all)
+
+;; TODO: next
+;; Global which-key
+(which-key-add-key-based-replacements "C-c m" "mode-commands")
+
+
 
 ;; Change ace-window leading char face
 (after! ace-window
