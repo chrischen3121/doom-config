@@ -172,12 +172,13 @@
   (which-key-add-keymap-based-replacements org-mode-map "C-c m c" "org-clock")
   (map!
    :map org-mode-map
-   "C-c m c e" #'org-set-effort
-   "C-c m c E" #'org-clock-modify-effort-estimate
-   "C-c m c c" #'org-clock-cancel
-   "C-c m c g" #'org-clock-goto
-   "C-c m c i" #'org-clock-in
-   "C-c m c o" #'org-clock-out))
+   :prefix ("C-c m c" . "org-clock")
+   :desc "Set effort" "e" #'org-set-effort
+   :desc "Modify estimate" "E" #'org-clock-modify-effort-estimate
+   :desc "Cancel clock" "c" #'org-clock-cancel
+   :desc "Goto clock" "g" #'org-clock-goto
+   :desc "Clock in" "i" #'org-clock-in
+   :desc "Clock out" "o" #'org-clock-out))
 
 ;; append to the global org-agenda-custom-commands list
 
