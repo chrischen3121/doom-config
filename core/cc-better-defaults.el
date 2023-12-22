@@ -27,7 +27,7 @@
    (alist-get 'prog-mode +spell-excluded-faces-alist)
    '(font-lock-string-face))
   (setq! cc/en-personal-dictionary
-         (expand-file-name "en.pws" cc/personal-dictionary-dir))
+         (file-name-concat cc/personal-dictionary-dir "en.pws"))
   (add-hook! spell-fu-mode
     (spell-fu-dictionary-add
      (spell-fu-get-personal-dictionary "en" cc/en-personal-dictionary)))
@@ -69,16 +69,17 @@
 ;; docker
 ;; C-x C-f /docker:$USER@$CONTAINER:/path/to/file
 
-;; TODO: next
 ;; Global which-key
-(which-key-add-key-based-replacements "C-c m" "mode-commands")
+(which-key-add-key-based-replacements "C-c m" "mode-cmds")
 
-
-
+;; TODO: next
 ;; Change ace-window leading char face
 (after! ace-window
   (custom-set-faces!
-    '(aw-leading-char-face :foreground "#51afef" :weight bold :height 3.0)))
+    '(aw-leading-char-face
+      :foreground "#51afef"
+      :weight bold
+      :height 3.0)))
 
 ;; Whole line or region
 (use-package! whole-line-or-region

@@ -55,11 +55,11 @@
 
 (load! "mycustom")
 
-(load! "cc-init" (expand-file-name "core" doom-user-dir))
+(load! "cc-init" (file-name-concat doom-user-dir "core"))
 (message "Loading core modules...done")
 
-;; (load! "cc-init" (expand-file-name "org" doom-user-dir))
+;; (load! "cc-init" (file-name-concat doom-user-dir "org"))
 ;; (message "Loading org modules...done")
 
-;; (load! "cc-init" (expand-file-name "languages" doom-user-dir))
+;; (load! "cc-init" (file-name-concat doom-user-dir "languages"))
 ;; (message "Loading language modules...done")

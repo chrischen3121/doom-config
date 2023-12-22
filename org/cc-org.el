@@ -106,7 +106,7 @@
 (use-package! anki-editor
   :after org
   :config
-  (setq! cc/org-anki-file (expand-file-name "anki.org" org-directory))
+  (setq! cc/org-anki-file (file-name-concat org-directory "anki.org"))
   (setq! anki-editor-create-decks t
          anki-editor-org-tags-as-anki-tags t
          anki-editor-use-math-jax t

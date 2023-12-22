@@ -37,16 +37,16 @@
 
 
 ;; :tools
-;; TODO: eval
-;; (when (modulep! :tools eval)
-;;   (map! :map prog-mode-map
-;;         :prefix ("C-c e" . "eval")
-;;         :desc "Eval line" "l" #'+eval/line-or-region
-;;         :desc "Eval buffer" "b" #'+eval/buffer-or-region
-;;         :desc "Region and replace" "r" #'+eval/region-and-replace
-;;         :desc "Region to REPL" "s" #'+eval/send-region-to-repl
-;;         :desc "Open REPL same window" "c" #'+eval/open-repl-same-window
-;;         :desc "Open REPL other window" "w" #'+eval/open-repl-other-window))
+;; eval
+(when (modulep! :tools eval)
+  (map! :map (prog-mode-map emacs-lisp-mode-map)
+        :prefix ("C-c m e" . "eval")
+        :desc "Eval line" "l" #'+eval/line-or-region
+        :desc "Eval buffer" "b" #'+eval/buffer-or-region
+        :desc "Region and replace" "r" #'+eval/region-and-replace
+        :desc "Region to REPL" "s" #'+eval/send-region-to-repl
+        :desc "Open REPL same window" "c" #'+eval/open-repl-same-window
+        :desc "Open REPL other window" "w" #'+eval/open-repl-other-window))
 
 ;; copilot
 (add-hook! (prog-mode git-commit-setup conf-mode yaml-mode) #'copilot-mode)

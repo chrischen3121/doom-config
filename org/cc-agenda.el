@@ -39,8 +39,8 @@
 
 (after! org
   (setq! org-log-repeat nil
-         +org-capture-journal-file (expand-file-name "journal.org" org-directory)
-         cc/org-capture-habits-file (expand-file-name "habits.org" org-directory)
+         +org-capture-journal-file (file-name-concat org-directory "journal.org")
+         cc/org-capture-habits-file (file-name-concat org-directory "habits.org")
          org-deadline-warning-days 5
          org-log-done 'time
          org-log-into-drawer t)
