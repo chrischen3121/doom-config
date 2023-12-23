@@ -109,3 +109,5 @@
 
 ;; Global which-key
 (which-key-add-key-based-replacements "C-c m" "mode-cmds")
+(which-key-add-key-based-replacements "C-x 8" "emoji")
+(which-key-add-key-based-replacements "C-x 8 e" "emoji")

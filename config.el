@@ -15,10 +15,6 @@
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 ;; (setq! display-line-numbers-type t)
 
-;; If you use `org' and don't want your org files in the default location below,
-;; change `org-directory'. It must be set before org loads!
-(setq! org-directory "~/org/")
-
 
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
 ;; `after!' block, otherwise Doom's defaults may override your settings. E.g.
@@ -54,6 +50,8 @@
 ;;
 
 (load! "mycustom")
+;; change `org-directory'. It must be set before org loads!
+(setq! org-directory cc/org-home-dir)
 
 (load! "cc-init" (file-name-concat doom-user-dir "core"))
 (message "Loading core modules...done")

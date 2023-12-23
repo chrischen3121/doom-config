@@ -34,8 +34,7 @@
 ;; YES: An affirmative decision.
 ;; NO: A negative decision.
 
-(setq! org-directory cc/org-home-dir
-       org-agenda-files `(,cc/org-home-dir))
+(setq! org-agenda-files `(,cc/org-home-dir))
 
 (after! org
   (setq! org-log-repeat nil
