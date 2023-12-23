@@ -1,10 +1,13 @@
 ;;; languages/cc-elisp.el -*- lexical-binding: t; -*-
 
 (after! emacs-lisp
-  (setq-hook! 'emacs-lisp-mode-hook tab-width 2))
+  (setq-hook! 'emacs-lisp-mode-hook tab-width 2)
+  (map!
+   :map emacs-lisp-mode-map
+   "C-c ! r" #'check-parens
+   ))
 
-(map!
- :after emacs-lisp-mode
- :map emacs-lisp-mode-map
- "C-c ! r" #'check-parens
- )
+(map! :prefix ("C-c P" . "Emacs profiling")
+      :desc "Start profiling" "p" #'profiler-start
+      :desc "Stop profiling" "s" #'profiler-stop
+      :desc "Report profiling" "r" #'profiler-report)

@@ -14,6 +14,11 @@
   :type 'string
   :group 'cc-config)
 
+(defcustom cc/deft-notes-dir "~/org/notes/"
+  "Deft notes directory."
+  :type 'string
+  :group 'cc-config)
+
 ;; agenda configiration
 (defcustom cc/org-home-dir "~/org/"
   "Agenda home directory"

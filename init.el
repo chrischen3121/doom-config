@@ -28,7 +28,7 @@
        (vertico +icons)  ; the search engine of the future
 
        :ui
-       ;;deft              ; notational velocity for Emacs
+       deft              ; notational velocity for Emacs
        doom              ; what makes DOOM look the way it does
        doom-dashboard    ; a nifty splash screen for Emacs
        ;;doom-quit         ; DOOM quit-message prompts when you quit Emacs
@@ -91,23 +91,23 @@
        (debugger +lsp)         ; FIXME stepping through code, to help you add bugs
        ;;direnv            ; direnv is an environment switcher for the shell.
        (docker +lsp)
-       editorconfig      ; let someone else argue about tabs vs spaces
-       ;; ein               ; TODO: try Jupyter notebooks with emacs
+       editorconfig        ; let someone else argue about tabs vs spaces
+       ;; ein              ; TODO: try Jupyter notebooks with emacs
        (eval +overlay)     ; run code, run (also, repls)
        ;;gist              ; interacting with github gists
        lookup              ; navigate your code and its documentation
        (lsp +peek)              ; M-x vscode
-       magit             ; a git porcelain for Emacs
+       magit               ; a git porcelain for Emacs TODO try +forge
        ;;make              ; run make tasks from Emacs
        ;;pass              ; password manager for nerds
-       ;;pdf               ; pdf enhancements
+       pdf               ; pdf enhancements
        ;;prodigy           ; FIXME managing external services & code builders
-       ;;rgb               ; creating color strings
+       ;;rgb               ; [deprecated] creating color strings
        ;;taskrunner        ; taskrunner for all your projects
        ;;terraform         ; infrastructure as code
        ;;tmux              ; an API for interacting with tmux
        ;;tree-sitter       ; syntax and parsing, sitting in a tree...
-       ;;upload            ; map local to remote projects via ssh/ftp
+       ;;upload            ; map local to remote projects via ssh/ftp TODO try this module as needed
 
        :os
        (:if IS-MAC macos)  ; improve compatibility with macOS

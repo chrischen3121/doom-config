@@ -54,6 +54,7 @@
 ;; Better defaults
 (package! ace-jump-mode)
 (package! whole-line-or-region)
+(package! rainbow-mode)
 
 ;; Org
 (package! anki-editor)

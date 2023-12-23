@@ -4,4 +4,5 @@
        cc/default-unicode-font-size 20
        cc/org-home-dir "~/org/"
        cc/personal-dictionary-dir "~/dicts/"
+       cc/deft-notes-dir "~/org/notes/"
        )
