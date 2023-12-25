@@ -101,18 +101,21 @@
 (after! treemacs
   (setq! treemacs-project-follow-mode t))
 
-;; tab
-(after! centaur-tabs
-  (setq! centaur-tabs-style "wave"
-         centaur-tabs-set-bar nil
-         centaur-tabs-height 36
-         centaur-tabs-close-button "x")
-  (add-hook! (dired-mode special-mode help-mode) #'centaur-tabs-local-mode)
-  (which-key-add-key-based-replacements "C-x t" "tab")
-  (map! :map centaur-tabs-mode-map
-        :desc "Tab forword" "C-x t f" #'centaur-tabs-forward
-        :desc "Tab backward" "C-x t b" #'centaur-tabs-backward
-        :desc "Tab ace jump" "C-x t j" #'centaur-tabs-ace-jump))
+;; tabs
+(when (modulep! :ui tabs)
+  (after! centaur-tabs
+    (setq! centaur-tabs-style "wave"
+           centaur-tabs-set-bar nil
+           centaur-tabs-height 36
+           centaur-tabs-close-button "x")
+    (add-hook! (dired-mode special-mode) #'centaur-tabs-local-mode)
+    (map! :prefix ("C-x t" . "tabs")
+          :map centaur-tabs-mode-map
+          :desc "Tab forword" "f" #'centaur-tabs-forward
+          :desc "Tab backward" "b" #'centaur-tabs-backward
+          :desc "Tab ace jump" "j" #'centaur-tabs-ace-jump)))
+
+
 
 
 ;; :others
