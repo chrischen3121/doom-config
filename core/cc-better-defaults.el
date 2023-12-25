@@ -80,7 +80,42 @@
   (setq! deft-directory cc/deft-notes-dir
          deft-use-filename-as-title t))
 
+;; workspace
+(when (modulep! :ui workspace)
+  (after! persp-mode
+    (setq! persp-emacsclient-init-frame-behaviour-override "main"))
+  )
+(map!
+ :map general-override-mode-map
+ :desc "Load workspace"
+ "C-c w l" #'+workspace/load
+ :desc "Load last autosaved session"
+ "C-c w L" #'doom/quickload-session
+ :desc "Save workspace"
+ "C-c w s" #'+workspace/save
+ :desc "Save session"
+ "C-c w S" #'doom/save-session)
 
+;; treemacs
+;; enable project follow mode
+(after! treemacs
+  (setq! treemacs-project-follow-mode t))
+
+;; tab
+(after! centaur-tabs
+  (setq! centaur-tabs-style "wave"
+         centaur-tabs-set-bar nil
+         centaur-tabs-height 36
+         centaur-tabs-close-button "x")
+  (add-hook! (dired-mode special-mode help-mode) #'centaur-tabs-local-mode)
+  (which-key-add-key-based-replacements "C-x t" "tab")
+  (map! :map centaur-tabs-mode-map
+        :desc "Tab forword" "C-x t f" #'centaur-tabs-forward
+        :desc "Tab backward" "C-x t b" #'centaur-tabs-backward
+        :desc "Tab ace jump" "C-x t j" #'centaur-tabs-ace-jump))
+
+
+;; :others
 ;; Whole line or region
 (use-package! whole-line-or-region
   :config
@@ -91,9 +126,14 @@
 ;; Ace jump mode
 ;; It can help you to move your cursor to ANY position in emacs
 ;; by using only 3 times key press.
-(after! ace-jump-mode
-  (map! :desc "Ace jump" "C-c j" #'ace-jump-mode
-        :desc "Ace jump backward" "C-c J" #'ace-jump-mode-pop-mark))
+(use-package! ace-jump-mode
+  :init
+  (map!
+   :map general-override-mode-map
+   :desc "Ace jump"
+   "C-c j" #'ace-jump-mode
+   :desc "Ace jump backward"
+   "C-c J" #'ace-jump-mode-pop-mark))
 
 ;; Global keybindings
 (map! "C-z" nil ; unbind suspend-frame
@@ -108,6 +148,9 @@
       :height 3.0)))
 
 ;; Global which-key
+(which-key-add-key-based-replacements "C-x <RET>" "coding-system")
+(which-key-add-key-based-replacements "C-x a" "abbrev")
 (which-key-add-key-based-replacements "C-c m" "mode-cmds")
+(which-key-add-key-based-replacements "M-s h" "highlight")
 (which-key-add-key-based-replacements "C-x 8" "emoji")
 (which-key-add-key-based-replacements "C-x 8 e" "emoji")

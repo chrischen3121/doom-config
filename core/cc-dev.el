@@ -48,6 +48,22 @@
         :desc "Open REPL same window" "c" #'+eval/open-repl-same-window
         :desc "Open REPL other window" "w" #'+eval/open-repl-other-window))
 
+
+;; :ui
+;; zen
+(when (modulep! :ui zen)
+  (after! writeroom-mode
+    (setq! +zen-text-scale 1)
+    (add-hook! 'writeroom-mode-enable-hook
+      (centaur-tabs-local-mode +1)
+      (display-line-numbers-mode -1)
+    (add-hook! 'writeroom-mode-disable-hook
+      (centaur-tabs-local-mode -1)
+      (display-line-numbers-mode +1)))))
+
+
+
+;; :others
 ;; copilot
 (add-hook! (prog-mode git-commit-setup conf-mode yaml-mode) #'copilot-mode)
 (map! :after copilot
