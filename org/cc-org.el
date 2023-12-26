@@ -9,9 +9,9 @@
 ;; C-c C-l -- Insert a link
 ;; C-x n s, C-x n w -- Narrow/Unnarrow buffer
 ;; C-c / -- Search in an outline tree and fold others as much as possible
-;; M-S-RET -- Add TODO outlines or add items with a checkbox
+;; M-S-<RET> -- Add TODO outlines or add items with a checkbox
 ;; C-c - -- Cycle bullets (-, +, *, ...)
-;; C-c m i -- org-toggle-inline-images
+;; C-c <TAB> -- org-toggle-inline-images
 ;; C-c ; -- Toggle the "COMMENT" keyword
 ;; ====== Tags ==========
 ;; C-c C-q -- Set a tag
@@ -34,7 +34,7 @@
 ;; #+INCLUDE: "~/.emacs" src emacs-lisp
 ;;
 (after! org
-  ;; org-indent-mode
+  ;; disable org-indent-mode
   (setq org-startup-indented nil) ; Prevent org-indent-mode from being enabled by default
   (remove-hook 'org-mode-hook #'org-indent-mode) ; Remove org-indent-mode from the org-mode-hook
 
@@ -46,14 +46,13 @@
              (org-level-3 . 1.1)))
     (set-face-attribute (car face) nil :font "Hack" :weight 'bold :height (cdr face)))
 
-  ;; Latex preview configuation
+  ;; Latex preview configuration
   (setq! org-pretty-entities t
          org-pretty-entities-include-sub-superscripts nil ; show sub'_' / super '^'
          org-highlight-latex-and-related '(native latex entities))
 
   ;; Inline image
   (setq! org-startup-with-inline-images t)
-  (which-key-add-keymap-based-replacements org-mode-map "C-c \"" "plot")
 
   ;; Source code block
   (dolist (lang
@@ -72,8 +71,7 @@
              ("shell" . "src shell")
              ("conf" . "src conf")))
     (add-to-list 'org-structure-template-alist lang))
-  (which-key-add-keymap-based-replacements org-mode-map "C-c m I" "org-id")
-  )
+  (which-key-add-keymap-based-replacements org-mode-map "C-c m I" "org-id"))
 
 ;; Keybindings
 (map! :after org
@@ -105,6 +103,8 @@
 ;; anki-editor
 (use-package! anki-editor
   :after org
+  :init
+  (which-key-add-keymap-based-replacements org-mode-map "C-c k" "anki")
   :config
   (setq! cc/org-anki-file (file-name-concat org-directory "anki.org"))
   (setq! anki-editor-create-decks t
@@ -118,7 +118,6 @@
          anki-editor-cloze-delete-blank 'anki-editor-cloze-delete-blank
          anki-editor-cloze-delete-all 'anki-editor-cloze-delete-all
          anki-editor-cloze-delete-region 'anki-editor-cloze-delete-region)
-  (which-key-add-keymap-based-replacements org-mode-map "C-c k" "anki")
   :bind (:map org-mode-map
               ("C-c k p" . anki-editor-push-notes)
               ("C-c k c" . anki-editor-cloze-dwim)

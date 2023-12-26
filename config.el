@@ -56,8 +56,8 @@
 (load! "cc-init" (file-name-concat doom-user-dir "core"))
 (message "Loading core modules...done")
 
-;; (load! "cc-init" (file-name-concat doom-user-dir "org"))
-;; (message "Loading org modules...done")
+(load! "cc-init" (file-name-concat doom-user-dir "org"))
+(message "Loading org modules...done")
 
 (load! "cc-init" (file-name-concat doom-user-dir "languages"))
 (message "Loading language modules...done")
