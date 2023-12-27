@@ -35,7 +35,7 @@
 ;;
 (after! org
   ;; disable org-indent-mode
-  (setq org-startup-indented nil) ; Prevent org-indent-mode from being enabled by default
+  (setq! org-startup-indented nil) ; Prevent org-indent-mode from being enabled by default
   (remove-hook 'org-mode-hook #'org-indent-mode) ; Remove org-indent-mode from the org-mode-hook
 
   ;; Org titles
@@ -71,7 +71,36 @@
              ("shell" . "src shell")
              ("conf" . "src conf")))
     (add-to-list 'org-structure-template-alist lang))
-  (which-key-add-keymap-based-replacements org-mode-map "C-c m I" "org-id"))
+  (which-key-add-keymap-based-replacements org-mode-map "C-c m I" "org-id")
+  (which-key-add-keymap-based-replacements org-mode-map "C-c \""  "plot"))
+
+;; :ui
+;; deft
+(after! deft
+  (setq! deft-directory cc/deft-notes-dir
+         deft-use-filename-as-title t
+         deft-strip-summary-regexp ":PROPERTIES:\n\\(.+\n\\)+:END:\n"))
+
+;; :lang
+;; org +roam
+;; TODO org-roam-ui
+(after! org-roam
+  (setq! org-roam-directory cc/org-roam-directory
+         org-roam-dailies-directory cc/org-roam-journal-directory
+         org-roam-db-location cc/org-roam-db-location
+         org-roam-db-gc-threshold most-positive-fixnum
+         org-roam-graph-viewer cc/org-roam-graph-viewer
+         org-roam-capture-templates
+         '(("d" "default" plain "%?"
+            :if-new (file+head "${slug}-%<%Y%m%d>.org"
+                               "#+title: ${title}\n")
+            :unnarrowed t)
+           ("t" "tagged" plain "%?"
+            :if-new (file+head "${slug}-%<%Y%m%d>.org"
+                               "#+title: ${title}\n#+filetags: %^{filetags}\n")
+            :unnarrowed t)
+           ))
+  (org-roam-db-autosync-mode))
 
 ;; Keybindings
 (map! :after org
@@ -128,6 +157,7 @@
 
 (use-package! org-superstar
   :hook (org-mode . org-superstar-mode))
+
 
 ;; org-tag-alist
 ;; '(("Learning" . ?l)

@@ -5,4 +5,7 @@
        cc/org-home-dir "~/org/"
        cc/personal-dictionary-dir "~/dicts/"
        cc/deft-notes-dir "~/org/notes/"
-       )
+       cc/org-roam-directory "~/org/roam/"
+       cc/org-roam-db-location "~/org/roam/org-roam.db"
+       cc/org-roam-journal-directory "~/org/roam/journal/"
+       cc/org-roam-graph-viewer "google-chrome")

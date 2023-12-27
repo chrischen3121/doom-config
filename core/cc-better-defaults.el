@@ -74,12 +74,6 @@
 ;; docker
 ;; C-x C-f /docker:$USER@$CONTAINER:/path/to/file
 
-;; :ui
-;; deft
-(after! deft
-  (setq! deft-directory cc/deft-notes-dir
-         deft-use-filename-as-title t))
-
 ;; workspace
 (when (modulep! :ui workspace)
   (after! persp-mode
@@ -116,8 +110,6 @@
           :desc "Tab ace jump" "j" #'centaur-tabs-ace-jump)))
 
 
-
-
 ;; :others
 ;; Whole line or region
 (use-package! whole-line-or-region
@@ -138,9 +130,11 @@
    :desc "Ace jump backward"
    "C-c J" #'ace-jump-mode-pop-mark))
 
+
 ;; Global keybindings
-(map! "C-z" nil ; unbind suspend-frame
-      "S-<SPC>" #'set-mark-command)
+(add-hook! 'doom-after-init-hook
+  (map! "C-z" nil ; unbind suspend-frame
+        "S-<SPC>" #'set-mark-command))
 
 ;; Change ace-window leading char face
 (after! ace-window
