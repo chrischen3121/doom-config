@@ -23,7 +23,12 @@
 (defcustom cc/org-home-dir "~/org/"
   "Agenda home directory"
   :type 'string
-  :group 'cc-agenda-config)
+  :group 'cc-org-config)
+
+(defcustom cc/org-pdf-notes-dir "~/org/pdf-notes/"
+  "Org pdf notes directory."
+  :type 'string
+  :group 'cc-org-config)
 
 ;; org-roam configuration
 (defcustom cc/org-roam-directory "~/org/roam/"

@@ -82,8 +82,8 @@
          deft-strip-summary-regexp ":PROPERTIES:\n\\(.+\n\\)+:END:\n"))
 
 ;; :lang
-;; org +roam
-;; TODO org-roam-ui
+;; org +roam +noter
+;; TODO maybe org-roam-ui
 (after! org-roam
   (setq! org-roam-directory cc/org-roam-directory
          org-roam-dailies-directory cc/org-roam-journal-directory
@@ -101,6 +101,11 @@
             :unnarrowed t)
            ))
   (org-roam-db-autosync-mode))
+
+
+(after! org-noter
+  (setq! org-noter-notes-search-path `(,cc/org-pdf-notes-dir)))
+
 
 ;; Keybindings
 (map! :after org
@@ -157,6 +162,11 @@
 
 (use-package! org-superstar
   :hook (org-mode . org-superstar-mode))
+
+
+;; TODO: add org-download
+;; wl-clipboard for org-download
+;; pamac install --no-confirm --needed wl-clipboard
 
 
 ;; org-tag-alist
