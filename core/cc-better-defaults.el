@@ -151,9 +151,10 @@
       :height 3.0)))
 
 ;; Global which-key
-(which-key-add-key-based-replacements "C-x <RET>" "coding-system")
-(which-key-add-key-based-replacements "C-x a" "abbrev")
-(which-key-add-key-based-replacements "C-c m" "mode-cmds")
-(which-key-add-key-based-replacements "M-s h" "highlight")
-(which-key-add-key-based-replacements "C-x 8" "emoji")
-(which-key-add-key-based-replacements "C-x 8 e" "emoji")
+(after! which-key
+  (which-key-add-key-based-replacements "C-x <RET>" "coding-system")
+  (which-key-add-key-based-replacements "C-x a" "abbrev")
+  (which-key-add-key-based-replacements "C-c m" "mode-cmds")
+  (which-key-add-key-based-replacements "M-s h" "highlight")
+  (which-key-add-key-based-replacements "C-x 8" "emoji")
+  (which-key-add-key-based-replacements "C-x 8 e" "emoji"))
