@@ -20,7 +20,7 @@
 ;; refresh your font settings. If Emacs still can't find your font, it likely
 ;; wasn't installed correctly. Font issues are rarely Doom issues!
 (setq! doom-font (font-spec :family "Hack" :size cc/default-font-size)
-       ; non-code text, where a more "book-like" font can make reading more comfortable
+                                        ; non-code text, where a more "book-like" font can make reading more comfortable
        doom-variable-pitch-font (font-spec :family "Hack" :size cc/default-unicode-font-size)
        doom-big-font (font-spec :family "Hack" :size (+ cc/default-font-size (/ cc/default-font-size 3)))
        doom-serif-font (font-spec :family "WenQuanyi Micro Hei Mono" :size cc/default-unicode-font-size)
@@ -71,7 +71,19 @@
         (load-theme cc/dark-theme t)
       (load-theme cc/light-theme t))))
 
-(cc/set-default-theme-by-time)
+(defun cc/set-default-theme-by-sys-style ()
+  """Set theme based on system style"""
+  (let ((gnome-style (shell-command-to-string "gsettings get org.gnome.desktop.interface gtk-theme")))
+    (if (string-match-p "dark" gnome-style)
+        (load-theme cc/dark-theme t)
+      (load-theme cc/light-theme t))))
+
+;; Set default theme by system style if it's gnome
+;; otherwise set by time
+(if (string-equal (getenv "XDG_CURRENT_DESKTOP") "GNOME")
+    (cc/set-default-theme-by-sys-style)
+  (cc/set-default-theme-by-time))
+
 
 (defun cc/switch-light-dark-theme ()
   """Switch light/dark themes"""
