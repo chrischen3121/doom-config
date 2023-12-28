@@ -86,10 +86,10 @@
 ;; TODO maybe org-roam-ui
 (after! org-roam
   (setq! org-roam-directory cc/org-roam-directory
-         org-roam-dailies-directory cc/org-roam-journal-directory
          org-roam-db-location cc/org-roam-db-location
          org-roam-db-gc-threshold most-positive-fixnum
          org-roam-graph-viewer cc/org-roam-graph-viewer
+         org-roam-dailies-directory cc/org-roam-journal-directory
          org-roam-capture-templates
          '(("d" "default" plain "%?"
             :if-new (file+head "${slug}-%<%Y%m%d>.org"
@@ -100,7 +100,36 @@
                                "#+title: ${title}\n#+filetags: %^{filetags}\n")
             :unnarrowed t)
            ))
-  (org-roam-db-autosync-mode))
+  (org-roam-db-autosync-mode)
+  (map! :prefix "C-c n r"
+        :desc "Generate org-id"
+        "p" #'org-id-get-create
+        :map org-mode-map
+        :prefix "C-c n r"
+        :desc "Add alias"
+        "a" #'org-roam-alias-add
+        :desc "Open org-roam buffer"
+        "b" #'org-roam-buffer-toggle
+        :desc "Add tag"
+        "t" #'org-roam-tag-add
+        :desc "Add ref"
+        "r" #'org-roam-ref-add))
+
+;; org-roam-ui
+(use-package! org-roam-ui
+  :after org-roam
+  :commands org-roam-ui-mode
+  :config
+  (setq! org-roam-ui-sync-theme t
+         org-roam-ui-follow t
+         org-roam-ui-update-on-save t
+         org-roam-ui-open-on-start t))
+
+(map! :prefix "C-c n r"
+      :desc "Open org-roam-ui"
+      "u" #'org-roam-ui-mode
+      :desc "Sync ui theme"
+      "l" #'org-roam-ui-sync-theme)
 
 
 (after! org-noter
@@ -140,18 +169,9 @@
   :init
   (which-key-add-keymap-based-replacements org-mode-map "C-c k" "anki")
   :config
-  (setq! cc/org-anki-file (file-name-concat org-directory "anki.org"))
   (setq! anki-editor-create-decks t
          anki-editor-org-tags-as-anki-tags t
-         anki-editor-use-math-jax t
-         anki-editor-export-preamble nil
-         anki-editor-export-index t
-         anki-editor-org-file cc/org-anki-file
-         anki-editor-new-notes-format "* %s :drill:\n:PROPERTIES:\n:ANKI_NOTE_TYPE: Basic\n:ANKI_DECK: %s\n:END:\n** Front\n%s\n** Back\n%s"
-         anki-editor-cloze-delete-func 'anki-editor-cloze-delete-blank
-         anki-editor-cloze-delete-blank 'anki-editor-cloze-delete-blank
-         anki-editor-cloze-delete-all 'anki-editor-cloze-delete-all
-         anki-editor-cloze-delete-region 'anki-editor-cloze-delete-region)
+         anki-editor-use-math-jax t)
   :bind (:map org-mode-map
               ("C-c k p" . anki-editor-push-notes)
               ("C-c k c" . anki-editor-cloze-dwim)

@@ -59,6 +59,8 @@
 ;; Org
 (package! anki-editor)
 (package! org-superstar)
+(package! org-roam-ui)
+
 ;; org-noter
 (package! nov)
 (package! djvu)

@@ -49,7 +49,10 @@
 ;; they are implemented.
 ;;
 
+(load! "cc-var-define")
+
 (load! "mycustom")
+
 ;; change `org-directory'. It must be set before org loads!
 (setq! org-directory cc/org-home-dir)
 
