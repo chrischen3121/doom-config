@@ -71,7 +71,6 @@
              ("shell" . "src shell")
              ("conf" . "src conf")))
     (add-to-list 'org-structure-template-alist lang))
-  (which-key-add-keymap-based-replacements org-mode-map "C-c m I" "org-id")
   (which-key-add-keymap-based-replacements org-mode-map "C-c \""  "plot"))
 
 ;; :ui
@@ -80,56 +79,6 @@
   (setq! deft-directory cc/deft-notes-dir
          deft-use-filename-as-title t
          deft-strip-summary-regexp ":PROPERTIES:\n\\(.+\n\\)+:END:\n"))
-
-;; :lang
-;; org +roam +noter
-;; TODO maybe org-roam-ui
-(after! org-roam
-  (setq! org-roam-directory cc/org-roam-directory
-         org-roam-db-location cc/org-roam-db-location
-         org-roam-db-gc-threshold most-positive-fixnum
-         org-roam-graph-viewer cc/org-roam-graph-viewer
-         org-roam-dailies-directory cc/org-roam-journal-directory
-         org-roam-capture-templates
-         '(("d" "default" plain "%?"
-            :if-new (file+head "${slug}-%<%Y%m%d>.org"
-                               "#+title: ${title}\n")
-            :unnarrowed t)
-           ("t" "tagged" plain "%?"
-            :if-new (file+head "${slug}-%<%Y%m%d>.org"
-                               "#+title: ${title}\n#+filetags: %^{filetags}\n")
-            :unnarrowed t)
-           ))
-  (org-roam-db-autosync-mode)
-  (map! :prefix "C-c n r"
-        :desc "Generate org-id"
-        "p" #'org-id-get-create
-        :map org-mode-map
-        :prefix "C-c n r"
-        :desc "Add alias"
-        "a" #'org-roam-alias-add
-        :desc "Open org-roam buffer"
-        "b" #'org-roam-buffer-toggle
-        :desc "Add tag"
-        "t" #'org-roam-tag-add
-        :desc "Add ref"
-        "r" #'org-roam-ref-add))
-
-;; org-roam-ui
-(use-package! org-roam-ui
-  :after org-roam
-  :commands org-roam-ui-mode
-  :config
-  (setq! org-roam-ui-sync-theme t
-         org-roam-ui-follow t
-         org-roam-ui-update-on-save t
-         org-roam-ui-open-on-start t))
-
-(map! :prefix "C-c n r"
-      :desc "Open org-roam-ui"
-      "u" #'org-roam-ui-mode
-      :desc "Sync ui theme"
-      "l" #'org-roam-ui-sync-theme)
 
 
 (after! org-noter
@@ -141,14 +90,21 @@
       :map org-mode-map
       "M-S-<return>" #'org-table-copy-down
       "S-<return>" #'org-insert-todo-heading
-      "C-c m s" #'org-insert-structure-template
-      "C-c m p" #'org-set-property
-      "C-c m I c" #'org-id-get-create
-      "C-c m I g" #'org-id-goto
-      "C-c m I w" #'org-id-copy
-      "C-c m I l" #'org-id-store-link
-      "C-c m l" #'org-latex-preview
-      "C-c m i" #'org-toggle-inline-images)
+      :prefix "C-c m"
+      :desc "Insert code template"
+      "s" #'org-insert-structure-template
+      :desc "Set property"
+      "p" #'org-set-property
+      :desc "Toggle latex preview"
+      "l" #'org-latex-preview
+      :desc "Toggle inline images"
+      "i" #'org-toggle-inline-images
+      :prefix ("C-c m I" . "org-id")
+      :desc "Generate org-id"
+      "c" #'org-id-get-create
+      "g" #'org-id-goto
+      "w" #'org-id-copy
+      "l" #'org-id-store-link)
 
 ;; org-protocol configuration for Logseq
 (use-package! org-protocol
@@ -165,6 +121,7 @@
 
 ;; anki-editor
 (use-package! anki-editor
+  :defer t
   :after org
   :init
   (which-key-add-keymap-based-replacements org-mode-map "C-c k" "anki")
@@ -172,6 +129,7 @@
   (setq! anki-editor-create-decks t
          anki-editor-org-tags-as-anki-tags t
          anki-editor-use-math-jax t)
+  ;; TODO
   :bind (:map org-mode-map
               ("C-c k p" . anki-editor-push-notes)
               ("C-c k c" . anki-editor-cloze-dwim)
@@ -184,10 +142,22 @@
   :hook (org-mode . org-superstar-mode))
 
 
-;; TODO: add org-download
-;; wl-clipboard for org-download
-;; pamac install --no-confirm --needed wl-clipboard
-
+;; TODO: maybe use org filename instead of 0 level heading
+(use-package! org-download
+  :after-call (org-mode-hook)
+  :config
+  (setq! org-download-image-dir "images/"
+         org-download-heading-lvl 0)
+  (map! :map org-mode-map
+        :prefix ("C-c m d" . "org-download")
+        :desc "Download screenshot"
+        "p" #'cc/org-download-screenshot
+        :desc "Delete downloaded image"
+        "d" #'org-download-delete
+        :desc "Delete all downloaded images"
+        "D" #'org-download-delete-all
+        :desc "Download clipboard"
+        "y" #'org-download-clipboard))
 
 ;; org-tag-alist
 ;; '(("Learning" . ?l)

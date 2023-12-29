@@ -58,6 +58,7 @@
 
 ;; Org
 (package! anki-editor)
+(package! org-download)
 (package! org-superstar)
 (package! org-roam-ui)
 
