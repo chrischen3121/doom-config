@@ -1,43 +1,68 @@
 ;;; core/cc-better-defaults.el -*- lexical-binding: t; -*-
 ;; TODO: May be try to use Hydra
-;; TODO: May be define function cc/kill-and-del-other-window
+;; TODO: May be define function cc/kill-and-del-other-window for cpp compile buffer
+
+
+(add-to-list 'default-frame-alist '(fullscreen . maximized))
+;; Unbind suspend-frame
+(map! "C-z" nil
+      :desc "Open recent files"
+      :map (general-override-mode-map override-global-map)
+      "C-c C-f" #'consult-recent-file)
+
+
+(add-hook! 'doom-after-init-hook
+           ;; Disable "continue comments" functionality
+           (advice-remove 'newline-and-indent
+                          '+default--newline-indent-and-continue-comments-a))
 
 ;; :app
 ;; +calendar
 (when (modulep! :app calendar)
   (setq! calendar-week-start-day 1)
   (map! :prefix "C-c o"
+        :map override-global-map
         :desc "Calendar"
         "c" #'+calendar/open-calendar))
 
+;; :checkers
+;; syntax
+(when (modulep! :checkers syntax)
+  (after! flycheck
+    (setq! flycheck-keymap-prefix (kbd "C-c 1"))
+    (map! :map (override-global-mode general-override-mode-map)
+          :prefix ("C-c 1" . "checkers"))))
 
 ;; :checkers
 ;; +grammar
 (when (modulep! :checkers grammar)
   (map!
    :map (text-mode-map org-mode-map)
-   :prefix ("C-c ! g" . "grammar")
+   :prefix ("C-c 1 g" . "grammar")
    :desc "Check buffer" "c" #'langtool-check
    :desc "Correct buffer" "C" #'langtool-correct-buffer))
 
 
+;; :checkers
 ;; +spell
+;; spell-fu
 (when (modulep! :checkers spell)
-  (setf
-   (alist-get 'prog-mode +spell-excluded-faces-alist)
-   '(font-lock-string-face))
-  (setq! cc/en-personal-dictionary
-         (file-name-concat cc/personal-dictionary-dir "en.pws"))
   (add-hook! spell-fu-mode
+    (setf
+     (alist-get 'prog-mode +spell-excluded-faces-alist)
+     '(font-lock-string-face))
+    (setq! cc/en-personal-dictionary
+           (file-name-concat cc/personal-dictionary-dir "en.pws"))
     (spell-fu-dictionary-add
      (spell-fu-get-personal-dictionary "en" cc/en-personal-dictionary)))
-  ;; spell-fu
+
   (after! spell-fu
     (setq! spell-fu-idle-delay 0.5)
     (custom-set-faces!
       '(spell-fu-incorrect-face :underline (:color "cyan" :style wave)))
     (map!
-     :prefix ("C-c ! s" . "spell")
+     :map flycheck-mode-map
+     :prefix ("C-c 1 s" . "spell-check")
      :desc "Correct word at point" "c" #'+spell/correct
      :desc "Add word at point" "a" #'+spell/add-word
      :desc "Remove word at point" "r" #'+spell/remove-word
@@ -49,52 +74,68 @@
 ;; dired
 ;; C-c C-r Rsync to ...
 ;; C-c C-e Rename entries
-(map! :after dired
-      :map dired-mode-map
-      "C-l" #'dired-up-directory)
+(when (modulep! :emacs dired)
+  (map! :after dired
+        :map dired-mode-map
+        "C-l" #'dired-up-directory))
+
+
+;; :completion
+;; vertico
+(when (modulep! :completion vertico)
+  (map! :after vertico
+        :map vertico-map
+        "C-l" #'vertico-directory-delete-char))
+
 
 ;; :emacs
-(map! :after vertico
-      :map vertico-map
-      "C-l" #'vertico-directory-delete-char)
-
 ;; undo
-(map! :after undo-fu
-      :prefix ("C-c u" . "undo")
-      "u" #'undo-fu-only-undo
-      "r" #'undo-fu-only-redo
-      "a" #'undo-fu-only-redo-all)
+(when (modulep! :emacs undo)
+  (map! :after undo-fu
+        :map (override-global-map general-override-mode-map)
+        :prefix ("C-c u" . "undo")
+        "u" #'undo-fu-only-undo
+        "r" #'undo-fu-only-redo
+        "a" #'undo-fu-only-redo-all))
 
 ;; :term
 ;; vterm
 ;; Install vterm-module by `M-x vterm-module-compile`
 ;; C-c o t/T Open vterm
 
+
 ;; :tools
 ;; docker
 ;; C-x C-f /docker:$USER@$CONTAINER:/path/to/file
 
+
+;; :ui
 ;; workspace
 (when (modulep! :ui workspace)
   (after! persp-mode
     (setq! persp-emacsclient-init-frame-behaviour-override "main"))
-  )
-(map!
- :map general-override-mode-map
- :desc "Load workspace"
- "C-c w l" #'+workspace/load
- :desc "Load last autosaved session"
- "C-c w L" #'doom/quickload-session
- :desc "Save workspace"
- "C-c w s" #'+workspace/save
- :desc "Save session"
- "C-c w S" #'doom/save-session)
+  (map!
+   :map (override-global-map general-override-mode-map)
+   :prefix ("C-c w w" . "workspace")
+   :desc "Load workspace"
+   "l" #'+workspace/load
+   :desc "Load last autosaved session"
+   "L" #'doom/quickload-session
+   :desc "Save workspace"
+   "s" #'+workspace/save
+   :desc "Save session"
+   "S" #'doom/save-session))
 
+
+;; :ui
 ;; treemacs
 ;; enable project follow mode
-(after! treemacs
-  (setq! treemacs-project-follow-mode t))
+(when (modulep! :ui treemacs)
+  (after! treemacs
+    (setq! treemacs-project-follow-mode t)))
 
+
+;; :ui
 ;; tabs
 (when (modulep! :ui tabs)
   (after! centaur-tabs
@@ -103,11 +144,14 @@
            centaur-tabs-height 36
            centaur-tabs-close-button "x")
     (add-hook! (dired-mode special-mode) #'centaur-tabs-local-mode)
-    (map! :prefix ("C-x t" . "tabs")
+    (map! :prefix ("C-c w t" . "tabs")
           :map centaur-tabs-mode-map
-          :desc "Tab forword" "f" #'centaur-tabs-forward
-          :desc "Tab backward" "b" #'centaur-tabs-backward
-          :desc "Tab ace jump" "j" #'centaur-tabs-ace-jump)))
+          :desc "Tab forword"
+          "f" #'centaur-tabs-forward
+          :desc "Tab backward"
+          "b" #'centaur-tabs-backward
+          :desc "Tab ace jump"
+          "j" #'centaur-tabs-ace-jump)))
 
 
 ;; :others
@@ -116,25 +160,21 @@
   :config
   (whole-line-or-region-global-mode))
 
+;; Rainbow mode: highlight color string
 (add-hook! (emacs-lisp-mode html-mode css-mode) #'rainbow-mode)
 
 ;; Ace jump mode
 ;; It can help you to move your cursor to ANY position in emacs
 ;; by using only 3 times key press.
 (use-package! ace-jump-mode
-  :init
+  :config
   (map!
-   :map general-override-mode-map
+   :map  (override-global-map general-override-mode-map)
    :desc "Ace jump"
    "C-c j" #'ace-jump-mode
    :desc "Ace jump backward"
    "C-c J" #'ace-jump-mode-pop-mark))
 
-
-;; Global keybindings
-(add-hook! 'doom-after-init-hook
-  (map! "C-z" nil ; unbind suspend-frame
-        "S-<SPC>" #'set-mark-command))
 
 ;; Change ace-window leading char face
 (after! ace-window
@@ -144,11 +184,11 @@
       :weight bold
       :height 3.0)))
 
-;; Global which-key
-(after! which-key
-  (which-key-add-key-based-replacements "C-x <RET>" "coding-system")
-  (which-key-add-key-based-replacements "C-x a" "abbrev")
-  (which-key-add-key-based-replacements "C-c m" "mode-cmds")
-  (which-key-add-key-based-replacements "M-s h" "highlight")
-  (which-key-add-key-based-replacements "C-x 8" "emoji")
-  (which-key-add-key-based-replacements "C-x 8 e" "emoji"))
+
+;; Add description for keybindings
+(map! :prefix ("C-x <RET>" . "coding-system")
+      :prefix ("C-x a" . "abbrev")
+      :prefix ("C-c m" . "Mode commands")
+      :prefix ("M-s h" . "highlight")
+      :prefix ("C-x 8" . "emoji")
+      :prefix ("C-x 8 e" . "emoji"))

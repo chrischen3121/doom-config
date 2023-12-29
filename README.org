@@ -1,15 +1,28 @@
-# doom-config
+* doom-config
 Configurations for Doom Emacs
 
-## Useful Keybindings
+** Packages to Try
+- workspace ~C-c w w~
+- grammar check ~C-c 1 g~
+- calendar ~C-c o c~
+- undo ~C-c u~
+- treemacs ~C-c o p~
+- tabs ~C-c w t~
+- ace jump ~C-c j~
+- outline-all ~C-c C-f~
+
+** Packages may Try
+- docker
+
+** Useful Keybindings
 | keybinding  | Command            |
 |-------------|--------------------|
 | ~C-c o c~   | Open calendar      |
 | ~C-c o t/T~ | Open vterm         |
 | ~C-c o p~   | Open treemacs      |
 | ~C-c n d~   | Open deft          |
-| ~C-c ! g~   | Grammar commands   |
-| ~C-c ! s~   | Spell commands     |
+| ~C-c 1 g~   | Grammar commands   |
+| ~C-c 1 s~   | Spell commands     |
 | ~C-c u~     | Undo commands      |
 | ~C-c w~     | Workspace commands |
 | ~C-x t~     | Tab commands       |

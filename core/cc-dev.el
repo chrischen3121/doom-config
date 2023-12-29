@@ -5,6 +5,11 @@
 (when (modulep! :completion company)
   (after! company
     (map! :after yasnippet
+          :map
+          (org-mode-map
+           prog-mode-map
+           yaml-mode-map
+           conf-mode-map)
           "M-/" #'company-yasnippet)
     (map! :map prog-mode-map
           "M-<RET>" #'+default--newline-indent-and-continue-comments-a
@@ -20,20 +25,25 @@
       'company-yasnippet)
     )
 
-
   (after! company-box
     (setq-hook! 'company-box-mode-hook company-box-doc-delay 2)))
-
 
 ;; :editor
 ;; fold (outline hide/show)
 ;; C-c C-f - fold commands prefix
 (when (modulep! :editor fold)
-  (map! "C-c C-f o" #'+fold-open-all
-        "C-c C-f c" #'+fold-close-all
-        "C-c C-f d" #'+fold-toggle-all)
-  (which-key-add-key-based-replacements "C-c @" "outline")
-  (which-key-add-key-based-replacements "C-c C-f C-a" "outline-all"))
+  (add-hook! 'outline-minor-mode-hook
+    (setq! outline-minor-mode-prefix (kbd "C-c 2 @"))
+    (which-key-add-key-based-replacements "C-c 2 @" "outline"))
+  (map! :map (org-mode-map prog-mode-map)
+        :prefix ("C-c 2" . "fold")
+        "l" #'+fold/toggle
+        "O" #'+fold/open-all
+        "C" #'+fold/close-all
+        "o" #'+fold/open
+        "c" #'+fold/close
+        "d" #'vimish-fold-delete
+        "D" #'vimish-fold-delete-all))
 
 
 ;; :tools
@@ -57,9 +67,9 @@
     (add-hook! 'writeroom-mode-enable-hook
       (centaur-tabs-local-mode +1)
       (display-line-numbers-mode -1)
-    (add-hook! 'writeroom-mode-disable-hook
-      (centaur-tabs-local-mode -1)
-      (display-line-numbers-mode +1)))))
+      (add-hook! 'writeroom-mode-disable-hook
+        (centaur-tabs-local-mode -1)
+        (display-line-numbers-mode +1)))))
 
 
 

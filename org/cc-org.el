@@ -1,5 +1,6 @@
 ;;; org/cc-org.el -*- lexical-binding: t; -*-
-;; TODO: org-download
+;; TODO: auto close emphasis and latex $
+;; TODO: write latex
 ;; TODO: anki-editor
 ;; TODO: org-format-latex-options
 ;;

@@ -4,7 +4,7 @@
   (setq-hook! 'emacs-lisp-mode-hook tab-width 2)
   (map!
    :map emacs-lisp-mode-map
-   "C-c ! r" #'check-parens
+   "C-c 1 r" #'check-parens
    ))
 
 (map! :prefix ("C-c P" . "Emacs profiling")
