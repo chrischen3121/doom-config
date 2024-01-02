@@ -33,4 +33,8 @@ Configurations for Doom Emacs
 | ~C-c m e~   | eval commands      |
 
 
-
+* TODOs
+** Workflow Optimization
+  - [ ] org-noter
+  - [ ] python
+  - [ ] C++

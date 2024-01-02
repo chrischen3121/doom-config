@@ -143,7 +143,9 @@
            centaur-tabs-set-bar nil
            centaur-tabs-height 36
            centaur-tabs-close-button "x")
-    (add-hook! (dired-mode special-mode) #'centaur-tabs-local-mode)
+    (add-hook!
+      (dired-mode special-mode vterm-mode)
+      #'centaur-tabs-local-mode)
     (map! :prefix ("C-c w t" . "tabs")
           :map centaur-tabs-mode-map
           :desc "Tab forword"

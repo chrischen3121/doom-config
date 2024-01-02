@@ -53,15 +53,18 @@
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
-;; `load-theme' function. This is the default:
-;; (setq! doom-theme 'doom-one)
-;; (setq! doom-theme 'doom-gruvbox-light)
-;; (setq! doom-theme 'doom-gruvbox)
-;; (setq! doom-theme 'doom-tomorrow-day)
+;; `load-theme' function.
+;; Recommended:
 
-;; (defvar cc/light-theme 'doom-tomorrow-day)
-(defvar cc/light-theme 'doom-gruvbox-light)
-(defvar cc/dark-theme 'doom-palenight)
+;; light:
+;; doom-acario-light, doom-one-light, doom-nord,  doom-oksolar-light
+
+;; dark:
+;; doom-peacock, doom-tomorrow-night, doom-opera
+
+(defvar cc/light-theme 'doom-one-light)
+(defvar cc/dark-theme 'doom-tomorrow-night)
+
 
 ;; Set default theme to light if it's daytime, dark if it's night
 (defun cc/set-default-theme-by-time ()
@@ -78,11 +81,7 @@
         (load-theme cc/dark-theme t)
       (load-theme cc/light-theme t))))
 
-;; Set default theme by system style if it's gnome
-;; otherwise set by time
-(if (string-equal (getenv "XDG_CURRENT_DESKTOP") "GNOME")
-    (cc/set-default-theme-by-sys-style)
-  (cc/set-default-theme-by-time))
+
 
 (defun cc/switch-light-dark-theme ()
   """Switch light/dark themes"""
@@ -92,5 +91,12 @@
              (load-theme cc/dark-theme t))
     (disable-theme cc/dark-theme)
     (load-theme cc/light-theme t)))
+
+(add-hook! 'doom-init-ui-hook
+           ;; Set default theme by system style if it's gnome
+           ;; otherwise set by time
+           (if (string-equal (getenv "XDG_CURRENT_DESKTOP") "GNOME")
+               (cc/set-default-theme-by-sys-style)
+             (cc/set-default-theme-by-time)))
 
 (map! "<f12>" #'cc/switch-light-dark-theme)

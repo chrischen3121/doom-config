@@ -37,6 +37,7 @@
 (after! org
   ;; disable org-indent-mode
   (setq! org-startup-indented nil) ; Prevent org-indent-mode from being enabled by default
+  ;; (setq-hook! 'org-mode-hook tab-width 8)
   (remove-hook 'org-mode-hook #'org-indent-mode) ; Remove org-indent-mode from the org-mode-hook
 
   ;; Org titles

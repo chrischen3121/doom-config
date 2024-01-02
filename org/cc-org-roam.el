@@ -18,11 +18,10 @@
             :unnarrowed t)
            ))
   (org-roam-db-autosync-mode)
-  (map! :prefix "C-c n r"
+  (map! :map org-mode-map
+        :prefix ("C-c m r" . "Roam")
         :desc "Generate org-id"
         "p" #'org-id-get-create
-        :map org-mode-map
-        :prefix "C-c n r"
         :desc "Add alias"
         "a" #'org-roam-alias-add
         :desc "Open org-roam buffer"
