@@ -7,7 +7,7 @@
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets. It is optional.
 (setq! user-full-name "Chris Chen"
-      user-mail-address "chrischen3121@gmail.com")
+       user-mail-address "chrischen3121@gmail.com")
 
 
 

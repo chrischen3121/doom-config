@@ -59,6 +59,29 @@
         :desc "Open REPL other window" "w" #'+eval/open-repl-other-window))
 
 
+;; :tools
+;; lsp +peek
+(when (modulep! :tools lsp +peek)
+  (after! lsp-ui
+    (setq! lsp-ui-sideline-show-diagnostics t
+           lsp-ui-sideline-show-code-actions t
+           lsp-ui-sideline-show-symbol t
+           lsp-ui-sideline-delay 0.5
+           lsp-ui-imenu-buffer-position 'left
+           ;;lsp-ui-imenu-auto-refresh t
+           lsp-ui-imenu-refresh-delay 2
+           )
+    (map!
+     :map lsp-ui-mode-map
+     [remap xref-find-definitions] #'lsp-ui-peek-find-definitions
+     [remap xref-find-references]  #'lsp-ui-peek-find-references
+     :desc "Open lsp-ui imenu" "C-c 3" #'lsp-ui-imenu
+     ))
+  (map! :leader
+        :prefix "c"
+        :desc "Peek doc" "K" #'lsp-ui-doc-glance))
+
+
 ;; :ui
 ;; zen
 (when (modulep! :ui zen)

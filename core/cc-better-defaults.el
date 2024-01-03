@@ -1,15 +1,9 @@
 ;;; core/cc-better-defaults.el -*- lexical-binding: t; -*-
-;; TODO: May be try to use Hydra
-;; TODO: May be define function cc/kill-and-del-other-window for cpp compile buffer
-
 
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
-;; Unbind suspend-frame
-(map! "C-z" nil
-      :desc "Open recent files"
-      :map (general-override-mode-map override-global-map)
-      "C-c C-f" #'consult-recent-file)
 
+;; Global keybindings
+(map! "C-z" nil)
 
 (add-hook! 'doom-after-init-hook
            ;; Disable "continue comments" functionality
@@ -20,8 +14,8 @@
 ;; +calendar
 (when (modulep! :app calendar)
   (setq! calendar-week-start-day 1)
-  (map! :prefix "C-c o"
-        :map override-global-map
+  (map! :leader
+        :prefix "o"
         :desc "Calendar"
         "c" #'+calendar/open-calendar))
 
@@ -30,8 +24,7 @@
 (when (modulep! :checkers syntax)
   (after! flycheck
     (setq! flycheck-keymap-prefix (kbd "C-c 1"))
-    (map! :map (override-global-mode general-override-mode-map)
-          :prefix ("C-c 1" . "checkers"))))
+    (map! :prefix ("C-c 1" . "checkers"))))
 
 ;; :checkers
 ;; +grammar
@@ -91,12 +84,12 @@
 ;; :emacs
 ;; undo
 (when (modulep! :emacs undo)
-  (map! :after undo-fu
-        :map (override-global-map general-override-mode-map)
-        :prefix ("C-c u" . "undo")
-        "u" #'undo-fu-only-undo
-        "r" #'undo-fu-only-redo
-        "a" #'undo-fu-only-redo-all))
+  (map!
+   :localleader
+   :prefix ("u" . "undo")
+   :desc "Undo" "u" #'undo-fu-only-undo
+   :desc "Redo" "r" #'undo-fu-only-redo
+   :desc "Redo all" "a" #'undo-fu-only-redo-all))
 
 ;; :term
 ;; vterm
@@ -145,6 +138,7 @@
            centaur-tabs-close-button "x")
     (add-hook!
       (dired-mode special-mode vterm-mode)
+      :append
       #'centaur-tabs-local-mode)
     (map! :prefix ("C-c w t" . "tabs")
           :map centaur-tabs-mode-map
@@ -171,11 +165,10 @@
 (use-package! ace-jump-mode
   :config
   (map!
-   :map  (override-global-map general-override-mode-map)
-   :desc "Ace jump"
-   "C-c j" #'ace-jump-mode
-   :desc "Ace jump backward"
-   "C-c J" #'ace-jump-mode-pop-mark))
+   :localleader
+   :prefix ("j" . "jump")
+   :desc "Ace jump" "j" #'ace-jump-mode
+   :desc "Ace jump backward" "b" #'ace-jump-mode-pop-mark))
 
 
 ;; Change ace-window leading char face

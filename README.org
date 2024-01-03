@@ -2,6 +2,7 @@
 Configurations for Doom Emacs
 
 ** Packages to Try
+- code action ~C-c a~
 - workspace ~C-c w w~
 - grammar check ~C-c 1 g~
 - calendar ~C-c o c~
@@ -34,6 +35,9 @@ Configurations for Doom Emacs
 
 
 * TODOs
+** Need To Fix
+  - [ ] ~map!~ with ~:localleader~ doesn't show up descriptions
+
 ** Workflow Optimization
   - [ ] org-noter
   - [ ] python
