@@ -60,9 +60,11 @@
 ;; eval
 (when (modulep! :tools eval)
   (map! :map (prog-mode-map emacs-lisp-mode-map)
-        :prefix ("C-c m e" . "eval")
+        :leader
+        :prefix ("l e" . "eval")
         :desc "Eval line" "l" #'+eval/line-or-region
         :desc "Eval buffer" "b" #'+eval/buffer-or-region
+        :desc "Eval defun" "d" #'eval-defun
         :desc "Region and replace" "r" #'+eval/region-and-replace
         :desc "Region to REPL" "s" #'+eval/send-region-to-repl
         :desc "Open REPL same window" "c" #'+eval/open-repl-same-window
@@ -101,25 +103,27 @@
   (after! writeroom-mode
     (setq! +zen-text-scale 0.8)
     (add-hook! 'writeroom-mode-enable-hook
-      (centaur-tabs-local-mode +1)
-      (display-line-numbers-mode -1)
-      (add-hook! 'writeroom-mode-disable-hook
-        (centaur-tabs-local-mode -1)
-        (display-line-numbers-mode +1)))))
-
+      (when (modulep! :ui tabs)
+        (centaur-tabs-local-mode +1))
+      (display-line-numbers-mode -1))
+    (add-hook! 'writeroom-mode-disable-hook
+      (when (modulep! :ui tabs)
+        (centaur-tabs-local-mode -1))
+      (display-line-numbers-mode +1))))
 
 
 ;; :others
 ;; copilot
-(add-hook! (prog-mode git-commit-setup conf-mode yaml-mode) #'copilot-mode)
-(map! :after copilot
-      :map copilot-completion-map
-      "<backtab>" #'copilot-accept-completion
-      "M-j" #'copilot-accept-completion
-      "M-n" #'copilot-next-completion
-      "M-p" #'copilot-previous-completion
-      "M-l" #'copilot-accept-completion-by-line
-      "M-o" #'copilot-panel-complete)
+(use-package! copilot
+  :hook ((prog-mode git-commit-setup conf-mode yaml-mode) . copilot-mode)
+  :config
+  (map! :map copilot-completion-map
+        "<backtab>" #'copilot-accept-completion
+        "M-j" #'copilot-accept-completion
+        "M-n" #'copilot-next-completion
+        "M-p" #'copilot-previous-completion
+        "M-l" #'copilot-accept-completion-by-line
+        "M-o" #'copilot-panel-complete))
 
 
 ;; TODO try ein and move to python.el
