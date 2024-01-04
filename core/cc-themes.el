@@ -27,35 +27,9 @@
        doom-symbol-font (font-spec :family "WenQuanyi Micro Hei" :size cc/default-unicode-font-size))
 
 
-;; just for debuging
-;; (defun describe-font-of-region-or-point ()
-;;   "Describe the font of the selected region or at point."
-;;   (interactive)
-;;   (let* ((pos (if (use-region-p)
-;;                   (region-beginning)
-;;                 (point)))
-;;          (face (or (get-char-property pos 'read-face-name)
-;;                    (get-char-property pos 'face)
-;;                    'default)))
-;;     (describe-face face)))
-
-;; TODO: need to fix
-;; (defun set-chinese-font (eng-font chs-font eng-size chs-size)
-;;   (set-face-attribute 'default nil :font
-;;                       (format "%s:pixelsize=%d" eng-font eng-size))
-;;   (dolist (charset '(kana han symbol cjk-misc bopomofo)))
-;;   (set-fontset-font (frame-parameter nil 'font)
-;;                     charset
-;;                     (font-spec :family chs-font :size chs-size)))
-
-;; (set-chinese-font "Hack" "WenQuanyi Micro Hei Mono" 20 20)
-
-
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function.
-;; Recommended:
-
 
 ;; Define default light/dark themes
 ;; light:
@@ -86,6 +60,16 @@
       (load-theme cc/light-theme t))))
 
 
+;; Automatically set default theme
+(add-hook! 'doom-init-ui-hook
+           ;; Set default theme by system style if it's gnome
+           ;; otherwise set by time
+           (defun auto-set-default-theme ()
+             (interactive)
+             (if (string-equal (getenv "XDG_CURRENT_DESKTOP") "GNOME")
+                 (cc/set-default-theme-by-sys-style)
+               (cc/set-default-theme-by-time))))
+
 
 ;; Switch between light and dark themes
 (defun cc/switch-light-dark-theme ()
@@ -97,15 +81,5 @@
     (disable-theme cc/dark-theme)
     (load-theme cc/light-theme t)))
 
-
-;; Automatically set default theme
-(add-hook! 'doom-init-ui-hook
-           ;; Set default theme by system style if it's gnome
-           ;; otherwise set by time
-           (defun auto-set-default-theme ()
-             (interactive)
-             (if (string-equal (getenv "XDG_CURRENT_DESKTOP") "GNOME")
-                 (cc/set-default-theme-by-sys-style)
-               (cc/set-default-theme-by-time))))
 
 (map! "<f12>" #'cc/switch-light-dark-theme)

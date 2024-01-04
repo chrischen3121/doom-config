@@ -3,13 +3,23 @@
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 
 ;; Global keybindings
-(map! "C-z" nil)
+(map! "C-z" nil
+      :leader
+      :prefix ("L" . "<less-used>")
+      :prefix ("g" . "<global>"))
+
+;; Add descriptions for keybindings
+(map! :prefix ("C-x <RET>" . "coding-system")
+      :prefix ("C-x a" . "abbrev")
+      :prefix ("M-s h" . "highlight")
+      :prefix ("C-x 8" . "emoji")
+      :prefix ("C-x 8 e" . "emoji"))
 
 (add-hook! 'doom-after-init-hook
            ;; Disable "continue comments" functionality
-           (advice-remove 'newline-and-indent
-                          '+default--newline-indent-and-continue-comments-a))
-
+           (defun disable-continue-comments ()
+             (advice-remove 'newline-and-indent
+                            '+default--newline-indent-and-continue-comments-a)))
 ;; :app
 ;; +calendar
 (when (modulep! :app calendar)
@@ -23,39 +33,44 @@
 ;; syntax
 (when (modulep! :checkers syntax)
   (after! flycheck
-    (setq! flycheck-keymap-prefix (kbd "C-c 1"))
-    (map! :prefix ("C-c 1" . "checkers"))))
+    (setq! flycheck-keymap-prefix (kbd "C-c L 1"))
+    (map! :map overriding-local-map
+          :leader
+          :prefix ("L 1" . "checkers"))))
 
 ;; :checkers
 ;; +grammar
 (when (modulep! :checkers grammar)
   (map!
-   :map (text-mode-map org-mode-map)
-   :prefix ("C-c 1 g" . "grammar")
+   :map text-mode-map
+   :leader
+   :prefix ("L g" . "grammar")
    :desc "Check buffer" "c" #'langtool-check
-   :desc "Correct buffer" "C" #'langtool-correct-buffer))
+   :desc "Correct buffer" "f" #'langtool-correct-buffer))
 
 
 ;; :checkers
 ;; +spell
 ;; spell-fu
 (when (modulep! :checkers spell)
-  (add-hook! spell-fu-mode
-    (setf
-     (alist-get 'prog-mode +spell-excluded-faces-alist)
-     '(font-lock-string-face))
-    (setq! cc/en-personal-dictionary
-           (file-name-concat cc/personal-dictionary-dir "en.pws"))
-    (spell-fu-dictionary-add
-     (spell-fu-get-personal-dictionary "en" cc/en-personal-dictionary)))
-
+  (setq! cc/en-personal-dictionary
+         (file-name-concat cc/personal-dictionary-dir "en.pws"))
+  (add-hook! spell-fu-mode :local
+    (defun add-personal-dictionary ()
+      (spell-fu-dictionary-add
+       (spell-fu-get-personal-dictionary "en" cc/en-personal-dictionary))))
   (after! spell-fu
     (setq! spell-fu-idle-delay 0.5)
+    (setf
+     (alist-get 'prog-mode +spell-excluded-faces-alist)
+     '(font-lock-constant-face
+       font-lock-string-face)) ; TODO: wait for official fix
     (custom-set-faces!
       '(spell-fu-incorrect-face :underline (:color "cyan" :style wave)))
     (map!
-     :map flycheck-mode-map
-     :prefix ("C-c 1 s" . "spell-check")
+     :map overriding-local-map
+     :leader
+     :prefix ("l s" . "spell-check")
      :desc "Correct word at point" "c" #'+spell/correct
      :desc "Add word at point" "a" #'+spell/add-word
      :desc "Remove word at point" "r" #'+spell/remove-word
@@ -85,31 +100,29 @@
 ;; undo
 (when (modulep! :emacs undo)
   (map!
-   :localleader
-   :prefix ("u" . "undo")
+   :map overriding-local-map
+   :leader
+   :prefix ("l u" . "undo")
    :desc "Undo" "u" #'undo-fu-only-undo
    :desc "Redo" "r" #'undo-fu-only-redo
    :desc "Redo all" "a" #'undo-fu-only-redo-all))
 
-;; :term
-;; vterm
-;; Install vterm-module by `M-x vterm-module-compile`
-;; C-c o t/T Open vterm
-
 
 ;; :tools
 ;; docker
+;; Hints:
+;; Open files in docker container:
 ;; C-x C-f /docker:$USER@$CONTAINER:/path/to/file
 
 
 ;; :ui
-;; workspace
-(when (modulep! :ui workspace)
-  (after! persp-mode
-    (setq! persp-emacsclient-init-frame-behaviour-override "main"))
+;; workspaces
+(when (modulep! :ui workspaces)
   (map!
-   :map (override-global-map general-override-mode-map)
-   :prefix ("C-c w w" . "workspace")
+   :leader
+   :prefix ("g w" . "workspace")
+   :desc "New workspace"
+   "n" #'+workspace/new-named
    :desc "Load workspace"
    "l" #'+workspace/load
    :desc "Load last autosaved session"
@@ -117,7 +130,20 @@
    :desc "Save workspace"
    "s" #'+workspace/save
    :desc "Save session"
-   "S" #'doom/save-session))
+   "S" #'doom/save-session
+   :desc "Delete workspace"
+   "d" #'+workspace/delete
+   :desc "Rename workspace"
+   "r" #'+workspace/rename
+   :desc "Switch workspace"
+   "w" #'+workspace/switch-to
+   :desc "Swap left"
+   "<left>" #'+workspace/swap-left
+   :desc "Swap right"
+   "<right>" #'+workspace/swap-right
+   :desc "Display workspaces"
+   "d" #'+workspace/display
+   ))
 
 
 ;; :ui
@@ -139,15 +165,19 @@
     (add-hook!
       (dired-mode special-mode vterm-mode)
       :append
+      ;; maybe :local
       #'centaur-tabs-local-mode)
-    (map! :prefix ("C-c w t" . "tabs")
+    (map! :leader
+          :prefix ("g t" . "tabs")
           :map centaur-tabs-mode-map
-          :desc "Tab forword"
+          :desc "Tab forward"
           "f" #'centaur-tabs-forward
           :desc "Tab backward"
           "b" #'centaur-tabs-backward
-          :desc "Tab ace jump"
-          "j" #'centaur-tabs-ace-jump)))
+          :desc "Switch to tab"
+          "j" #'centaur-tabs-ace-jump
+          :desc "Tab close"
+          "c" #'centaur-tabs-close-tab)))
 
 
 ;; :others
@@ -157,16 +187,19 @@
   (whole-line-or-region-global-mode))
 
 ;; Rainbow mode: highlight color string
-(add-hook! (emacs-lisp-mode html-mode css-mode) #'rainbow-mode)
+(add-hook! (emacs-lisp-mode html-mode css-mode)
+           #'rainbow-mode)
 
 ;; Ace jump mode
 ;; It can help you to move your cursor to ANY position in emacs
 ;; by using only 3 times key press.
 (use-package! ace-jump-mode
+  :commands ace-jump-mode
   :config
   (map!
-   :localleader
-   :prefix ("j" . "jump")
+   :map overriding-local-map
+   :leader
+   :prefix ("l j" . "jump/goto")
    :desc "Ace jump" "j" #'ace-jump-mode
    :desc "Ace jump backward" "b" #'ace-jump-mode-pop-mark))
 
@@ -177,13 +210,4 @@
     '(aw-leading-char-face
       :foreground "#51afef"
       :weight bold
-      :height 3.0)))
-
-
-;; Add description for keybindings
-(map! :prefix ("C-x <RET>" . "coding-system")
-      :prefix ("C-x a" . "abbrev")
-      :prefix ("C-c m" . "Mode commands")
-      :prefix ("M-s h" . "highlight")
-      :prefix ("C-x 8" . "emoji")
-      :prefix ("C-x 8 e" . "emoji"))
+      :height 5.0)))

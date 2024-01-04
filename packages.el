@@ -66,6 +66,9 @@
 (package! nov)
 (package! djvu)
 
+;; python
+(disable-packages! pipenv)
+
 ;; Development
 (package! copilot
   :recipe (:host github
