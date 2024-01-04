@@ -2,48 +2,58 @@
 
 ;; :completion
 ;; company
+;; Hints:
+;; C-; +company/complete
 (when (modulep! :completion company)
   (after! company
-    (map! :after yasnippet
-          :map
-          (org-mode-map
-           prog-mode-map
-           yaml-mode-map
-           conf-mode-map)
-          "M-/" #'company-yasnippet)
-    (map! :map prog-mode-map
-          "M-<RET>" #'+default--newline-indent-and-continue-comments-a
-          :map company-active-map
-          "M-/" #'company-abort)
+    (when (modulep! :editor snippets)
+      (map! :after yasnippet
+            :map (org-mode-map
+                  prog-mode-map
+                  yaml-mode-map
+                  conf-mode-map)
+            :desc "Code snippets"
+            "M-/" #'company-yasnippet))
+    (map!
+     (:map prog-mode-map
+           "M-<RET>" #'+default--newline-indent-and-continue-comments-a)
+     (:map company-active-map
+           "M-/" #'company-abort))
+
     (set-company-backend!
       '(prog-mode yaml-mode conf-mode)
       'company-capf
       '(:seperate company-yasnippet company-files))
-    (set-company-backend! '(text-mode org-mode)
+    (set-company-backend!
+      '(text-mode org-mode)
       'company-capf
       '(:separate company-dabbrev company-files company-ispell)
-      'company-yasnippet)
-    )
+      'company-yasnippet))
 
-  (after! company-box
-    (setq-hook! 'company-box-mode-hook company-box-doc-delay 2)))
+  (when (modulep! :completion company +childframe)
+    (after! company-box
+      (setq-hook! 'company-box-mode-hook company-box-doc-delay 2))))
 
 ;; :editor
 ;; fold (outline hide/show)
 ;; C-c C-f - fold commands prefix
 (when (modulep! :editor fold)
-  (add-hook! 'outline-minor-mode-hook
-    (setq! outline-minor-mode-prefix (kbd "C-c 2 @"))
-    (which-key-add-key-based-replacements "C-c 2 @" "outline"))
+  (after! outline
+    (add-hook! 'outline-minor-mode-hook
+      (defun set-outline-prefix-map ()
+        (setq! outline-minor-mode-prefix (kbd "C-c l f l"))
+        (which-key-add-key-based-replacements "C-c l f l" "outline"))))
+
   (map! :map (org-mode-map prog-mode-map)
-        :prefix ("C-c 2" . "fold")
-        "l" #'+fold/toggle
-        "O" #'+fold/open-all
-        "C" #'+fold/close-all
-        "o" #'+fold/open
-        "c" #'+fold/close
-        "d" #'vimish-fold-delete
-        "D" #'vimish-fold-delete-all))
+        :leader
+        :prefix ("l f" . "fold")
+        :desc "Toggle fold one" "f" #'+fold/toggle
+        :desc "Open all" "O" #'+fold/open-all
+        :desc "Close all" "C" #'+fold/close-all
+        :desc "Open one" "o" #'+fold/open
+        :desc "Close one" "c" #'+fold/close
+        :desc "Delete folded one" "d" #'vimish-fold-delete
+        :desc "Delete folded all" "D" #'vimish-fold-delete-all))
 
 
 ;; :tools
