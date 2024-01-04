@@ -3,17 +3,20 @@
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 
 ;; Global keybindings
-(map! "C-z" nil
-      :leader
-      :prefix ("L" . "<less-used>")
-      :prefix ("g" . "<global>"))
+(map! "C-z" nil)
 
-;; Add descriptions for keybindings
-(map! :prefix ("C-x <RET>" . "coding-system")
-      :prefix ("C-x a" . "abbrev")
-      :prefix ("M-s h" . "highlight")
-      :prefix ("C-x 8" . "emoji")
-      :prefix ("C-x 8 e" . "emoji"))
+(after! which-key
+  ;; Add descriptions for keybindings
+  (map! :prefix ("C-c g" . "<global>")
+        :prefix ("C-c L" . "<less-used>")
+        :prefix ("C-x <RET>" . "coding-system")
+        :prefix ("C-x a" . "abbrev")
+        :prefix ("M-s h" . "highlight")
+        :prefix ("C-x 8" . "emoji")
+        :prefix ("C-x 8 e" . "emoji"))
+  (which-key-add-key-based-replacements "C-c l g f" "Go to Function")
+  (which-key-add-key-based-replacements "C-c l g v" "Go to Variable")
+  (which-key-add-key-based-replacements "C-c l g l" "Go to Library"))
 
 (add-hook! 'doom-after-init-hook
            ;; Disable "continue comments" functionality
@@ -195,11 +198,11 @@
 ;; by using only 3 times key press.
 (use-package! ace-jump-mode
   :commands ace-jump-mode
-  :config
+  :init
   (map!
    :map overriding-local-map
    :leader
-   :prefix ("l j" . "jump/goto")
+   :prefix "l g"
    :desc "Ace jump" "j" #'ace-jump-mode
    :desc "Ace jump backward" "b" #'ace-jump-mode-pop-mark))
 
