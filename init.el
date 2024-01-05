@@ -23,7 +23,7 @@
 
        :completion
        ;;company
-       company             ;[opt]flags the ultimate code completion backend
+       (company +childframe)             ;[opt]flags the ultimate code completion backend
        ;;helm              ; the *other* search engine for love and life
        ;;ido               ; the other *other* search engine...
        ;;ivy               ; a search engine for love and life

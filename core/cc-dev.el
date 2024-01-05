@@ -41,12 +41,13 @@
   (after! outline
     (add-hook! 'outline-minor-mode-hook
       (defun set-outline-prefix-map ()
-        (setq! outline-minor-mode-prefix (kbd "C-c l f l"))
-        (which-key-add-key-based-replacements "C-c l f l" "outline"))))
+        (setq! outline-minor-mode-prefix (kbd "C-c 2 l"))
+        (which-key-add-keymap-based-replacements
+          outline-minor-mode-map "C-c 2 l" "outline"))))
 
   (map! :map (org-mode-map prog-mode-map)
         :leader
-        :prefix ("l f" . "fold")
+        :prefix ("2" . "fold")
         :desc "Toggle fold one" "f" #'+fold/toggle
         :desc "Open all" "O" #'+fold/open-all
         :desc "Close all" "C" #'+fold/close-all
@@ -61,7 +62,7 @@
 (when (modulep! :tools eval)
   (map! :map (prog-mode-map emacs-lisp-mode-map)
         :leader
-        :prefix ("l e" . "eval")
+        :prefix ("; e" . "eval")
         :desc "Eval line" "l" #'+eval/line-or-region
         :desc "Eval buffer" "b" #'+eval/buffer-or-region
         :desc "Eval defun" "d" #'eval-defun
@@ -74,6 +75,10 @@
 ;; :tools
 ;; lsp +peek
 (when (modulep! :tools lsp +peek)
+  (setq! lsp-keymap-prefix (kbd "C-c ; l"))
+  (map! :map overriding-local-map
+        :leader
+        :prefix ("; l" . "lsp"))
   (after! lsp-ui
     (setq! lsp-ui-sideline-show-diagnostics t
            lsp-ui-sideline-show-code-actions t
@@ -82,6 +87,7 @@
            lsp-ui-imenu-buffer-position 'left
            ;;lsp-ui-imenu-auto-refresh t
            lsp-ui-imenu-refresh-delay 2)
+
     (map!
      :map lsp-ui-mode-map
      [remap xref-find-definitions] #'lsp-ui-peek-find-definitions
@@ -115,17 +121,16 @@
 ;; :others
 ;; copilot
 (use-package! copilot
-  :hook ((prog-mode git-commit-setup conf-mode yaml-mode) . copilot-mode)
+  :defer t
+  :init
+  (add-hook! (prog-mode git-commit-setup conf-mode yaml-mode)
+             :append #'copilot-mode)
+  (setq-hook! copilot-mode copilot--indent-warning-printed-p t)
   :config
   (map! :map copilot-completion-map
         "<backtab>" #'copilot-accept-completion
+        "M-o" #'copilot-panel-complete
+        "M-l" #'copilot-accept-completion-by-line
         "M-j" #'copilot-accept-completion
         "M-n" #'copilot-next-completion
-        "M-p" #'copilot-previous-completion
-        "M-l" #'copilot-accept-completion-by-line
-        "M-o" #'copilot-panel-complete))
-
-
-;; TODO try ein and move to python.el
-;; (after! ein
-;;   (setq! ein:jupyter-server-use-subcommand "server"))
+        "M-p" #'copilot-previous-completion))

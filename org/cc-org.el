@@ -1,7 +1,6 @@
 ;;; org/cc-org.el -*- lexical-binding: t; -*-
 ;; TODO: auto close emphasis and latex $
 ;; TODO: write latex
-;; TODO: anki-editor
 ;; TODO: org-format-latex-options
 ;;
 ;;; Hints:
@@ -37,7 +36,6 @@
 (after! org
   ;; disable org-indent-mode
   (setq! org-startup-indented nil) ; Prevent org-indent-mode from being enabled by default
-  ;; (setq-hook! 'org-mode-hook tab-width 8)
   (remove-hook 'org-mode-hook #'org-indent-mode) ; Remove org-indent-mode from the org-mode-hook
 
   ;; Org titles
@@ -46,7 +44,7 @@
            '((org-level-1 . 1.3)
              (org-level-2 . 1.2)
              (org-level-3 . 1.1)))
-    (set-face-attribute (car face) nil :font "Hack" :weight 'bold :height (cdr face)))
+    (set-face-attribute (car face) nil :weight 'bold :height (cdr face)))
 
   ;; Latex preview configuration
   (setq! org-pretty-entities t
@@ -57,23 +55,30 @@
   (setq! org-startup-with-inline-images t)
 
   ;; Source code block
-  (dolist (lang
-           '(("py" . "src python")
-             ("cpp" . "src cpp")
-             ("sh" . "src bash")
-             ("el" . "src emacs-lisp")
-             ("tex" . "src latex")
-             ("js" . "src js")
-             ("html" . "src html")
-             ("css" . "src css")
-             ("json" . "src json")
-             ("yaml" . "src yaml")
-             ("plantuml" . "src plantuml")
-             ("dot" . "src dot")
-             ("shell" . "src shell")
-             ("conf" . "src conf")))
-    (add-to-list 'org-structure-template-alist lang))
-  (which-key-add-keymap-based-replacements org-mode-map "C-c \""  "plot"))
+  (appendq! org-structure-template-alist
+            '(("el" . "src emacs-lisp")
+              ("py" . "src python")
+              ("cpp" . "src cpp")
+              ("sh" . "src bash")
+              ("tex" . "src latex")
+              ("js" . "src js")
+              ("html" . "src html")
+              ("css" . "src css")
+              ("json" . "src json")
+              ("yaml" . "src yaml")
+              ("plantuml" . "src plantuml")
+              ("dot" . "src dot")
+              ("shell" . "src shell")
+              ("conf" . "src conf")))
+
+  (map! :map org-mode-map
+        :leader
+        :prefix ("; p" . "preview/plot")
+        :desc "Preview latex fragment" "l" #'org-latex-preview
+        :desc "Preview image" "i" #'org-display-inline-images
+        :desc "Plot table" "p" #'org-plot/gnuplot
+        "d" nil
+        "u" nil))
 
 ;; :ui
 ;; deft
@@ -90,18 +95,15 @@
 ;; Keybindings
 (map! :after org
       :map org-mode-map
+      :desc "Insert date" "C-c !" #'org-timestamp-inactive
       "M-S-<return>" #'org-table-copy-down
       "S-<return>" #'org-insert-todo-heading
-      :prefix "C-c m"
+
+      :prefix "C-c ;"
       :desc "Insert code template"
       "s" #'org-insert-structure-template
-      :desc "Set property"
-      "p" #'org-set-property
-      :desc "Toggle latex preview"
-      "l" #'org-latex-preview
-      :desc "Toggle inline images"
-      "i" #'org-toggle-inline-images
-      :prefix ("C-c m I" . "org-id")
+
+      :prefix ("C-c ; i" . "org-id")
       :desc "Generate org-id"
       "c" #'org-id-get-create
       "g" #'org-id-goto
@@ -112,8 +114,12 @@
 (use-package! org-protocol
   :after org
   :config
-  (add-to-list 'org-protocol-protocol-alist
-               '("org-protocol-logseq" :protocol "find-file" :function org-protocol-logseq :kill-client nil))
+  (add-to-list
+   'org-protocol-protocol-alist
+   '("org-protocol-logseq"
+     :protocol "find-file"
+     :function org-protocol-logseq
+     :kill-client nil))
   (defun org-protocol-logseq (fname)
     "Process org-protocol://find-file?path= style URL."
     (let ((f (plist-get (org-protocol-parse-parameters fname nil '(:path)) :path)))
@@ -123,22 +129,22 @@
 
 ;; anki-editor
 (use-package! anki-editor
-  :defer t
   :after org
-  :init
-  (which-key-add-keymap-based-replacements org-mode-map "C-c k" "anki")
+  :commands (anki-editor-insert-note
+             anki-editor-update-note
+             anki-editor-push-notes)
   :config
   (setq! anki-editor-create-decks t
          anki-editor-org-tags-as-anki-tags t
          anki-editor-use-math-jax t)
-  ;; TODO
-  :bind (:map org-mode-map
-              ("C-c k p" . anki-editor-push-notes)
-              ("C-c k c" . anki-editor-cloze-dwim)
-              ("C-c k i" . anki-editor-insert-note)
-              ("C-c k u" . anki-editor-update-note)
-              ("C-c k 0" . anki-editor-clear-cloze))
-  )
+  (map! :map org-mode-map
+        :prefix ("C-c k" . "anki")
+        :desc "Push cards" "p" #'anki-editor-push-notes
+        :desc "Cloze dwim" "c" #'anki-editor-cloze-dwim
+        :desc "Insert card" "i" #'anki-editor-insert-note
+        :desc "Update card" "u" #'anki-editor-update-note
+        :desc "Clear cloze" "0" #'anki-editor-clear-cloze
+        ))
 
 (use-package! org-superstar
   :hook (org-mode . org-superstar-mode))
@@ -151,7 +157,7 @@
   (setq! org-download-image-dir "images/"
          org-download-heading-lvl 0)
   (map! :map org-mode-map
-        :prefix ("C-c m d" . "org-download")
+        :prefix ("C-c ; d" . "org-download")
         :desc "Download screenshot"
         "p" #'cc/org-download-screenshot
         :desc "Delete downloaded image"

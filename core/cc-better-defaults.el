@@ -7,16 +7,14 @@
 
 (after! which-key
   ;; Add descriptions for keybindings
-  (map! :prefix ("C-c g" . "<global>")
-        :prefix ("C-c L" . "<less-used>")
+  (map! :prefix ("C-c g" . "<cc-global>")
+        :prefix ("C-c L" . "<cc-less-used>")
+        :prefix ("C-c ;" . "<cc-local>")
         :prefix ("C-x <RET>" . "coding-system")
         :prefix ("C-x a" . "abbrev")
         :prefix ("M-s h" . "highlight")
         :prefix ("C-x 8" . "emoji")
-        :prefix ("C-x 8 e" . "emoji"))
-  (which-key-add-key-based-replacements "C-c l g f" "Go to Function")
-  (which-key-add-key-based-replacements "C-c l g v" "Go to Variable")
-  (which-key-add-key-based-replacements "C-c l g l" "Go to Library"))
+        :prefix ("C-x 8 e" . "emoji")))
 
 (add-hook! 'doom-after-init-hook
            ;; Disable "continue comments" functionality
@@ -36,10 +34,8 @@
 ;; syntax
 (when (modulep! :checkers syntax)
   (after! flycheck
-    (setq! flycheck-keymap-prefix (kbd "C-c L 1"))
-    (map! :map overriding-local-map
-          :leader
-          :prefix ("L 1" . "checkers"))))
+    (setq! flycheck-keymap-prefix (kbd "C-c 1"))
+    (which-key-add-key-based-replacements "C-c 1" "checker")))
 
 ;; :checkers
 ;; +grammar
@@ -47,7 +43,7 @@
   (map!
    :map text-mode-map
    :leader
-   :prefix ("L g" . "grammar")
+   :prefix ("1 g" . "grammar")
    :desc "Check buffer" "c" #'langtool-check
    :desc "Correct buffer" "f" #'langtool-correct-buffer))
 
@@ -73,7 +69,7 @@
     (map!
      :map overriding-local-map
      :leader
-     :prefix ("l s" . "spell-check")
+     :prefix ("1 s" . "spell-check")
      :desc "Correct word at point" "c" #'+spell/correct
      :desc "Add word at point" "a" #'+spell/add-word
      :desc "Remove word at point" "r" #'+spell/remove-word
@@ -105,7 +101,7 @@
   (map!
    :map overriding-local-map
    :leader
-   :prefix ("l u" . "undo")
+   :prefix ("; u" . "undo")
    :desc "Undo" "u" #'undo-fu-only-undo
    :desc "Redo" "r" #'undo-fu-only-redo
    :desc "Redo all" "a" #'undo-fu-only-redo-all))
@@ -123,7 +119,7 @@
 (when (modulep! :ui workspaces)
   (map!
    :leader
-   :prefix ("g w" . "workspace")
+   :prefix ("3" . "workspace")
    :desc "New workspace"
    "n" #'+workspace/new-named
    :desc "Load workspace"
@@ -145,8 +141,7 @@
    :desc "Swap right"
    "<right>" #'+workspace/swap-right
    :desc "Display workspaces"
-   "d" #'+workspace/display
-   ))
+   "d" #'+workspace/display))
 
 
 ;; :ui
@@ -171,7 +166,7 @@
       ;; maybe :local
       #'centaur-tabs-local-mode)
     (map! :leader
-          :prefix ("g t" . "tabs")
+          :prefix ("4" . "tabs")
           :map centaur-tabs-mode-map
           :desc "Tab forward"
           "f" #'centaur-tabs-forward
@@ -202,9 +197,8 @@
   (map!
    :map overriding-local-map
    :leader
-   :prefix "l g"
    :desc "Ace jump" "j" #'ace-jump-mode
-   :desc "Ace jump backward" "b" #'ace-jump-mode-pop-mark))
+   :desc "Ace jump back" "J" #'ace-jump-mode-pop-mark))
 
 
 ;; Change ace-window leading char face

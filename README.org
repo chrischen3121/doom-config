@@ -7,7 +7,22 @@ Most important leader keys:
 - ~C-c g~: my global leader key
 - ~C-c l~: local leader key
 - ~C-c L~: ~+less-used~
+- ~C-c ;~: my local leader key
 - ~C-c c~: ~+code~
+
+*** Leader Direct
+- ~1~: check
+- ~2~: fold
+- ~3~: workspace
+- ~4~: tab
+- ~&~: yasnippet
+
+*** F<key>
+- ~F8~: *lsp-imenu/imenu*
+- ~F9~: *treemacs*
+- ~F10~: menu popup
+- ~F11~: fullscreen
+- ~F12~: switch light/dark theme
 
 *** Useful Keybindings
 | keybinding  | Command            |
@@ -19,7 +34,7 @@ Most important leader keys:
 | ~C-c 1 g~   | Grammar commands   |
 | ~C-c 1 s~   | Spell commands     |
 | ~C-c u~     | Undo commands      |
-| ~C-c w~     | Workspace commands |
+| ~C-c 3~     | Workspace commands |
 | ~C-x t~     | Tab commands       |
 | ~C-c j~     | Ace jump           |
 | ~C-c t~     | Active minor mode  |
