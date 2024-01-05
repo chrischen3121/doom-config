@@ -19,9 +19,7 @@
            ))
   (org-roam-db-autosync-mode)
   (map! :map org-mode-map
-        :prefix ("C-c m r" . "Roam")
-        :desc "Generate org-id"
-        "p" #'org-id-get-create
+        :prefix ("C-c ; r" . "Roam")
         :desc "Add alias"
         "a" #'org-roam-alias-add
         :desc "Open org-roam buffer"
@@ -32,19 +30,17 @@
         "r" #'org-roam-ref-add))
 
 
-
 ;; org-roam-ui
 (use-package! org-roam-ui
-  :after org-roam
   :commands org-roam-ui-mode
   :config
   (setq! org-roam-ui-sync-theme t
          org-roam-ui-follow t
          org-roam-ui-update-on-save t
-         org-roam-ui-open-on-start t))
-
-(map! :prefix "C-c n r"
-      :desc "Open org-roam-ui"
-      "u" #'org-roam-ui-mode
-      :desc "Sync ui theme"
-      "l" #'org-roam-ui-sync-theme)
+         org-roam-ui-open-on-start t)
+  :init
+  (map! :prefix "C-c ; r"
+        :desc "Open org-roam-ui"
+        "u" #'org-roam-ui-mode
+        :desc "Sync ui theme"
+        "l" #'org-roam-ui-sync-theme))

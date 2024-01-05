@@ -37,7 +37,7 @@
   ;; disable org-indent-mode
   (setq! org-startup-indented nil) ; Prevent org-indent-mode from being enabled by default
   (remove-hook 'org-mode-hook #'org-indent-mode) ; Remove org-indent-mode from the org-mode-hook
-
+  (require 'org-indent) ; fix: Invalid face reference: org-indent
   ;; Org titles
   (setq! org-ellipsis " ▼") ; ▼
   (dolist (face
@@ -112,7 +112,7 @@
 
 ;; org-protocol configuration for Logseq
 (use-package! org-protocol
-  :after org
+  :after-call (org-mode-hook)
   :config
   (add-to-list
    'org-protocol-protocol-alist
@@ -129,22 +129,22 @@
 
 ;; anki-editor
 (use-package! anki-editor
-  :after org
-  :commands (anki-editor-insert-note
-             anki-editor-update-note
-             anki-editor-push-notes)
+  :after-call (org-mode-hook)
+  :commands (anki-editor-push-notes
+             anki-editor-insert-note
+             anki-editor-update-note)
   :config
   (setq! anki-editor-create-decks t
          anki-editor-org-tags-as-anki-tags t
          anki-editor-use-math-jax t)
+  :init
   (map! :map org-mode-map
-        :prefix ("C-c k" . "anki")
+        :prefix ("C-c ; k" . "anki")
         :desc "Push cards" "p" #'anki-editor-push-notes
         :desc "Cloze dwim" "c" #'anki-editor-cloze-dwim
         :desc "Insert card" "i" #'anki-editor-insert-note
         :desc "Update card" "u" #'anki-editor-update-note
-        :desc "Clear cloze" "0" #'anki-editor-clear-cloze
-        ))
+        :desc "Clear cloze" "0" #'anki-editor-clear-cloze))
 
 (use-package! org-superstar
   :hook (org-mode . org-superstar-mode))
@@ -153,9 +153,9 @@
 ;; TODO: maybe use org filename instead of 0 level heading
 (use-package! org-download
   :after-call (org-mode-hook)
-  :config
-  (setq! org-download-image-dir "images/"
-         org-download-heading-lvl 0)
+  :commands (org-download-screenshot
+             org-download-clipboard)
+  :init
   (map! :map org-mode-map
         :prefix ("C-c ; d" . "org-download")
         :desc "Download screenshot"
@@ -165,7 +165,10 @@
         :desc "Delete all downloaded images"
         "D" #'org-download-delete-all
         :desc "Download clipboard"
-        "y" #'org-download-clipboard))
+        "y" #'org-download-clipboard)
+  :config
+  (setq! org-download-image-dir "images/"
+         org-download-heading-lvl 0))
 
 ;; org-tag-alist
 ;; '(("Learning" . ?l)

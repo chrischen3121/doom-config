@@ -95,10 +95,7 @@
             (file+headline cc/org-capture-habits-file "Habits")
             "* [ ] [#C] %^{Habit Name}\nSCHEDULED: <%<%Y-%m-%d %a> .+1m>\n"
             :prepend t :empty-lines 1
-            )
-           )
-         )
-  )
+            ))))
 
 (after! org-agenda
   ;; Customized agenda views
@@ -150,8 +147,7 @@
   (setq! org-agenda-start-with-log-mode t
          org-agenda-show-future-repeats nil)
   (map! :map org-agenda-mode-map
-        "C" #'org-agenda-columns)
-  )
+        "C" #'org-agenda-columns))
 
 
 (after! org-clock
@@ -164,14 +160,12 @@
      (t state)))
 
   (setq! org-clock-in-switch-to-state #'cc/org-clock-in-switch-state
-         org-clock-report-include-clocking-task t)
-  )
+         org-clock-report-include-clocking-task t))
 
 (after! org
-  (which-key-add-keymap-based-replacements org-mode-map "C-c m c" "org-clock")
   (map!
    :map org-mode-map
-   :prefix ("C-c m c" . "org-clock")
+   :prefix ("C-c ; c" . "org-clock")
    :desc "Set effort" "e" #'org-set-effort
    :desc "Modify estimate" "E" #'org-clock-modify-effort-estimate
    :desc "Cancel clock" "c" #'org-clock-cancel
