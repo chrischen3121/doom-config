@@ -57,6 +57,9 @@ Most important leader keys:
 ** Packages may Try
 - docker
 
+* Package Location
+- =~/.config/emacs/.local/straight/repos=
+- =~/.config/emacs/elpa=
 
 * TODOs
 ** Need To Fix

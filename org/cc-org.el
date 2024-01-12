@@ -1,6 +1,4 @@
 ;;; org/cc-org.el -*- lexical-binding: t; -*-
-;; TODO: auto close emphasis and latex $
-;; TODO: write latex
 ;; TODO: org-format-latex-options
 ;;
 ;;; Hints:
@@ -33,6 +31,8 @@
 ;; =============================
 ;; #+INCLUDE: "~/.emacs" src emacs-lisp
 ;;
+(remove-hook! 'org-load-hook #'+org-init-smartparens-h)
+
 (after! org
   ;; disable org-indent-mode
   (setq! org-startup-indented nil) ; Prevent org-indent-mode from being enabled by default
@@ -46,6 +46,11 @@
              (org-level-3 . 1.1)))
     (set-face-attribute (car face) nil :weight 'bold :height (cdr face)))
 
+  ;; Latex hints:
+  ;; ` - cdlatex-math-symbol
+  ;; ' - cdlatex-math-modify e.g. 'b: /mathbf
+
+
   ;; Latex preview configuration
   (setq! org-pretty-entities t
          org-pretty-entities-include-sub-superscripts nil ; show sub'_' / super '^'
@@ -55,6 +60,7 @@
   (setq! org-startup-with-inline-images t)
 
   ;; Source code block
+  ;; TODO maybe just use yasnippet
   (appendq! org-structure-template-alist
             '(("el" . "src emacs-lisp")
               ("py" . "src python")
@@ -70,6 +76,13 @@
               ("dot" . "src dot")
               ("shell" . "src shell")
               ("conf" . "src conf")))
+
+
+  ;; smartparens for inline latex
+  (sp-with-modes 'org-mode
+    (sp-local-pair "$" "$"
+                   :unless '(sp-point-after-word-p)))
+
 
   (map! :map org-mode-map
         :leader
