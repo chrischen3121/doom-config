@@ -54,7 +54,7 @@
 (when (modulep! :checkers spell)
   (setq! cc/en-personal-dictionary
          (file-name-concat cc/personal-dictionary-dir "en.pws"))
-  (add-hook! spell-fu-mode :local
+  (add-hook! spell-fu-mode
     (defun add-personal-dictionary ()
       (spell-fu-dictionary-add
        (spell-fu-get-personal-dictionary "en" cc/en-personal-dictionary))))
