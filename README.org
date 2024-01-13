@@ -42,7 +42,6 @@ Most important leader keys:
 | ~C-c t m~   | Minimap mode       |
 | ~C-c m e~   | eval commands      |
 
-
 ** Packages to Try
 - code action ~C-c a~
 - workspace ~C-c w w~
@@ -60,6 +59,16 @@ Most important leader keys:
 * Package Location
 - =~/.config/emacs/.local/straight/repos=
 - =~/.config/emacs/elpa=
+
+* org-mode
+** LaTeX Input
+** org-noter
+- On PDF window
+| keybinding | command             |
+|------------+---------------------|
+| e / i      | insert a page note  |
+| M-e / M-i  | insert precise note |
+| <tab>      | insert selection    |
 
 * TODOs
 ** Need To Fix

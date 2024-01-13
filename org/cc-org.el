@@ -102,7 +102,23 @@
 
 
 (after! org-noter
-  (setq! org-noter-notes-search-path `(,cc/org-pdf-notes-dir)))
+  (setq! org-noter-notes-search-path `(,cc/org-pdf-notes-dir)
+         org-noter-highlight-selected-text t
+         org-noter-auto-save-last-location t
+         org-noter-max-short-selected-text-length 40)
+  (map! :map (org-noter-notes-mode-map org-noter-doc-mode-map)
+        :prefix ("C-c ; n" . "org-noter")
+        :desc "Sync next note"
+        "n" #'org-noter-sync-next-note
+        :desc "Sync previous note"
+        "p" #'org-noter-sync-prev-note
+        :desc "Sync page or chapter"
+        "s" #'org-noter-sync-current-page-or-chapter
+        :desc "Sync current note"
+        "c" #'org-noter-sync-current-note
+        :map org-noter-doc-mode-map
+        :desc "Insert note" "e" #'org-noter-insert-note
+        :desc "Insert precise note" "M-e" #'org-noter-insert-precise-note))
 
 
 ;; Keybindings
@@ -163,7 +179,6 @@
   :hook (org-mode . org-superstar-mode))
 
 
-;; TODO: maybe use org filename instead of 0 level heading
 (use-package! org-download
   :after-call (org-mode-hook)
   :commands (org-download-screenshot
@@ -172,16 +187,16 @@
   (map! :map org-mode-map
         :prefix ("C-c ; d" . "org-download")
         :desc "Download screenshot"
-        "p" #'cc/org-download-screenshot
+        "p" #'org-download-screenshot
         :desc "Delete downloaded image"
         "d" #'org-download-delete
         :desc "Delete all downloaded images"
-        "D" #'org-download-delete-all
-        :desc "Download clipboard"
-        "y" #'org-download-clipboard)
+        "y" #'org-download-clipboard
+        :desc "Rename"
+        "r" #'org-download-rename-at-point)
   :config
   (setq! org-download-image-dir "images/"
-         org-download-heading-lvl 0))
+         org-download-heading-lvl 1))
 
 ;; org-tag-alist
 ;; '(("Learning" . ?l)
