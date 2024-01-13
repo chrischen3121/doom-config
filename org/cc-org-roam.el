@@ -39,7 +39,7 @@
          org-roam-ui-update-on-save t
          org-roam-ui-open-on-start t)
   :init
-  (map! :prefix "C-c ; r"
+  (map! :prefix ("C-c g r" . "Roam")
         :desc "Open org-roam-ui"
         "u" #'org-roam-ui-mode
         :desc "Sync ui theme"
