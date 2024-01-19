@@ -97,8 +97,7 @@
    :prefix ("d e" . "eval")
    :desc "eval" "e" #'dap-eval
    :desc "eval region" "r" #'dap-eval-region
-   :desc "eval thing at point" "t" #'dap-eval-thing-at-point
-   ))
+   :desc "eval thing at point" "t" #'dap-eval-thing-at-point))
 
 ;; :tools
 ;; lsp +peek
