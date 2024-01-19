@@ -90,7 +90,9 @@
    :desc "quit" "q" #'+debugger/quit
    :prefix ("d b" . "breakpoints")
    :desc "toggle bp" "b" #'dap-breakpoint-toggle
-   :desc "delete all bp" "d" #'dap-breakpoint-delete-all
+   :desc "add bp" "a" #'dap-breakpoint-add
+   :desc "delete bp" "d" #'dap-breakpoint-delete
+   :desc "delete all bp" "D" #'dap-breakpoint-delete-all
    :desc "add condition" "c" #'dap-breakpoint-condition
    :desc "hit condition" "h" #'dap-breakpoint-hit-condition
    :desc "log message" "l" #'dap-breakpoint-log-message
