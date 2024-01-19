@@ -87,7 +87,7 @@
    :desc "step-in" "i" #'dap-step-in
    :desc "step-out" "o" #'dap-step-out
    :desc "restart" "r" #'dap-debug-restart
-   :desc "stop" "s" #'dap-disconnect
+   :desc "quit" "q" #'+debugger/quit
    :prefix ("d b" . "breakpoints")
    :desc "toggle bp" "b" #'dap-breakpoint-toggle
    :desc "delete all bp" "d" #'dap-breakpoint-delete-all
