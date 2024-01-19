@@ -190,7 +190,7 @@
         "p" #'org-download-screenshot
         :desc "Delete downloaded image"
         "d" #'org-download-delete
-        :desc "Delete all downloaded images"
+        :desc "From clipboard"
         "y" #'org-download-clipboard
         :desc "Rename"
         "r" #'org-download-rename-at-point)
