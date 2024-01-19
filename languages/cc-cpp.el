@@ -30,4 +30,4 @@
       :desc "Compile" "c" #'cc/lsp-cpp-compile
       :desc "Man" "m" #'woman
       :desc "Run" "r" #'cc/lsp-cpp-run
-      :desc "Debug" "d" #'gud-gdb)
+      :desc "Debug" "d" #'gdb)

@@ -4,3 +4,6 @@
 ;; TODO try ein and move to python.el
 ;; (after! ein
 ;;   (setq! ein:jupyter-server-use-subcommand "server"))
+(when (modulep! :tools debugger)
+  (after! dap-mode
+    (setq dap-python-debugger 'debugpy)))

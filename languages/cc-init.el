@@ -3,3 +3,5 @@
 (load! "cc-elisp")
 
 (load! "cc-cpp")
+
+(load! "cc-python")

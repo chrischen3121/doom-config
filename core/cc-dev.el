@@ -8,12 +8,10 @@
   (after! company
     (when (modulep! :editor snippets)
       (map! :after yasnippet
-            :map (org-mode-map
-                  prog-mode-map
-                  yaml-mode-map
-                  conf-mode-map)
+            :map yas-minor-mode-map
             :desc "Code snippets"
-            "M-/" #'company-yasnippet))
+            "M-/" #'company-yasnippet
+            "S-<tab>" nil))
     (map!
      (:map prog-mode-map
            "M-<RET>" #'+default--newline-indent-and-continue-comments-a)
@@ -28,7 +26,11 @@
       '(text-mode org-mode)
       'company-capf
       '(:separate company-dabbrev company-files company-ispell)
-      'company-yasnippet))
+      'company-yasnippet)
+    (setq-hook! 'org-mode-hook
+      company-minimum-prefix-length 3
+      ))
+
 
   (when (modulep! :completion company +childframe)
     (after! company-box
@@ -71,6 +73,32 @@
         :desc "Open REPL same window" "c" #'+eval/open-repl-same-window
         :desc "Open REPL other window" "w" #'+eval/open-repl-other-window))
 
+;; :tools
+;; debugger
+(when (modulep! :tools debugger)
+  (map!
+   :desc "dap debug" "C-c g d" #'dap-debug
+   :map dap-mode-map
+   :leader
+   :prefix ("d" . "dap-cmds")
+   :desc "start" "s" #'dap-debug
+   :desc "continue" "c" #'dap-continue
+   :desc "next" "n" #'dap-next
+   :desc "step-in" "i" #'dap-step-in
+   :desc "step-out" "o" #'dap-step-out
+   :desc "restart" "r" #'dap-debug-restart
+   :desc "disconnect" "q" #'dap-disconnect
+   :prefix ("d b" . "breakpoints")
+   :desc "toggle bp" "b" #'dap-breakpoint-toggle
+   :desc "delete all bp" "d" #'dap-breakpoint-delete-all
+   :desc "add condition" "c" #'dap-breakpoint-condition
+   :desc "hit condition" "h" #'dap-breakpoint-hit-condition
+   :desc "log message" "l" #'dap-breakpoint-log-message
+   :prefix ("d e" . "eval")
+   :desc "eval" "e" #'dap-eval
+   :desc "eval region" "r" #'dap-eval-region
+   :desc "eval thing at point" "t" #'dap-eval-thing-at-point
+   ))
 
 ;; :tools
 ;; lsp +peek

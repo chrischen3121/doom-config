@@ -70,6 +70,23 @@ Most important leader keys:
 | M-e / M-i  | insert precise note |
 | <tab>      | insert selection    |
 
+* Languages
+** Debuggers
+- dap-cpptools :: ~M-x dap-cpptools-setup~
+- dap-gdb-lldb :: ~M-x dap-gdb-lldb-setup~
+- dap-lldb
+
+*** Python
+
+- ~pip3 install debugpy~ (recommended)
+- or ~pip3 install ptvsd~
+
+#+begin_src emacs-lisp
+;; in $DOOMDIR/config.el
+(after! dap-mode
+  (setq dap-python-debugger 'debugpy))
+#+end_src
+
 * TODOs
 ** Need To Fix
   - [ ] ~map!~ with ~:localleader~ doesn't show up descriptions
