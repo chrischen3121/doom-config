@@ -81,13 +81,13 @@
    :map dap-mode-map
    :leader
    :prefix ("d" . "dap-cmds")
-   :desc "start" "s" #'dap-debug
+   :desc "start" "d" #'dap-debug
    :desc "continue" "c" #'dap-continue
    :desc "next" "n" #'dap-next
    :desc "step-in" "i" #'dap-step-in
    :desc "step-out" "o" #'dap-step-out
    :desc "restart" "r" #'dap-debug-restart
-   :desc "disconnect" "q" #'dap-disconnect
+   :desc "stop" "s" #'dap-disconnect
    :prefix ("d b" . "breakpoints")
    :desc "toggle bp" "b" #'dap-breakpoint-toggle
    :desc "delete all bp" "d" #'dap-breakpoint-delete-all
@@ -98,6 +98,7 @@
    :desc "eval" "e" #'dap-eval
    :desc "eval region" "r" #'dap-eval-region
    :desc "eval thing at point" "t" #'dap-eval-thing-at-point))
+
 
 ;; :tools
 ;; lsp +peek
