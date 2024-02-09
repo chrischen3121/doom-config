@@ -1,6 +1,9 @@
 * doom-config
 Configurations for Doom Emacs
 
+** Icon Fonts
+~M-x nerd-icons-install-fonts~
+
 ** Keybindings
 Most important leader keys:
 - ~C-c~: global leader key
