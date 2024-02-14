@@ -85,8 +85,7 @@
 
 
   (map! :map org-mode-map
-        :leader
-        :prefix ("; p" . "preview/plot")
+        :prefix ("C-c ; p" . "preview/plot")
         :desc "Preview latex fragment" "l" #'org-latex-preview
         :desc "Preview image" "i" #'org-display-inline-images
         :desc "Plot table" "p" #'org-plot/gnuplot

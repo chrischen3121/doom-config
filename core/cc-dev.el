@@ -48,8 +48,7 @@
           outline-minor-mode-map "C-c 2 l" "outline"))))
 
   (map! :map (org-mode-map prog-mode-map)
-        :leader
-        :prefix ("2" . "fold")
+        :prefix ("C-c 2" . "fold")
         :desc "Toggle fold one" "f" #'+fold/toggle
         :desc "Open all" "O" #'+fold/open-all
         :desc "Close all" "C" #'+fold/close-all
@@ -63,8 +62,7 @@
 ;; eval
 (when (modulep! :tools eval)
   (map! :map (prog-mode-map emacs-lisp-mode-map)
-        :leader
-        :prefix ("; e" . "eval")
+        :prefix ("C-c ; e" . "eval")
         :desc "Eval line" "l" #'+eval/line-or-region
         :desc "Eval buffer" "b" #'+eval/buffer-or-region
         :desc "Eval defun" "d" #'eval-defun
@@ -79,8 +77,7 @@
   (map!
    :desc "dap debug" "C-c g d" #'dap-debug
    :map dap-mode-map
-   :leader
-   :prefix ("d" . "dap-cmds")
+   :prefix ("C-c d" . "dap-cmds")
    :desc "start" "d" #'dap-debug
    :desc "continue" "c" #'dap-continue
    :desc "next" "n" #'dap-next
@@ -88,7 +85,7 @@
    :desc "step-out" "o" #'dap-step-out
    :desc "restart" "r" #'dap-debug-restart
    :desc "quit" "q" #'+debugger/quit
-   :prefix ("d b" . "breakpoints")
+   :prefix ("C-c d b" . "breakpoints")
    :desc "toggle bp" "b" #'dap-breakpoint-toggle
    :desc "add bp" "a" #'dap-breakpoint-add
    :desc "delete bp" "d" #'dap-breakpoint-delete
@@ -96,7 +93,7 @@
    :desc "add condition" "c" #'dap-breakpoint-condition
    :desc "hit condition" "h" #'dap-breakpoint-hit-condition
    :desc "log message" "l" #'dap-breakpoint-log-message
-   :prefix ("d e" . "eval")
+   :prefix ("C-c d e" . "eval")
    :desc "eval" "e" #'dap-eval
    :desc "eval region" "r" #'dap-eval-region
    :desc "eval thing at point" "t" #'dap-eval-thing-at-point))

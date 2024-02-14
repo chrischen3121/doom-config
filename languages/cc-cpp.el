@@ -26,11 +26,10 @@
           (vterm-send-return))))))
 
 (map! :map c++-mode-map
-      :leader
-      :prefix ";"
+      :prefix "C-c ;"
       :desc "Compile" "c" #'cc/lsp-cpp-compile
       :desc "Man" "m" #'woman
       :desc "Run" "r" #'cc/lsp-cpp-run
-      :prefix ("; d" . "Debug")
+      :prefix ("C-c ; d" . "Debug")
       :desc "gdb" "g" #'gdb
       :desc "dap-debug" "d" #'dap-debug)
