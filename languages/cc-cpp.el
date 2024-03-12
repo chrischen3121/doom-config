@@ -25,6 +25,11 @@
           (vterm-send-string (format "./%s\n" file))
           (vterm-send-return))))))
 
+(add-hook! 'c++-mode-hook
+  (setq-local flycheck-clang-language-standard "c++20"
+              flycheck-gcc-language-standard "c++20"
+              tab-width 2))
+
 (map! :map c++-mode-map
       :prefix "C-c ;"
       :desc "Compile" "c" #'cc/lsp-cpp-compile

@@ -16,11 +16,16 @@
         :prefix ("C-x 8" . "emoji")
         :prefix ("C-x 8 e" . "emoji")))
 
+
+;; Global configuration
 (add-hook! 'doom-after-init-hook
            ;; Disable "continue comments" functionality
            (defun disable-continue-comments ()
              (advice-remove 'newline-and-indent
-                            '+default--newline-indent-and-continue-comments-a)))
+                            '+default--newline-indent-and-continue-comments-a))
+           ;; for Github Copilot compatibility
+           (setq! whitespace-style (delq 'newline-mark whitespace-style)))
+
 ;; :app
 ;; +calendar
 (when (modulep! :app calendar)
