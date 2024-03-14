@@ -3,7 +3,8 @@
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 
 ;; Global keybindings
-(map! "C-z" nil)
+(map! "C-z" nil
+      "C-x C-z" nil)
 
 (after! which-key
   ;; Add descriptions for keybindings

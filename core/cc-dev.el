@@ -120,10 +120,10 @@
      [remap xref-find-definitions] #'lsp-ui-peek-find-definitions
      [remap xref-find-references]  #'lsp-ui-peek-find-references
      :desc "Open lsp-ui imenu" "<f8>" #'lsp-ui-imenu
-     :desc "Open lsp-ui imenu" "C-c o i" #'lsp-ui-imenu
+     :desc "Open lsp-ui imenu" "C-c t i" #'lsp-ui-imenu
      :map lsp-ui-imenu-mode-map
      :desc "Close lsp-ui imenu" "<f8>" #'lsp-ui-imenu--kill
-     :desc "Close lsp-ui imenu" "C-c o i" #'lsp-ui-imenu--kill))
+     :desc "Close lsp-ui imenu" "C-c t i" #'lsp-ui-imenu--kill))
 
   (map! :leader
         :prefix "c"

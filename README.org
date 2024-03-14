@@ -21,8 +21,8 @@ Most important leader keys:
 - ~&~: yasnippet
 
 *** F<key>
-- ~F8~: *lsp-imenu/imenu*
-- ~F9~: *treemacs*
+- ~F8~, ~C-c t i~: *lsp-imenu/imenu*
+- ~F9~, ~C-c o p~: *treemacs*
 - ~F10~: menu popup
 - ~F11~: fullscreen
 - ~F12~: switch light/dark theme
@@ -51,7 +51,7 @@ Most important leader keys:
 - grammar check ~C-c 1 g~
 - calendar ~C-c o c~
 - undo ~C-c u~
-- treemacs ~C-c o p~
+- *treemacs* ~C-c o p~
 - tabs ~C-c w t~
 - ace jump ~C-c j~
 - outline-all ~C-c C-f~

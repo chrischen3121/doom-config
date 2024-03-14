@@ -23,7 +23,7 @@
 (setq! doom-font (font-spec :family "Hack" :size cc/default-font-size)
        doom-variable-pitch-font (font-spec :family "Hack" :size cc/default-unicode-font-size)
        doom-big-font (font-spec :family "Hack" :size (+ cc/default-font-size (/ cc/default-font-size 3)))
-       doom-serif-font (font-spec :family "WenQuanyi Micro Hei Mono" :size cc/default-unicode-font-size)
+       doom-serif-font (font-spec :family "WenQuanyi Micro Hei" :size cc/default-unicode-font-size)
        doom-symbol-font (font-spec :family "WenQuanyi Micro Hei" :size cc/default-unicode-font-size))
 
 
