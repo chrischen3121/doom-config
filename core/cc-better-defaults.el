@@ -59,7 +59,9 @@
 ;; spell-fu
 (when (modulep! :checkers spell)
   (setq! cc/en-personal-dictionary
-         (file-name-concat cc/personal-dictionary-dir "en.pws"))
+         (file-name-concat cc/personal-dictionary-dir "en.pws")
+         ispell-dictionary "en")
+
   (add-hook! spell-fu-mode
     (defun add-personal-dictionary ()
       (spell-fu-dictionary-add
