@@ -91,6 +91,7 @@ Most important leader keys:
 #+end_src
 
 * TODOs
+- [ ] default: company-capf only, "M-/" use company-other-backends
 ** Need To Fix
   - [ ] ~map!~ with ~:localleader~ doesn't show up descriptions
 
