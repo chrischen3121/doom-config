@@ -35,7 +35,8 @@
              "--completion-style=detailed"
              "--header-insertion=never"
              "--header-insertion-decorators=0"))
-    (set-lsp-priority! 'clangd 2)))
+    (set-lsp-priority! 'clangd 2))
+  (add-to-list 'auto-mode-alist '("conanfile\\.txt\\'" . conf-windows-mode)))
 
 (add-hook! 'c++-mode-hook
   (setq-local flycheck-clang-language-standard "c++20"
