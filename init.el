@@ -23,7 +23,7 @@
 
        :completion
        ;;company
-       (company +childframe)             ;[opt]flags the ultimate code completion backend
+       (company +childframe) ;[opt]flags the ultimate code completion backend
        ;;helm              ; the *other* search engine for love and life
        ;;ido               ; the other *other* search engine...
        ;;ivy               ; a search engine for love and life
@@ -156,7 +156,7 @@
        ;;nim               ; python + lisp at the speed of c
        ;;nix               ; I hereby declare "nix geht mehr!"
        ;;ocaml             ; an objective came
-       (org +noter +present +pretty +roam2)
+       (org +noter +roam2)
        ;;php               ; perl's insecure younger brother
        plantuml          ; diagrams for confusing people more
        ;;purescript        ; javascript, but functional

@@ -56,10 +56,10 @@
 (package! whole-line-or-region)
 (package! rainbow-mode)
 
-;; Org
+;; TODO Org
 (package! anki-editor)
 (package! org-download)
-(package! org-superstar)
+(package! org-superstar) ; may disable
 (package! org-roam-ui)
 
 ;; org-noter

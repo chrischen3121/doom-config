@@ -90,10 +90,15 @@ Most important leader keys:
   (setq dap-python-debugger 'debugpy))
 #+end_src
 
+* Hints
+- ~M-RET~ for vertico: submit directly without selection
+- ~general-override-mode-map~ have a high priority than most other keymaps.
+  - It's designed to override bindings in all other keymaps.
+  - This ensures that certain global keybindings are always available regardless of the current mode or context.
+
 * TODOs
 - [ ] default: company-capf only, "M-/" use company-other-backends
-** Need To Fix
-  - [ ] ~map!~ with ~:localleader~ doesn't show up descriptions
+- [ ] disable leader-map, and redefine keybindings
 
 ** Workflow Optimization
   - [ ] org-noter

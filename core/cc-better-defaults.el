@@ -6,6 +6,11 @@
 (map! "C-z" nil
       "C-x C-z" nil)
 
+;; disable evil leader key
+;; error will be thrown if alt-key is nil
+(setq! doom-leader-alt-key "C-z"
+       doom-localleader-alt-key "C-z l")
+
 (after! which-key
   ;; Add descriptions for keybindings
   (map! :prefix ("C-c g" . "<cc-global>")
@@ -26,6 +31,8 @@
                             '+default--newline-indent-and-continue-comments-a))
            ;; for Github Copilot compatibility
            (setq! whitespace-style (delq 'newline-mark whitespace-style)))
+
+
 
 ;; :app
 ;; +calendar

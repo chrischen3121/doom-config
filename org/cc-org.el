@@ -94,10 +94,18 @@
 
 ;; :ui
 ;; deft
-(after! deft
-  (setq! deft-directory cc/deft-notes-dir
-         deft-use-filename-as-title t
-         deft-strip-summary-regexp ":PROPERTIES:\n\\(.+\n\\)+:END:\n"))
+(when (modulep! :ui deft)
+  (map! :map general-override-mode-map
+        :prefix ("C-c n r d" . "Deft")
+        :desc "Deft Search" "s" #'deft
+        :desc "Deft Find File" "f" #'deft-find-file)
+  (after! deft
+    (setq! deft-directory cc/deft-notes-dir
+           deft-default-extension "org"
+           deft-use-filename-as-title t
+           deft-strip-summary-regexp ":PROPERTIES:\n\\(.+\n\\)+:END:\n")))
+
+
 
 
 (after! org-noter
@@ -178,6 +186,7 @@
   :hook (org-mode . org-superstar-mode))
 
 
+;; TODO may use +dragndrop
 (use-package! org-download
   :after-call (org-mode-hook)
   :commands (org-download-screenshot
