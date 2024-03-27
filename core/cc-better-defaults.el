@@ -1,26 +1,26 @@
 ;;; core/cc-better-defaults.el -*- lexical-binding: t; -*-
 
-(add-to-list 'default-frame-alist '(fullscreen . maximized))
+;; (add-to-list 'default-frame-alist '(fullscreen . maximized))
 
 ;; Global keybindings
-(map! "C-z" nil
-      "C-x C-z" nil)
+;; (map! "C-z" nil
+;;       "C-x C-z" nil)
 
 ;; disable evil leader key
 ;; error will be thrown if alt-key is nil
-(setq! doom-leader-alt-key "C-z"
-       doom-localleader-alt-key "C-z l")
+;; (setq! doom-leader-alt-key "C-z"
+;;        doom-localleader-alt-key "C-z l")
 
-(after! which-key
-  ;; Add descriptions for keybindings
-  (map! :prefix ("C-c g" . "<cc-global>")
-        :prefix ("C-c L" . "<cc-less-used>")
-        :prefix ("C-c ;" . "<cc-local>")
-        :prefix ("C-x <RET>" . "coding-system")
-        :prefix ("C-x a" . "abbrev")
-        :prefix ("M-s h" . "highlight")
-        :prefix ("C-x 8" . "emoji")
-        :prefix ("C-x 8 e" . "emoji")))
+;; (after! which-key
+;;   ;; Add descriptions for keybindings
+;;   (map! :prefix ("C-c g" . "<cc-global>")
+;;         :prefix ("C-c L" . "<cc-less-used>")
+;;         :prefix ("C-c ;" . "<cc-local>")
+;;         :prefix ("C-x <RET>" . "coding-system")
+;;         :prefix ("C-x a" . "abbrev")
+;;         :prefix ("M-s h" . "highlight")
+;;         :prefix ("C-x 8" . "emoji")
+;;         :prefix ("C-x 8 e" . "emoji")))
 
 
 ;; Global configuration
@@ -34,31 +34,31 @@
 
 
 
-;; :app
-;; +calendar
-(when (modulep! :app calendar)
-  (setq! calendar-week-start-day 1)
-  (map! :leader
-        :prefix "o"
-        :desc "Calendar"
-        "c" #'+calendar/open-calendar))
+;; ;; :app
+;; ;; +calendar
+;; (when (modulep! :app calendar)
+;;   (setq! calendar-week-start-day 1)
+;;   (map! :leader
+;;         :prefix "o"
+;;         :desc "Calendar"
+;;         "c" #'+calendar/open-calendar))
 
-;; :checkers
-;; syntax
-(when (modulep! :checkers syntax)
-  (after! flycheck
-    (setq! flycheck-keymap-prefix (kbd "C-c 1"))
-    (which-key-add-key-based-replacements "C-c 1" "checker")))
+;; ;; :checkers
+;; ;; syntax
+;; (when (modulep! :checkers syntax)
+;;   (after! flycheck
+;;     (setq! flycheck-keymap-prefix (kbd "C-c 1"))
+;;     (which-key-add-key-based-replacements "C-c 1" "checker")))
 
-;; :checkers
-;; +grammar
-(when (modulep! :checkers grammar)
-  (map!
-   :map text-mode-map
-   :leader
-   :prefix ("1 g" . "grammar")
-   :desc "Check buffer" "c" #'langtool-check
-   :desc "Correct buffer" "f" #'langtool-correct-buffer))
+;; ;; :checkers
+;; ;; +grammar
+;; (when (modulep! :checkers grammar)
+;;   (map!
+;;    :map text-mode-map
+;;    :leader
+;;    :prefix ("1 g" . "grammar")
+;;    :desc "Check buffer" "c" #'langtool-check
+;;    :desc "Correct buffer" "f" #'langtool-correct-buffer))
 
 
 ;; :checkers

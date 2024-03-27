@@ -7,3 +7,5 @@
 (when (modulep! :tools debugger)
   (after! dap-mode
     (setq dap-python-debugger 'debugpy)))
+
+(setq-hook! python-mode python-indent-offset 2)

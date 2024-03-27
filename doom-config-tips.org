@@ -1,0 +1,254 @@
+#+title: Doom Config Tips
+
+* Common mistakes when configuring Doom Emacs
+Having helped many users configure Doom, I've spotted a few recurring oversights
+that I will list here, in the hopes that it will help you avoid the same
+mistakes:
+
+** Packages are eagerly loaded
+Using ~use-package!~ without a deferring keyword (one of: ~:defer :after
+:commands :defer-incrementally :after-call~) will load the package immediately.
+This causes other packages to be pulled in and loaded, which will compromise
+many of Doom's startup optimizations.
+
+This is usually by accident. Choosing which keyword to use depends on the
+needs of the package, so there is no simple answer to this.
+
+** Manual package management
+A lot of Emacs documentation and help will contain advice to install packages
+with package.el's API (e.g. ~package-install~) or with use-package's ~:ensure~
+keyword). You are free to do this, if it is your preference, but otherwise, Doom
+has its own package management system.
+
+Migrating ~use-package~ code to Doom is usually a case of removing the ~:ensure~
+keyword and adding a ~(package! PACKAGENAME)~ to =~/.doom.d/packages.el= (and
+running ~doom sync~ to sync your config).
+
+** Using ~org-babel-do-load-languages~ to load your babel packages
+You don't need ~org-babel-do-load-languages~. Doom lazy loads babel packages
+based on the language name in ~#+BEGIN_SRC~ blocks needed. As long as the babel
+plugin is installed and the plugin is named after its language (e.g.
+~#+BEGIN_SRC rust~ will load ~ob-rust~), you don't need to do anything else.
+
+There may be some special cases, however. Doom tries to handle a couple of them
+(e.g. with ob-jupyter, ob-ipython and ob-async). If you are experiencing errors
+while trying to use a certain language in org src blocks, check out the [[file:../modules/lang/org/README.org][:lang
+org module documentation]] for details on how to add support for it.
+
+** Using ~delete-trailing-whitespaces~ or ~whitespace-cleanup~ to manage leftover whitespace
+#+BEGIN_SRC elisp
+(add-hook 'after-save-hook #'delete-trailing-whitespace)
+;; or
+(add-hook 'after-save-hook #'whitespace-cleanup)
+#+END_SRC
+
+These two lines are a common sight in Emacs configs, but they are unnecessary
+for Doom Emacs. We already use the more sophisticated =ws-butler= to manage
+extraneous whitespace. However, you might have the impression that it isn't
+working. That's because =ws-butler= works in two unusual ways, meant to be less
+imposing than its alternatives:
+
+1. It only cleans up trailing whitespace /on lines that you've touched/ (but
+   always strips newlines at EOF).
+
+   Why do this? Because I believe file-wide reformatting should be a deliberate
+   act (and not blindly automated). If it is necessary, chances are you're
+   working on somebody else's project -- or with other people, but here, large
+   scale whitespace changes could cause problems or simply be rude. We don't
+   endorse PRs that are 1% contribution and 99% whitespace!
+
+   However, if it's truly deliberate, ~M-x delete-trailing-whitespaces~ and ~M-x
+   whitespace-cleanup~ are available to be called =deliberately=, instead.
+
+2. =ws-butler= replaces trailing whitespace and newlines with *virtual*
+   whitespace. This is whitespace that only exists in the Emacs buffer, but
+   isn't actually written to the file.
+
+   Why do this? Because you might have wanted to use that space for something in
+   your current editing session, and it would be inconvenient for the editor to
+   delete it before you got to it.
+
+   If you use it, it's there. If you don't, it isn't written to the file.
+
+
+* Troubleshoot
+When problems arise, you should be prepared to collect information in order to
+solve them, or for the bug report you're about to write. Both Emacs and Doom
+provide tools to make this easier. Here are a few things you can try, first:
+
++ Investigate the =*Messages*= log for warnings or error messages. This log can
+  be opened with =SPC h e=, =C-h e= or =M-x view-echo-area-messages=.
+
++ Look up errors/warnings [[file:faq.org::Common Issues][on the FAQ]] and [[https://github.com/hlissner/doom-emacs/issues][Doom's issue tracker]]. It is possible
+  that a solution for your issue already exists. The FAQ can be searched from
+  inside Doom with =SPC h d f= (or =C-h d f= for non-evil users).
+
++ Run ~bin/doom doctor~ on the command line to diagnose common issues with your
+  environment and config. It will suggest solutions for them as well.
+
++ ~bin/doom clean~ will ensure the problem isn't stale bytecode in your private
+  config or Doom core. If you haven't used ~bin/doom compile~, there's no need
+  to do this.
+
++ ~bin/doom sync~ will ensure the problem isn't missing packages or outdated
+  autoloads files
+
++ ~bin/doom build~ will ensure the problem isn't stale package bytecode or
+  broken symlinks.
+
++ ~bin/doom update~ will ensure that your packages are up-to-date, eliminating
+  issues that originate from upstream.
+
++ If you happen to know what module(s) are relevant to your issue, check their
+  documentation (press =<leader> h d m= to jump to a module's documentation). Your
+  issue may be documented.
+
++ If possible, see if the issue can be reproduced in vanilla Emacs (Emacs
+  without Doom) and/or vanilla Doom (Doom without your private config). [[#testing-in-dooms-sandbox][Doom's
+  sandbox can help you check]].
+
++ Ask for help on [[https://discord.gg/qvGgnVx][our Discord server]]. It is the quickest way to get help,
+  sometimes straight from Doom's maintainer, who is very active there.
+
+If none of these things have helped you, then it's time to open a bug report.
+See "[[file:contributing.org::*Reporting issues][Reporting Issues]]" in the [[file:contributing.org][contributing guidelines]] on how to file an
+effective bug report.
+
+** Looking up documentation and state from within Emacs
+...
+
+*** Variables, functions, faces, etc.
+Emacs is a Lisp interpreter whose state you can access on-the-fly with tools
+provided to you by Emacs itself. They're available on the =SPC h= prefix by
+default. Use them to debug your sessions.
+
+Here are some of the more important ones:
+
++ ~describe-variable~ (=SPC h v=)
++ ~describe-function~ (=SPC h f=)
++ ~describe-face~ (=SPC h F=)
++ ~describe-bindings~ (=SPC h b=)
++ ~describe-key~ (=SPC h k=)
++ ~describe-char~ (=SPC h '=)
++ ~find-library~ (=SPC h P=)
+
+You can also evaluate code with ~eval-expression~ (=M-;= or =SPC ;=).
+
+*** TODO For Doom Modules, packages, autodefs, etc.
++ ~doom/open-news~ (=SPC h n=) ::
+     ...
++ ~doom/help~ (=SPC h d h=) ::
+     Open the index of Doom's manual.
++ ~doom/help-modules~ (=SPC h d m=) ::
+     Jumps to a module's documentation.
++ ~doom/help-autodefs~ (=SPC h u=) ::
+     Jumps to the documentation for an autodef function/macro. These are special
+     functions that are always defined, whether or not their containing modules
+     are enabled.
++ ~doom/help-packages~ (=SPC h p=) ::
+     Look up packages that are installed, by whom (what modules) and where jump
+     to all the places it is being configured.
++ ~doom/info~ ::
+     ...
+
+** How to extract a backtrace from an error
+If you encounter an error while using Doom Emacs, you're probably about to head
+off and file a bug report (or request help on [[https://discord.gg/qvGgnVx][our Discord server]]). Before you
+do, please generate a backtrace to include with it.
+
+To do so you must enable ~debug-on-error~ then recreate the error.
+
+*** Enabling ~debug-on-error~
+There are three ways to enable ~debug-on-error~:
+
+1. Start Emacs with ~emacs --debug-init~. Use this for errors that occur at
+   startup.
+2. Evil users can press =SPC h d d= and non-evil users can press =C-h d d=.
+3. If the above don't work, there's always: ~M-x toggle-debug-on-error~
+
+Now that ~debug-on-error~ is on, recreate the error. A window should pop up with
+a backtrace.
+
+*** A backtrace from ~bin/doom~
+If the error you've encountered is emitted from ~bin/doom~, you can re-run the
+same command with the ~-d~ or ~--debug~ switches to force it to emit a backtrace
+when an error occurs. The ~DEBUG~ environment variable will work to.
+
+#+BEGIN_SRC sh
+doom -d sync
+doom --debug install
+DEBUG=1 doom update
+#+END_SRC
+
+#+BEGIN_QUOTE
+Note: switch order is important. ~-d~ / ~--debug~ /must/ come right after ~doom~
+and before the subcommand. This will be fixed eventually.
+#+END_QUOTE
+
+** Evaluating Elisp on-the-fly
+Often, you may find it helpful for debugging to evaluate some Emacs Lisp. Here
+are couple things you can do:
+
++ Use =M-:= (bound to ~eval-expression~),
++ =SPC x= will open a scratch buffer. ~M-x emacs-lisp-mode~ will change it to
+  the appropriate major mode, then use ~+eval:region~ (=gr=) and ~+eval/buffer~
+  (=gR=) to evaluate code,
+
+** How to determine the origin of a bug
+** Testing in Doom's sandbox
+"The sandbox" is one of Doom Emacs' features; it is a test bed for running elisp
+in a fresh instance of Emacs with varying amounts of Doom loaded (none at all,
+all of it, or somewhere in between). This can be helpful for isolating bugs to
+determine who you should report a bug to.
+
+If you can recreate a bug in vanilla Emacs then it should be reported to the
+developers of the relevant packages or, perhaps, the Emacs devs themselves.
+
+Otherwise, it is best to bring it up on the Doom Emacs issue list, rather than
+confusing and inundating the Emacs community with Doom-specific issues.
+
+*** Opening the sandbox
+There are three common ways to access the sandbox:
+
++ =SPC h E= (for evil users)
++ =C-h E= (for non-evil users)
++ ~M-x doom/sandbox~
+
+Doing any of the above will pop up a ~*doom:sandbox*~ window. What you enter
+into this buffer will be executed in the new instance of Emacs when you decide
+to launch it.
+
+*** Launching the sandbox
+You have four options when it comes to launching the sandbox:
+
+- =C-c C-c= :: This launches "vanilla Emacs". Vanilla means nothing is loaded;
+  purely Emacs and nothing else. If you can reproduce an error here, then the
+  issue likely lies in the plugin(s) you are testing or in Emacs itself.
+- =C-c C-d= :: This launches "vanilla Doom", which is vanilla Emacs plus Doom's
+  core. This does not load your private config, nor any of Doom's (or your)
+  modules.
+- =C-c C-p= :: This launches "vanilla Doom+". That is, Doom core plus the
+  modules that you have specified in the ~doom!~ block of your private config
+  (in =~/.doom.d/init.el=). This *does not* load your private config, however.
+- =C-c C-f= :: This launches "full Doom". It loads Doom's core, your enabled
+  modules, and your private config. This instance should be identical to the
+  instance you launched it from.
+
+#+BEGIN_QUOTE
+All new instances will inherit your ~load-path~ so you can access any packages
+you have installed.
+#+END_QUOTE
+*** Testing packages in the sandbox
+Instances of Emacs launched from the sandbox have inherited your ~load-path~.
+This means you can load packages -- even in Vanilla Emacs -- without worrying
+about installing or setting them up. Just ~(require PACKAGE)~ and launch the
+sandbox. e.g.
+
+#+BEGIN_SRC elisp
+(require 'magit)
+(find-file "~/some/file/in/a/repo")
+(call-interactively #'magit-status)
+#+END_SRC
+
+** TODO Bisecting your private config
+** TODO Bisecting Doom Emacs
