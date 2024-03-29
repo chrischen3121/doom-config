@@ -193,4 +193,5 @@
        (default +bindings +smartparens)
 
        :cc
-       better-defaults)
+       better-defaults
+       dev)

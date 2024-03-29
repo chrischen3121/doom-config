@@ -4,43 +4,6 @@
 ;; company
 ;; Hints:
 ;; C-; +company/complete
-(when (modulep! :completion company)
-  (after! company
-    (when (modulep! :editor snippets)
-      (map! :after yasnippet
-            :map yas-minor-mode-map
-            :desc "Code snippets"
-            "M-/" #'company-yasnippet
-            "S-<tab>" nil))
-    (setq! company-tooltip-limit 12)
-
-    (map!
-     (:map prog-mode-map
-           "M-<RET>" #'+default--newline-indent-and-continue-comments-a)
-     (:map company-active-map
-           "M-/" #'company-abort))
-
-
-    ;; (put '+company-init-backends-h 'permanent-local-hook t)
-    ;; the above line will overwrite the company-backends even after the major-mode-hook
-    ;; the following advice will overwrite the company-backends after +company-init-backends-h
-    (defun cc/overwrite-company-backends (orig-fun &rest args)
-      ;; Call the original function first
-      (apply orig-fun args)
-      ;; Then apply your customization if in (org-mode prog-mode yaml-mode conf-mode)
-      (when (member major-mode '(org-mode text-mode))
-        (setq-local company-backends '((company-capf company-ispell company-files :separate))))
-      (when (member major-mode '(prog-mode yaml-mode conf-mode))
-        (setq-local company-backends `(,+lsp-company-backends))))
-    (advice-add '+company-init-backends-h :around #'cc/overwrite-company-backends)
-
-    (setq-hook! 'org-mode-hook
-      company-minimum-prefix-length 3))
-
-
-  (when (modulep! :completion company +childframe)
-    (after! company-box
-      (setq-hook! 'company-box-mode-hook company-box-doc-delay 2))))
 
 ;; :editor
 ;; fold (outline hide/show)
