@@ -107,3 +107,12 @@
      :map text-mode-map
      :prefix "C-c 1"
      :desc "Check grammar" "g" #'langtool-check)))
+
+
+;; :completion
+;; vertico
+(when (modulep! :completion vertico)
+  (after! vertico
+    (map! :prefix "C-c s"
+          :desc "Search Project" "p" #'+default/search-project)
+          :desc "Search Directory" "d" #'+default/search-directory))

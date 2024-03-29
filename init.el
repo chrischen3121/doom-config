@@ -22,9 +22,6 @@
 
        :completion
        (company +childframe) ;[opt]flags the ultimate code completion backend
-       ;;helm              ; the *other* search engine for love and life
-       ;;ido               ; the other *other* search engine...
-       ;;ivy               ; a search engine for love and life
        (vertico +icons)    ; the search engine of the future
 
        :ui
@@ -74,13 +71,10 @@
        vc                ; version-control and Emacs, sitting in a tree
 
        :term
-       ;;eshell            ; the elisp shell that works everywhere
-       ;;shell             ; simple shell REPL for Emacs
-       ;;term              ; basic terminal emulator for Emacs
        vterm             ; the best terminal emulation in Emacs
 
        :checkers
-       (syntax +childframe)          ; tasing you for every semicolon you forget
+       syntax                          ; tasing you for every semicolon you forget
        (spell +hunspell +everywhere)   ; tasing you for misspelling mispelling
        ;; (spell +aspell +everywhere)   ; tasing you for misspelling mispelling
        ;;[opt]grammar                       ; tasing grammar mistake every you make

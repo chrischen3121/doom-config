@@ -95,6 +95,7 @@ Most important leader keys:
 - ~general-override-mode-map~ have a high priority than most other keymaps.
   - It's designed to override bindings in all other keymaps.
   - This ensures that certain global keybindings are always available regardless of the current mode or context.
+- [[https://github.com/doomemacs/doomemacs/blob/master/modules/completion/vertico/README.org][vertico usage]]
 
 ** ~emacs-everwhere~
 *** Gnome Wayland

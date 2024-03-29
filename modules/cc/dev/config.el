@@ -21,12 +21,15 @@
       ;; Then apply your customization if in (org-mode prog-mode yaml-mode conf-mode)
       (when (member major-mode '(org-mode text-mode))
         (setq-local company-backends '(company-capf (company-ispell company-files :separate))))
-      ;; TODO need to check: not right in C++ mode
-      (when (member major-mode '(prog-mode yaml-mode conf-mode))
+      (when (member major-mode '(prog-mode yaml-mode conf-mode
+                                 c-mode c++-mode python-mode))
         ;; (setq-local company-backends `(,+lsp-company-backends))
         (if (modulep! :editor snippets)
-          (setq-local company-backends '(company-capf (company-yasnippet company-files :separate)))
-          (setq-local company-backends `(,lsp-company-backends)))))
+            (setq-local company-backends
+                        `(,lsp-company-backends
+                          (company-yasnippet company-files :separate)))
+            (setq-local company-backends
+                        `(,lsp-company-backends company-files :separate)))))
     (advice-add '+company-init-backends-h :around #'cc/overwrite-company-backends)
 
     (setq-hook! 'org-mode-hook company-minimum-prefix-length 3)))
