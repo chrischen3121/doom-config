@@ -11,8 +11,6 @@
            (setq! whitespace-style (delq 'newline-mark whitespace-style)))
 
 
-
-
 ;; :emacs
 ;; dired
 ;; C-c C-r Rsync to ...
