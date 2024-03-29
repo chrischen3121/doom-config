@@ -96,6 +96,12 @@ Most important leader keys:
   - It's designed to override bindings in all other keymaps.
   - This ensures that certain global keybindings are always available regardless of the current mode or context.
 
+** ~emacs-everwhere~
+*** Gnome Wayland
+- Settings -> keyboard -> Keyboard Shortcuts -> Custom Shortcuts
+- name it "Emacs Everywhere"
+- command field ~emacsclient --eval "(emacs-everywhere)"~
+
 * TODOs
 - [ ] default: company-capf only, "M-/" use company-other-backends
 - [ ] disable leader-map, and redefine keybindings

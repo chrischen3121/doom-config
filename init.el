@@ -22,12 +22,11 @@
        ;;layout            ; auie,ctsrnm is the superior home row
 
        :completion
-       ;;company
        (company +childframe) ;[opt]flags the ultimate code completion backend
        ;;helm              ; the *other* search engine for love and life
        ;;ido               ; the other *other* search engine...
        ;;ivy               ; a search engine for love and life
-       (vertico +icons)  ; the search engine of the future
+       (vertico +icons)    ; the search engine of the future
 
        :ui
        deft              ; notational velocity for Emacs
@@ -82,8 +81,9 @@
        vterm             ; the best terminal emulation in Emacs
 
        :checkers
-       syntax                        ; tasing you for every semicolon you forget
-       (spell +aspell +everywhere)   ; tasing you for misspelling mispelling
+       (syntax +childframe)          ; tasing you for every semicolon you forget
+       (spell +hunspell +everywhere)   ; tasing you for misspelling mispelling
+       ;; (spell +aspell +everywhere)   ; tasing you for misspelling mispelling
        ;;[opt]grammar                       ; tasing grammar mistake every you make
 
        :tools
@@ -186,11 +186,8 @@
 
        :app
        calendar
-       ;;emms
        ;;everywhere        ; *leave* Emacs!? You must be joking
-       ;;irc               ; how neckbeards socialize
-       ;;(rss +org)        ; emacs as an RSS reader
-       ;;twitter           ; twitter client https://twitter.com/vnought
+       ;;(rss +org)          ; emacs as an RSS reader
 
        :config
        ;;literate

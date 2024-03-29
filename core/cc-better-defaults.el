@@ -1,27 +1,5 @@
 ;;; core/cc-better-defaults.el -*- lexical-binding: t; -*-
 
-;; (add-to-list 'default-frame-alist '(fullscreen . maximized))
-
-;; Global keybindings
-;; (map! "C-z" nil
-;;       "C-x C-z" nil)
-
-;; disable evil leader key
-;; error will be thrown if alt-key is nil
-;; (setq! doom-leader-alt-key "C-z"
-;;        doom-localleader-alt-key "C-z l")
-
-;; (after! which-key
-;;   ;; Add descriptions for keybindings
-;;   (map! :prefix ("C-c g" . "<cc-global>")
-;;         :prefix ("C-c L" . "<cc-less-used>")
-;;         :prefix ("C-c ;" . "<cc-local>")
-;;         :prefix ("C-x <RET>" . "coding-system")
-;;         :prefix ("C-x a" . "abbrev")
-;;         :prefix ("M-s h" . "highlight")
-;;         :prefix ("C-x 8" . "emoji")
-;;         :prefix ("C-x 8 e" . "emoji")))
-
 
 ;; Global configuration
 (add-hook! 'doom-after-init-hook
@@ -33,63 +11,6 @@
            (setq! whitespace-style (delq 'newline-mark whitespace-style)))
 
 
-
-;; ;; :app
-;; ;; +calendar
-;; (when (modulep! :app calendar)
-;;   (setq! calendar-week-start-day 1)
-;;   (map! :leader
-;;         :prefix "o"
-;;         :desc "Calendar"
-;;         "c" #'+calendar/open-calendar))
-
-;; ;; :checkers
-;; ;; syntax
-;; (when (modulep! :checkers syntax)
-;;   (after! flycheck
-;;     (setq! flycheck-keymap-prefix (kbd "C-c 1"))
-;;     (which-key-add-key-based-replacements "C-c 1" "checker")))
-
-;; ;; :checkers
-;; ;; +grammar
-;; (when (modulep! :checkers grammar)
-;;   (map!
-;;    :map text-mode-map
-;;    :leader
-;;    :prefix ("1 g" . "grammar")
-;;    :desc "Check buffer" "c" #'langtool-check
-;;    :desc "Correct buffer" "f" #'langtool-correct-buffer))
-
-
-;; :checkers
-;; +spell
-;; spell-fu
-(when (modulep! :checkers spell)
-  (setq! cc/en-personal-dictionary
-         (file-name-concat cc/personal-dictionary-dir "en.pws")
-         ispell-dictionary "en")
-
-  (add-hook! spell-fu-mode
-    (defun add-personal-dictionary ()
-      (spell-fu-dictionary-add
-       (spell-fu-get-personal-dictionary "en" cc/en-personal-dictionary))))
-  (after! spell-fu
-    (setq! spell-fu-idle-delay 0.5)
-    (setf
-     (alist-get 'prog-mode +spell-excluded-faces-alist)
-     '(font-lock-constant-face
-       font-lock-string-face)) ; TODO: wait for official fix
-    (custom-set-faces!
-      '(spell-fu-incorrect-face :underline (:color "cyan" :style wave)))
-    (map!
-     :map overriding-local-map
-     :leader
-     :prefix ("1 s" . "spell-check")
-     :desc "Correct word at point" "c" #'+spell/correct
-     :desc "Add word at point" "a" #'+spell/add-word
-     :desc "Remove word at point" "r" #'+spell/remove-word
-     :desc "Goto next error" "n" #'spell-fu-goto-next-error
-     :desc "Goto previous error" "p" #'spell-fu-goto-previous-error)))
 
 
 ;; :emacs
