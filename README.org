@@ -103,6 +103,7 @@ Most important leader keys:
 - command field ~emacsclient --eval "(emacs-everywhere)"~
 
 * TODOs
+- [ ] check every enabled module and remove any unnecessary packages
 - [ ] default: company-capf only, "M-/" use company-other-backends
 - [ ] disable leader-map, and redefine keybindings
 
