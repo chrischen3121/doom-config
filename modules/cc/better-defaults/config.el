@@ -140,3 +140,9 @@
     (map! :prefix "C-c s"
           :desc "Search Project" "p" #'+default/search-project)
     :desc "Search Directory" "d" #'+default/search-directory))
+
+
+;; :editor
+;; word-wrap
+(when (modulep! :editor word-wrap)
+  (+global-word-wrap-mode +1))
