@@ -24,7 +24,8 @@
 (when (modulep! :editor format)
   (map! :map prog-mode-map
         :prefix "C-c c"
-        :desc "Format buffer" "f" #'+format/region-or-buffer))
+        :desc "Format buffer" "f" #'+format/region-or-buffer
+        :desc "Format with apheleia" "F" #'apheleia-format-buffer))
 
 ;; :editor
 ;; fold
