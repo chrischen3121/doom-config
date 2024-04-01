@@ -50,7 +50,6 @@
        zen               ; distraction-free coding or writing
 
        :editor
-       ;;(evil +everywhere); come to the dark side, we have cookies
        file-templates    ; auto-snippets for empty files
        fold              ; (nigh) universal code folding
        format            ; automated prettiness
@@ -101,7 +100,7 @@
        ;;taskrunner        ; taskrunner for all your projects
        ;;terraform         ; infrastructure as code
        ;;tmux              ; an API for interacting with tmux
-       ;;tree-sitter       ; syntax and parsing, sitting in a tree...
+       tree-sitter       ; syntax and parsing, sitting in a tree...
        ;;upload            ; map local to remote projects via ssh/ftp TODO try this module as needed
 
        :os
@@ -153,7 +152,7 @@
        ;;php               ; perl's insecure younger brother
        plantuml          ; diagrams for confusing people more
        ;;purescript        ; javascript, but functional
-       (python +lsp +pyenv +poetry) ; beautiful is better than ugly
+       (python +lsp +pyenv +poetry +tree-sitter) ; beautiful is better than ugly
        ;;[opt] qt                ; the 'cutest' gui framework ever
        ;;racket            ; a DSL for DSLs
        ;;raku              ; the artist formerly known as perl6
@@ -183,9 +182,9 @@
        ;;(rss +org)          ; emacs as an RSS reader
 
        :config
-       ;;literate
        (default +bindings +smartparens)
 
        :cc
        better-defaults
-       dev)
+       dev
+       langs)

@@ -104,11 +104,10 @@ Most important leader keys:
 - command field ~emacsclient --eval "(emacs-everywhere)"~
 
 * TODOs
-- [ ] check every enabled module and remove any unnecessary packages
-- [ ] default: company-capf only, "M-/" use company-other-backends
-- [ ] disable leader-map, and redefine keybindings
+- default: company-capf only, "M-/" use company-other-backends
+- disable leader-map, and redefine keybindings
 
 ** Workflow Optimization
-  - [ ] org-noter
-  - [ ] python
-  - [ ] C++
+  - org-noter
+  - python
+  - C++
