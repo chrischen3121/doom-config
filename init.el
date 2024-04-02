@@ -25,7 +25,7 @@
        doom-dashboard    ; a nifty splash screen for Emacs
        ;;doom-quit         ; DOOM quit-message prompts when you quit Emacs
        (emoji +unicode)  ; 🙂
-       hl-todo           ; highlight TODO/FIXME/NOTE/DEPRECATED/HACK/REVIEW
+       hl-todo           ; highlight TODOO/FIXME/NOTE/DEPRECATED/HACK/REVIEW
        ;;hydra           ; This module is DEPRECATED.
        ;;indent-guides     ; highlighted indent columns
        ;;ligatures         ; ligatures and symbols to make your code pretty again
@@ -173,7 +173,8 @@
        ;;(rss +org)          ; emacs as an RSS reader
 
        :config
-       (default +bindings +smartparens)
+       ;; (default +smartparens)
+       (default +bindings +smartparens) ;; TODO remove +bindings
 
        :cc
        better-defaults
