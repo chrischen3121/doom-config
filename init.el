@@ -168,8 +168,8 @@
        ;;zig               ; C, but simpler
 
        :email
+       ;; TODO may try this later, when writing email with org is needed
        ;;(mu4e +org +gmail)
-       ;;notmuch
        ;;(wanderlust +gmail)
 
        :app
