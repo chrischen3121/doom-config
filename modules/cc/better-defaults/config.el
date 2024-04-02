@@ -34,7 +34,20 @@
 
       :prefix ("C-c t" . "toggle")
       :prefix ("C-c w" . "workspace")
+
+      ;; C-c f +file
       :prefix ("C-c f" . "file")
+      :desc "Copy this file" "c" #'doom/copy-this-file
+      :desc "Delete this file" "D" #'doom/delete-this-file
+      :desc "Move this file" "m" #'doom/move-this-file
+      :desc "Find file in private config" "p"
+      #'doom/find-file-in-private-config
+      :desc "Browse private config" "b" #'doom/open-private-config
+      :desc "Sudo this file" "s" #'doom/sudo-this-file
+      :desc "Sudo find file" "S" #'doom/sudo-find-file
+      :desc "Copy file path" "y" #'+default/yank-buffer-path
+      :desc "Open scratch buffer" "x" #'doom/open-scratch-buffer
+
       :prefix ("C-h 4" . "info")
       :prefix ("C-c l" . "<cc-local>"))
 
@@ -46,6 +59,8 @@
         :desc "Find file" "f" #'projectile-find-file
         :desc "Search symbol" "." #'+default/search-project-for-symbol-at-point
         :desc "Browse project" "D" #'+default/browse-project
+        :prefix "C-c f"
+        :desc "Recent project files" "R" #'projectile-recentf
         :prefix ("C-c p 4" . "other-window")
         :prefix ("C-c p 5" . "other-frame")
         :prefix ("C-c p x" . "run")
@@ -66,8 +81,6 @@
           :desc "Insert snippet" "i" #'yas-insert-snippet)))
 
 ;; recentf
-(map! :prefix "C-c f"
-      :desc "Recent files" "r" #'recentf-open-files)
 (after! recentf
   (setq! recentf-max-saved-items 21)
   (add-to-list 'recentf-exclude "autosave"))
@@ -136,13 +149,21 @@
 ;; :completion
 ;; vertico
 (when (modulep! :completion vertico)
-  (after! vertico
-    (map! :prefix "C-c s"
-          :desc "Search Project" "p" #'+default/search-project)
-    :desc "Search Directory" "d" #'+default/search-directory))
+  (map! :prefix "C-c s"
+        :desc "Search Project" "p" #'+default/search-project
+        :prefix "C-c f"
+        :desc "Locate file" "l" #'consult-locate
+        :desc "Recent files" "r" #'consult-recent-file))
 
 
 ;; :editor
 ;; word-wrap
 (when (modulep! :editor word-wrap)
   (+global-word-wrap-mode +1))
+
+
+;; :emacs
+;; dired
+(when (modulep! :emacs dired)
+  (map! :prefix "C-c f"
+        :desc "Find directory" "d" #'dired))

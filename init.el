@@ -57,7 +57,7 @@
        ;; objed             ; text object editing for the innocent
        ;; parinfer          ; turn lisp into python, sort of
        snippets             ; my elves. They type so I don't have to
-       word-wrap         ; soft wrapping with language-aware indent
+       word-wrap            ; soft wrapping with language-aware indent
 
        :emacs
        (dired +icons)    ; making dired pretty [functional]
