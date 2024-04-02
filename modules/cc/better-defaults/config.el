@@ -15,7 +15,9 @@
          doom-localleader-alt-key "C-z l"))
 
 ;; global keybindings
-(map! :prefix ("C-x <RET>" . "coding-system")
+(map! :desc "Redo" "C-c r" #'undo-fu-only-redo
+      :desc "Redo all" "C-c R" #'undo-fu-only-redo-all
+      :prefix ("C-x <RET>" . "coding-system")
       :prefix ("C-x a" . "abbrev")
       :prefix ("M-s h" . "highlight")
       :prefix ("C-x 8" . "emoji")
@@ -34,6 +36,7 @@
 
       :prefix ("C-c t" . "toggle")
       :prefix ("C-c w" . "workspace")
+      :prefix ("C-c c" . "code")
 
       ;; C-c f +file
       :prefix ("C-c f" . "file")
@@ -153,7 +156,9 @@
         :desc "Search Project" "p" #'+default/search-project
         :prefix "C-c f"
         :desc "Locate file" "l" #'consult-locate
-        :desc "Recent files" "r" #'consult-recent-file))
+        :desc "Recent files" "r" #'consult-recent-file)
+  (map! :map vertico-map
+        "C-l" #'vertico-directory-delete-word))
 
 
 ;; :editor
@@ -165,7 +170,13 @@
 ;; :emacs
 ;; dired
 (when (modulep! :emacs dired)
+  (map! :after dired
+        :map dired-mode-map
+        "C-l" #'dired-up-directory)
   (map! :map dired-mode-map
+        "C-c C-r" nil
+        "C-c C-e" nil
         :prefix "C-c l"
         :desc "Rsync" "r" #'dired-rsync
         :desc "Edit mode" "e" #'wdired-change-to-wdired-mode))
+

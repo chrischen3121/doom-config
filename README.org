@@ -6,11 +6,8 @@ Configurations for Doom Emacs
 
 ** Keybindings
 Most important leader keys:
-- ~C-c~: global leader key
-- ~C-c g~: my global leader key
-- ~C-c l~: local leader key
-- ~C-c L~: ~+less-used~
-- ~C-c ;~: my local leader key
+- ~C-c~: global prefix key
+- ~C-c l~: local prefix key
 - ~C-c c~: ~+code~
 
 *** Leader Direct
@@ -28,29 +25,27 @@ Most important leader keys:
 - ~F12~: switch light/dark theme
 
 *** Useful Keybindings
-| keybinding  | Command            |
-|-------------|--------------------|
-| ~C-c o c~   | Open calendar      |
-| ~C-c o t/T~ | Open vterm         |
-| ~C-c o p~   | Open treemacs      |
-| ~C-c n d~   | Open deft          |
-| ~C-c 1 g~   | Grammar commands   |
-| ~C-c 1 s~   | Spell commands     |
-| ~C-c u~     | Undo commands      |
-| ~C-c 3~     | Workspace commands |
-| ~C-x t~     | Tab commands       |
-| ~C-c j~     | Ace jump           |
-| ~C-c t~     | Active minor mode  |
-| ~C-c t z~   | Zen mode           |
-| ~C-c t m~   | Minimap mode       |
-| ~C-c m e~   | eval commands      |
+| keybinding  | Command                   |
+|-------------+---------------------------|
+| ~C-c o c~   | Open calendar             |
+| ~C-c o t/T~ | Open vterm                |
+| ~C-c o p~   | Open treemacs             |
+| ~C-c n d~   | Open deft                 |
+| ~C-c 1 g~   | Grammar commands          |
+| ~C-c 1 s~   | Spell commands            |
+| ~C-c 3~     | Workspace commands        |
+| ~C-x t~     | Tab commands              |
+| ~C-c j~     | Ace jump                  |
+| ~C-c t~     | Active minor mode         |
+| ~C-c t z~   | Zen mode                  |
+| ~C-c t m~   | Minimap mode              |
+| ~C-c m e~   | eval commands             |
 
 ** Packages to Try
 - code action ~C-c a~
 - workspace ~C-c w w~
 - grammar check ~C-c 1 g~
 - calendar ~C-c o c~
-- undo ~C-c u~
 - *treemacs* ~C-c o p~
 - tabs ~C-c w t~
 - ace jump ~C-c j~

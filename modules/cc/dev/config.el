@@ -30,11 +30,16 @@
 ;; :editor
 ;; fold
 (when (modulep! :editor fold)
+  (after! outline
+    (setq-hook! 'outline-minor-mode-hook
+      outline-minor-mode-prefix (kbd "C-c 2 l"))
+    (which-key-add-keymap-based-replacements
+      outline-minor-mode-map "C-c 2 l" "outline")
+    (undefine-key! outline-minor-mode-map "C-c @"))
+
   (map! :map prog-mode-map
-        :prefix "C-c C-f"
-        :desc "Fold region" "C-f" #'+fold/toggle
-        :desc "Unfold region" "C-u" #'+fold/open
-        :desc "Fold all" "F" #'+fold/close-all
-        :desc "Unfold all" "U" #'+fold/open-all
-        :desc "Delete folded" "d" #'vimish-fold-delete
-        :desc "Delete all folded" "D" #'vimish-fold-delete-all))
+        :prefix ("C-c 2" . "fold")
+        :desc "Fold/Unfold" "2" #'+fold/toggle
+        :desc "Fold all" "f" #'+fold/close-all
+        :desc "Unfold all" "u" #'+fold/open-all
+        :desc "Delete folded" "d" #'vimish-fold-delete))

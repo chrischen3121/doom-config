@@ -5,28 +5,6 @@
 ;; Hints:
 ;; C-; +company/complete
 
-;; :editor
-;; fold (outline hide/show)
-;; C-c C-f - fold commands prefix
-(when (modulep! :editor fold)
-  (after! outline
-    (add-hook! 'outline-minor-mode-hook
-      (defun set-outline-prefix-map ()
-        (setq! outline-minor-mode-prefix (kbd "C-c 2 l"))
-        (which-key-add-keymap-based-replacements
-          outline-minor-mode-map "C-c 2 l" "outline"))))
-
-  (map! :map (org-mode-map prog-mode-map)
-        :prefix ("C-c 2" . "fold")
-        :desc "Toggle fold one" "f" #'+fold/toggle
-        :desc "Open all" "O" #'+fold/open-all
-        :desc "Close all" "C" #'+fold/close-all
-        :desc "Open one" "o" #'+fold/open
-        :desc "Close one" "c" #'+fold/close
-        :desc "Delete folded one" "d" #'vimish-fold-delete
-        :desc "Delete folded all" "D" #'vimish-fold-delete-all))
-
-
 ;; :tools
 ;; eval
 (when (modulep! :tools eval)

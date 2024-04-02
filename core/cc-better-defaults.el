@@ -10,37 +10,6 @@
            ;; for Github Copilot compatibility
            (setq! whitespace-style (delq 'newline-mark whitespace-style)))
 
-
-;; :emacs
-;; dired
-;; C-c C-r Rsync to ...
-;; C-c C-e Rename entries
-(when (modulep! :emacs dired)
-  (map! :after dired
-        :map dired-mode-map
-        "C-l" #'dired-up-directory))
-
-
-;; :completion
-;; vertico
-(when (modulep! :completion vertico)
-  (map! :after vertico
-        :map vertico-map
-        "C-l" #'vertico-directory-delete-char))
-
-
-;; :emacs
-;; undo
-(when (modulep! :emacs undo)
-  (map!
-   :map overriding-local-map
-   :leader
-   :prefix ("; u" . "undo")
-   :desc "Undo" "u" #'undo-fu-only-undo
-   :desc "Redo" "r" #'undo-fu-only-redo
-   :desc "Redo all" "a" #'undo-fu-only-redo-all))
-
-
 ;; :tools
 ;; docker
 ;; Hints:

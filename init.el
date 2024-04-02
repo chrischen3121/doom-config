@@ -62,7 +62,7 @@
        :emacs
        (dired +icons)    ; making dired pretty [functional]
        (ibuffer +icons)  ; interactive buffer management
-       undo              ; persistent, smarter undo for your inevitable mistakes
+       undo              ; persistent, smarter undo for your inevitable mistakes (undo-fu)
        vc                ; version-control and Emacs, sitting in a tree
 
        :term
