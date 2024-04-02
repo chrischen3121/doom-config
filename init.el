@@ -63,7 +63,7 @@
        (dired +icons)    ; making dired pretty [functional]
        (ibuffer +icons)  ; interactive buffer management
        undo              ; persistent, smarter undo for your inevitable mistakes (undo-fu)
-       vc                ; version-control and Emacs, sitting in a tree
+       vc                ; version-control and Emacs, sitting in a tree (gitignore, gitconfig)
 
        :term
        vterm             ; the best terminal emulation in Emacs
