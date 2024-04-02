@@ -15,11 +15,6 @@
 ;;      directory (for easy access to its source code).
 
 (doom! :input
-       ;;bidi              ; (tfel ot) thgir etirw uoy gnipleh
-       ;;chinese
-       ;;japanese
-       ;;layout            ; auie,ctsrnm is the superior home row
-
        :completion
        (company +childframe) ;[opt]flags the ultimate code completion backend
        (vertico +icons)    ; the search engine of the future
