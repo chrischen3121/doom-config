@@ -54,13 +54,13 @@
 (after! projectile
   (map! :map projectile-mode-map
         :prefix ("C-c p" . "project")
+        :desc "Recent project files" "r" #'projectile-recentf
+        :desc "Replace in project" "R" #'projectile-replace
         :desc "Search project" "s" #'+default/search-project
         :desc "List todos" "t" #'magit-todos-list
         :desc "Find file" "f" #'projectile-find-file
         :desc "Search symbol" "." #'+default/search-project-for-symbol-at-point
         :desc "Browse project" "D" #'+default/browse-project
-        :prefix "C-c f"
-        :desc "Recent project files" "R" #'projectile-recentf
         :prefix ("C-c p 4" . "other-window")
         :prefix ("C-c p 5" . "other-frame")
         :prefix ("C-c p x" . "run")
@@ -165,5 +165,7 @@
 ;; :emacs
 ;; dired
 (when (modulep! :emacs dired)
-  (map! :prefix "C-c f"
-        :desc "Find directory" "d" #'dired))
+  (map! :map dired-mode-map
+        :prefix "C-c l"
+        :desc "Rsync" "r" #'dired-rsync
+        :desc "Edit mode" "e" #'wdired-change-to-wdired-mode))
