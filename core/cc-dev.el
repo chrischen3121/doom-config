@@ -6,19 +6,6 @@
 ;; C-; +company/complete
 
 ;; :tools
-;; eval
-(when (modulep! :tools eval)
-  (map! :map (prog-mode-map emacs-lisp-mode-map)
-        :prefix ("C-c ; e" . "eval")
-        :desc "Eval line" "l" #'+eval/line-or-region
-        :desc "Eval buffer" "b" #'+eval/buffer-or-region
-        :desc "Eval defun" "d" #'eval-defun
-        :desc "Region and replace" "r" #'+eval/region-and-replace
-        :desc "Region to REPL" "s" #'+eval/send-region-to-repl
-        :desc "Open REPL same window" "c" #'+eval/open-repl-same-window
-        :desc "Open REPL other window" "w" #'+eval/open-repl-other-window))
-
-;; :tools
 ;; debugger
 (when (modulep! :tools debugger)
   (map!

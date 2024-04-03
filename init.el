@@ -73,18 +73,17 @@
        :tools
        ansible
        ;;biblio            ; Bibtex Writes a PhD for you (citation needed)
-       (debugger +lsp)         ; TODO FIXME stepping through code, to help you add bugs
+       (debugger +lsp)     ; TODO FIXME stepping through code, to help you add bugs
        (docker +lsp)
        editorconfig        ; let someone else argue about tabs vs spaces
-       ein                 ; TODO: try Jupyter notebooks with emacs
-       (eval +overlay)     ; run code, run (also, repls)
-       ;;gist              ; interacting with github gists
-       lookup              ; navigate your code and its documentation
-       (lsp +peek)              ; M-x vscode
+       ein                 ; TODO try Jupyter notebooks with emacs
+       (eval +overlay)     ; TODO run code, run (also, repls)
+       (lookup +dictionary +offline)      ; navigate your code and its documentation
+       (lsp +peek)         ; M-x vscode
        magit               ; a git porcelain for Emacs TODO try +forge
        ;;make              ; run make tasks from Emacs
        ;;pass              ; password manager for nerds
-       pdf               ; pdf enhancements
+       pdf                 ; pdf enhancements
        ;;prodigy           ; FIXME managing external services & code builders
        ;;rgb               ; [deprecated] creating color strings
        ;;taskrunner        ; taskrunner for all your projects

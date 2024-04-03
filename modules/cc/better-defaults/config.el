@@ -146,7 +146,8 @@
 ;; spell
 ;; +hunspell
 (when (modulep! :checkers spell +hunspell)
-  (setq! ispell-dictionary "en_US"))
+  (after! ispell
+    (setq! ispell-dictionary "en_US")))
 
 ;; :checkers
 ;; grammar
