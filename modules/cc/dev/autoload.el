@@ -17,11 +17,11 @@
 
   ;; prog-mode backends
   (when (member major-mode '(prog-mode yaml-mode conf-mode
-                             c-mode c++-mode python-mode))
+                             c-mode c++-mode python-mode
+                             sh-mode))
     ;; (setq-local company-backends `(,+lsp-company-backends))
     (if (modulep! :editor snippets)
         (setq-local company-backends
-                    `(,+lsp-company-backends
-                      (company-yasnippet company-files :separate)))
+                    `(,+lsp-company-backends company-yasnippet company-files))
       (setq-local company-backends
-                  `(,+lsp-company-backends company-files :separate)))))
+                  `(,+lsp-company-backends company-files)))))

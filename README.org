@@ -99,7 +99,8 @@ Most important leader keys:
 - command field ~emacsclient --eval "(emacs-everywhere)"~
 
 * TODOs
-- default: company-capf only, "M-/" use company-other-backends
+- poetry-tracking-mode or manually poetry-virtualenv-toggle
+  - checking with ein:run
 - disable leader-map, and redefine keybindings
 
 ** Workflow Optimization

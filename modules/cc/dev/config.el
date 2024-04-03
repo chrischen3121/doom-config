@@ -9,7 +9,8 @@
 (when (modulep! :completion company)
   (after! company
     (setq! company-tooltip-limit 12)
-    (map! :map company-active-map
+    (map! :desc "Complete path" "C-c C-/"  #'company-files
+          :map company-active-map
           "M-/" #'company-other-backend
           "S-<tab>" nil)
     (advice-add '+company-init-backends-h :around #'cc/overwrite-company-backends)
@@ -43,3 +44,23 @@
         :desc "Fold all" "f" #'+fold/close-all
         :desc "Unfold all" "u" #'+fold/open-all
         :desc "Delete folded" "d" #'vimish-fold-delete))
+
+;; :tools
+;; docker
+(when (modulep! :tools docker)
+  (map! :prefix "C-c o"
+        :desc "Docker" "D" #'docker))
+
+;; :tools
+;; editorconfig
+;; Indent for languages, See: editorconfig-indentation-alist
+
+;; :tools
+;; ein (jupyter notebook)
+(when (modulep! :tools ein)
+  (after! ein
+    (setq! ein:jupyter-server-use-subcommand "server"))
+  (map! :prefix "C-c o"
+        :desc "Jupyter run" "j" #'ein:run
+        :desc "Jupyter login" "J" #'ein:login
+        :desc "Jupyter stop" "C-j" #'ein:stop))

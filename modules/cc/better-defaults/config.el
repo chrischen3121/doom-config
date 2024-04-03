@@ -4,7 +4,11 @@
 ;; (add-to-list 'default-frame-alist '(fullscreen . maximized))
 (add-to-list 'initial-frame-alist '(fullscreen . maximized))
 
-;; Global keybindings
+;; which-key sort by description
+(after! which-key
+  (setq! which-key-sort-order 'which-key-description-order))
+
+;; Unset global keybindings
 (undefine-key! global-map
   "C-z" "C-x C-z")
 
@@ -13,6 +17,10 @@
 (when (not (modulep! :editor evil))
   (setq! doom-leader-alt-key "C-z"
          doom-localleader-alt-key "C-z l"))
+
+;; make file executable if it has shebang
+(add-hook! 'after-save-hook
+           #'executable-make-buffer-file-executable-if-script-p)
 
 ;; global keybindings
 (map! :desc "Redo" "C-c r" #'undo-fu-only-redo
