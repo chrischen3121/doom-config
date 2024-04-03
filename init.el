@@ -61,6 +61,7 @@
        vc                ; version-control and Emacs, sitting in a tree (gitignore, gitconfig)
 
        :term
+       eshell
        vterm             ; the best terminal emulation in Emacs
 
        :checkers
@@ -70,10 +71,9 @@
        ;;[opt]grammar                       ; tasing grammar mistake every you make
 
        :tools
-       ;;[opt]ansible
-       ;;biblio            ; Writes a PhD for you (citation needed)
-       ;;collab            ; buffers with friends
-       (debugger +lsp)         ; FIXME stepping through code, to help you add bugs
+       ansible
+       ;;biblio            ; Bibtex Writes a PhD for you (citation needed)
+       (debugger +lsp)         ; TODO FIXME stepping through code, to help you add bugs
        ;;direnv            ; direnv is an environment switcher for the shell.
        (docker +lsp)
        editorconfig        ; let someone else argue about tabs vs spaces

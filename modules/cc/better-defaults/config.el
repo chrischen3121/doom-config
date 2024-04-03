@@ -164,7 +164,8 @@
 ;; :editor
 ;; word-wrap
 (when (modulep! :editor word-wrap)
-  (+global-word-wrap-mode +1))
+  (+global-word-wrap-mode +1)
+  (add-to-list '+word-wrap-disabled-modes 'vterm-mode))
 
 
 ;; :emacs
@@ -180,3 +181,10 @@
         :desc "Rsync" "r" #'dired-rsync
         :desc "Edit mode" "e" #'wdired-change-to-wdired-mode))
 
+
+;; :term
+;; vterm
+(when (modulep! :term vterm)
+  (map! :prefix "C-c o"
+        :desc "Vterm" "t" #'+vterm/toggle
+        :desc "Vterm here" "T" #'+vterm/here))
