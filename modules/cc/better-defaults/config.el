@@ -197,3 +197,11 @@
   (map! :prefix "C-c o"
         :desc "Vterm" "t" #'+vterm/toggle
         :desc "Vterm here" "T" #'+vterm/here))
+
+;; :tools
+;; lookup
+(when (modulep! :tools lookup)
+  (map! :prefix "C-c s"
+        :desc "Word dictionary" "d" #'+lookup/dictionary-definition
+        :desc "Word synonyms" "s" #'+lookup/synonyms
+        :desc "Locate file" "f" #'+lookup/file))

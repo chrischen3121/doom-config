@@ -98,6 +98,9 @@ Most important leader keys:
 - name it "Emacs Everywhere"
 - command field ~emacsclient --eval "(emacs-everywhere)"~
 
+** ~lookup~
+- Use ~dash-docs-install-docset~ to install offline docsets
+
 * TODOs
 - poetry-tracking-mode or manually poetry-virtualenv-toggle
   - checking with ein:run

@@ -83,5 +83,15 @@
 ;; :tools
 ;; lookup
 (when (modulep! :tools lookup)
-  (map! :prefix "C-c l"
-        :desc "Lookup" "l" #'lookup))
+  (map! :map general-override-mode-map
+        :prefix "C-c c"
+        :desc "Lookup definition" "l" #'+lookup/definition
+        :desc "Lookup references" "r" #'+lookup/references
+        :desc "Lookup documentation" "d" #'+lookup/dpocumentation
+        :desc "Lookup online" "o" #'+lookup/online
+        :desc "Lookup Online(Select)" "O" #'+lookup/online-select
+        :desc "Lookup type def" "t" #'+lookup/type-definition
+        :desc "Lookup implementations" "i" #'+lookup/implementations
+        :desc "Lookup docsets" "k" #'+lookup/in-docsets
+        :desc "Lookup in all docsets" "K" #'+lookup/in-all-docsets
+        :desc "Install offline docsets" "D" #'dash-docs-install-docset))
