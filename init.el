@@ -82,7 +82,6 @@
        (lsp +peek)         ; TODO M-x vscode
        magit               ; a git porcelain for Emacs. NOTE Add (+forge) when dealing with issues and PRs
        make                ; run make tasks from Emacs
-       ;;pass              ; password manager for nerds
        pdf                 ; pdf enhancements
        ;;prodigy           ; FIXME managing external services & code builders
        ;;rgb               ; [deprecated] creating color strings
