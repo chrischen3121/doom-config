@@ -25,8 +25,7 @@
        doom-dashboard    ; a nifty splash screen for Emacs
        ;;doom-quit         ; DOOM quit-message prompts when you quit Emacs
        (emoji +unicode)  ; 🙂
-       hl-todo           ; highlight TODOO/FIXME/NOTE/DEPRECATED/HACK/REVIEW
-       ;;hydra           ; This module is DEPRECATED.
+       hl-todo           ; highlight TODO/FIXME/NOTE/DEPRECATED/HACK/REVIEW
        ;;indent-guides     ; highlighted indent columns
        ;;ligatures         ; ligatures and symbols to make your code pretty again
        minimap           ; show a map of the code on the side
@@ -71,6 +70,7 @@
        ;;[opt]grammar                       ; tasing grammar mistake every you make
 
        :tools
+       ;; NOTE TODOs needs to be verified with python/C++ environments
        ansible
        ;;biblio            ; Bibtex Writes a PhD for you (citation needed)
        (debugger +lsp)     ; TODO FIXME stepping through code, to help you add bugs
@@ -79,9 +79,9 @@
        ein                 ; TODO try Jupyter notebooks with emacs
        (eval +overlay)     ; TODO run code, run (also, repls)
        (lookup +dictionary +docsets)      ; navigate your code and its documentation
-       (lsp +peek)         ; M-x vscode
-       magit               ; a git porcelain for Emacs TODO try +forge
-       ;;make              ; run make tasks from Emacs
+       (lsp +peek)         ; TODO M-x vscode
+       magit               ; a git porcelain for Emacs. NOTE Add (+forge) when dealing with issues and PRs
+       make                ; run make tasks from Emacs
        ;;pass              ; password manager for nerds
        pdf                 ; pdf enhancements
        ;;prodigy           ; FIXME managing external services & code builders
