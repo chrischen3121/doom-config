@@ -83,11 +83,7 @@
        magit               ; a git porcelain for Emacs. NOTE Add (+forge) when dealing with issues and PRs
        make                ; run make tasks from Emacs
        pdf                 ; pdf enhancements
-       ;;prodigy           ; FIXME managing external services & code builders
-       ;;rgb               ; [deprecated] creating color strings
-       ;;taskrunner        ; taskrunner for all your projects
-       ;;terraform         ; infrastructure as code
-       ;;tmux              ; an API for interacting with tmux
+       ;;terraform         ; infrastructure as code, try it when using cloud services
        tree-sitter       ; syntax and parsing, sitting in a tree...
        ;;upload            ; map local to remote projects via ssh/ftp TODO try this module as needed
 
