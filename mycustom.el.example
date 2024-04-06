@@ -1,6 +1,8 @@
 ;;; mycustom.el -*- lexical-binding: t; -*-
 
-(setq! cc/default-font-size 20
+(setq! cc/default-font "Hack"
+       cc/default-unicode-font "WenQuanYi Micro Hei"
+       cc/default-font-size 20
        cc/default-unicode-font-size 20
        cc/org-home-dir "~/org/"
        cc/org-pdf-notes-dir "~/org/pdf-notes/"

@@ -170,6 +170,8 @@
        (default +bindings +smartparens) ;; TODO remove +bindings
 
        :cc
+       appearance
        better-defaults
+       notes
        dev
        langs)

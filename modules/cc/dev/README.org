@@ -1,2 +1,1 @@
-:cc dev
-* TODO try Tree-sitter module
+#+title: :cc dev
