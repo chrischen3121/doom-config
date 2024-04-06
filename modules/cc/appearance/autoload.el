@@ -1,6 +1,5 @@
 ;;; cc/appearance/autoload.el -*- lexical-binding: t; -*-
 
-
 ;; Set default theme to light if it's daytime, dark if it's night
 ;;;###autoload
 (defun cc/set-default-theme-by-time ()
@@ -19,6 +18,7 @@
     (if (string-match-p "dark" gnome-style)
         (load-theme cc/dark-theme t)
       (load-theme cc/light-theme t))))
+
 
 ;; Switch between light and dark themes
 ;;;###autoload

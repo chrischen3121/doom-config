@@ -1,14 +1,7 @@
 ;;; core/cc-better-defaults.el -*- lexical-binding: t; -*-
 
 
-;; Global configuration
-(add-hook! 'doom-after-init-hook
-           ;; Disable "continue comments" functionality
-           (defun disable-continue-comments ()
-             (advice-remove 'newline-and-indent
-                            '+default--newline-indent-and-continue-comments-a))
-           ;; for Github Copilot compatibility
-           (setq! whitespace-style (delq 'newline-mark whitespace-style)))
+
 
 ;; :tools
 ;; docker
@@ -80,28 +73,9 @@
           :desc "Tab close"
           "c" #'centaur-tabs-close-tab)))
 
-
-;; :others
-;; Whole line or region
-(use-package! whole-line-or-region
-  :config
-  (whole-line-or-region-global-mode))
-
 ;; Rainbow mode: highlight color string
 (add-hook! (emacs-lisp-mode html-mode css-mode)
            #'rainbow-mode)
-
-;; Ace jump mode
-;; It can help you to move your cursor to ANY position in emacs
-;; by using only 3 times key press.
-(use-package! ace-jump-mode
-  :commands ace-jump-mode
-  :init
-  (map!
-   :map overriding-local-map
-   :leader
-   :desc "Ace jump" "j" #'ace-jump-mode
-   :desc "Ace jump back" "J" #'ace-jump-mode-pop-mark))
 
 
 ;; Change ace-window leading char face

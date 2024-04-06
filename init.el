@@ -172,6 +172,7 @@
        :cc
        appearance
        better-defaults
-       notes
-       dev
-       langs)
+       ;;notes
+       ;;dev
+       ;;langs
+       )

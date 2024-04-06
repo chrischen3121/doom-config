@@ -1,8 +1,17 @@
 ;; -*- no-byte-compile: t; -*-
 ;;; cc/better-defaults/config.el -*- lexical-binding: t; -*-
 
-;; (add-to-list 'default-frame-alist '(fullscreen . maximized))
-(add-to-list 'initial-frame-alist '(fullscreen . maximized))
+;; ;; TODO:
+;; (defun cc/disable-continue-comments ()
+;;   (advice-remove 'newline-and-indent
+;;                  '+default--newline-indent-and-continue-comments-a))
+
+;; ;; Global configuration
+;; (add-hook! 'doom-after-init-hook
+;;   (defun cc/after-doom-init-config ()
+;;     (cc/disable-continue-comments)
+;;     ;; for Github Copilot compatibility
+;;     (setq! whitespace-style (delq 'newline-mark whitespace-style))))
 
 ;; which-key sort by description
 (after! which-key
@@ -205,3 +214,22 @@
         :desc "Word dictionary" "d" #'+lookup/dictionary-definition
         :desc "Word synonyms" "s" #'+lookup/synonyms
         :desc "Locate file" "f" #'+lookup/file))
+
+
+
+;; ;; packages included in this module
+;; ;; Whole line or region
+;; (use-package! whole-line-or-region
+;;   :config
+;;   (whole-line-or-region-global-mode +1))
+
+
+;; ;; Ace jump mode
+;; ;; It can help you to move your cursor to ANY position in emacs
+;; ;; by using only 3 times key press.
+;; (use-package! ace-jump-mode
+;;   :commands ace-jump-mode
+;;   :init
+;;   (map! :prefix "C-c"
+;;         :desc "Ace jump" "j" #'ace-jump-mode
+;;         :desc "Ace jump back" "J" #'ace-jump-mode-pop-mark))

@@ -2,6 +2,9 @@
 ;;; cc/appearance/config.el -*- lexical-binding: t; -*-
 ;;;
 
+;; other frame settings: 'default-frame-alist
+(add-to-list 'initial-frame-alist '(fullscreen . maximized))
+
 (defcustom cc/default-font "Hack"
   "Adjust default font for your system."
   :type 'string
@@ -63,22 +66,26 @@
 
 ;; Automatically set default theme
 (add-hook! 'doom-init-ui-hook
+           :append
            ;; Set default theme by system style if it's gnome
            ;; otherwise set by time
-           (defun cc/after-doom-ui-configuration ()
+           (defun cc/after-doom-init-ui ()
+             ;; Setting fonts should be done before loading theme
+             ;; Or here is a workaround to reload theme after setting fonts
              (setq! doom-font
-                    (font-spec :family cc/default-font :size cc/default-font-size)
-                    doom-variable-pitch-font
-                    (font-spec :family cc/default-font :size cc/default-unicode-font-size)
-                    doom-big-font
-                    (font-spec :family cc/default-font :size (+ cc/default-font-size (/ cc/default-font-size 3)))
-                    doom-serif-font
-                    (font-spec :family cc/default-unicode-font :size cc/default-unicode-font-size)
-                    doom-symbol-font
-                    (font-spec :family cc/default-unicode-font :size cc/default-unicode-font-size))
+                  (font-spec :family cc/default-font :size cc/default-font-size)
+                  doom-variable-pitch-font
+                  (font-spec :family cc/default-font :size cc/default-unicode-font-size)
+                  doom-big-font
+                  (font-spec :family cc/default-font
+                             :size (+ cc/default-font-size (/ cc/default-font-size 3)))
+                  doom-serif-font
+                  (font-spec :family cc/default-unicode-font :size cc/default-unicode-font-size)
+                  doom-symbol-font
+                  (font-spec :family cc/default-unicode-font :size cc/default-unicode-font-size))
              ;; TODO: may be compatible with other linux desktop environments
              (if (string-equal (getenv "XDG_CURRENT_DESKTOP") "GNOME")
                  (cc/set-default-theme-by-sys-style)
                (cc/set-default-theme-by-time))
-             (map! "<f12>" #'cc/switch-light-dark-theme)
-             ))
+             (doom/reload-theme)
+             (map! "<f12>" #'cc/switch-light-dark-theme)))
