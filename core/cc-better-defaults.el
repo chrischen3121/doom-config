@@ -72,16 +72,3 @@
           "j" #'centaur-tabs-ace-jump
           :desc "Tab close"
           "c" #'centaur-tabs-close-tab)))
-
-;; Rainbow mode: highlight color string
-(add-hook! (emacs-lisp-mode html-mode css-mode)
-           #'rainbow-mode)
-
-
-;; Change ace-window leading char face
-(after! ace-window
-  (custom-set-faces!
-    '(aw-leading-char-face
-      :foreground "#51afef"
-      :weight bold
-      :height 5.0)))

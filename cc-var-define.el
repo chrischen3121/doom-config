@@ -1,9 +1,4 @@
 ;;; core/cc-var-define.el -*- lexical-binding: t; -*-
-(defcustom cc/personal-dictionary-dir "~/dicts/"
-  "Personal dictionary directory."
-  :type 'string
-  :group 'cc-config)
-
 ;; agenda configuration
 (defcustom cc/org-home-dir "~/org/"
   "Agenda home directory"

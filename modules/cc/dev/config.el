@@ -95,3 +95,8 @@
         :desc "Lookup docsets" "k" #'+lookup/in-docsets
         :desc "Lookup in all docsets" "K" #'+lookup/in-all-docsets
         :desc "Install offline docsets" "D" #'dash-docs-install-docset))
+
+;; [Packages]
+;; Rainbow mode: highlight color string
+(add-hook! (emacs-lisp-mode html-mode css-mode)
+           #'rainbow-mode)

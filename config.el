@@ -53,16 +53,6 @@
 
 (load! "mycustom")
 
-(when (modulep! :checkers spell)
-  (setq! cc/en-personal-dictionary
-         (file-name-concat cc/personal-dictionary-dir "en.pws")
-         ispell-dictionary "en")
-
-  (add-hook! spell-fu-mode
-    (defun add-personal-dictionary ()
-      (spell-fu-dictionary-add
-       (spell-fu-get-personal-dictionary "en" cc/en-personal-dictionary)))))
-
 ;; change `org-directory'. It must be set before org loads!
 (setq! org-directory cc/org-home-dir)
 

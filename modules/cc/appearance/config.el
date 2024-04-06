@@ -59,7 +59,7 @@
 ;; doom-acario-light, doom-one-light, doom-nord,  doom-oksolar-light
 
 ;; dark:
-;; doom-peacock, doom-tomorrow-night, doom-opera
+;; doom-one, doom-peacock, doom-tomorrow-night, doom-opera
 
 (defvar cc/light-theme 'doom-one-light)
 (defvar cc/dark-theme 'doom-tomorrow-night)
@@ -73,19 +73,30 @@
              ;; Setting fonts should be done before loading theme
              ;; Or here is a workaround to reload theme after setting fonts
              (setq! doom-font
-                  (font-spec :family cc/default-font :size cc/default-font-size)
-                  doom-variable-pitch-font
-                  (font-spec :family cc/default-font :size cc/default-unicode-font-size)
-                  doom-big-font
-                  (font-spec :family cc/default-font
-                             :size (+ cc/default-font-size (/ cc/default-font-size 3)))
-                  doom-serif-font
-                  (font-spec :family cc/default-unicode-font :size cc/default-unicode-font-size)
-                  doom-symbol-font
-                  (font-spec :family cc/default-unicode-font :size cc/default-unicode-font-size))
-             ;; TODO: may be compatible with other linux desktop environments
-             (if (string-equal (getenv "XDG_CURRENT_DESKTOP") "GNOME")
+                    (font-spec :family cc/default-font :size cc/default-font-size)
+                    doom-variable-pitch-font
+                    (font-spec :family cc/default-font :size cc/default-unicode-font-size)
+                    doom-big-font
+                    (font-spec :family cc/default-font
+                               :size (+ cc/default-font-size (/ cc/default-font-size 3)))
+                    doom-serif-font
+                    (font-spec :family cc/default-unicode-font :size cc/default-unicode-font-size)
+                    doom-symbol-font
+                    (font-spec :family cc/default-unicode-font :size cc/default-unicode-font-size))
+             (if (string-equal (getenv "XDG_SESSION_TYPE") "x11")
                  (cc/set-default-theme-by-sys-style)
                (cc/set-default-theme-by-time))
              (doom/reload-theme)
              (map! "<f12>" #'cc/switch-light-dark-theme)))
+
+
+;; Change ace-window leading char face
+(after! ace-window
+  (custom-set-faces!
+    '(aw-leading-char-face
+      :foreground "#51afef"
+      :weight bold
+      :height 5.0)))
+
+(when (modulep! :ui doom-dashboard)
+  (setq! +doom-dashboard-name "Happy Hacking!"))

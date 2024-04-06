@@ -23,8 +23,8 @@
        deft              ; notational velocity for Emacs
        doom              ; what makes DOOM look the way it does
        doom-dashboard    ; a nifty splash screen for Emacs
-       ;;doom-quit         ; DOOM quit-message prompts when you quit Emacs
-       (emoji +unicode)  ; 🙂
+       doom-quit         ; DOOM quit-message prompts when you quit Emacs
+       (emoji +ascii +github +unicode)  ; 🙂
        hl-todo           ; highlight TODO/FIXME/NOTE/DEPRECATED/HACK/REVIEW
        ;;indent-guides     ; highlighted indent columns
        ;;ligatures         ; ligatures and symbols to make your code pretty again
@@ -65,8 +65,7 @@
 
        :checkers
        syntax                          ; tasing you for every semicolon you forget
-       (spell +hunspell +everywhere)   ; tasing you for misspelling mispelling
-       ;; (spell +aspell +everywhere)   ; tasing you for misspelling mispelling
+       (spell +aspell +everywhere)   ; tasing you for misspelling mispelling
        ;;[opt]grammar                       ; tasing grammar mistake every you make
 
        :tools
@@ -172,7 +171,7 @@
        :cc
        appearance
        better-defaults
-       ;;notes
-       ;;dev
+       notes
+       dev
        ;;langs
        )

@@ -51,11 +51,6 @@
 
 (disable-packages! evil)
 
-;; Better defaults
-(package! ace-jump-mode)
-(package! whole-line-or-region)
-(package! rainbow-mode)
-
 ;; TODO Org
 (package! anki-editor)
 (package! org-download)

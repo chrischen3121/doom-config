@@ -1,17 +1,18 @@
 ;; -*- no-byte-compile: t; -*-
 ;;; cc/better-defaults/config.el -*- lexical-binding: t; -*-
 
-;; ;; TODO:
-;; (defun cc/disable-continue-comments ()
-;;   (advice-remove 'newline-and-indent
-;;                  '+default--newline-indent-and-continue-comments-a))
+(defcustom cc/personal-dictionary-dir "~/dicts/"
+  "Personal dictionary directory."
+  :type 'string
+  :group 'cc-better-defaults)
 
-;; ;; Global configuration
-;; (add-hook! 'doom-after-init-hook
-;;   (defun cc/after-doom-init-config ()
-;;     (cc/disable-continue-comments)
-;;     ;; for Github Copilot compatibility
-;;     (setq! whitespace-style (delq 'newline-mark whitespace-style))))
+
+;; Global configuration
+(add-hook! 'doom-after-init-hook
+  (defun cc/after-doom-init-config ()
+    (cc/disable-continue-comments)
+    ;; for Github Copilot compatibility
+    (setq! whitespace-style (delq 'newline-mark whitespace-style))))
 
 ;; which-key sort by description
 (after! which-key
@@ -46,17 +47,18 @@
       :prefix ("C-x x" . "buffer-ops")
       :prefix ("C-x 4" . "other-window")
       :prefix ("C-x 5" . "other-frame")
-      :prefix ("C-c o" . "open")
-      :prefix ("C-c s" . "search")
-      :prefix ("C-c n" . "notes")
+      :prefix ("C-c o" . "<open>")
+      :prefix ("C-c s" . "<search>")
+      :prefix ("C-c i" . "<insert>")
+      :prefix ("C-c n" . "<notes>")
       :desc "Browse notes" "n" #'+default/browse-notes
 
-      :prefix ("C-c t" . "toggle")
-      :prefix ("C-c w" . "workspace")
-      :prefix ("C-c c" . "code")
+      :prefix ("C-c t" . "<toggle>")
+      :prefix ("C-c w" . "<workspace>")
+      :prefix ("C-c c" . "<code>")
 
       ;; C-c f +file
-      :prefix ("C-c f" . "file")
+      :prefix ("C-c f" . "<file>")
       :desc "Copy this file" "c" #'doom/copy-this-file
       :desc "Delete this file" "D" #'doom/delete-this-file
       :desc "Move this file" "m" #'doom/move-this-file
@@ -68,16 +70,21 @@
       :desc "Copy file path" "y" #'+default/yank-buffer-path
       :desc "Open scratch buffer" "x" #'doom/open-scratch-buffer
 
+      :prefix ("C-c i" . "<insert>")
+      :desc "Unicode" "u" #'insert-char
+      :desc "Current file name" "f" #'+default/insert-file-path
+      :desc "From clipboard" "y" #'+default/yank-pop
+
       :prefix ("C-h 4" . "info")
-      :prefix ("C-c l" . "<cc-local>"))
+      :prefix ("C-c l" . "<local>"))
 
 (after! projectile
   (map! :map projectile-mode-map
-        :prefix ("C-c p" . "project")
+        :prefix ("C-c p" . "<project>")
         :desc "Recent project files" "r" #'projectile-recentf
         :desc "Replace in project" "R" #'projectile-replace
         :desc "Search project" "s" #'+default/search-project
-        :desc "List todos" "t" #'magit-todos-list
+        :desc "List todos" "T" #'magit-todos-list
         :desc "Find file" "f" #'projectile-find-file
         :desc "Search symbol" "." #'+default/search-project-for-symbol-at-point
         :desc "Browse project" "D" #'+default/browse-project
@@ -87,7 +94,7 @@
         :prefix ("C-c p x 4" . "run other-window")))
 
 (when (modulep! :editor snippets)
-  (map! :prefix ("C-c &" . "snippets")
+  (map! :prefix ("C-c &" . "<snippets>")
         :desc "New snippet" "n" #'+snippets/new
         :desc "Edit snippet" "e" #'+snippets/edit
         :desc "Find snippet" "f" #'+snippets/find
@@ -95,6 +102,8 @@
   (after! yasnippet
     (undefine-key! yas-minor-mode-map
       "C-c & C-n" "C-c & C-v" "C-c & C-s")
+    (map! :prefix "C-c i"
+          :desc "Snippet" "s" #'yas-insert-snippet)
     (map! :map yas-minor-mode-map
           :prefix "C-c &"
           :desc "Reload snippets" "r" #'yas-reload-all
@@ -127,7 +136,7 @@
 (when (modulep! :checkers syntax)
   (after! flycheck
     (setq! flycheck-keymap-prefix (kbd "C-c 1"))
-    (which-key-add-key-based-replacements "C-c 1" "checker")))
+    (which-key-add-key-based-replacements "C-c 1" "<checker>")))
 
 
 ;; :checkers
@@ -135,7 +144,10 @@
 ;; spell-fu
 (when (modulep! :checkers spell)
   (after! spell-fu
-    (setq! spell-fu-idle-delay 0.5)
+    (setq! spell-fu-idle-delay 0.5
+           cc/en-personal-dictionary
+           (file-name-concat cc/personal-dictionary-dir "en.pws")
+           ispell-dictionary "en")
     (setf
      (alist-get 'prog-mode +spell-excluded-faces-alist)
      '(font-lock-constant-face
@@ -149,17 +161,13 @@
      :desc "Add word at point" "a" #'+spell/add-word
      :desc "Remove word at point" "r" #'+spell/remove-word
      :desc "Goto next error" "n" #'spell-fu-goto-next-error
-     :desc "Goto previous error" "p" #'spell-fu-goto-previous-error)))
+     :desc "Goto previous error" "p" #'spell-fu-goto-previous-error)
+    (add-hook! 'spell-fu-mode-hook
+      (defun add-personal-dictionary ()
+        (spell-fu-dictionary-add
+         (spell-fu-get-personal-dictionary "en" cc/en-personal-dictionary))))))
 
 ;; :checkers
-;; spell
-;; +hunspell
-(when (modulep! :checkers spell +hunspell)
-  (after! ispell
-    (setq! ispell-dictionary "en_US")))
-
-;; :checkers
-;; grammar
 (when (modulep! :checkers grammar)
   (after! langtool
     (map!
@@ -174,7 +182,8 @@
         :desc "Search Project" "p" #'+default/search-project
         :prefix "C-c f"
         :desc "Locate file" "l" #'consult-locate
-        :desc "Recent files" "r" #'consult-recent-file)
+        :desc "Recent files" "r" #'consult-recent-file
+        :desc "Search buffer" "b" #'consult-line)
   (map! :map vertico-map
         "C-l" #'vertico-directory-delete-word))
 
@@ -216,20 +225,26 @@
         :desc "Locate file" "f" #'+lookup/file))
 
 
+;; :ui
+;; emoji
+(when (modulep! :ui emoji)
+  (map! :prefix "C-c i"
+        :desc "Emoji" "e" #'emojify-insert-emoji))
 
-;; ;; packages included in this module
-;; ;; Whole line or region
-;; (use-package! whole-line-or-region
-;;   :config
-;;   (whole-line-or-region-global-mode +1))
+
+;; [Packages]
+;; Whole line or region
+(use-package! whole-line-or-region
+  :config
+  (whole-line-or-region-global-mode +1))
 
 
-;; ;; Ace jump mode
-;; ;; It can help you to move your cursor to ANY position in emacs
-;; ;; by using only 3 times key press.
-;; (use-package! ace-jump-mode
-;;   :commands ace-jump-mode
-;;   :init
-;;   (map! :prefix "C-c"
-;;         :desc "Ace jump" "j" #'ace-jump-mode
-;;         :desc "Ace jump back" "J" #'ace-jump-mode-pop-mark))
+;; Ace jump mode
+;; It can help you to move your cursor to ANY position in emacs
+;; by using only 3 times key press.
+(use-package! ace-jump-mode
+  :commands ace-jump-mode
+  :init
+  (map! :prefix "C-c"
+        :desc "Ace jump" "j" #'ace-jump-mode
+        :desc "Ace jump back" "J" #'ace-jump-mode-pop-mark))

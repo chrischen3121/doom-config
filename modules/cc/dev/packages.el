@@ -3,3 +3,5 @@
 
 (disable-packages! company-dict
                    evil-vimish-fold)
+
+(package! rainbow-mode)
