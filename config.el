@@ -56,11 +56,11 @@
 ;; change `org-directory'. It must be set before org loads!
 (setq! org-directory cc/org-home-dir)
 
-;; (load! "cc-init" (file-name-concat doom-user-dir "core"))
+(load! "cc-init" (file-name-concat doom-user-dir "core"))
 (message "Loading core modules...done")
 
-;; (load! "cc-init" (file-name-concat doom-user-dir "org"))
+(load! "cc-init" (file-name-concat doom-user-dir "org"))
 (message "Loading org modules...done")
 
-;; (load! "cc-init" (file-name-concat doom-user-dir "languages"))
+(load! "cc-init" (file-name-concat doom-user-dir "languages"))
 (message "Loading language modules...done")

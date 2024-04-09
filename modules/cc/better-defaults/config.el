@@ -1,32 +1,22 @@
 ;; -*- no-byte-compile: t; -*-
 ;;; cc/better-defaults/config.el -*- lexical-binding: t; -*-
 
-(defcustom cc/personal-dictionary-dir "~/dicts/"
-  "Personal dictionary directory."
-  :type 'string
-  :group 'cc-better-defaults)
+(defvar cc/personal-aspell-dict-dir "~/dicts/"
+  "Personal aspell dictionary directory.")
 
-
-;; Global configuration
-(add-hook! 'doom-after-init-hook
-  (defun cc/after-doom-init-config ()
-    (cc/disable-continue-comments)
+;; Change newline behavior
+(add-hook! 'doom-first-buffer-hook
+  (defun cc/change-newline-behavior ()
+    (advice-remove 'newline-and-indent
+                   '+default--newline-indent-and-continue-comments-a)
+;;;###package whitespace
     ;; for Github Copilot compatibility
     (setq! whitespace-style (delq 'newline-mark whitespace-style))))
 
-;; which-key sort by description
-(after! which-key
-  (setq! which-key-sort-order 'which-key-description-order))
-
-;; Unset global keybindings
-(undefine-key! global-map
-  "C-z" "C-x C-z")
-
-;; disable evil leader key
-;; error will be thrown if alt-key is nil
-(when (not (modulep! :editor evil))
-  (setq! doom-leader-alt-key "C-z"
-         doom-localleader-alt-key "C-z l"))
+;; recentf
+(after! recentf
+  (setq! recentf-max-saved-items 21)
+  (add-to-list 'recentf-exclude "autosave"))
 
 ;; make file executable if it has shebang
 (add-hook! 'after-save-hook
@@ -78,7 +68,9 @@
       :prefix ("C-h 4" . "info")
       :prefix ("C-c l" . "<local>"))
 
+
 (after! projectile
+  (define-key! projectile-mode-map (kbd "C-c p") projectile-command-map)
   (map! :map projectile-mode-map
         :prefix ("C-c p" . "<project>")
         :desc "Recent project files" "r" #'projectile-recentf
@@ -87,32 +79,11 @@
         :desc "List todos" "T" #'magit-todos-list
         :desc "Find file" "f" #'projectile-find-file
         :desc "Search symbol" "." #'+default/search-project-for-symbol-at-point
-        :desc "Browse project" "D" #'+default/browse-project
+        :desc "Project dired" "D" #'+default/browse-project
         :prefix ("C-c p 4" . "other-window")
         :prefix ("C-c p 5" . "other-frame")
         :prefix ("C-c p x" . "run")
         :prefix ("C-c p x 4" . "run other-window")))
-
-(when (modulep! :editor snippets)
-  (map! :prefix ("C-c &" . "<snippets>")
-        :desc "New snippet" "n" #'+snippets/new
-        :desc "Edit snippet" "e" #'+snippets/edit
-        :desc "Find snippet" "f" #'+snippets/find
-        :desc "Browse snippets" "b" #'+default/browse-templates)
-  (after! yasnippet
-    (undefine-key! yas-minor-mode-map
-      "C-c & C-n" "C-c & C-v" "C-c & C-s")
-    (map! :prefix "C-c i"
-          :desc "Snippet" "s" #'yas-insert-snippet)
-    (map! :map yas-minor-mode-map
-          :prefix "C-c &"
-          :desc "Reload snippets" "r" #'yas-reload-all
-          :desc "Insert snippet" "i" #'yas-insert-snippet)))
-
-;; recentf
-(after! recentf
-  (setq! recentf-max-saved-items 21)
-  (add-to-list 'recentf-exclude "autosave"))
 
 ;; :app
 ;; calendar
@@ -146,7 +117,7 @@
   (after! spell-fu
     (setq! spell-fu-idle-delay 0.5
            cc/en-personal-dictionary
-           (file-name-concat cc/personal-dictionary-dir "en.pws")
+           (file-name-concat cc/personal-aspell-dict-dir "en.pws")
            ispell-dictionary "en")
     (setf
      (alist-get 'prog-mode +spell-excluded-faces-alist)

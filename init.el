@@ -166,11 +166,12 @@
 
        :config
        ;; (default +smartparens)
-       (default +bindings +smartparens) ;; TODO remove +bindings
+       (default +smartparens) ;; TODO remove +bindings
 
        :cc
        appearance
        better-defaults
        notes
        dev
-       langs)
+       langs
+       bindings)

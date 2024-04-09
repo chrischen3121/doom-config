@@ -37,7 +37,7 @@
     (load-theme cc/light-theme t)))
 
 ;;;###autoload
-(defun cc/update-doom-ui-appearance ()
+(defun cc/set-doom-ui-appearance ()
   "Set up the fonts and themes for the current system."
   (setq! doom-font
          (font-spec :family cc/default-font :size cc/default-font-size)
@@ -50,6 +50,8 @@
          (font-spec :family cc/default-unicode-font :size cc/default-unicode-font-size)
          doom-symbol-font
          (font-spec :family cc/default-unicode-font :size cc/default-unicode-font-size))
-  (if (string-equal (getenv "XDG_SESSION_TYPE") "x11")
-      (cc/set-theme-based-on-sys-style)
-    (cc/set-theme-based-on-time)))
+  (let ((session-type (getenv "XDG_SESSION_TYPE")))
+    (if (or (string-equal session-type "x11")
+            (string-equal session-type "wayland"))
+        (cc/set-theme-based-on-sys-style)
+      (cc/set-theme-based-on-time))))

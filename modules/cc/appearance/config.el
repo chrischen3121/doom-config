@@ -39,34 +39,6 @@
 ;; dark:
 ;; doom-one, doom-peacock, doom-tomorrow-night, doom-opera
 
-
-
-
-;; Automatically set default theme
-;; (add-hook! 'doom-init-ui-hook
-;;            :append
-;;            ;; Set default theme by system style if it's gnome
-;;            ;; otherwise set by time
-;;            (defun cc/after-doom-init-ui ()
-;;              ;; Setting fonts should be done before loading theme
-;;              ;; Or here is a workaround to reload theme after setting fonts
-;;              (setq! doom-font
-;;                     (font-spec :family cc/default-font :size cc/default-font-size)
-;;                     doom-variable-pitch-font
-;;                     (font-spec :family cc/default-font :size cc/default-unicode-font-size)
-;;                     doom-big-font
-;;                     (font-spec :family cc/default-font
-;;                                :size (+ cc/default-font-size (/ cc/default-font-size 3)))
-;;                     doom-serif-font
-;;                     (font-spec :family cc/default-unicode-font :size cc/default-unicode-font-size)
-;;                     doom-symbol-font
-;;                     (font-spec :family cc/default-unicode-font :size cc/default-unicode-font-size))
-;;              (if (string-equal (getenv "XDG_SESSION_TYPE") "x11")
-;;                  (cc/set-default-theme-by-sys-style)
-;;                (cc/set-default-theme-by-time))
-;;              (doom/reload-theme)
-;;              (map! "<f12>" #'cc/switch-light-dark-theme)))
-
 (map! "<f12>" #'cc/switch-light-dark-theme)
 
 ;; Change ace-window leading char face
