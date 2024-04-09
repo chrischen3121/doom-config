@@ -1,4 +1,4 @@
-#+title: Readme
+#+title: README
 
 * File structure
 Doom recognizes a handful of special file names, none of which are required for

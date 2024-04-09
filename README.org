@@ -92,6 +92,20 @@ Most important leader keys:
   - This ensures that certain global keybindings are always available regardless of the current mode or context.
 - [[https://github.com/doomemacs/doomemacs/blob/master/modules/completion/vertico/README.org][vertico usage]]
 
+** Hook Sequence
+1. ~doom-before-init-hook~
+2. load doom modules::core
+3. ~doom-after-modules-init-hook~
+4. load =doom/config.el=, then =doom/custom.el=
+5. ~doom-load-theme-hook~
+6. ~doom-after-init-hook~ (show benchmark)
+7. ~doom-init-ui-hook~
+
+*** others
+- ~doom-first-input-hook~
+- ~doom-first-buffer-hook~
+
+
 ** ~emacs-everwhere~
 *** Gnome Wayland
 - Settings -> keyboard -> Keyboard Shortcuts -> Custom Shortcuts

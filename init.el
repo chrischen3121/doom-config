@@ -173,5 +173,4 @@
        better-defaults
        notes
        dev
-       ;;langs
-       )
+       langs)

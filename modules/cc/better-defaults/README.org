@@ -1,1 +1,1 @@
-:cc better-defaults
+#+title: :cc better-defaults
