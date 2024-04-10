@@ -45,6 +45,18 @@
         :desc "Unfold all" "u" #'+fold/open-all
         :desc "Delete folded" "d" #'vimish-fold-delete))
 
+;; :editor
+;; yasnippet
+(when (modulep! :editor snippets)
+  (map! :map yas-minor-mode-map
+        "C-c &" nil
+        (:prefix "C-c i"
+         :desc "Snippet" "s" #'yas-insert-snippet)
+        (:prefix "C-c y"
+         :desc "Reload snippets" "r" #'yas-reload-all
+         :desc "Insert snippet" "i" #'yas-insert-snippet)))
+
+
 ;; :tools
 ;; docker
 (when (modulep! :tools docker)
@@ -71,30 +83,14 @@
 ;; to add new or overwrite, See:
 ;; https://github.com/emacsorphanage/quickrun?tab=readme-ov-file#user-defined-command
 ;; TODO check with python
-(when (modulep! :tools eval)
-  (map! :map (prog-mode-map emacs-lisp-mode-map)
-        :prefix ("C-c l e" . "eval")
-        :desc "Eval line" "l" #'+eval/line-or-region
-        :desc "Eval buffer" "b" #'+eval/buffer-or-region
-        :desc "Region to REPL" "s" #'+eval/send-region-to-repl
-        :desc "Open REPL same window" "r" #'+eval/open-repl-same-window
-        :desc "Open REPL other window" "R" #'+eval/open-repl-other-window))
-
-;; :tools
-;; lookup
-(when (modulep! :tools lookup)
-  (map! :map general-override-mode-map
-        :prefix "C-c c"
-        :desc "Lookup definition" "l" #'+lookup/definition
-        :desc "Lookup references" "r" #'+lookup/references
-        :desc "Lookup documentation" "d" #'+lookup/dpocumentation
-        :desc "Lookup online" "o" #'+lookup/online
-        :desc "Lookup Online(Select)" "O" #'+lookup/online-select
-        :desc "Lookup type def" "t" #'+lookup/type-definition
-        :desc "Lookup implementations" "i" #'+lookup/implementations
-        :desc "Lookup docsets" "k" #'+lookup/in-docsets
-        :desc "Lookup in all docsets" "K" #'+lookup/in-all-docsets
-        :desc "Install offline docsets" "D" #'dash-docs-install-docset))
+;; (when (modulep! :tools eval)
+;;   (map! :map (prog-mode-map emacs-lisp-mode-map)
+;;         :prefix ("C-c l e" . "eval")
+;;         :desc "Eval line" "l" #'+eval/line-or-region
+;;         :desc "Eval buffer" "b" #'+eval/buffer-or-region
+;;         :desc "Region to REPL" "s" #'+eval/send-region-to-repl
+;;         :desc "Open REPL same window" "r" #'+eval/open-repl-same-window
+;;         :desc "Open REPL other window" "R" #'+eval/open-repl-other-window))
 
 ;; [Packages]
 ;; Rainbow mode: highlight color string

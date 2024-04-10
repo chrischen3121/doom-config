@@ -23,42 +23,7 @@
            #'executable-make-buffer-file-executable-if-script-p)
 
 ;; global keybindings
-(map! :desc "Redo" "C-c r" #'undo-fu-only-redo
-      :desc "Redo all" "C-c R" #'undo-fu-only-redo-all
-      :prefix ("C-x <RET>" . "coding-system")
-      :prefix ("C-x a" . "abbrev")
-      :prefix ("M-s h" . "highlight")
-      :prefix ("C-x 8" . "emoji")
-      :prefix ("C-x 8 e" . "emoji")
-      :prefix ("C-x n" . "narrow/widen")
-      :prefix ("C-x r" . "register")
-      :prefix ("C-x t" . "tab")
-      :prefix ("C-x w" . "win-select")
-      :prefix ("C-x x" . "buffer-ops")
-      :prefix ("C-x 4" . "other-window")
-      :prefix ("C-x 5" . "other-frame")
-      :prefix ("C-c o" . "<open>")
-      :prefix ("C-c s" . "<search>")
-      :prefix ("C-c i" . "<insert>")
-      :prefix ("C-c n" . "<notes>")
-      :desc "Browse notes" "n" #'+default/browse-notes
-
-      :prefix ("C-c t" . "<toggle>")
-      :prefix ("C-c w" . "<workspace>")
-      :prefix ("C-c c" . "<code>")
-
-      ;; C-c f +file
-      :prefix ("C-c f" . "<file>")
-      :desc "Copy this file" "c" #'doom/copy-this-file
-      :desc "Delete this file" "D" #'doom/delete-this-file
-      :desc "Move this file" "m" #'doom/move-this-file
-      :desc "Find file in private config" "p"
-      #'doom/find-file-in-private-config
-      :desc "Browse private config" "b" #'doom/open-private-config
-      :desc "Sudo this file" "s" #'doom/sudo-this-file
-      :desc "Sudo find file" "S" #'doom/sudo-find-file
-      :desc "Copy file path" "y" #'+default/yank-buffer-path
-      :desc "Open scratch buffer" "x" #'doom/open-scratch-buffer
+(map! :prefix ("C-c w" . "<workspace>")
 
       :prefix ("C-c i" . "<insert>")
       :desc "Unicode" "u" #'insert-char
