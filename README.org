@@ -119,6 +119,8 @@ Most important leader keys:
 - poetry-tracking-mode or manually poetry-virtualenv-toggle
   - checking with ein:run
 - disable leader-map, and redefine keybindings
+- try projectile default keymap ~C-c l p~
+  - move most-used ones into ~C-c p~
 
 ** Workflow Optimization
   - org-noter

@@ -5,9 +5,6 @@
 (when (modulep! :ui workspaces)
   (setq! persp-keymap-prefix (kbd "C-c w")))
 
-(after! projectile
-  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map))
-
 ;; Unset global keybindings
 (undefine-key! global-map
   "C-z"
@@ -26,6 +23,7 @@
 ;; Autoloads
 (autoload 'org-capture-goto-target "org-capture" nil t)
 (autoload 'recentf-open-files "recentf" nil t)
+(autoload 'projectile-recentf "projectile" nil t)
 
 ;; Adding which-key descriptions
 (after! which-key
@@ -58,7 +56,7 @@
       :desc "Redo" "r" #'undo-fu-only-redo
       :desc "Redo all" "R" #'undo-fu-redo-all
 
-      ;;; C-c t --- toggle
+      ;;; DONE C-c t --- toggle
       (:prefix-map ("t" . "<toggle>")
        :desc "Big font mode" "b" #'doom-big-font-mode
        :desc "Fullscreen" "F" #'toggle-frame-fullscreen
@@ -132,21 +130,27 @@
          :desc "Search in all docsets" "S" #'+lookup/in-all-docsets
          :desc "Install offline docsets""D" #'dash-docs-install-docset))
 
-      ;;; C-c f --- file
+      ;;; DONE C-c f --- file
       (:prefix-map ("f" . "<file>")
        :desc "Recent files" "r" #'recentf-open-files
        :desc "Copy this file" "c" #'doom/copy-this-file
        :desc "Delete this file" "d" #'doom/delete-this-file
        :desc "Move this file" "m" #'doom/move-this-file
        :desc "Locate file" "l" #'locate
-       :desc "Find file in private config" "p" #'doom/open-private-config
+       :desc "Find file under here (-r)" "h" #'+default/find-file-under-here
+       :desc "Find in doom" "p" #'doom/find-file-in-private-config
+       :desc "Browse in doom" "P" #'doom/open-private-config
+       :desc "Find in emacsd" "e" #'doom/find-file-in-emacsd
+       :desc "Browse in emacsd" "E" #'doom/browse-in-emacsd
        :desc "Sudo this file" "s" #'doom/sudo-this-file
        :desc "Sudo find file" "S" #'doom/sudo-find-file
        :desc "Copy file path" "y" #'+default/yank-buffer-path)
 
       ;;; C-c p --- project
       (:prefix-map ("p" . "<project>")
-       :desc "Open current editorconfig" "e" #'editorconfig-find-current-editorconfig)
+       :desc "Open current editorconfig" "e" #'editorconfig-find-current-editorconfig
+
+       )
 
 
       ;;; C-c o --- open
@@ -154,9 +158,7 @@
 
 
       ;;; C-c s --- search
-      (:prefix-map ("s" . "<search>")
-       :desc "Search file under here" "r" #'+default/find-file-under-here
-       :desc "Search file in private config" "p" #'doom/find-file-in-private-config)
+      (:prefix-map ("s" . "<search>"))
 
 
       ;;; C-c i --- insert

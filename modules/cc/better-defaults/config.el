@@ -34,8 +34,16 @@
       :prefix ("C-c l" . "<local>"))
 
 
+;; projectile keybindings
 (after! projectile
-  (define-key! projectile-mode-map (kbd "C-c p") projectile-command-map)
+  (define-key projectile-mode-map (kbd "C-c l p") 'projectile-command-map)
+  (after! which-key
+    (which-key-add-key-based-replacements
+      "C-c l p" "<projectile>"
+      "C-c l p 4" "other-window"
+      "C-c l p 5" "other-frame"
+      "C-c l p x" "execute"
+      "C-c l p s" "search"))
   (map! :map projectile-mode-map
         :prefix ("C-c p" . "<project>")
         :desc "Recent project files" "r" #'projectile-recentf
@@ -44,11 +52,7 @@
         :desc "List todos" "T" #'magit-todos-list
         :desc "Find file" "f" #'projectile-find-file
         :desc "Search symbol" "." #'+default/search-project-for-symbol-at-point
-        :desc "Project dired" "D" #'+default/browse-project
-        :prefix ("C-c p 4" . "other-window")
-        :prefix ("C-c p 5" . "other-frame")
-        :prefix ("C-c p x" . "run")
-        :prefix ("C-c p x 4" . "run other-window")))
+        :desc "Project dired" "D" #'+default/browse-project))
 
 ;; :app
 ;; calendar
