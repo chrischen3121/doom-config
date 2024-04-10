@@ -45,6 +45,14 @@
     "C-x a" "abbrev"))
 
 ;; Global keybindings
+(map!
+ ;;; buffer management
+ :desc "ibuffer" "C-x C-b" #'ibuffer
+ :desc "Switch to buffer" "C-x b" #'switch-to-buffer
+ :desc "Switch to buffer other window" "C-x 4 b" #'switch-to-buffer-other-window
+ )
+
+;; "C-c" keybindings
 (map! :after which-key
       :prefix "C-c"
       :desc "Redo" "r" #'undo-fu-only-redo
@@ -128,15 +136,17 @@
       (:prefix-map ("f" . "<file>")
        :desc "Recent files" "r" #'recentf-open-files
        :desc "Copy this file" "c" #'doom/copy-this-file
-       :desc "Delete this file" "D" #'doom/delete-this-file
+       :desc "Delete this file" "d" #'doom/delete-this-file
        :desc "Move this file" "m" #'doom/move-this-file
-       :desc "Find file in private config" "p"
-       #'doom/find-file-in-private-config
-       :desc "Browse private config" "b" #'doom/open-private-config
+       :desc "Locate file" "l" #'locate
+       :desc "Find file in private config" "p" #'doom/open-private-config
        :desc "Sudo this file" "s" #'doom/sudo-this-file
        :desc "Sudo find file" "S" #'doom/sudo-find-file
-       :desc "Copy file path" "y" #'+default/yank-buffer-path
-       :desc "Open scratch buffer" "x" #'doom/open-scratch-buffer)
+       :desc "Copy file path" "y" #'+default/yank-buffer-path)
+
+      ;;; C-c p --- project
+      (:prefix-map ("p" . "<project>")
+       :desc "Open current editorconfig" "e" #'editorconfig-find-current-editorconfig)
 
 
       ;;; C-c o --- open
@@ -144,7 +154,9 @@
 
 
       ;;; C-c s --- search
-      (:prefix-map ("s" . "<search>"))
+      (:prefix-map ("s" . "<search>")
+       :desc "Search file under here" "r" #'+default/find-file-under-here
+       :desc "Search file in private config" "p" #'doom/find-file-in-private-config)
 
 
       ;;; C-c i --- insert
@@ -164,7 +176,6 @@
 ;; local keybindings
 (map! :after which-key
       :prefix ("C-c l" . "<local>")
-
 
       ;; C-c l e --- eval
       (:when (modulep! :tools eval)

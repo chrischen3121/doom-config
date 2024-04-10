@@ -50,8 +50,6 @@
          (font-spec :family cc/default-unicode-font :size cc/default-unicode-font-size)
          doom-symbol-font
          (font-spec :family cc/default-unicode-font :size cc/default-unicode-font-size))
-  (let ((session-type (getenv "XDG_SESSION_TYPE")))
-    (if (or (string-equal session-type "x11")
-            (string-equal session-type "wayland"))
-        (cc/set-theme-based-on-sys-style)
-      (cc/set-theme-based-on-time))))
+  (if (string-equal (getenv "XDG_SESSION_DESKTOP") "gnome")
+      (cc/set-theme-based-on-sys-style)
+    (cc/set-theme-based-on-time)))
