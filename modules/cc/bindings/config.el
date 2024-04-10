@@ -3,7 +3,8 @@
 
 ;; persp-mode and projectile in different prefixes
 (when (modulep! :ui workspaces)
-  (setq! persp-keymap-prefix (kbd "C-c w")))
+  (setq! persp-keymap-prefix (kbd "C-c w p"))
+  (which-key-add-key-based-replacements "C-c w p" "persp-mode"))
 
 ;; Unset global keybindings
 (undefine-key! global-map
@@ -153,22 +154,43 @@
 
       ;;; C-c p --- project
       (:prefix-map ("p" . "<project>")
-       :desc "Open current editorconfig" "e" #'editorconfig-find-current-editorconfig
-
-       )
+       :desc "Open current editorconfig" "e" #'editorconfig-find-current-editorconfig)
 
 
       ;;; C-c o --- open
       (:prefix-map ("o" . "<open>")
-       (:when (modulep! :app calendar)
-         :desc "Calendar" "c" #'calendar)
-       (:when (modulep! :term vterm)
-         :desc "vterm" "t" #'+vterm/toggle
-         :desc "vterm here" "T" #'+vterm/here))
+                   (:when (modulep! :app calendar)
+                     :desc "Calendar" "c" #'calendar)
+                   (:when (modulep! :term vterm)
+                     :desc "vterm" "t" #'+vterm/toggle
+                     :desc "vterm here" "T" #'+vterm/here))
 
 
       ;;; C-c w --- workspace
-      (:prefix-map ("w" . "<workspace>"))
+      (:prefix-map ("w" . "<workspace>")
+                   (:when (modulep! :ui workspaces)
+                     :desc "New workspace"
+                     "n" #'+workspace/new-named
+                     :desc "Load workspace"
+                     "l" #'+workspace/load
+                     :desc "Load last session"
+                     "L" #'doom/quickload-session
+                     :desc "Save workspace"
+                     "s" #'+workspace/save
+                     :desc "Save session"
+                     "S" #'doom/save-session
+                     :desc "Delete workspace"
+                     "d" #'+workspace/delete
+                     :desc "Rename workspace"
+                     "r" #'+workspace/rename
+                     :desc "Switch workspace"
+                     "w" #'+workspace/switch-to
+                     :desc "Swap left"
+                     "<left>" #'+workspace/swap-left
+                     :desc "Swap right"
+                     "<right>" #'+workspace/swap-right
+                     :desc "Display workspaces"
+                     "d" #'+workspace/display))
 
 
       ;;; C-c s --- search

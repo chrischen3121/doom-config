@@ -127,6 +127,35 @@
          :desc "Rsync" "r" #'dired-rsync
          :desc "Edit mode" "e" #'wdired-change-to-wdired-mode)))
 
+;; :ui
+;; treemacs
+;; enable project follow mode
+(when (modulep! :ui treemacs)
+  (after! treemacs
+    (setq! treemacs-project-follow-mode t)))
+
+
+;; :ui
+;; tabs
+(when (modulep! :ui tabs)
+  (after! centaur-tabs
+    (setq! centaur-tabs-style "wave"
+           centaur-tabs-set-bar nil
+           centaur-tabs-height 36
+           centaur-tabs-close-button "x")
+    (add-hook!
+      (dired-mode special-mode vterm-mode)
+      :append
+      ;; maybe :local
+      #'centaur-tabs-local-mode)
+    (map! :map centaur-tabs-mode-map
+          :prefix ("C-c w t" . "tabs")
+          :desc "Tab forward" "f" #'centaur-tabs-forward
+          :desc "Tab backward" "b" #'centaur-tabs-backward
+          :desc "Switch to tab" "j" #'centaur-tabs-ace-jump
+          :desc "Tab close" "c" #'centaur-tabs-close-tab)))
+
+
 
 ;; [Packages]
 ;; Whole line or region
