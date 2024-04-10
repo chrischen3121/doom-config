@@ -40,7 +40,8 @@
     "C-x 4" "other-window"
     "C-x 5" "other-frame"
     "C-x p" "project"
-    "C-x a" "abbrev"))
+    "C-x a" "abbrev"
+    "C-h 4" "info"))
 
 ;; Global keybindings
 (map!
@@ -132,11 +133,15 @@
 
       ;;; DONE C-c f --- file
       (:prefix-map ("f" . "<file>")
-       :desc "Recent files" "r" #'recentf-open-files
+       :desc "Recent files" "r"
+       (cond ((modulep! :completion vertico) #'consult-recent-file)
+             (t #'recentf-open-files))
        :desc "Copy this file" "c" #'doom/copy-this-file
        :desc "Delete this file" "d" #'doom/delete-this-file
        :desc "Move this file" "m" #'doom/move-this-file
-       :desc "Locate file" "l" #'locate
+       :desc "Locate file" "l"
+       (cond ((modulep! :completion vertico) #'consult-locate)
+             (t #'locate))
        :desc "Find file under here (-r)" "h" #'+default/find-file-under-here
        :desc "Find in doom" "p" #'doom/find-file-in-private-config
        :desc "Browse in doom" "P" #'doom/open-private-config
@@ -154,18 +159,37 @@
 
 
       ;;; C-c o --- open
-      (:prefix-map ("o" . "<open>"))
+      (:prefix-map ("o" . "<open>")
+       (:when (modulep! :app calendar)
+         :desc "Calendar" "c" #'calendar)
+       (:when (modulep! :term vterm)
+         :desc "vterm" "t" #'+vterm/toggle
+         :desc "vterm here" "T" #'+vterm/here))
+
+
+      ;;; C-c w --- workspace
+      (:prefix-map ("w" . "<workspace>"))
 
 
       ;;; C-c s --- search
-      (:prefix-map ("s" . "<search>"))
+      (:prefix-map ("s" . "<search>")
+       :desc "Search line" "l"
+       (cond ((modulep! :completion vertico)   #'consult-line)
+             ((modulep! :completion ivy)       #'swiper)
+             ((modulep! :completion helm)      #'swiper))
+       (:when (modulep! :tools lookup)
+         :desc "Word dictionary" "w" #'+lookup/dictionary-definition
+         :desc "Thesaurus/θɪˈsɔːrəs/" "t" #'+lookup/synonyms
+         :desc "Find file" "f" #'+lookup/file))
 
 
       ;;; C-c i --- insert
       (:prefix-map ("i". "<insert>")
        :desc "Unicode" "u" #'insert-char
        :desc "Current file name" "f" #'+default/insert-file-path
-       :desc "From clipboard" "y" #'+default/yank-pop)
+       :desc "From clipboard" "y" #'+default/yank-pop
+       (:when (modulep! :ui emoji)
+         :desc "Emoji" "e" #'emojify-insert-emoji))
 
 
       ;;; C-c n --- note

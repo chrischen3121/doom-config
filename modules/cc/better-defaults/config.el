@@ -22,17 +22,6 @@
 (add-hook! 'after-save-hook
            #'executable-make-buffer-file-executable-if-script-p)
 
-;; global keybindings
-(map! :prefix ("C-c w" . "<workspace>")
-
-      :prefix ("C-c i" . "<insert>")
-      :desc "Unicode" "u" #'insert-char
-      :desc "Current file name" "f" #'+default/insert-file-path
-      :desc "From clipboard" "y" #'+default/yank-pop
-
-      :prefix ("C-h 4" . "info")
-      :prefix ("C-c l" . "<local>"))
-
 
 ;; projectile keybindings
 (after! projectile
@@ -58,13 +47,11 @@
 ;; calendar
 (when (modulep! :app calendar)
   (after! calendar
-    (setq! calendar-week-start-day 1))
-  (map! :prefix "C-c o"
-        :desc "Calendar"
-        "c" #'+calendar/open-calendar))
+    (setq! calendar-week-start-day 1)))
 
 ;; :app
 ;; everywhere
+;; TODO: may be used to edit anki cards
 (when (modulep! :app everywhere)
   (after! recentf
     (add-to-list 'recentf-exclude "emacs-everywhere"))
@@ -77,7 +64,6 @@
   (after! flycheck
     (setq! flycheck-keymap-prefix (kbd "C-c 1"))
     (which-key-add-key-based-replacements "C-c 1" "<checker>")))
-
 
 ;; :checkers
 ;; spell
@@ -96,7 +82,7 @@
       '(spell-fu-incorrect-face :underline (:color "cyan" :style wave)))
     (map!
      :map general-override-mode-map
-     :prefix ("C-c 1 s" . "spell-check")
+     :prefix ("C-c 1 s" . "<spell-check>")
      :desc "Correct word at point" "c" #'+spell/correct
      :desc "Add word at point" "a" #'+spell/add-word
      :desc "Remove word at point" "r" #'+spell/remove-word
@@ -118,12 +104,6 @@
 ;; :completion
 ;; vertico
 (when (modulep! :completion vertico)
-  (map! :prefix "C-c s"
-        :desc "Search Project" "p" #'+default/search-project
-        :prefix "C-c f"
-        :desc "Locate file" "l" #'consult-locate
-        :desc "Recent files" "r" #'consult-recent-file
-        :desc "Search buffer" "b" #'consult-line)
   (map! :map vertico-map
         "C-l" #'vertico-directory-delete-word))
 
@@ -140,44 +120,18 @@
 (when (modulep! :emacs dired)
   (map! :after dired
         :map dired-mode-map
-        "C-l" #'dired-up-directory)
-  (map! :map dired-mode-map
+        "C-l" #'dired-up-directory
         "C-c C-r" nil
         "C-c C-e" nil
-        :prefix "C-c l"
-        :desc "Rsync" "r" #'dired-rsync
-        :desc "Edit mode" "e" #'wdired-change-to-wdired-mode))
-
-
-;; :term
-;; vterm
-(when (modulep! :term vterm)
-  (map! :prefix "C-c o"
-        :desc "Vterm" "t" #'+vterm/toggle
-        :desc "Vterm here" "T" #'+vterm/here))
-
-;; :tools
-;; lookup
-(when (modulep! :tools lookup)
-  (map! :prefix "C-c s"
-        :desc "Word dictionary" "d" #'+lookup/dictionary-definition
-        :desc "Word synonyms" "s" #'+lookup/synonyms
-        :desc "Locate file" "f" #'+lookup/file))
-
-
-;; :ui
-;; emoji
-(when (modulep! :ui emoji)
-  (map! :prefix "C-c i"
-        :desc "Emoji" "e" #'emojify-insert-emoji))
+        (:prefix "C-c l"
+         :desc "Rsync" "r" #'dired-rsync
+         :desc "Edit mode" "e" #'wdired-change-to-wdired-mode)))
 
 
 ;; [Packages]
 ;; Whole line or region
 (use-package! whole-line-or-region
-  :config
-  (whole-line-or-region-global-mode +1))
-
+  :hook (doom-first-input . whole-line-or-region-global-mode))
 
 ;; Ace jump mode
 ;; It can help you to move your cursor to ANY position in emacs
@@ -185,6 +139,4 @@
 (use-package! ace-jump-mode
   :commands ace-jump-mode
   :init
-  (map! :prefix "C-c"
-        :desc "Ace jump" "j" #'ace-jump-mode
-        :desc "Ace jump back" "J" #'ace-jump-mode-pop-mark))
+  (map! "C-." #'ace-jump-mode))

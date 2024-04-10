@@ -1,9 +1,6 @@
 ;; -*- no-byte-compile: t; -*-
 ;;; cc/dev/config.el -*- lexical-binding: t; -*-
 
-(map! :map prog-mode-map
-      "M-<RET>" #'+default--newline-indent-and-continue-comments-a)
-
 ;; :completion
 ;; company
 (when (modulep! :completion company)
@@ -44,6 +41,7 @@
         :desc "Fold all" "f" #'+fold/close-all
         :desc "Unfold all" "u" #'+fold/open-all
         :desc "Delete folded" "d" #'vimish-fold-delete))
+
 
 ;; :editor
 ;; yasnippet
