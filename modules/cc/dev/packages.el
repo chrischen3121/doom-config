@@ -8,6 +8,5 @@
 
 (package! copilot
   :recipe (:host github
-           :repo "zerolfx/copilot.el"
-           :branch "main"
-           :files ("dist" "*.el")))
+           :repo "copilot-emacs/copilot.el"
+           :files ("*.el")))

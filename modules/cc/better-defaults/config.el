@@ -8,10 +8,7 @@
 (add-hook! 'doom-first-buffer-hook
   (defun cc/change-newline-behavior ()
     (advice-remove 'newline-and-indent
-                   '+default--newline-indent-and-continue-comments-a)
-;;;###package whitespace
-    ;; for Github Copilot compatibility
-    (setq! whitespace-style (delq 'newline-mark whitespace-style))))
+                   '+default--newline-indent-and-continue-comments-a)))
 
 ;; recentf
 (after! recentf
