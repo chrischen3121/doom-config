@@ -64,34 +64,19 @@
         :desc "Peek doc" "K" #'lsp-ui-doc-glance))
 
 
-;; :ui
-;; zen
-(when (modulep! :ui zen)
-  (after! writeroom-mode
-    (setq! +zen-text-scale 0.8)
-    (add-hook! 'writeroom-mode-enable-hook
-      (when (modulep! :ui tabs)
-        (centaur-tabs-local-mode +1))
-      (display-line-numbers-mode -1))
-    (add-hook! 'writeroom-mode-disable-hook
-      (when (modulep! :ui tabs)
-        (centaur-tabs-local-mode -1))
-      (display-line-numbers-mode +1))))
-
-
 ;; :others
 ;; copilot
-(use-package! copilot
-  :defer t
-  :init
-  (add-hook! (prog-mode git-commit-setup conf-mode yaml-mode)
-             :append #'copilot-mode)
-  (setq-hook! copilot-mode copilot--indent-warning-printed-p t)
-  :config
-  (map! :map copilot-completion-map
-        "<backtab>" #'copilot-accept-completion
-        "M-o" #'copilot-panel-complete
-        "M-l" #'copilot-accept-completion-by-line
-        "M-j" #'copilot-accept-completion
-        "M-n" #'copilot-next-completion
-        "M-p" #'copilot-previous-completion))
+;; (use-package! copilot
+;;   :defer t
+;;   :init
+;;   (add-hook! (prog-mode git-commit-setup conf-mode yaml-mode)
+;;              :append #'copilot-mode)
+;;   (setq-hook! copilot-mode copilot--indent-warning-printed-p t)
+;;   :config
+;;   (map! :map copilot-completion-map
+;;         "<backtab>" #'copilot-accept-completion
+;;         "M-o" #'copilot-panel-complete
+;;         "M-l" #'copilot-accept-completion-by-line
+;;         "M-j" #'copilot-accept-completion
+;;         "M-n" #'copilot-next-completion
+;;         "M-p" #'copilot-previous-completion))

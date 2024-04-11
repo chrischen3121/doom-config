@@ -173,5 +173,7 @@
        better-defaults
        notes
        dev
-       langs
-       bindings)
+       bindings
+
+       :cc-langs
+       elisp)

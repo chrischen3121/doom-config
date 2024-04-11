@@ -5,3 +5,9 @@
                    evil-vimish-fold)
 
 (package! rainbow-mode)
+
+(package! copilot
+  :recipe (:host github
+           :repo "zerolfx/copilot.el"
+           :branch "main"
+           :files ("dist" "*.el")))

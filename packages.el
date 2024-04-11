@@ -65,8 +65,3 @@
 (disable-packages! pipenv)
 
 ;; Development
-(package! copilot
-  :recipe (:host github
-           :repo "zerolfx/copilot.el"
-           :branch "main"
-           :files ("dist" "*.el")))

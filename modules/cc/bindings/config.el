@@ -89,6 +89,9 @@
        :desc "Compile" "c" #'compile
        :desc "Format buffer/region" "f" #'+format/region-or-buffer
        :desc "List errors" "e" #'+default/diagnostics
+       (:when (modulep! :tools make)
+         :desc "Make run target" "m" #'+make/run
+         :desc "Make run last" "M" #'+make/run-last)
 
        ;; TODO: lsp bindings
        ;; (:when (and (modulep! :tools lsp) (not (modulep! :tools lsp +eglot)))
@@ -163,7 +166,14 @@
                      :desc "Calendar" "c" #'calendar)
                    (:when (modulep! :term vterm)
                      :desc "vterm" "t" #'+vterm/toggle
-                     :desc "vterm here" "T" #'+vterm/here))
+                     :desc "vterm here" "T" #'+vterm/here)
+                   (:when (modulep! :tools ein)
+                     (:prefix-map ("j" . "Jupyter")
+                      :desc "Jupyter run" "r" #'ein:run
+                      :desc "Jupyter login" "l" #'ein:login
+                      :desc "Jupyter stop" "s" #'ein:stop))
+                   (:when (modulep! :tools docker)
+                     :desc "Docker" "d" #'docker))
 
 
       ;;; C-c w --- workspace

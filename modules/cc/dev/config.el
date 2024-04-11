@@ -6,8 +6,18 @@
 (when (modulep! :completion company)
   (after! company
     (setq! company-tooltip-limit 12)
-    (map! :desc "Complete path" "C-c C-/"  #'company-files
-          :map company-active-map
+    (map! :prefix ("C-c l c" . "<company>")
+          "f" #'company-files
+          "d" #'company-dabbrev
+          "D" #'company-dabbrev-code
+          "y" #'company-yasnippet
+          "c" #'company-complete
+          "C" #'company-capf
+          "s" #'company-ispell
+          "g" #'company-gtags
+          "e" #'company-etags
+          "o" #'company-other-backend)
+    (map! :map company-active-map
           "M-/" #'company-other-backend
           "S-<tab>" nil)
     (advice-add '+company-init-backends-h :around #'cc/overwrite-company-backends)
@@ -54,13 +64,6 @@
          :desc "Reload snippets" "r" #'yas-reload-all
          :desc "Insert snippet" "i" #'yas-insert-snippet)))
 
-
-;; :tools
-;; docker
-(when (modulep! :tools docker)
-  (map! :prefix "C-c o"
-        :desc "Docker" "D" #'docker))
-
 ;; :tools
 ;; editorconfig
 ;; Indent for languages, See: `editorconfig-indentation-alist'
@@ -69,11 +72,8 @@
 ;; ein (jupyter notebook)
 (when (modulep! :tools ein)
   (after! ein
-    (setq! ein:jupyter-server-use-subcommand "server"))
-  (map! :prefix "C-c o"
-        :desc "Jupyter run" "j" #'ein:run
-        :desc "Jupyter login" "J" #'ein:login
-        :desc "Jupyter stop" "C-j" #'ein:stop))
+    ;; for jupyter-lab, otherwise use "notebook"
+    (setq! ein:jupyter-server-use-subcommand "server")))
 
 ;; :tools
 ;; eval
@@ -92,5 +92,23 @@
 
 ;; [Packages]
 ;; Rainbow mode: highlight color string
-(add-hook! (emacs-lisp-mode html-mode css-mode)
-           #'rainbow-mode)
+(use-package! rainbow-mode
+  :hook ((emacs-lisp-mode html-mode css-mode) . rainbow-mode))
+
+;; github copilot
+;; Codeium: NOTE wait for the async company-backend
+;; cape-capf-super solution is still experimental
+(use-package! copilot
+  :defer t
+  :init
+  (add-hook! (prog-mode git-commit-setup conf-mode yaml-mode)
+             :append #'copilot-mode)
+  (setq-hook! copilot-mode copilot--indent-warning-printed-p t)
+  :config
+  (map! :map copilot-completion-map
+        "<backtab>" #'copilot-accept-completion
+        "M-o" #'copilot-panel-complete
+        "M-l" #'copilot-accept-completion-by-line
+        "M-j" #'copilot-accept-completion
+        "M-n" #'copilot-next-completion
+        "M-p" #'copilot-previous-completion))
