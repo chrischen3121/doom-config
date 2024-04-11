@@ -62,21 +62,3 @@
   (map! :leader
         :prefix "c"
         :desc "Peek doc" "K" #'lsp-ui-doc-glance))
-
-
-;; :others
-;; copilot
-;; (use-package! copilot
-;;   :defer t
-;;   :init
-;;   (add-hook! (prog-mode git-commit-setup conf-mode yaml-mode)
-;;              :append #'copilot-mode)
-;;   (setq-hook! copilot-mode copilot--indent-warning-printed-p t)
-;;   :config
-;;   (map! :map copilot-completion-map
-;;         "<backtab>" #'copilot-accept-completion
-;;         "M-o" #'copilot-panel-complete
-;;         "M-l" #'copilot-accept-completion-by-line
-;;         "M-j" #'copilot-accept-completion
-;;         "M-n" #'copilot-next-completion
-;;         "M-p" #'copilot-previous-completion))

@@ -31,34 +31,8 @@
 ;; =============================
 ;; #+INCLUDE: "~/.emacs" src emacs-lisp
 ;;
-(remove-hook! 'org-load-hook #'+org-init-smartparens-h)
 
 (after! org
-  ;; disable org-indent-mode
-  (setq! org-startup-indented nil) ; Prevent org-indent-mode from being enabled by default
-  (remove-hook 'org-mode-hook #'org-indent-mode) ; Remove org-indent-mode from the org-mode-hook
-  (require 'org-indent) ; fix: Invalid face reference: org-indent
-  ;; Org titles
-  (setq! org-ellipsis " ▼") ; ▼
-  (dolist (face
-           '((org-level-1 . 1.3)
-             (org-level-2 . 1.2)
-             (org-level-3 . 1.1)))
-    (set-face-attribute (car face) nil :weight 'bold :height (cdr face)))
-
-  ;; Latex hints:
-  ;; ` - cdlatex-math-symbol
-  ;; ' - cdlatex-math-modify e.g. 'b: /mathbf
-
-
-  ;; Latex preview configuration
-  (setq! org-pretty-entities t
-         org-pretty-entities-include-sub-superscripts nil ; show sub'_' / super '^'
-         org-highlight-latex-and-related '(native latex entities))
-
-  ;; Inline image
-  (setq! org-startup-with-inline-images t)
-
   ;; Source code block
   ;; TODO maybe just use yasnippet
   (appendq! org-structure-template-alist
