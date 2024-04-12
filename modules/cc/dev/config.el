@@ -76,6 +76,23 @@
     (setq! ein:jupyter-server-use-subcommand "server")))
 
 ;; :tools
+;; rgb
+(when (modulep! :tools rgb)
+  (add-hook! '(emacs-lisp-mode-hook html-mode-hook
+               css-mode-hook scss-mode-hook)
+             #'rainbow-mode)
+  (after! rainbow-mode
+    (add-hook! 'rainbow-mode-hook
+      (hl-line-mode (if rainbow-mode -1 +1)))))
+
+;; :tools
+;; upload
+;; TODO: add descriptions for ssh-deploy keybindings
+(when (modulep! :tools upload)
+  (map! :after ssh-deploy
+        :desc "<ssh-upload>" "C-c r u" #'ssh-deploy-prefix-map))
+
+;; :tools
 ;; eval
 ;; check `quickrun--language-alist' for languages
 ;; to add new or overwrite, See:
@@ -92,11 +109,12 @@
 
 ;; [Packages]
 ;; Rainbow mode: highlight color string
-(use-package! rainbow-mode
-  :hook ((emacs-lisp-mode html-mode css-mode) . rainbow-mode))
+;; (use-package! rainbow-mode
+;;   :hook ((emacs-lisp-mode html-mode css-mode) . rainbow-mode))
 
 ;; Codeium: NOTE wait for the async company-backend
 ;; cape-capf-super solution is still experimental
+
 
 ;; Github Copilot
 (use-package! copilot
@@ -105,14 +123,14 @@
   (setq! copilot--indent-warning-printed-p t)
   (map! :map copilot-completion-map
         "<backtab>" #'copilot-accept-completion
-        (:prefix "C-c l c"
-         :desc "Copilot panel" "P" #'copilot-panel-complete
-         :desc "Copilot by line"  "w" #'copilot-accept-completion-by-word
-         :desc "Copilot by line"  "l" #'copilot-accept-completion-by-line
-         :desc "Copilot next" "n" #'copilot-next-completion
-          :desc "Copilot previous" "p" #'copilot-previous-completion))
+        "C-g" #'copilot-clear-overlay
+        "M-s" #'copilot-panel-complete
+        "M-w" #'copilot-accept-completion-by-word
+        "M-l" #'copilot-accept-completion-by-line
+        "M-n" #'copilot-next-completion
+        "M-p" #'copilot-previous-completion)
 ;;;###package whitespace
-    ;; For Github Copilot compatibility
-    ;; Cursor Jump to End of Line When Typing
-    ;; If you are using whitespace-mode, make sure to remove newline-mark from whitespace-style.
-    (setq! whitespace-style (delq 'newline-mark whitespace-style)))
+  ;; For Github Copilot compatibility
+  ;; Cursor Jump to End of Line When Typing
+  ;; If you are using whitespace-mode, make sure to remove newline-mark from whitespace-style.
+  (setq! whitespace-style (delq 'newline-mark whitespace-style)))

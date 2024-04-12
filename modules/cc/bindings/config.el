@@ -55,8 +55,12 @@
 ;; "C-c" keybindings
 (map! :after which-key
       :prefix "C-c"
-      :desc "Redo" "r" #'undo-fu-only-redo
-      :desc "Redo all" "R" #'undo-fu-redo-all
+
+      ;;; C-c u --- undo
+      (:prefix-map ("u" . "<undo>")
+       :desc "Undo" "u" #'undo-fu-only-undo
+       :desc "Undo tree redo" "r" #'undo-fu-only-redo
+       :desc "Undo tree redo all" "R" #'undo-fu-redo-all)
 
       ;;; DONE C-c t --- toggle
       (:prefix-map ("t" . "<toggle>")
@@ -161,46 +165,48 @@
 
 
       ;;; C-c o --- open
-      (:prefix-map ("o" . "<open>")
-                   (:when (modulep! :app calendar)
-                     :desc "Calendar" "c" #'calendar)
-                   (:when (modulep! :term vterm)
-                     :desc "vterm" "t" #'+vterm/toggle
-                     :desc "vterm here" "T" #'+vterm/here)
-                   (:when (modulep! :tools ein)
-                     (:prefix-map ("j" . "Jupyter")
-                      :desc "Jupyter run" "r" #'ein:run
-                      :desc "Jupyter login" "l" #'ein:login
-                      :desc "Jupyter stop" "s" #'ein:stop))
-                   (:when (modulep! :tools docker)
-                     :desc "Docker" "d" #'docker))
+      (:prefix-map
+       ("o" . "<open>")
+       (:when (modulep! :app calendar)
+         :desc "Calendar" "c" #'calendar)
+       (:when (modulep! :term vterm)
+         :desc "vterm" "t" #'+vterm/toggle
+         :desc "vterm here" "T" #'+vterm/here)
+       (:when (modulep! :tools ein)
+         (:prefix-map ("j" . "Jupyter")
+          :desc "Jupyter run" "r" #'ein:run
+          :desc "Jupyter login" "l" #'ein:login
+          :desc "Jupyter stop" "s" #'ein:stop))
+       (:when (modulep! :tools docker)
+         :desc "Docker" "d" #'docker))
 
 
       ;;; C-c w --- workspace
-      (:prefix-map ("w" . "<workspace>")
-                   (:when (modulep! :ui workspaces)
-                     :desc "New workspace"
-                     "n" #'+workspace/new-named
-                     :desc "Load workspace"
-                     "l" #'+workspace/load
-                     :desc "Load last session"
-                     "L" #'doom/quickload-session
-                     :desc "Save workspace"
-                     "s" #'+workspace/save
-                     :desc "Save session"
-                     "S" #'doom/save-session
-                     :desc "Delete workspace"
-                     "d" #'+workspace/delete
-                     :desc "Rename workspace"
-                     "r" #'+workspace/rename
-                     :desc "Switch workspace"
-                     "w" #'+workspace/switch-to
-                     :desc "Swap left"
-                     "<left>" #'+workspace/swap-left
-                     :desc "Swap right"
-                     "<right>" #'+workspace/swap-right
-                     :desc "Display workspaces"
-                     "d" #'+workspace/display))
+      (:prefix-map
+       ("w" . "<workspace>")
+       (:when (modulep! :ui workspaces)
+         :desc "New workspace"
+         "n" #'+workspace/new-named
+         :desc "Load workspace"
+         "l" #'+workspace/load
+         :desc "Load last session"
+         "L" #'doom/quickload-session
+         :desc "Save workspace"
+         "s" #'+workspace/save
+         :desc "Save session"
+         "S" #'doom/save-session
+         :desc "Delete workspace"
+         "d" #'+workspace/delete
+         :desc "Rename workspace"
+         "r" #'+workspace/rename
+         :desc "Switch workspace"
+         "w" #'+workspace/switch-to
+         :desc "Swap left"
+         "<left>" #'+workspace/swap-left
+         :desc "Swap right"
+         "<right>" #'+workspace/swap-right
+         :desc "Display workspaces"
+         "d" #'+workspace/display))
 
 
       ;;; C-c s --- search
@@ -228,6 +234,8 @@
       (:prefix-map ("n" . "<note>")
        :desc "Browse notes" "n" #'+default/browse-notes)
 
+      ;;; C-c r --- remote
+      (:prefix-map ("r" . "<remote>"))
       )
 
 
@@ -235,11 +243,24 @@
 (map! :after which-key
       :prefix ("C-c l" . "<local>")
 
-      ;; C-c l e --- eval
-      (:when (modulep! :tools eval)
+      ;; C-c l r --- run/eval
+      (:prefix-map
+       ("r" . "<run/eval>")
+       (:when (modulep! :tools eval)
+         :map prog-mode-map
+         :desc "Eval buffer" "b" #'+eval/buffer-or-region
+         :desc "Eval line" "r" #'+eval/line-or-region
+         :desc "Send to REPL" "s" #'+eval/send-region-to-repl
+         :desc "Open REPL" "i" #'+eval/open-repl-other-window))
+
+
+      ;; C-c l t --- tmux
+      (:when (modulep! :tools tmux)
         :map prog-mode-map
-        :prefix-map ("e" . "<eval/quickrun>")
-        :desc "Eval buffer" "b" #'+eval/buffer-or-region
-        :desc "Eval line" "r" #'+eval/line-or-region
-        :desc "Send to REPL" "s" #'+eval/send-region-to-repl
-        :desc "Open REPL" "i" #'+eval/open-repl-other-window))
+        :prefix-map ("t" . "<tmux>")
+        :desc "Run" "r" #'+tmux/run
+        :desc "Rerun" "R" #'+tmux/rerun
+        :desc "cd" "c" #'+tmux/cd
+        :desc "cd to here" "h" #'+tmux/cd-here
+        :desc "cd to project" "p" #'+tmux/cd-project
+        :desc "Send region" "s" #'+tmux/send-region))

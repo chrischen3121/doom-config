@@ -4,7 +4,8 @@
 (disable-packages! company-dict
                    evil-vimish-fold)
 
-(package! rainbow-mode)
+(when (modulep! :tools rgb)
+  (disable-packages! kurecolor))
 
 (package! copilot
   :recipe (:host github
