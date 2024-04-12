@@ -123,8 +123,6 @@
   (setq! copilot--indent-warning-printed-p t)
   (map! :map copilot-completion-map
         "<backtab>" #'copilot-accept-completion
-        "C-g" #'copilot-clear-overlay
-        "M-s" #'copilot-panel-complete
         "M-w" #'copilot-accept-completion-by-word
         "M-l" #'copilot-accept-completion-by-line
         "M-n" #'copilot-next-completion
