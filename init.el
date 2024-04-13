@@ -29,7 +29,7 @@
        doom-quit         ; DOOM quit-message prompts when you quit Emacs
        (emoji +ascii +unicode)  ; 🙂
        hl-todo           ; highlight TODO/FIXME/NOTE/DEPRECATED/HACK/REVIEW
-       indent-guides     ; highlighted indent columns
+       ;; indent-guides     ; highlighted indent columns
        ;; minimap           ; show a map of the code on the side
        modeline          ; snazzy, Atom-inspired modeline, plus API
        nav-flash         ; blink cursor line after big motions
@@ -39,7 +39,6 @@
        (treemacs +lsp)   ; a project drawer, like neotree but cooler
        unicode           ; extended unicode support for various languages
        (vc-gutter +diff-hl +pretty) ; vcs diff in the fringe
-       ;;[opt]vi-tilde-fringe   ; fringe tildes to mark beyond EOB
        (window-select +numbers)     ; visually switch windows
        workspaces        ; tab emulation, persistence & separate workspaces
        zen               ; distraction-free coding or writing
@@ -158,7 +157,6 @@
        ;;(rss +org)          ; emacs as an RSS reader
 
        :config
-       ;; (default +smartparens)
        (default +smartparens) ;; TODO remove +bindings
 
        :cc

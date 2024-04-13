@@ -188,28 +188,27 @@
       (:prefix-map
        ("w" . "<workspace>")
        (:when (modulep! :ui workspaces)
+         ;; workspace
          :desc "New workspace"
          "n" #'+workspace/new-named
-         :desc "Load workspace"
-         "l" #'+workspace/load
-         :desc "Load last session"
-         "L" #'doom/quickload-session
          :desc "Save workspace"
          "s" #'+workspace/save
-         :desc "Save session"
-         "S" #'doom/save-session
+         :desc "Load workspace"
+         "l" #'+workspace/load
          :desc "Delete workspace"
          "d" #'+workspace/delete
-         :desc "Rename workspace"
-         "r" #'+workspace/rename
          :desc "Switch workspace"
          "w" #'+workspace/switch-to
-         :desc "Swap left"
-         "<left>" #'+workspace/swap-left
-         :desc "Swap right"
-         "<right>" #'+workspace/swap-right
          :desc "Display workspaces"
-         "d" #'+workspace/display))
+         "a" #'+workspace/display
+         :desc "Switch to last workspace"
+         "o" #'+workspace/other
+
+         ;; session
+         :desc "Load last session"
+         "L" #'doom/quickload-session
+         :desc "Save session"
+         "S" #'doom/save-session))
 
 
       ;;; C-c s --- search
