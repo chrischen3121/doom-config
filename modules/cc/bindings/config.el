@@ -178,7 +178,10 @@
           :desc "Jupyter login" "l" #'ein:login
           :desc "Jupyter stop" "s" #'ein:stop))
        (:when (modulep! :tools docker)
-         :desc "Docker" "d" #'docker))
+         :desc "Docker" "d" #'docker)
+       (:when (modulep! :ui treemacs)
+         :desc "Treemacs" "t" #'treemacs)
+       )
 
 
       ;;; C-c w --- workspace
@@ -215,6 +218,7 @@
        (cond ((modulep! :completion vertico)   #'consult-line)
              ((modulep! :completion ivy)       #'swiper)
              ((modulep! :completion helm)      #'swiper))
+       :desc "List colors" "C" #'list-colors-display
        (:when (modulep! :tools lookup)
          :desc "Word dictionary" "w" #'+lookup/dictionary-definition
          :desc "Thesaurus/θɪˈsɔːrəs/" "t" #'+lookup/synonyms

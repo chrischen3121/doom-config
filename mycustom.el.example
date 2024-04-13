@@ -11,7 +11,7 @@
   (cc/set-doom-ui-appearance))
 
 (when (modulep! :cc better-defaults)
-  (setq! cc/personal-aspell-dict-dir "~/Dropbox/AppExports/spell-fu/"))
+  (setq! cc/personal-aspell-dict-dir "~/dicts/spell-fu/"))
 
 (setq! cc/org-home-dir "~/org/"
        cc/org-pdf-notes-dir "~/org/pdf-notes/"

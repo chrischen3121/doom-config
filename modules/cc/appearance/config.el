@@ -41,13 +41,6 @@
 
 (map! "<f12>" #'cc/switch-light-dark-theme)
 
-;; Change ace-window leading char face
-(after! ace-window
-  (custom-set-faces!
-    '(aw-leading-char-face
-      :foreground "#51afef"
-      :weight bold
-      :height 5.0)))
 
 (when (modulep! :ui doom-dashboard)
   (setq! +doom-dashboard-name "Happy Hacking!"))

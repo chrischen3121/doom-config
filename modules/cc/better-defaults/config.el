@@ -75,8 +75,6 @@
      (alist-get 'prog-mode +spell-excluded-faces-alist)
      '(font-lock-constant-face
        font-lock-string-face)) ; TODO: wait for official fix, should disable spell-fu in string
-    (custom-set-faces!
-      '(spell-fu-incorrect-face :underline (:color "cyan" :style wave)))
     (map!
      :map general-override-mode-map
      :prefix ("C-c 1 s" . "<spell-check>")
@@ -171,7 +169,6 @@
       (add-hook! 'writeroom-mode-disable-hook
         (centaur-tabs-local-mode -1)
         (display-line-numbers-mode +1)))))
-
 
 ;; [Packages]
 ;; Whole line or region
