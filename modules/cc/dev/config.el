@@ -32,8 +32,8 @@
 (when (modulep! :editor format)
   (map! :map prog-mode-map
         :prefix "C-c c"
-        :desc "Format buffer" "f" #'+format/region-or-buffer
-        :desc "Format with apheleia" "F" #'apheleia-format-buffer))
+        :desc "Format buffer" "f" #'+format/region-or-buffer))
+
 
 ;; :editor
 ;; fold
@@ -86,11 +86,53 @@
       (hl-line-mode (if rainbow-mode -1 +1)))))
 
 ;; :tools
+;; lsp +peek
+(when (modulep! :tools lsp +peek)
+
+  ;; TODO: lsp default keymap is disorganized, try some and remove this keymap
+  (setq! lsp-keymap-prefix (kbd "C-c c l"))
+  (which-key-add-key-based-replacements
+    "C-c c l" "<lsp>"
+    "C-c c l =" "<format>"
+    "C-c c l a" "<action>"
+    "C-c c l F" "<workspace>"
+    "C-c c l g" "<lsp-find>"
+    "C-c c l G" "<lsp-ui-peek>"
+    "C-c c l h" "<doc>"
+    "C-c c l r" "<rename/org-imports>"
+    "C-c c l T" "<toggle>"
+    "C-c c l w" "<workspace>")
+
+  (after! lsp-ui
+    (setq! lsp-ui-sideline-show-diagnostics t
+           lsp-ui-sideline-show-code-actions t
+           lsp-ui-sideline-show-symbol t
+           lsp-ui-sideline-delay 0.5
+           lsp-ui-imenu-buffer-position 'left
+           lsp-ui-imenu-auto-refresh t
+           lsp-ui-imenu-refresh-delay 2)
+    (map!
+     :map lsp-ui-mode-map
+     [remap xref-find-definitions] #'lsp-ui-peek-find-definitions
+     [remap xref-find-references]  #'lsp-ui-peek-find-references
+     :desc "Open lsp-ui imenu" "<f2>" #'lsp-ui-imenu
+     :desc "Open lsp-ui imenu" "C-c t I" #'lsp-ui-imenu
+     :map lsp-ui-imenu-mode-map
+     :desc "Close lsp-ui imenu" "<f2>" #'lsp-ui-imenu--kill
+     :desc "Close lsp-ui imenu" "C-c t I" #'lsp-ui-imenu--kill)))
+
+;; :tools
 ;; upload
 ;; TODO: add descriptions for ssh-deploy keybindings
 (when (modulep! :tools upload)
   (map! :after ssh-deploy
         :desc "<ssh-upload>" "C-c r u" #'ssh-deploy-prefix-map))
+
+;; :ui
+;; indent-guide
+(when (modulep! :ui indent-guides)
+  (remove-hook! '(prog-mode-hook text-mode-hook conf-mode-hook)
+    #'highlight-indent-guides-mode))
 
 ;; :tools
 ;; eval

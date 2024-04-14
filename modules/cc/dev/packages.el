@@ -2,7 +2,8 @@
 ;;; cc/better-defaults/packages.el
 
 (disable-packages! company-dict
-                   evil-vimish-fold)
+                   evil-vimish-fold
+                   eglot)
 
 (when (modulep! :tools rgb)
   (disable-packages! kurecolor))

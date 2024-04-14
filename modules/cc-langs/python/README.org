@@ -1,0 +1,11 @@
+#+title: :cc-langs python
+
+* Debuggers
+- ~pip3 install debugpy~ (recommended)
+- or ~pip3 install ptvsd~
+
+#+begin_src emacs-lisp
+;; in $DOOMDIR/config.el
+(after! dap-mode
+  (setq dap-python-debugger 'debugpy))
+#+end_src

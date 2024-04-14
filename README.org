@@ -10,36 +10,37 @@ Most important leader keys:
 - ~C-c l~: local prefix key
 - ~C-c c~: ~+code~
 
-*** Leader Direct
-- ~1~: check
-- ~2~: fold
-- ~3~: workspace
-- ~4~: tab
-- ~&~: yasnippet
+*** Common Keys
+- ~C-c 1~: check
+- ~C-c 2~: fold
+- ~C-c 3~: workspace
+- ~C-c 4~: tab
+- ~C-c y~: yasnippet
 
 *** F<key>
-- ~F8~, ~C-c t i~: *lsp-imenu/imenu*
-- ~F9~, ~C-c o p~: *treemacs*
+- ~F1~, ~C-c o t~: *treemacs*
+- ~F2~, ~C-c t i~: *lsp-imenu/imenu*
 - ~F10~: menu popup
 - ~F11~: fullscreen
 - ~F12~: switch light/dark theme
 
 *** Useful Keybindings
-| keybinding  | Command                   |
-|-------------+---------------------------|
-| ~C-c o c~   | Open calendar             |
-| ~C-c o t/T~ | Open vterm                |
-| ~C-c o p~   | Open treemacs             |
-| ~C-c n d~   | Open deft                 |
-| ~C-c 1 g~   | Grammar commands          |
-| ~C-c 1 s~   | Spell commands            |
-| ~C-c 3~     | Workspace commands        |
-| ~C-x t~     | Tab commands              |
-| ~C-c j~     | Ace jump                  |
-| ~C-c t~     | Active minor mode         |
-| ~C-c t z~   | Zen mode                  |
-| ~C-c t m~   | Minimap mode              |
-| ~C-c m e~   | eval commands             |
+| keybinding         | Command          |
+|--------------------+------------------|
+| ~C-c o c~          | Open calendar    |
+| ~C-c o t/T~        | Open vterm       |
+| ~C-c o t~          | Open treemacs    |
+| ~C-c n d~          | Open deft        |
+| ~C-c 1~            | <checkers>       |
+| ~C-c 1 g~          | Grammar commands |
+| ~C-c 1 s~          | Spell commands   |
+| ~C-c 2~            | <fold>           |
+| ~C-c 3~            | <workspace>      |
+| ~C-c 4~            | <tab>            |
+| ~C-.~              | Ace jump         |
+| ~M-.~ or ~C-c s w~ | Dictionary       |
+| ~C-c t z~          | Zen mode         |
+| ~C-c l r~          | <run/eval>       |
 
 ** Packages to Try
 - code action ~C-c a~
@@ -67,23 +68,6 @@ Most important leader keys:
 | e / i      | insert a page note  |
 | M-e / M-i  | insert precise note |
 | <tab>      | insert selection    |
-
-* Languages
-** Debuggers
-- dap-cpptools :: ~M-x dap-cpptools-setup~
-- dap-gdb-lldb :: ~M-x dap-gdb-lldb-setup~
-- dap-lldb
-
-*** Python
-
-- ~pip3 install debugpy~ (recommended)
-- or ~pip3 install ptvsd~
-
-#+begin_src emacs-lisp
-;; in $DOOMDIR/config.el
-(after! dap-mode
-  (setq dap-python-debugger 'debugpy))
-#+end_src
 
 * Hints
 - ~M-RET~ for vertico: submit directly without selection

@@ -15,6 +15,9 @@
   (setq! recentf-max-saved-items 21)
   (add-to-list 'recentf-exclude "autosave"))
 
+;; Frame related
+
+
 ;; make file executable if it has shebang
 (add-hook! 'after-save-hook
            #'executable-make-buffer-file-executable-if-script-p)
@@ -22,6 +25,7 @@
 
 ;; projectile keybindings
 (after! projectile
+  ;; TODO: need to combine the useful keybindings to "C-c p"
   (define-key projectile-mode-map (kbd "C-c l p") 'projectile-command-map)
   (after! which-key
     (which-key-add-key-based-replacements

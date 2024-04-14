@@ -1,0 +1,12 @@
+#+title: :cc-langs cpp
+
+* Project Compile Settings
+** ~cmake~
+- Generate =compile_commands.json=
+  - ~cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON .~
+- ~M-x +cc/reload-compile-db~
+
+* Debuggers
+- dap-cpptools :: ~M-x dap-cpptools-setup~
+- dap-gdb-lldb :: ~M-x dap-gdb-lldb-setup~
+- dap-lldb

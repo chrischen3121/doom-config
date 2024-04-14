@@ -3,8 +3,8 @@
 
 ;; persp-mode and projectile in different prefixes
 (when (modulep! :ui workspaces)
-  (setq! persp-keymap-prefix (kbd "C-c w p"))
-  (which-key-add-key-based-replacements "C-c w p" "persp-mode"))
+  (setq! persp-keymap-prefix (kbd "C-c 3 p"))
+  (which-key-add-key-based-replacements "C-c 3 p" "persp-mode"))
 
 ;; Unset global keybindings
 (undefine-key! global-map
@@ -45,24 +45,24 @@
     "C-h 4" "info"))
 
 ;; Global keybindings
-(map!
- ;;; buffer management
- :desc "ibuffer" "C-x C-b" #'ibuffer
- :desc "Switch to buffer" "C-x b" #'switch-to-buffer
- :desc "Switch to buffer other window" "C-x 4 b" #'switch-to-buffer-other-window
- )
+(map! :after which-key
+      :desc "ibuffer" "C-x C-b" #'ibuffer
+      :desc "Switch to buffer" "C-x b" #'switch-to-buffer
+      :desc "Switch to buffer other window" "C-x 4 b" #'switch-to-buffer-other-window
+      (:when (modulep! :ui treemacs)
+        "<f1>" #'treemacs))
 
 ;; "C-c" keybindings
 (map! :after which-key
       :prefix "C-c"
 
-      ;;; C-c u --- undo
+      ;; C-c u --- undo
       (:prefix-map ("u" . "<undo>")
        :desc "Undo" "u" #'undo-fu-only-undo
        :desc "Undo tree redo" "r" #'undo-fu-only-redo
        :desc "Undo tree redo all" "R" #'undo-fu-redo-all)
 
-      ;;; DONE C-c t --- toggle
+      ;; DONE C-c t --- toggle
       (:prefix-map ("t" . "<toggle>")
        :desc "Big font mode" "b" #'doom-big-font-mode
        :desc "Fullscreen" "F" #'toggle-frame-fullscreen
@@ -78,55 +78,45 @@
          :desc "Org presentation" "p" #'org-tree-slide-mode)
        (:when (modulep! :ui zen)
          :desc "Zen mode" "z" #'+zen/toggle
-         :desc "Zen mode (fullscreen)" "Z" #'+zen/toggle-fullscreen))
+         :desc "Zen mode (fullscreen)" "Z" #'+zen/toggle-fullscreen)
+       (:when (modulep! :ui indent-guides)
+         :desc "Indent guides" "i" #'highlight-indent-guides-mode))
 
 
-      ;;; C-c y --- snippets
+      ;; C-c y --- snippets
       (:prefix-map ("y" . "<snippets>")
        :desc "New snippet" "n" #'+snippets/new
        :desc "Edit snippet" "e" #'+snippets/edit
        :desc "Find snippet" "f" #'+snippets/find
        :desc "Browse snippets" "b" #'+default/browse-templates)
 
-      ;;; C-c c --- code
+      ;; C-c c --- code
       (:prefix-map ("c" . "<code>")
-       :desc "Compile" "c" #'compile
+       :desc "Compile" "c" #'+default/compile
        :desc "Format buffer/region" "f" #'+format/region-or-buffer
        :desc "List errors" "e" #'+default/diagnostics
        (:when (modulep! :tools make)
          :desc "Make run target" "m" #'+make/run
          :desc "Make run last" "M" #'+make/run-last)
 
-       ;; TODO: lsp bindings
-       ;; (:when (and (modulep! :tools lsp) (not (modulep! :tools lsp +eglot)))
-       ;;   :desc "LSP Code actions" "a" #'lsp-execute-code-action
-       ;;   :desc "LSP Organize imports" "o" #'lsp-organize-imports
-       ;;   :desc "LSP Rename" "r" #'lsp-rename)
-       ;;   (:when (modulep! :completion ivy)
-       ;;     :desc "Jump to symbol in current workspace" "j"   #'lsp-ivy-workspace-symbol
-       ;;     :desc "Jump to symbol in any workspace"     "J"   #'lsp-ivy-global-workspace-symbol)
-       ;;   (:when (modulep! :completion helm)
-       ;;     :desc "Jump to symbol in current workspace" "j"   #'helm-lsp-workspace-symbol
-       ;;     :desc "Jump to symbol in any workspace"     "J"   #'helm-lsp-global-workspace-symbol)
-       ;;   (:when (modulep! :completion vertico)
-       ;;     :desc "Jump to symbol in current workspace" "j"   #'consult-lsp-symbols
-       ;;     :desc "Jump to symbol in any workspace"     "J"   (cmd!! #'consult-lsp-symbols 'all-workspaces))
-       ;;   (:when (modulep! :ui treemacs +lsp)
-       ;;     :desc "Errors list"                         "X"   #'lsp-treemacs-errors-list
-       ;;     :desc "Incoming call hierarchy"             "y"   #'lsp-treemacs-call-hierarchy
-       ;;     :desc "Outgoing call hierarchy"             "Y"   (cmd!! #'lsp-treemacs-call-hierarchy t)
-       ;;     :desc "References tree"                     "R"   (cmd!! #'lsp-treemacs-references t)
-       ;;     :desc "Symbols"                             "S"   #'lsp-treemacs-symbols))
-       ;; (:when (modulep! :tools lsp +eglot)
-       ;;   :desc "LSP Execute code action"              "a" #'eglot-code-actions
-       ;;   :desc "LSP Rename"                           "r" #'eglot-rename
-       ;;   :desc "LSP Find declaration"                 "j" #'eglot-find-declaration
-       ;;   (:when (modulep! :completion vertico)
-       ;;     :desc "Jump to symbol in current workspace" "j" #'consult-eglot-symbols))
-       )
+       (:when (and (modulep! :tools lsp) (not (modulep! :tools lsp +eglot)))
+         :desc "LSP Code actions" "a" #'lsp-execute-code-action
+         :desc "LSP Organize imports" "o" #'lsp-organize-imports
+         :desc "LSP Rename" "r" #'lsp-rename)
+       (:when (modulep! :completion vertico)
+         :desc "Jump to symbol" "j"   #'consult-lsp-symbols)
+       (:when (modulep! :ui treemacs +lsp)
+         :prefix-map ("t" . "<lsp-treemacs>")
+         :desc "Errors list" "e" #'lsp-treemacs-errors-list
+         :desc "Incoming call hierarchy" "i" #'lsp-treemacs-call-hierarchy
+         :desc "Outgoing call hierarchy" "o" (cmd!! #'lsp-treemacs-call-hierarchy t)
+         :desc "References tree" "r" (cmd!! #'lsp-treemacs-references t)
+         :desc "Symbols" "s" #'lsp-treemacs-symbols))
 
 
-      ;;; C-c k --- lookup
+
+
+      ;; C-c k --- lookup
       (:prefix-map ("k" . "<lookup>")
        :desc "Jump to definition" "l" #'+lookup/definition
        :desc "Jump to references" "r" #'+lookup/references
@@ -139,7 +129,7 @@
          :desc "Search in all docsets" "S" #'+lookup/in-all-docsets
          :desc "Install offline docsets""D" #'dash-docs-install-docset))
 
-      ;;; DONE C-c f --- file
+      ;; DONE C-c f --- file
       (:prefix-map ("f" . "<file>")
        :desc "Recent files" "r"
        (cond ((modulep! :completion vertico) #'consult-recent-file)
@@ -159,12 +149,12 @@
        :desc "Sudo find file" "S" #'doom/sudo-find-file
        :desc "Copy file path" "y" #'+default/yank-buffer-path)
 
-      ;;; C-c p --- project
+      ;; C-c p --- project
       (:prefix-map ("p" . "<project>")
        :desc "Open current editorconfig" "e" #'editorconfig-find-current-editorconfig)
 
 
-      ;;; C-c o --- open
+      ;; C-c o --- open
       (:prefix-map
        ("o" . "<open>")
        (:when (modulep! :app calendar)
@@ -184,9 +174,9 @@
        )
 
 
-      ;;; C-c w --- workspace
+      ;; C-c 3 --- workspace
       (:prefix-map
-       ("w" . "<workspace>")
+       ("3" . "<workspace>")
        (:when (modulep! :ui workspaces)
          ;; workspace
          :desc "New workspace"
@@ -211,7 +201,7 @@
          "S" #'doom/save-session))
 
 
-      ;;; C-c s --- search
+      ;; C-c s --- search
       (:prefix-map ("s" . "<search>")
        :desc "Search line" "l"
        (cond ((modulep! :completion vertico)   #'consult-line)
@@ -224,7 +214,7 @@
          :desc "Find file" "f" #'+lookup/file))
 
 
-      ;;; C-c i --- insert
+      ;; C-c i --- insert
       (:prefix-map ("i". "<insert>")
        :desc "Unicode" "u" #'insert-char
        :desc "Current file name" "f" #'+default/insert-file-path
@@ -233,11 +223,11 @@
          :desc "Emoji" "e" #'emojify-insert-emoji))
 
 
-      ;;; C-c n --- note
+      ;; C-c n --- note
       (:prefix-map ("n" . "<note>")
        :desc "Browse notes" "n" #'+default/browse-notes)
 
-      ;;; C-c r --- remote
+      ;; C-c r --- remote
       (:prefix-map ("r" . "<remote>"))
       )
 
