@@ -116,6 +116,33 @@
      :desc "Close lsp-ui imenu" "C-c t I" #'lsp-ui-imenu--kill)))
 
 ;; :tools
+;; debugger
+(when (modulep! :tools debugger)
+  (map!
+   :map dap-mode-map
+   (:prefix ("C-c g" . "<debugger>")
+    :desc "start" "d" #'+debugger/start
+    :desc "continue" "c" #'dap-continue
+    :desc "next" "n" #'dap-next
+    :desc "step-in" "i" #'dap-step-in
+    :desc "step-out" "o" #'dap-step-out
+    :desc "restart" "r" #'dap-debug-restart
+    :desc "quit" "q" #'+debugger/quit)
+   (:prefix ("C-c g b" . "breakpoints")
+    :desc "Toggle bp" "b" #'dap-breakpoint-toggle
+    :desc "Add bp" "a" #'dap-breakpoint-add
+    :desc "Delete bp" "d" #'dap-breakpoint-delete
+    :desc "Delete all bp" "D" #'dap-breakpoint-delete-all
+    :desc "Add condition" "c" #'dap-breakpoint-condition
+    :desc "Hit condition" "h" #'dap-breakpoint-hit-condition
+    :desc "Log message" "l" #'dap-breakpoint-log-message)
+   (:prefix "C-c l r"
+    :desc "Dap eval" "e" #'dap-eval
+    :desc "Dap eval region" "r" #'dap-eval-region
+    :desc "Dap eval at point" "t" #'dap-eval-thing-at-point)))
+
+
+;; :tools
 ;; upload
 ;; TODO: add descriptions for ssh-deploy keybindings
 (when (modulep! :tools upload)
