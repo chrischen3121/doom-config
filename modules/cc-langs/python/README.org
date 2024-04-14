@@ -1,5 +1,12 @@
 #+title: :cc-langs python
 
+* ~pyenv~
+Use ~pyenv~ to manage python versions.
+- For project, specify python version in ~.python-version~ file in project root.
+
+* ~poetry~
+Use ~poetry~ to manage dependencies.
+
 * Debuggers
 - ~pip3 install debugpy~ (recommended)
 - or ~pip3 install ptvsd~
