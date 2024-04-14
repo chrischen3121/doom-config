@@ -103,6 +103,8 @@
          :desc "LSP Code actions" "a" #'lsp-execute-code-action
          :desc "LSP Organize imports" "o" #'lsp-organize-imports
          :desc "LSP Rename" "r" #'lsp-rename)
+       (:when (modulep! :tools lsp +peek)
+         :desc "LSP Doc glance" "g" #'lsp-ui-doc-glance)
        (:when (modulep! :completion vertico)
          :desc "Jump to symbol" "j"   #'consult-lsp-symbols)
        (:when (modulep! :ui treemacs +lsp)
@@ -112,7 +114,6 @@
          :desc "Outgoing call hierarchy" "o" (cmd!! #'lsp-treemacs-call-hierarchy t)
          :desc "References tree" "r" (cmd!! #'lsp-treemacs-references t)
          :desc "Symbols" "s" #'lsp-treemacs-symbols))
-
 
 
 
@@ -127,7 +128,9 @@
        (:when (modulep! :tools lookup +docsets)
          :desc "Search in docsets" "s" #'+lookup/in-docsets
          :desc "Search in all docsets" "S" #'+lookup/in-all-docsets
-         :desc "Install offline docsets""D" #'dash-docs-install-docset))
+         :desc "Install offline docsets""D" #'dash-docs-install-docset)
+       (:when (modulep! :tools lsp +peek)
+         :desc "LSP Doc glance" "g" #'lsp-ui-doc-glance))
 
       ;; DONE C-c f --- file
       (:prefix-map ("f" . "<file>")

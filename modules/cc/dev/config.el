@@ -28,14 +28,6 @@
     (setq-hook! 'company-box-mode-hook company-box-doc-delay 2)))
 
 ;; :editor
-;; format
-(when (modulep! :editor format)
-  (map! :map prog-mode-map
-        :prefix "C-c c"
-        :desc "Format buffer" "f" #'+format/region-or-buffer))
-
-
-;; :editor
 ;; fold
 (when (modulep! :editor fold)
   (after! outline
@@ -45,6 +37,7 @@
       outline-minor-mode-map "C-c 2 l" "outline")
     (undefine-key! outline-minor-mode-map "C-c @"))
 
+;;;###package vimish-fold
   (map! :map prog-mode-map
         :prefix ("C-c 2" . "fold")
         :desc "Fold/Unfold" "2" #'+fold/toggle
@@ -56,7 +49,8 @@
 ;; :editor
 ;; yasnippet
 (when (modulep! :editor snippets)
-  (map! :map yas-minor-mode-map
+  (map! :after yasnippet
+        :map yas-minor-mode-map
         "C-c &" nil
         (:prefix "C-c i"
          :desc "Snippet" "s" #'yas-insert-snippet)
@@ -88,8 +82,8 @@
 ;; :tools
 ;; lsp +peek
 (when (modulep! :tools lsp +peek)
-
   ;; TODO: lsp default keymap is disorganized, try some and remove this keymap
+;;;###package lsp-mode
   (setq! lsp-keymap-prefix (kbd "C-c c l"))
   (which-key-add-key-based-replacements
     "C-c c l" "<lsp>"
@@ -131,6 +125,7 @@
 ;; :ui
 ;; indent-guide
 (when (modulep! :ui indent-guides)
+;;;###package highlight-indent-guides
   (remove-hook! '(prog-mode-hook text-mode-hook conf-mode-hook)
     #'highlight-indent-guides-mode))
 

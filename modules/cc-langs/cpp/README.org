@@ -5,6 +5,7 @@
 - Generate =compile_commands.json=
   - ~cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON .~
 - ~M-x +cc/reload-compile-db~
+  - both LSP servers and irony will recognize =compile_commands.json=
 
 * Debuggers
 - dap-cpptools :: ~M-x dap-cpptools-setup~

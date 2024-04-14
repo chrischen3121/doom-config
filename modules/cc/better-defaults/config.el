@@ -103,6 +103,7 @@
 ;; :completion
 ;; vertico
 (when (modulep! :completion vertico)
+;;;###package vertico
   (map! :map vertico-map
         "C-l" #'vertico-directory-delete-word))
 
@@ -111,7 +112,8 @@
 ;; word-wrap
 (when (modulep! :editor word-wrap)
   (+global-word-wrap-mode +1)
-  (add-to-list '+word-wrap-disabled-modes 'vterm-mode))
+  (after! word-wrap
+    (add-to-list '+word-wrap-disabled-modes 'vterm-mode)))
 
 
 ;; :emacs
