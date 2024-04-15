@@ -50,7 +50,8 @@
       :desc "Switch to buffer" "C-x b" #'switch-to-buffer
       :desc "Switch to buffer other window" "C-x 4 b" #'switch-to-buffer-other-window
       (:when (modulep! :ui treemacs)
-        "<f1>" #'treemacs))
+        "<f1>" #'+treemacs/toggle
+        "C-x C-o" #'treemacs-select-window))
 
 ;; "C-c" keybindings
 (map! :after which-key
@@ -106,16 +107,7 @@
        (:when (modulep! :tools lsp +peek)
          :desc "LSP Doc glance" "g" #'lsp-ui-doc-glance)
        (:when (modulep! :completion vertico)
-         :desc "Jump to symbol" "j"   #'consult-lsp-symbols)
-       (:when (modulep! :ui treemacs +lsp)
-         :prefix-map ("t" . "<lsp-treemacs>")
-         :desc "Errors list" "e" #'lsp-treemacs-errors-list
-         :desc "Incoming call hierarchy" "i" #'lsp-treemacs-call-hierarchy
-         :desc "Outgoing call hierarchy" "o" (cmd!! #'lsp-treemacs-call-hierarchy t)
-         :desc "References tree" "r" (cmd!! #'lsp-treemacs-references t)
-         :desc "Symbols" "s" #'lsp-treemacs-symbols))
-
-
+         :desc "Jump to symbol" "j"   #'consult-lsp-symbols))
 
       ;; C-c k --- lookup
       (:prefix-map ("k" . "<lookup>")
@@ -166,15 +158,24 @@
          :desc "vterm" "t" #'+vterm/toggle
          :desc "vterm here" "T" #'+vterm/here)
        (:when (modulep! :tools ein)
-         (:prefix-map ("j" . "Jupyter")
+         (:prefix-map ("j" . "<jupyter>")
           :desc "Jupyter run" "r" #'ein:run
           :desc "Jupyter login" "l" #'ein:login
           :desc "Jupyter stop" "s" #'ein:stop))
        (:when (modulep! :tools docker)
          :desc "Docker" "d" #'docker)
-       (:when (modulep! :ui treemacs)
-         :desc "Treemacs" "t" #'treemacs)
-       )
+
+       ;; C-c C-t --- treemacs
+       (:when (modulep! :ui treemacs +lsp)
+         :prefix-map ("C-t" . "<treemacs>")
+         :desc "Project manager" "p" #'+treemacs/toggle
+         :desc "Errors list" "e" #'lsp-treemacs-errors-list
+         :desc "Incoming call hierarchy" "i" #'lsp-treemacs-call-hierarchy
+         :desc "Outgoing call hierarchy" "o" (cmd!! #'lsp-treemacs-call-hierarchy t)
+         :desc "Type hierarchy" "t" #'lsp-treemacs-type-hierarchy
+         :desc "Implementation" "I" #'lsp-treemacs-implementations
+         :desc "References tree" "r" (cmd!! #'lsp-treemacs-references t)
+         :desc "Symbols" "s" #'lsp-treemacs-symbols))
 
 
       ;; C-c 3 --- workspace

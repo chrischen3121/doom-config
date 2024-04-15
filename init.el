@@ -167,4 +167,6 @@
        dev
 
        :cc-langs
-       elisp)
+       elisp
+       cpp
+       )

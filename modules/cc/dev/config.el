@@ -83,20 +83,9 @@
 ;; lsp +peek
 (when (modulep! :tools lsp +peek)
   ;; TODO: lsp default keymap is disorganized, try some and remove this keymap
-;;;###package lsp-mode
   (setq! lsp-keymap-prefix (kbd "C-c c l"))
-  (which-key-add-key-based-replacements
-    "C-c c l" "<lsp>"
-    "C-c c l =" "<format>"
-    "C-c c l a" "<action>"
-    "C-c c l F" "<workspace>"
-    "C-c c l g" "<lsp-find>"
-    "C-c c l G" "<lsp-ui-peek>"
-    "C-c c l h" "<doc>"
-    "C-c c l r" "<rename/org-imports>"
-    "C-c c l T" "<toggle>"
-    "C-c c l w" "<workspace>")
-
+  (after! lsp-mode
+    (add-hook! 'lsp-mode-hook #'lsp-enable-which-key-integration))
   (after! lsp-ui
     (setq! lsp-ui-sideline-show-diagnostics t
            lsp-ui-sideline-show-code-actions t
@@ -109,11 +98,9 @@
      :map lsp-ui-mode-map
      [remap xref-find-definitions] #'lsp-ui-peek-find-definitions
      [remap xref-find-references]  #'lsp-ui-peek-find-references
-     :desc "Open lsp-ui imenu" "<f2>" #'lsp-ui-imenu
-     :desc "Open lsp-ui imenu" "C-c t I" #'lsp-ui-imenu
-     :map lsp-ui-imenu-mode-map
-     :desc "Close lsp-ui imenu" "<f2>" #'lsp-ui-imenu--kill
-     :desc "Close lsp-ui imenu" "C-c t I" #'lsp-ui-imenu--kill)))
+     ;; :desc "Open lsp-ui imenu" "<f2>" #'lsp-ui-imenu
+     ;; :desc "Close lsp-ui imenu" "<f2>" #'lsp-ui-imenu--kill
+     )))
 
 ;; :tools
 ;; debugger
@@ -184,7 +171,7 @@
 (use-package! copilot
   :hook ((prog-mode git-commit-setup conf-mode yaml-mode) . copilot-mode)
   :config
-  (setq! copilot--indent-warning-printed-p t)
+  (setq! copilot-indent-offset-warning-disable t)
   (map! :map copilot-completion-map
         "<backtab>" #'copilot-accept-completion
         "M-w" #'copilot-accept-completion-by-word
