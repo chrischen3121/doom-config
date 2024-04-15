@@ -51,7 +51,9 @@
       :desc "Switch to buffer other window" "C-x 4 b" #'switch-to-buffer-other-window
       (:when (modulep! :ui treemacs)
         "<f1>" #'+treemacs/toggle
-        "C-x C-o" #'treemacs-select-window))
+        "C-x C-o" #'treemacs-select-window
+        :prefix ("C-c C-w" . "tree-workspace")
+        :prefix ("C-c C-p" . "tree-project")))
 
 ;; "C-c" keybindings
 (map! :after which-key
@@ -163,19 +165,19 @@
           :desc "Jupyter login" "l" #'ein:login
           :desc "Jupyter stop" "s" #'ein:stop))
        (:when (modulep! :tools docker)
-         :desc "Docker" "d" #'docker)
+         :desc "Docker" "d" #'docker))
 
-       ;; C-c C-t --- treemacs
-       (:when (modulep! :ui treemacs +lsp)
-         :prefix-map ("C-t" . "<treemacs>")
-         :desc "Project manager" "p" #'+treemacs/toggle
-         :desc "Errors list" "e" #'lsp-treemacs-errors-list
-         :desc "Incoming call hierarchy" "i" #'lsp-treemacs-call-hierarchy
-         :desc "Outgoing call hierarchy" "o" (cmd!! #'lsp-treemacs-call-hierarchy t)
-         :desc "Type hierarchy" "t" #'lsp-treemacs-type-hierarchy
-         :desc "Implementation" "I" #'lsp-treemacs-implementations
-         :desc "References tree" "r" (cmd!! #'lsp-treemacs-references t)
-         :desc "Symbols" "s" #'lsp-treemacs-symbols))
+      ;; C-c C-t --- treemacs
+      (:when (modulep! :ui treemacs +lsp)
+        :prefix-map ("C-t" . "<treemacs>")
+        :desc "Project manager" "p" #'+treemacs/toggle
+        :desc "Errors list" "e" #'lsp-treemacs-errors-list
+        :desc "Incoming call hierarchy" "i" #'lsp-treemacs-call-hierarchy
+        :desc "Outgoing call hierarchy" "o" (cmd!! #'lsp-treemacs-call-hierarchy t)
+        :desc "Type hierarchy" "t" #'lsp-treemacs-type-hierarchy
+        :desc "Implementation" "I" #'lsp-treemacs-implementations
+        :desc "References tree" "r" (cmd!! #'lsp-treemacs-references t)
+        :desc "Symbols" "s" #'lsp-treemacs-symbols)
 
 
       ;; C-c 3 --- workspace

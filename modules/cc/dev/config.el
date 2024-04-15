@@ -102,6 +102,10 @@
      ;; :desc "Close lsp-ui imenu" "<f2>" #'lsp-ui-imenu--kill
      )))
 
+(when (modulep! :ui treemacs +lsp)
+  (after! treemacs
+    (setq! lsp-treemacs-sync-mode 1)))
+
 ;; :tools
 ;; debugger
 (when (modulep! :tools debugger)
