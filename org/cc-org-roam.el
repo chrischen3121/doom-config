@@ -19,7 +19,7 @@
            ))
   (org-roam-db-autosync-mode)
   (map! :map org-mode-map
-        :prefix ("C-c ; r" . "Roam")
+        :prefix ("C-c l r" . "Roam")
         :desc "Add alias"
         "a" #'org-roam-alias-add
         :desc "Open org-roam buffer"

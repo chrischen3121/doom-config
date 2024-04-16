@@ -154,6 +154,7 @@
       ;; C-c o --- open
       (:prefix-map
        ("o" . "<open>")
+       :desc "Agenda" "a" #'org-agenda
        (:when (modulep! :app calendar)
          :desc "Calendar" "c" #'calendar)
        (:when (modulep! :term vterm)
@@ -222,8 +223,25 @@
 
 
       ;; C-c n --- note
-      (:prefix-map ("n" . "<note>")
-       :desc "Browse notes" "n" #'+default/browse-notes)
+      (:prefix-map
+       ("n" . "<note>")
+       (:when (modulep! :lang org +roam2)
+         :desc "Find node" "f" #'org-roam-node-find
+         :desc "Find ref" "r" #'org-roam-ref-find
+         :desc "Show graph" "g" #'org-roam-graph
+         :desc "Insert node" "i" #'org-roam-node-insert
+         :desc "Capture" "c" #'org-roam-capture
+         :desc "Show backlinks" "b" #'org-roam-buffer-toggle
+         :desc "Show backlinks(dedicated)" "B" #'org-roam-buffer-display-dedicated
+         :desc "Sync db" "s" #'org-roam-db-sync
+         (:prefix-map ("d" . "by date")
+          :desc "Goto date" "d" #'org-roam-dailies-goto-date
+          :desc "Capture date" "c" #'org-roam-dailies-capture-date
+          :desc "Goto tomorrow" "m" #'org-roam-dailies-goto-tomorrow
+          :desc "Goto today" "t" #'org-roam-dailies-goto-today
+          :desc "Goto yesterday" "y" #'org-roam-dailies-goto-yesterday
+          :desc "Find dir" "f" #'org-roam-dailies-find-directory)
+         ))
 
       ;; C-c r --- remote
       (:prefix-map ("r" . "<remote>"))
