@@ -1,8 +1,7 @@
 ;; -*- no-byte-compile: t; -*-
 ;;; cc/notes/config.el -*- lexical-binding: t; -*-
 ;; TODO: org-format-latex-options
-;; TODO: may try +dragndrop +gnuplot +jupyter +pandoc
-;;       +pretty(latex highlighting)
+;; TODO: may try +jupyter +pandoc +pretty(latex highlighting)
 ;;
 ;;; Hints:
 ;;
@@ -43,11 +42,11 @@
 
       ;; C-c i --- insert
       (:prefix "C-c i"
-       :desc "Org insert date" "C-c i d" #'org-timestamp-inactive
-       :desc "Org insert time" "C-c i t" #'org-timestamp
-       :desc "Set a tag" "C-c i T" #'org-set-tags-command
-       :desc "Set a tag" "C-c i p" #'org-set-property
-       :desc "Insert link" "C-c i l" #'org-insert-link)
+       :desc "Org insert date" "d" #'org-timestamp-inactive
+       :desc "Org insert time" "t" #'org-timestamp
+       :desc "Set a tag" "T" #'org-set-tags-command
+       :desc "Set a tag" "p" #'org-set-property
+       :desc "Insert link" "l" #'org-insert-link)
 
 
       ;; local prefix l
@@ -112,7 +111,6 @@
            :desc "Insert note" "e" #'org-noter-insert-note
            :desc "Insert precise note" "M-e" #'org-noter-insert-precise-note))))
 
-
 ;; :ui
 ;; deft
 (when (modulep! :ui deft)
@@ -142,3 +140,20 @@
         :desc "Insert card" "i" #'anki-editor-insert-note
         :desc "Update card" "u" #'anki-editor-update-note
         :desc "Clear cloze" "0" #'anki-editor-clear-cloze))
+
+(use-package! org-download
+  :commands (org-download-screenshot
+             org-download-clipboard
+             org-download-delete
+             org-download-rename-at-point)
+  :init
+  (map! :map org-mode-map
+        :prefix ("C-c l d" . "<org-download>")
+        :desc "Insert screenshot" "i" #'org-download-screenshot
+        :desc "Insert from clipboard" "y" #'org-download-clipboard
+        :desc "Rename at point" "r" #'org-download-rename-at-point
+        :desc "Delete at point" "d" #'org-download-delete)
+  :config
+  (setq! org-download-image-dir "images/"
+         org-download-heading-lvl 1
+         org-download-annotate-function (lambda (_link) "")))

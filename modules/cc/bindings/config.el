@@ -47,8 +47,8 @@
 ;; Global keybindings
 (map! :after which-key
       :desc "ibuffer" "C-x C-b" #'ibuffer
-      :desc "Switch to buffer" "C-x b" #'switch-to-buffer
-      :desc "Switch to buffer other window" "C-x 4 b" #'switch-to-buffer-other-window
+      :desc "Switch buffer" "C-x b" #'switch-to-buffer
+      :desc "Switch buffer" "C-x 4 b" #'switch-to-buffer-other-window
       (:when (modulep! :ui treemacs)
         "<f1>" #'+treemacs/toggle
         "C-x C-o" #'treemacs-select-window
@@ -185,26 +185,18 @@
        ("w" . "<workspace>")
        (:when (modulep! :ui workspaces)
          ;; workspace
-         :desc "New workspace"
-         "n" #'+workspace/new-named
-         :desc "Save workspace"
-         "s" #'+workspace/save
-         :desc "Load workspace"
-         "l" #'+workspace/load
-         :desc "Delete workspace"
-         "d" #'+workspace/delete
-         :desc "Switch workspace"
-         "w" #'+workspace/switch-to
-         :desc "Display workspaces"
-         "a" #'+workspace/display
-         :desc "Switch to last workspace"
-         "o" #'+workspace/other
+         :desc "New workspace" "n" #'+workspace/new-named
+         :desc "Save workspace" "s" #'+workspace/save
+         :desc "Restore workspace" "r" #'+workspace/load
+         :desc "Delete workspace" "d" #'+workspace/delete
+         :desc "Switch workspace" "w" #'+workspace/switch-to
+         :desc "Display workspaces" "l" #'+workspace/display
+         :desc "Switch to last workspace" "o" #'+workspace/other
 
          ;; session
-         :desc "Load last session"
-         "L" #'doom/quickload-session
-         :desc "Save session"
-         "S" #'doom/save-session))
+         :desc "[Session] Load" "L" #'doom/load-session
+         :desc "[Session] Save" "S" #'doom/save-session
+         :desc "[Session] Load last" "q" #'doom/quickload-session))
 
 
       ;; C-c s --- search

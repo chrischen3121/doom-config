@@ -36,6 +36,7 @@
       "C-c C-p s" "search"))
   (map! :map projectile-mode-map
         :prefix ("C-c p" . "<project>")
+        :desc "Switch project" "p" #'projectile-switch-project
         :desc "Recent project files" "r" #'projectile-recentf
         :desc "Replace in project" "R" #'projectile-replace
         :desc "Search project" "s" #'+default/search-project

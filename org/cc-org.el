@@ -31,25 +31,6 @@
 ;; #+INCLUDE: "~/.emacs" src emacs-lisp
 ;;
 
-;; TODO may use +dragndrop
-(use-package! org-download
-  :after-call (org-mode-hook)
-  :commands (org-download-screenshot
-             org-download-clipboard)
-  :init
-  (map! :map org-mode-map
-        :prefix ("C-c ; d" . "org-download")
-        :desc "Download screenshot"
-        "p" #'org-download-screenshot
-        :desc "Delete downloaded image"
-        "d" #'org-download-delete
-        :desc "From clipboard"
-        "y" #'org-download-clipboard
-        :desc "Rename"
-        "r" #'org-download-rename-at-point)
-  :config
-  (setq! org-download-image-dir "images/"
-         org-download-heading-lvl 1))
 
 ;; org-tag-alist
 ;; '(("Learning" . ?l)

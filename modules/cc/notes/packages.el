@@ -3,7 +3,6 @@
 
 (package! anki-editor)
 (package! org-download)
-;; (package! org-superstar)
 
 (when (modulep! :lang org +roam2)
   (package! org-roam-ui))
