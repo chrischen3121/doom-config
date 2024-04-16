@@ -26,14 +26,14 @@
 ;; projectile keybindings
 (after! projectile
   ;; TODO: need to combine the useful keybindings to "C-c p"
-  (define-key projectile-mode-map (kbd "C-c l p") 'projectile-command-map)
+  (define-key projectile-mode-map (kbd "C-c C-p") 'projectile-command-map)
   (after! which-key
     (which-key-add-key-based-replacements
-      "C-c l p" "<projectile>"
-      "C-c l p 4" "other-window"
-      "C-c l p 5" "other-frame"
-      "C-c l p x" "execute"
-      "C-c l p s" "search"))
+      "C-c C-p" "<projectile>"
+      "C-c C-p 4" "other-window"
+      "C-c C-p 5" "other-frame"
+      "C-c C-p x" "execute"
+      "C-c C-p s" "search"))
   (map! :map projectile-mode-map
         :prefix ("C-c p" . "<project>")
         :desc "Recent project files" "r" #'projectile-recentf

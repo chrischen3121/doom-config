@@ -3,8 +3,8 @@
 
 ;; persp-mode and projectile in different prefixes
 (when (modulep! :ui workspaces)
-  (setq! persp-keymap-prefix (kbd "C-c 3 p"))
-  (which-key-add-key-based-replacements "C-c 3 p" "persp-mode"))
+  (setq! persp-keymap-prefix (kbd "C-c w p"))
+  (which-key-add-key-based-replacements "C-c w p" "persp-mode"))
 
 ;; Unset global keybindings
 (undefine-key! global-map
@@ -180,9 +180,9 @@
         :desc "Symbols" "s" #'lsp-treemacs-symbols)
 
 
-      ;; C-c 3 --- workspace
+      ;; C-c w --- workspace
       (:prefix-map
-       ("3" . "<workspace>")
+       ("w" . "<workspace>")
        (:when (modulep! :ui workspaces)
          ;; workspace
          :desc "New workspace"

@@ -49,13 +49,7 @@
 ;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
 ;;(unpin! t)
 
-(disable-packages! evil)
-
 ;; TODO Org
-(package! anki-editor)
-(package! org-download)
-(package! org-superstar) ; may disable
-(package! org-roam-ui)
 
 ;; org-noter
 (package! nov)
