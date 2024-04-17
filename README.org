@@ -48,6 +48,7 @@ Most important prefix keys:
 - grammar check ~C-c 1 g~
 - calendar ~C-c o c~
 - *treemacs* ~C-c o p~
+  - ~C-c C-p p~ treemacs project
 - tabs ~C-c w t~
 - ace jump ~C-c j~
 - outline-all ~C-c C-f~
@@ -105,7 +106,7 @@ Most important prefix keys:
 - ~run-python~
   - use ~ipython~ interpreter with popup
 - disable leader-map, and redefine keybindings
-- try projectile default keymap ~C-c l p~
+- try projectile default keymap ~C-c M-p p~
   - move most-used ones into ~C-c p~
 
 ** Workflow Optimization

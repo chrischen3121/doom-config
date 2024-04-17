@@ -156,13 +156,35 @@
 
       ;; C-c p --- project
       (:prefix-map ("p" . "<project>")
-       :desc "Open current editorconfig" "e" #'editorconfig-find-current-editorconfig)
+       :desc "Open current editorconfig" "e" #'editorconfig-find-current-editorconfig
+       :desc "Search project" "s" #'+default/search-project
+       :desc "Switch project" "p" #'projectile-switch-project
+       :desc "Recent files" "R" #'projectile-recentf
+       :desc "List todos" "t" #'magit-todos-list
+       :desc "Replace in project" "r" #'projectile-replace
+       :desc "Find file" "f" #'projectile-find-file
+       :desc "Project dired" "d" #'+default/browse-project
+       :desc "Search symbol" "." #'+default/search-project-for-symbol-at-point)
+
+
+      ;; C-c a --- agenda
+      (:prefix-map ("a" . "<agenda>")
+       :desc "Find agenda file" "f" #'+default/find-in-notes
+       :desc "Agenda view""a" #'org-agenda
+       :desc "Agenda capture" "c" #'org-capture
+       (:map org-mode-map
+        :prefix ("e" . "<effort>")
+        :desc "Add estimate" "a" #'org-set-effort
+        :desc "Edit estimate" "e" #'org-clock-modify-effort-estimate
+        :desc "Clock in" "i" #'org-clock-in
+        :desc "Clock out" "o" #'org-clock-out
+        :desc "Cancel clock" "c" #'org-clock-cancel
+        :desc "Goto clock" "g" #'org-clock-goto))
 
 
       ;; C-c o --- open
       (:prefix-map
        ("o" . "<open>")
-       :desc "Agenda" "a" #'org-agenda
        (:when (modulep! :app calendar)
          :desc "Calendar" "c" #'calendar)
        (:when (modulep! :term vterm)
@@ -175,6 +197,7 @@
           :desc "Jupyter stop" "s" #'ein:stop))
        (:when (modulep! :tools docker)
          :desc "Docker" "d" #'docker))
+
 
       ;; C-c C-t --- treemacs
       (:when (modulep! :ui treemacs +lsp)
@@ -234,7 +257,8 @@
       (:prefix-map
        ("n" . "<note>")
        (:when (modulep! :lang org +roam2)
-         :desc "Find node" "f" #'org-roam-node-find
+         :desc "Fleet note" "j" #'org-roam-dailies-find-today
+         :desc "Find note" "f" #'org-roam-node-find
          :desc "Find ref" "r" #'org-roam-ref-find
          :desc "Show graph" "g" #'org-roam-graph
          :desc "Insert node" "i" #'org-roam-node-insert
@@ -261,7 +285,7 @@
           :desc "Goto yesterday" "y" #'org-roam-dailies-goto-yesterday
           :desc "Find dir" "f" #'org-roam-dailies-find-directory)
          (:map org-roam-mode-map
-               :desc "Visit node" "v" #'org-roam-node-visit)
+          :desc "Visit node" "v" #'org-roam-node-visit)
          ))
 
       ;; C-c r --- remote

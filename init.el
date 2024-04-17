@@ -164,6 +164,7 @@
        bindings
        better-defaults
        notes
+       agenda
        dev
 
        :cc-langs

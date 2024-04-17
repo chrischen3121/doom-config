@@ -25,25 +25,14 @@
 
 ;; projectile keybindings
 (after! projectile
-  ;; TODO: need to combine the useful keybindings to "C-c p"
-  (define-key projectile-mode-map (kbd "C-c C-p") 'projectile-command-map)
+  (define-key projectile-mode-map (kbd "C-c M-p") 'projectile-command-map)
   (after! which-key
     (which-key-add-key-based-replacements
-      "C-c C-p" "<projectile>"
-      "C-c C-p 4" "other-window"
-      "C-c C-p 5" "other-frame"
-      "C-c C-p x" "execute"
-      "C-c C-p s" "search"))
-  (map! :map projectile-mode-map
-        :prefix ("C-c p" . "<project>")
-        :desc "Switch project" "p" #'projectile-switch-project
-        :desc "Recent project files" "r" #'projectile-recentf
-        :desc "Replace in project" "R" #'projectile-replace
-        :desc "Search project" "s" #'+default/search-project
-        :desc "List todos" "T" #'magit-todos-list
-        :desc "Find file" "f" #'projectile-find-file
-        :desc "Search symbol" "." #'+default/search-project-for-symbol-at-point
-        :desc "Project dired" "D" #'+default/browse-project))
+      "C-c M-p" "<projectile>"
+      "C-c M-p 4" "other-window"
+      "C-c M-p 5" "other-frame"
+      "C-c M-p x" "execute"
+      "C-c M-p s" "search")))
 
 ;; :app
 ;; calendar
