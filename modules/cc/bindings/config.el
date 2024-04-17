@@ -236,8 +236,7 @@
        (:when (modulep! :lang org +roam2)
          :desc "Find node" "f" #'org-roam-node-find
          :desc "Find ref" "r" #'org-roam-ref-find
-         :desc "Show UI node local" "g" #'org-roam-ui-node-local
-         :desc "Show graph" "G" #'org-roam-graph
+         :desc "Show graph" "g" #'org-roam-graph
          :desc "Insert node" "i" #'org-roam-node-insert
          :desc "Capture" "c" #'org-roam-capture
          :desc "Show backlinks" "b" #'org-roam-buffer-toggle

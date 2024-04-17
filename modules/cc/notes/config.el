@@ -165,12 +165,16 @@
            org-roam-ui-update-on-save t
            org-roam-ui-open-on-start t)
     :init
-    ;; https://github.com/org-roam/org-roam-ui/issues/289
+    ;; HACK https://github.com/org-roam/org-roam-ui/issues/289
     ;; emacs29 will set value to sqlite-builtin, only first file tag works
     (setq! org-roam-database-connector 'sqlite)
-    (map! :prefix "C-c n"
-          :desc "Open UI" "u" #'org-roam-ui-mode
-          :desc "Sync UI theme" "S" #'org-roam-ui-sync-theme)))
+    (map! :prefix ("C-c n u" . "<org-roam-ui>")
+          :desc "Start roam UI" "u" #'org-roam-ui-mode
+          :desc "Open new UI page" "o" #'org-roam-ui-open
+          :desc "Sync UI theme" "s" #'org-roam-ui-sync-theme
+          :map org-mode-map
+          :desc "Show ui node local" "g" #'org-roam-ui-node-local
+          :desc "Zoom ui node" "z" #'org-roam-ui-node-zoom)))
 
 
 (use-package! anki-editor
