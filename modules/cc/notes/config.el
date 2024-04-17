@@ -86,6 +86,7 @@
   (remove-hook 'org-mode-hook #'org-indent-mode)
   (setq! org-startup-indented nil
          org-ellipsis " ▼"
+         org-directory cc/org-home-dir
 
          ;; pretty latex preview
          org-pretty-entities t
@@ -153,17 +154,7 @@
                                "#+title: ${title}\n#+filetags: %^{filetags}\n")
             :unnarrowed t)
            ))
-  (org-roam-db-autosync-mode)
-  (map! :map org-mode-map
-        :prefix ("C-c l r" . "Roam")
-        :desc "Add alias"
-        "a" #'org-roam-alias-add
-        :desc "Open org-roam buffer"
-        "b" #'org-roam-buffer-toggle
-        :desc "Add tag"
-        "t" #'org-roam-tag-add
-        :desc "Add ref"
-        "r" #'org-roam-ref-add))
+  (org-roam-db-autosync-mode))
 
 (when (modulep! :lang org +roam2)
   (use-package! org-roam-ui
@@ -174,11 +165,12 @@
            org-roam-ui-update-on-save t
            org-roam-ui-open-on-start t)
     :init
-    (map! :prefix ("C-c g r" . "Roam")
-          :desc "Open org-roam-ui"
-          "u" #'org-roam-ui-mode
-          :desc "Sync ui theme"
-          "l" #'org-roam-ui-sync-theme)))
+    ;; https://github.com/org-roam/org-roam-ui/issues/289
+    ;; emacs29 will set value to sqlite-builtin, only first file tag works
+    (setq! org-roam-database-connector 'sqlite)
+    (map! :prefix "C-c n"
+          :desc "Open UI" "u" #'org-roam-ui-mode
+          :desc "Sync UI theme" "S" #'org-roam-ui-sync-theme)))
 
 
 (use-package! anki-editor

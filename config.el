@@ -51,9 +51,6 @@
 
 (load! "mycustom")
 
-;; change `org-directory'. It must be set before org loads!
-(setq! org-directory cc/org-home-dir)
-
 (load! "cc-init" (file-name-concat doom-user-dir "org"))
 (message "Loading org modules...done")
 

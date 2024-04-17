@@ -11,6 +11,12 @@
   "C-z"
   "C-x C-z")
 
+(setq!
+ doom-leader-key nil
+ doom-localleader-key nil
+ doom-leader-alt-key "C-c M-d"
+ doom-localleader-alt-key "C-c M-d l")
+
 (remove-hook! 'doom-first-input-hook #'which-key-mode)
 (add-hook! 'doom-first-buffer-hook
            :append
@@ -42,7 +48,9 @@
     "C-x 5" "other-frame"
     "C-x p" "project"
     "C-x a" "abbrev"
-    "C-h 4" "info"))
+    "C-h 4" "info"
+    "C-c M-d" "doom/leader"
+    "C-c M-d l" "doom/localleader"))
 
 ;; Global keybindings
 (map! :after which-key
@@ -228,19 +236,33 @@
        (:when (modulep! :lang org +roam2)
          :desc "Find node" "f" #'org-roam-node-find
          :desc "Find ref" "r" #'org-roam-ref-find
-         :desc "Show graph" "g" #'org-roam-graph
+         :desc "Show UI node local" "g" #'org-roam-ui-node-local
+         :desc "Show graph" "G" #'org-roam-graph
          :desc "Insert node" "i" #'org-roam-node-insert
          :desc "Capture" "c" #'org-roam-capture
          :desc "Show backlinks" "b" #'org-roam-buffer-toggle
          :desc "Show backlinks(dedicated)" "B" #'org-roam-buffer-display-dedicated
          :desc "Sync db" "s" #'org-roam-db-sync
-         (:prefix-map ("d" . "by date")
+         :desc "Refile node" "w" #'org-roam-refile
+         (:prefix ("a" . "alias")
+          :desc "Add alias" "a" #'org-roam-alias-add
+          :desc "Remove alias" "r" #'org-roam-alias-remove)
+         (:prefix ("r" . "ref")
+          :desc "Add ref" "a" #'org-roam-ref-add
+          :desc "Remove ref" "r" #'org-roam-ref-remove
+          :desc "Find ref" "f" #'org-roam-ref-find)
+         (:prefix ("t" . "tag")
+          :desc "Add tag" "a" #'org-roam-tag-add
+          :desc "Remove tag" "r" #'org-roam-tag-remove)
+         (:prefix ("d" . "by date")
           :desc "Goto date" "d" #'org-roam-dailies-goto-date
           :desc "Capture date" "c" #'org-roam-dailies-capture-date
           :desc "Goto tomorrow" "m" #'org-roam-dailies-goto-tomorrow
           :desc "Goto today" "t" #'org-roam-dailies-goto-today
           :desc "Goto yesterday" "y" #'org-roam-dailies-goto-yesterday
           :desc "Find dir" "f" #'org-roam-dailies-find-directory)
+         (:map org-roam-mode-map
+               :desc "Visit node" "v" #'org-roam-node-visit)
          ))
 
       ;; C-c r --- remote

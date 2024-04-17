@@ -5,7 +5,7 @@ Configurations for Doom Emacs
 ~M-x nerd-icons-install-fonts~
 
 ** Keybindings
-Most important leader keys:
+Most important prefix keys:
 - ~C-c~: global prefix key
 - ~C-c l~: local prefix key
 - ~C-c c~: ~+code~

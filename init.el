@@ -157,7 +157,7 @@
        ;;(rss +org)          ; emacs as an RSS reader
 
        :config
-       (default +smartparens) ;; TODO remove +bindings
+       (default +smartparens) ;; +bindings
 
        :cc
        appearance

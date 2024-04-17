@@ -106,7 +106,9 @@
 (when (modulep! :completion vertico)
 ;;;###package vertico
   (map! :map vertico-map
-        "C-l" #'vertico-directory-delete-word))
+        "C-l" #'vertico-directory-delete-word
+        "M-h" #'+vertico/enter-or-preview))
+
 
 
 ;; :editor
