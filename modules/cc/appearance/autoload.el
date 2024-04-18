@@ -2,7 +2,7 @@
 
 (defvar cc/default-font "Hack" "Adjust default font for your system.")
 (defvar cc/default-font-size 24)
-(defvar cc/default-unicode-font "WenQuanYi Micro Hei"
+(defvar cc/default-unicode-font "Noto Sans CJK SC"
   "Adjust unicode font for your system.")
 (defvar cc/default-unicode-font-size 24)
 (defvar cc/light-theme 'doom-one-light)
@@ -15,28 +15,13 @@
   "Switch to light theme"
   (setq! doom-theme cc/light-theme
          cc/theme-dark-p nil)
-  (custom-set-faces!
-    ;; ace-window
-    '(aw-leading-char-face :foreground "tomato" :weight bold :height 4.5)
-    ;; spell-fu
-    '(spell-fu-incorrect-face :underline (:style wave :color "goldenrod"))
-    ;; volatile-highlights
-    '(vhl/default-face :background "wheat1"))
   (load-theme doom-theme t))
-
 
 ;;;###autoload
 (defun cc/switch-to-dark-theme ()
   "Switch to dark theme"
   (setq! doom-theme cc/dark-theme
          cc/theme-dark-p t)
-  (custom-set-faces!
-    ;; ace-window
-    '(aw-leading-char-face :foreground "steel blue" :weight bold :height 4.5)
-    ;; spell-fu
-    '(spell-fu-incorrect-face :underline (:style wave :color "goldenrod"))
-    ;; volatile-highlights
-    '(vhl/default-face :background "dark slate gray"))
   (load-theme doom-theme t))
 
 
@@ -63,9 +48,10 @@
 (defun cc/switch-light-dark-theme ()
   "Switch light/dark themes"
   (interactive)
-  (if (eq doom-theme cc/light-theme)
-      (cc/switch-to-dark-theme)
-    (cc/switch-to-light-theme)))
+  (if cc/theme-dark-p
+      (cc/switch-to-light-theme)
+    (cc/switch-to-dark-theme)))
+
 
 ;;;###autoload
 (defun cc/set-doom-ui-appearance ()
@@ -81,6 +67,13 @@
          (font-spec :family cc/default-unicode-font :size cc/default-unicode-font-size)
          doom-symbol-font
          (font-spec :family cc/default-unicode-font :size cc/default-unicode-font-size))
+  (custom-set-faces!
+    ;; ace-window
+    '(aw-leading-char-face :inherit 'font-lock-builtin-face :height 4.5)
+    ;; spell-fu
+    `(spell-fu-incorrect-face :underline (:style wave :color ,(doom-color 'blue)))
+    ;; volatile-highlights
+    `(vhl/default-face :inherit 'region :background ,(doom-color 'gray)))
   (if (string-equal (getenv "XDG_SESSION_DESKTOP") "gnome")
       (cc/set-theme-based-on-sys-style)
     (cc/set-theme-based-on-time)))
