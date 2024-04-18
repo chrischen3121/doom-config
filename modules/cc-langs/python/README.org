@@ -1,11 +1,45 @@
 #+title: :cc-langs python
 
+* System-wise Development Env
+- Python interpreter: system builtin
+- Packages: ~pipx~
+  - Make sure ~pipx~ is installed with system package manager. (e.g. ~python-pipx~ in Arch Linux)
+- ~pipx install [any-language-server]~
+- ~pipx install poetry~
+
 * ~pyenv~
 Use ~pyenv~ to manage python versions.
 - For project, specify python version in ~.python-version~ file in project root.
 
 * ~poetry~
 Use ~poetry~ to manage dependencies.
+** For Existing Project
+- ~poetry env use [python-version]~
+- ~poetry lock~
+- ~poetry install~
+- ~poetry update~: update dependencies
+
+** For New Project
+- ~poetry new [project-name]~
+- ~poetry add [package-name]~
+
+** Run Project Scripts
+- ~poetry shell~
+- ~poetry run python your_script.py~
+- ~poetry run pytest~
+
+* Using In-project Language Server
+- ~poetry add --group dev "python-lsp-server[all]"~
+
+* Editable Dependency
+- When you poetry install, the root package are installed as editable into your venv.
+- Path dependencies with ~develop = true~ in =pyproject.toml= are installed as editable.
+- ~poetry add --editable~ that sets the develop flag in =pyproject.toml=.
+#+begin_src conf-toml
+  [tool.poetry.dependencies]
+  basic-lib = { path = "/path/to/basic-lib", develop = true}
+#+end_src
+
 
 * Debuggers
 - ~pip3 install debugpy~ (recommended)

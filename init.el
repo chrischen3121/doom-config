@@ -170,4 +170,5 @@
        :cc-langs
        elisp
        cpp
+       python
        )

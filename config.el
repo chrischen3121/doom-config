@@ -49,7 +49,5 @@
 ;; they are implemented.
 ;;
 
+;; Using "mycustom" instead of "custom" to keep the custom file clean
 (load! "mycustom")
-
-(load! "cc-init" (file-name-concat doom-user-dir "languages"))
-(message "Loading language modules...done")
