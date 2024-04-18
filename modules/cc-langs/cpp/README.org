@@ -1,11 +1,23 @@
 #+title: :cc-langs cpp
 
-* Project Compile Settings
-** ~cmake~
+* Compile Options
+** user-wise
+user configuration: a =config.yaml= file in an OS-specific directory:
+- =$XDG_CONFIG_HOME/clangd/config.yaml=, typically =~/.config/clangd/config.yaml=
+#+begin_src yaml
+CompileFlags:
+  Add: [-std=c++20]
+#+end_src
+
+** project-wise
+*** ~cmake~
 - Generate =compile_commands.json=
   - ~cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON .~
 - ~M-x +cc/reload-compile-db~
   - both LSP servers and irony will recognize =compile_commands.json=
+
+*** ~clangd~
+a file named =.clangd= in the source tree. (clangd searches in all parent directories of the active file).
 
 * Debuggers
 - dap-cpptools :: ~M-x dap-cpptools-setup~
