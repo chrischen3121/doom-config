@@ -134,7 +134,7 @@
   )
 
 (after! org-agenda
-  (setq! org-agenda-files `(,cc/org-home-dir))
+  (setq! org-agenda-files `(,cc/org-agenda-dir))
 
   ;; todo tags trigger
   (setq! org-todo-state-tags-triggers
@@ -226,7 +226,7 @@
 
            ;; Archive search
            ("A" "Archive Search" search ""
-            ((org-agenda-files (directory-files-recursively cc/org-home-dir ".org_archive$"))))
+            ((org-agenda-files (directory-files-recursively cc/org-agenda-dir ".org_archive$"))))
 
            ;; Effort review
            ("t" "Effort Table" alltodo ""

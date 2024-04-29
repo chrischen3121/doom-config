@@ -25,6 +25,9 @@
 ;; C-c C-c -- jump between definition and reference
 ;; +strike-through+
 (defvar cc/org-home-dir "~/org/"
+  "Org directory")
+
+(defvar cc/org-agenda-dir "~/org/todos/"
   "Agenda home directory")
 
 (defvar cc/deft-notes-dir "~/org/notes/"

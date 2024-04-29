@@ -15,6 +15,7 @@
 
 (when (modulep! :cc notes)
   (setq! cc/org-home-dir "~/org/"
+         cc/org-agenda-dir "~/org/todos/"
          cc/org-pdf-notes-dir "~/org/pdf-notes/"
          cc/deft-notes-dir "~/org/notes/"
          cc/org-roam-directory "~/org/roam/"
