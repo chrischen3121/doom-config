@@ -188,8 +188,7 @@
 (use-package! anki-editor
   ;;:after-call (org-mode-hook)
   :commands (anki-editor-push-notes
-             anki-editor-insert-note
-             anki-editor-update-note)
+             anki-editor-insert-note)
   :config
   (setq! anki-editor-create-decks t
          anki-editor-org-tags-as-anki-tags t
@@ -199,8 +198,8 @@
         :prefix ("C-c l a" . "<anki>")
         :desc "Push cards" "p" #'anki-editor-push-notes
         :desc "Cloze dwim" "c" #'anki-editor-cloze-dwim
+        :desc "Cloze region" "r" #'anki-editor-cloze-region
         :desc "Insert card" "i" #'anki-editor-insert-note
-        :desc "Update card" "u" #'anki-editor-update-note
         :desc "Clear cloze" "0" #'anki-editor-clear-cloze))
 
 (use-package! org-download
