@@ -134,7 +134,12 @@
   )
 
 (after! org-agenda
-  (setq! org-agenda-files `(,cc/org-agenda-dir))
+  (setq! org-agenda-files `(,cc/org-agenda-dir)
+         org-stuck-projects
+         '("+TODO=\"PROJ\""
+           ("TODO" "STRT")
+           nil
+           ""))
 
   ;; todo tags trigger
   (setq! org-todo-state-tags-triggers
