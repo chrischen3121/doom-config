@@ -109,6 +109,15 @@
       (sp-local-pair "$" "$"
                      :unless '(sp-point-after-word-p)))))
 
+(when (modulep! :tools pdf)
+  (map! (:map pdf-view-mode-map
+         :prefix "C-c l"
+         :desc "Toggle slice mode" "s"
+         #'pdf-view-auto-slice-minor-mode))
+  (add-hook! 'pdf-view-mode-hook
+    (defun pdf-view-follow-theme ()
+      (pdf-view-themed-minor-mode 1))))
+
 (when (modulep! :lang org +noter)
   (map! :prefix ("C-c n p" . "<pdfnotes>")
         :desc "Find pdfnotes file" "f" #'cc/open-pdf-note-files
@@ -119,7 +128,7 @@
            org-noter-auto-save-last-location t
            org-noter-max-short-selected-text-length 40)
     (add-hook! 'org-noter-doc-mode-hook
-               (setq-local pdf-view-display-size 'fit-width))
+      (setq-local pdf-view-display-size 'fit-width))
     (map! (:map (org-noter-notes-mode-map org-noter-doc-mode-map)
            :prefix "C-c n p"
            :desc "Generate TOC" "t" #'org-noter-create-skeleton
