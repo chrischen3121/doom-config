@@ -9,4 +9,4 @@
   (after! dap-mode
     (setq dap-python-debugger 'debugpy)))
 
-(setq-hook! python-mode python-indent-offset 2)
+(setq-hook! python-mode python-indent-offset 4)

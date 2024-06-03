@@ -187,3 +187,9 @@
   ;; Cursor Jump to End of Line When Typing
   ;; If you are using whitespace-mode, make sure to remove newline-mark from whitespace-style.
   (setq! whitespace-style (delq 'newline-mark whitespace-style)))
+
+
+;; Langs
+(add-hook! 'sh-mode-hook
+  (defun cc/set-default-shell ()
+    (sh-set-shell "bash")))
