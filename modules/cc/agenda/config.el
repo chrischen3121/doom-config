@@ -76,9 +76,8 @@
             "* [-] %?\n%U\n"
             :clock-in t :clock-keep t prepend t)
            ("i" "Quick ideas" entry
-            -            (file+headline +org-capture-todo-file "Ideas")
-            -            "* %u %?\n%i\n" :prepend t)
-
+            (file+headline +org-capture-todo-file "Ideas")
+            "* %u %?\n%i\n" :prepend t)
            ;; Study
            ("c" "Start a cource" entry
             (file+headline cc/agenda-study-file "Courses")
