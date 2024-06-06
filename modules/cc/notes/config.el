@@ -113,7 +113,9 @@
   (map! (:map pdf-view-mode-map
          :prefix "C-c l"
          :desc "Toggle slice mode" "s"
-         #'pdf-view-auto-slice-minor-mode))
+         #'pdf-view-auto-slice-minor-mode
+         :desc "Toggle themed mode" "t"
+         #'pdf-view-themed-minor-mode))
   (add-hook! 'pdf-view-mode-hook
     (defun pdf-view-follow-theme ()
       (pdf-view-themed-minor-mode 1))))
