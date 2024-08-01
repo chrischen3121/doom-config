@@ -27,9 +27,6 @@
 (defvar cc/org-home-dir "~/org/"
   "Org directory")
 
-(defvar cc/org-agenda-dir "~/org/todos/"
-  "Agenda home directory")
-
 (defvar cc/deft-notes-dir "~/org/notes/"
   "Deft notes directory.")
 
@@ -62,7 +59,8 @@
        :desc "Org insert date" "d" #'org-timestamp-inactive
        :desc "Org insert time" "t" #'org-timestamp
        :desc "Set a tag" "T" #'org-set-tags-command
-       :desc "Set a tag" "p" #'org-set-property
+       :desc "Set property" "p" #'org-set-property
+       :desc "Create org-id" "i" #'org-id-get-create
        :desc "Insert link" "l" #'org-insert-link)
 
 

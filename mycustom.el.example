@@ -22,3 +22,6 @@
          cc/org-roam-db-location "~/org/roam/org-roam.db"
          cc/org-roam-journal-directory "~/org/roam/journal/"
          cc/org-roam-graph-viewer "google-chrome"))
+
+(when (modulep! :cc agenda)
+  (setq! cc/org-agenda-dir "~/org/todos/"))

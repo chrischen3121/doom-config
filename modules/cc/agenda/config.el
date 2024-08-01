@@ -35,6 +35,9 @@
 ;; YES: An affirmative decision.
 ;; NO: A negative decision.
 
+(defvar cc/org-agenda-dir "~/org/todos/"
+  "Agenda home directory")
+
 (defvar cc/agenda-habits-file nil
   "The file path to store habits.")
 
@@ -47,14 +50,14 @@
 (defvar cc/agenda-study-file nil
   "The file path to store study tasks.")
 
-
 (after! org
   (setq! org-log-repeat nil
-         +org-capture-journal-file (file-name-concat org-directory "journal.org")
-         cc/agenda-habits-file (file-name-concat org-directory "habits.org")
-         cc/agenda-projects-file (file-name-concat org-directory "projects.org")
-         cc/agenda-work-file (file-name-concat org-directory "work.org")
-         cc/agenda-study-file (file-name-concat org-directory "study.org")
+         +org-capture-todo-file (file-name-concat cc/org-agenda-dir "todo.org")
+         +org-capture-journal-file (file-name-concat cc/org-agenda-dir "journal.org")
+         cc/agenda-habits-file (file-name-concat cc/org-agenda-dir "habits.org")
+         cc/agenda-projects-file (file-name-concat cc/org-agenda-dir "projects.org")
+         cc/agenda-work-file (file-name-concat cc/org-agenda-dir "work.org")
+         cc/agenda-study-file (file-name-concat cc/org-agenda-dir "study.org")
          org-deadline-warning-days 5
          org-log-done 'time
          org-log-into-drawer t)
