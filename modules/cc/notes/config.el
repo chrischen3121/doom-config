@@ -224,6 +224,6 @@
         :desc "Rename at point" "r" #'org-download-rename-at-point
         :desc "Delete at point" "d" #'org-download-delete)
   :config
-  (setq! org-download-image-dir "images/"
+  (setq! org-download-image-dir "images/screenshots/"
          org-download-heading-lvl 1
          org-download-annotate-function (lambda (_link) "")))

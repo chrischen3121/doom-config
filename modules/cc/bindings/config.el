@@ -145,7 +145,9 @@
        :desc "Locate file" "l"
        (cond ((modulep! :completion vertico) #'consult-locate)
              (t #'locate))
-       :desc "Find file under here (-r)" "h" #'+default/find-file-under-here
+       :desc "Find file under here (-r)" "." #'+default/find-file-under-here
+       :desc "Find roam note" "n" #'org-roam-node-find
+       :desc "Find agenda file" "a" #'+default/find-in-notes
        :desc "Find in doom" "p" #'doom/find-file-in-private-config
        :desc "Browse in doom" "P" #'doom/open-private-config
        :desc "Find in emacsd" "e" #'doom/find-file-in-emacsd
