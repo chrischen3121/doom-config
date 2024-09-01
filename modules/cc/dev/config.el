@@ -38,7 +38,7 @@
     (undefine-key! outline-minor-mode-map "C-c @"))
 
 ;;;###package vimish-fold
-  (map! :map prog-mode-map
+  (map! :map (prog-mode-map yaml-mode-map)
         :prefix ("C-c 2" . "fold")
         :desc "Fold/Unfold" "2" #'+fold/toggle
         :desc "Fold all" "f" #'+fold/close-all
