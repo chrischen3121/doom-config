@@ -143,9 +143,11 @@
 ;; :ui
 ;; indent-guide
 (when (modulep! :ui indent-guides)
-;;;###package highlight-indent-guides
-  (remove-hook! '(prog-mode-hook text-mode-hook conf-mode-hook)
-    #'highlight-indent-guides-mode))
+  (defun cc/inhibit-for-specified-modes ()
+    "Inhibit indent-guides mode if the current mode is in the specified list."
+    (member major-mode '(org-mode)))
+;;;###package indent-bars
+  (add-hook! '+indent-guides-inhibit-functions #'cc/inhibit-for-specified-modes))
 
 ;; :tools
 ;; eval

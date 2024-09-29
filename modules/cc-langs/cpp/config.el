@@ -9,6 +9,7 @@
   (add-hook! 'c++-mode-hook
     (setq-local tab-width 2))
 
+
   (add-to-list 'auto-mode-alist '("conanfile\\.txt\\'" . conf-windows-mode))
   (map! :after cc-mode
         :map c++-mode-map

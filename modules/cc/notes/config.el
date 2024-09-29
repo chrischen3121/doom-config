@@ -166,10 +166,6 @@
             :if-new (file+head "${slug}-%<%Y%m%d>.org"
                                "#+title: ${title}\n")
             :unnarrowed t)
-           ("t" "tagged" plain "%?"
-            :if-new (file+head "${slug}-%<%Y%m%d>.org"
-                               "#+title: ${title}\n#+filetags: %^{filetags}\n")
-            :unnarrowed t)
            ))
   (org-roam-db-autosync-mode))
 
