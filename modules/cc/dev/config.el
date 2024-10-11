@@ -70,16 +70,6 @@
     (setq! ein:jupyter-server-use-subcommand "server")))
 
 ;; :tools
-;; rgb
-(when (modulep! :tools rgb)
-  (add-hook! '(emacs-lisp-mode-hook html-mode-hook
-               css-mode-hook scss-mode-hook)
-             #'rainbow-mode)
-  (after! rainbow-mode
-    (add-hook! 'rainbow-mode-hook
-      (hl-line-mode (if rainbow-mode -1 +1)))))
-
-;; :tools
 ;; lsp +peek
 (when (modulep! :tools lsp +peek)
   ;; TODO: lsp default keymap is disorganized, try some and remove this keymap
@@ -173,6 +163,13 @@
 ;; cape-capf-super solution is still experimental
 
 
+;; rainbow-mode
+(use-package! rainbow-mode
+  :hook ((emacs-lisp-mode html-mode css-mode scss-mode) . rainbow-mode)
+  :config
+  (add-hook! 'rainbow-mode-hook
+    (hl-line-mode (if rainbow-mode -1 +1))))
+
 ;; Github Copilot
 (use-package! copilot
   :hook ((prog-mode git-commit-setup conf-mode yaml-mode) . copilot-mode)
@@ -189,7 +186,6 @@
   ;; Cursor Jump to End of Line When Typing
   ;; If you are using whitespace-mode, make sure to remove newline-mark from whitespace-style.
   (setq! whitespace-style (delq 'newline-mark whitespace-style)))
-
 
 ;; Langs
 (add-hook! 'sh-mode-hook

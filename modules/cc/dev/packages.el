@@ -5,8 +5,7 @@
                    evil-vimish-fold
                    eglot)
 
-(when (modulep! :tools rgb)
-  (disable-packages! kurecolor))
+(package! rainbow-mode)
 
 (package! copilot
   :recipe (:host github
