@@ -179,4 +179,5 @@
 (use-package! ace-jump-mode
   :commands ace-jump-mode
   :init
-  (map! "C-." #'ace-jump-mode))
+  (map! "C-." #'ace-jump-mode
+        "C-c j" #'ace-jump-mode))

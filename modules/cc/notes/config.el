@@ -84,6 +84,7 @@
 ;; org configuration
 (remove-hook! 'org-load-hook #'+org-init-smartparens-h)
 (after! org
+  (require 'org-indent)
   (remove-hook 'org-mode-hook #'org-indent-mode)
   (setq! org-startup-indented nil
          org-ellipsis " ▼"
