@@ -31,7 +31,7 @@
        (emoji +ascii +unicode)  ; 🙂
        hl-todo           ; highlight TODO/FIXME/NOTE/DEPRECATED/HACK/REVIEW
        indent-guides     ; highlighted indent columns
-       ;; minimap           ; show a map of the code on the side
+       minimap           ; show a map of the code on the side
        modeline          ; snazzy, Atom-inspired modeline, plus API
        nav-flash         ; blink cursor line after big motions
        ophints           ; highlight the region an operation acts on
@@ -85,7 +85,7 @@
        pdf                 ; pdf enhancements
        tmux
        ;;terraform         ; May try it: infrastructure as code, try it when using cloud services
-       tree-sitter       ; syntax and parsing, sitting in a tree...
+       ;;tree-sitter       ; syntax and parsing, sitting in a tree...
        upload            ; map local to remote projects via ssh/ftp
 
        :os
@@ -137,7 +137,7 @@
        ;;php               ; perl's insecure younger brother
        plantuml          ; diagrams for confusing people more
        ;;purescript        ; javascript, but functional
-       (python +lsp +pyenv +poetry +tree-sitter) ; beautiful is better than ugly
+       (python +lsp +pyenv +poetry +pyright +tree-sitter) ; beautiful is better than ugly
        ;;[opt] qt                ; the 'cutest' gui framework ever
        ;;racket            ; a DSL for DSLs
        ;;swift             ; who asked for emoji variables?

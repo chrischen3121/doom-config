@@ -3,7 +3,7 @@
 
 (when (modulep! :lang python +poetry)
   (map! :map python-mode-map
-        :desc "poetry" "C-c l p" #'poetry))
+        :desc "poetry" "C-c m p" #'poetry))
 
 (when (modulep! :tools debugger)
   (after! dap-mode

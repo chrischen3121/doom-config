@@ -13,7 +13,7 @@
   (add-to-list 'auto-mode-alist '("conanfile\\.txt\\'" . conf-windows-mode))
   (map! :after cc-mode
         :map c++-mode-map
-        :prefix "C-c l"
+        :prefix "C-c m"
         :desc "Compile" "c" #'cc/cpp-compile
         :desc "Run" "r" #'cc/cpp-run
         :desc "Quick run" "q" #'cc/cpp-quick-run

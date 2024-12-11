@@ -6,7 +6,7 @@
 (when (modulep! :completion company)
   (after! company
     (setq! company-tooltip-limit 12)
-    (map! :prefix ("C-c l c" . "<company>")
+    (map! :prefix ("C-c m c" . "<company>")
           "f" #'company-files
           "d" #'company-dabbrev
           "D" #'company-dabbrev-code
@@ -34,12 +34,12 @@
     (setq-hook! 'outline-minor-mode-hook
       outline-minor-mode-prefix (kbd "C-c 2 l"))
     (which-key-add-keymap-based-replacements
-      outline-minor-mode-map "C-c 2 l" "outline")
+      outline-minor-mode-map "C-c 2 l" "<outline>")
     (undefine-key! outline-minor-mode-map "C-c @"))
 
 ;;;###package vimish-fold
   (map! :map (prog-mode-map yaml-mode-map)
-        :prefix ("C-c 2" . "fold")
+        :prefix ("C-c 2" . "<fold>")
         :desc "Fold/Unfold" "2" #'+fold/toggle
         :desc "Fold all" "f" #'+fold/close-all
         :desc "Unfold all" "u" #'+fold/open-all
@@ -73,7 +73,7 @@
 ;; lsp +peek
 (when (modulep! :tools lsp +peek)
   ;; TODO: lsp default keymap is disorganized, try some and remove this keymap
-  (setq! lsp-keymap-prefix (kbd "C-c c l"))
+  (setq! lsp-keymap-prefix (kbd "C-c l"))
   (after! lsp-mode
     (add-hook! 'lsp-mode-hook #'lsp-enable-which-key-integration))
   (after! lsp-ui
@@ -83,7 +83,8 @@
            lsp-ui-sideline-delay 0.5
            lsp-ui-imenu-buffer-position 'left
            lsp-ui-imenu-auto-refresh t
-           lsp-ui-imenu-refresh-delay 2)
+           ;; lsp-ui-imenu-refresh-delay 2
+           )
     (map!
      :map lsp-ui-mode-map
      [remap xref-find-definitions] #'lsp-ui-peek-find-definitions
@@ -94,7 +95,16 @@
 
 (when (modulep! :ui treemacs +lsp)
   (after! treemacs
-    (setq! lsp-treemacs-sync-mode 1)))
+    (setq! lsp-treemacs-sync-mode 1)
+    (map! :prefix-map ("C-c l t" . "<lsp-treemacs>")
+          :desc "Browse project" "b" #'+treemacs/toggle
+          :desc "Errors list" "e" #'lsp-treemacs-errors-list
+          :desc "Incoming call hierarchy" "i" #'lsp-treemacs-call-hierarchy
+          :desc "Outgoing call hierarchy" "o" (cmd!! #'lsp-treemacs-call-hierarchy t)
+          :desc "Type hierarchy" "t" #'lsp-treemacs-type-hierarchy
+          :desc "Implementation" "I" #'lsp-treemacs-implementations
+          :desc "References tree" "r" (cmd!! #'lsp-treemacs-references t)
+          :desc "Symbols" "s" #'lsp-treemacs-symbols)))
 
 ;; :tools
 ;; debugger
@@ -117,11 +127,10 @@
     :desc "Add condition" "c" #'dap-breakpoint-condition
     :desc "Hit condition" "h" #'dap-breakpoint-hit-condition
     :desc "Log message" "l" #'dap-breakpoint-log-message)
-   (:prefix "C-c l r"
+   (:prefix "C-c m r"
     :desc "Dap eval" "e" #'dap-eval
     :desc "Dap eval region" "r" #'dap-eval-region
     :desc "Dap eval at point" "t" #'dap-eval-thing-at-point)))
-
 
 ;; :tools
 ;; upload
@@ -147,7 +156,7 @@
 ;; TODO check with python
 ;; (when (modulep! :tools eval)
 ;;   (map! :map (prog-mode-map emacs-lisp-mode-map)
-;;         :prefix ("C-c l e" . "eval")
+;;         :prefix ("C-c m e" . "eval")
 ;;         :desc "Eval line" "l" #'+eval/line-or-region
 ;;         :desc "Eval buffer" "b" #'+eval/buffer-or-region
 ;;         :desc "Region to REPL" "s" #'+eval/send-region-to-repl

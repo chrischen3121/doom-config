@@ -79,7 +79,8 @@
        :desc "Fullscreen" "F" #'toggle-frame-fullscreen
        :desc "Flymake" "f" #'flymake-mode ; TODO: just give it a try
        :desc "Line numbers" "l" #'doom/toggle-line-numbers
-       :desc "Tab/Space switch" "t" #'doom/toggle-indent-style
+       :desc "Treemacs" "t" #'+treemacs/toggle
+       :desc "Tab/Space switch" "T" #'doom/toggle-indent-style
        :desc "Read-only mode" "r" #'read-only-mode
        (:when (modulep! :checkers syntax)
          :desc "Flycheck" "c" #'flycheck-mode)
@@ -91,7 +92,7 @@
          :desc "Zen mode" "z" #'+zen/toggle
          :desc "Zen mode (fullscreen)" "Z" #'+zen/toggle-fullscreen)
        (:when (modulep! :ui indent-guides)
-         :desc "Indent guides" "i" #'highlight-indent-guides-mode))
+         :desc "Indent guides" "i" #'indent-bars-mode))
 
 
       ;; C-c y --- snippets
@@ -106,6 +107,7 @@
        :desc "Compile" "c" #'+default/compile
        :desc "Format buffer/region" "f" #'+format/region-or-buffer
        :desc "List errors" "e" #'+default/diagnostics
+       :desc "Inlay Hints Mode" "i" #'lsp-inlay-hints-mode
        (:when (modulep! :tools make)
          :desc "Make run target" "m" #'+make/run
          :desc "Make run last" "M" #'+make/run-last)
@@ -200,20 +202,6 @@
        (:when (modulep! :tools docker)
          :desc "Docker" "d" #'docker))
 
-
-      ;; C-c C-t --- treemacs
-      (:when (modulep! :ui treemacs +lsp)
-        :prefix-map ("C-t" . "<treemacs>")
-        :desc "Project manager" "p" #'+treemacs/toggle
-        :desc "Errors list" "e" #'lsp-treemacs-errors-list
-        :desc "Incoming call hierarchy" "i" #'lsp-treemacs-call-hierarchy
-        :desc "Outgoing call hierarchy" "o" (cmd!! #'lsp-treemacs-call-hierarchy t)
-        :desc "Type hierarchy" "t" #'lsp-treemacs-type-hierarchy
-        :desc "Implementation" "I" #'lsp-treemacs-implementations
-        :desc "References tree" "r" (cmd!! #'lsp-treemacs-references t)
-        :desc "Symbols" "s" #'lsp-treemacs-symbols)
-
-
       ;; C-c w --- workspace
       (:prefix-map
        ("w" . "<workspace>")
@@ -297,9 +285,9 @@
 
 ;; local keybindings
 (map! :after which-key
-      :prefix ("C-c l" . "<local>")
+      :prefix ("C-c m" . "<local>")
 
-      ;; C-c l r --- run/eval
+      ;; C-c m r --- run/eval
       (:prefix-map
        ("r" . "<run/eval>")
        (:when (modulep! :tools eval)
@@ -310,7 +298,7 @@
          :desc "Open REPL" "i" #'+eval/open-repl-other-window))
 
 
-      ;; C-c l t --- tmux
+      ;; C-c m t --- tmux
       (:when (modulep! :tools tmux)
         :map prog-mode-map
         :prefix-map ("t" . "<tmux>")

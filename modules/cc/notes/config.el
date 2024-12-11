@@ -21,7 +21,7 @@
 ;; C-c . -- Set a timestamp
 ;; S-LEFT/S-Right -- Change by one day
 ;; ====== Footnotes =========
-;; C-c l f footnote prefix
+;; C-c m f footnote prefix
 ;; C-c C-c -- jump between definition and reference
 ;; +strike-through+
 (defvar cc/org-home-dir "~/org/"
@@ -65,7 +65,7 @@
 
 
       ;; local prefix l
-      (:prefix "C-c l"
+      (:prefix "C-c m"
 
        ;; i -- create org-id
        :desc "Create org-id" "i" #'org-id-get-create
@@ -110,7 +110,7 @@
 
 (when (modulep! :tools pdf)
   (map! (:map pdf-view-mode-map
-         :prefix "C-c l"
+         :prefix "C-c m"
          :desc "Toggle slice mode" "s"
          #'pdf-view-auto-slice-minor-mode
          :desc "Toggle themed mode" "t"
@@ -156,21 +156,26 @@
            ":PROPERTIES:\n\\(.+\n\\)+:END:\n")))
 
 
-(after! org-roam
-  (setq! org-roam-directory cc/org-roam-directory
-         org-roam-db-location cc/org-roam-db-location
-         org-roam-db-gc-threshold most-positive-fixnum
-         org-roam-graph-viewer cc/org-roam-graph-viewer
-         org-roam-dailies-directory cc/org-roam-journal-directory
-         org-roam-capture-templates
-         '(("d" "default" plain "%?"
-            :if-new (file+head "${slug}-%<%Y%m%d>.org"
-                               "#+title: ${title}\n")
-            :unnarrowed t)
-           ))
-  (org-roam-db-autosync-mode))
+
 
 (when (modulep! :lang org +roam2)
+  (after! org-roam
+    (when (>= emacs-major-version 29)
+      (setq! org-roam-database-connector 'sqlite-builtin))
+
+    (setq! org-roam-directory cc/org-roam-directory
+           org-roam-db-location cc/org-roam-db-location
+           org-roam-db-gc-threshold most-positive-fixnum
+           org-roam-graph-viewer cc/org-roam-graph-viewer
+           org-roam-dailies-directory cc/org-roam-journal-directory
+           org-roam-capture-templates
+           '(("d" "default" plain "%?"
+              :if-new (file+head "${slug}-%<%Y%m%d>.org"
+                                 "#+title: ${title}\n")
+              :unnarrowed t)
+             ))
+    (org-roam-db-autosync-mode))
+
   (use-package! org-roam-ui
     :commands org-roam-ui-mode
     :config
@@ -201,7 +206,7 @@
          anki-editor-use-math-jax t)
   :init
   (map! :map org-mode-map
-        :prefix ("C-c l a" . "<anki>")
+        :prefix ("C-c m a" . "<anki>")
         :desc "Push cards" "p" #'anki-editor-push-notes
         :desc "Cloze dwim" "c" #'anki-editor-cloze-dwim
         :desc "Cloze region" "r" #'anki-editor-cloze-region
@@ -215,7 +220,7 @@
              org-download-rename-at-point)
   :init
   (map! :map org-mode-map
-        :prefix ("C-c l d" . "<org-download>")
+        :prefix ("C-c m d" . "<org-download>")
         :desc "Insert screenshot" "i" #'org-download-screenshot
         :desc "Insert from clipboard" "y" #'org-download-clipboard
         :desc "Rename at point" "r" #'org-download-rename-at-point

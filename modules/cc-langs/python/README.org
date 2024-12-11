@@ -29,7 +29,7 @@ Use ~poetry~ to manage dependencies.
 - ~poetry run pytest~
 
 * Using In-project Language Server
-- ~poetry add --group dev "python-lsp-server[all]"~
+- ~poetry add --group dev basedpyright~
 
 * Editable Dependency
 - When you poetry install, the root package are installed as editable into your venv.
@@ -50,3 +50,12 @@ Use ~poetry~ to manage dependencies.
 (after! dap-mode
   (setq dap-python-debugger 'debugpy))
 #+end_src
+
+* TODO List
+- [ ] pyright configuration
+- [ ] type checking
+- [ ] sphinx doc?
+- [ ] debugging
+- [ ] code len?
+- [ ] tree-sitter
+- [ ] copilot, codium

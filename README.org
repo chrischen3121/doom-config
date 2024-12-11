@@ -7,7 +7,7 @@ Configurations for Doom Emacs
 ** Keybindings
 Most important prefix keys:
 - ~C-c~: global prefix key
-- ~C-c l~: local prefix key
+- ~C-c m~: local prefix key
 - ~C-c c~: ~+code~
 
 *** Common Keys
@@ -40,7 +40,7 @@ Most important prefix keys:
 | ~C-.~              | Ace jump         |
 | ~M-.~ or ~C-c s w~ | Dictionary       |
 | ~C-c t z~          | Zen mode         |
-| ~C-c l r~          | <run/eval>       |
+| ~C-c m r~          | <run/eval>       |
 
 ** Packages to Try
 - code action ~C-c a~
