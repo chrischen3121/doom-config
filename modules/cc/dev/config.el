@@ -72,7 +72,7 @@
 ;; :tools
 ;; lsp +peek
 (when (modulep! :tools lsp +peek)
-  ;; TODO: lsp default keymap is disorganized, try some and remove this keymap
+    ;; TODO: lsp default keymap is disorganized, try some and remove this keymap
   (setq! lsp-keymap-prefix (kbd "C-c l"))
   (after! lsp-mode
     (add-hook! 'lsp-mode-hook #'lsp-enable-which-key-integration))
@@ -80,7 +80,7 @@
     (setq! lsp-ui-sideline-show-diagnostics t
            lsp-ui-sideline-show-code-actions t
            lsp-ui-sideline-show-symbol t
-           lsp-ui-sideline-delay 0.5
+           lsp-ui-sideline-delay 1
            lsp-ui-imenu-buffer-position 'left
            lsp-ui-imenu-auto-refresh t
            ;; lsp-ui-imenu-refresh-delay 2
@@ -99,6 +99,7 @@
     (map! :prefix-map ("C-c l t" . "<lsp-treemacs>")
           :desc "Browse project" "b" #'+treemacs/toggle
           :desc "Errors list" "e" #'lsp-treemacs-errors-list
+          :desc "LSP UI Errors List" "E" #'lsp-ui-flycheck-list
           :desc "Incoming call hierarchy" "i" #'lsp-treemacs-call-hierarchy
           :desc "Outgoing call hierarchy" "o" (cmd!! #'lsp-treemacs-call-hierarchy t)
           :desc "Type hierarchy" "t" #'lsp-treemacs-type-hierarchy
@@ -111,7 +112,7 @@
 (when (modulep! :tools debugger)
   (map!
    :map dap-mode-map
-   (:prefix ("C-c g" . "<debugger>")
+   (:prefix ("C-c c g" . "<debugger>")
     :desc "start" "d" #'+debugger/start
     :desc "continue" "c" #'dap-continue
     :desc "next" "n" #'dap-next

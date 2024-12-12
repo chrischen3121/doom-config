@@ -127,7 +127,9 @@
 ;; enable project follow mode
 (when (modulep! :ui treemacs)
   (after! treemacs
-    (setq! treemacs-project-follow-mode t)))
+    (setq! treemacs-project-follow-mode t))
+  (after! (:and treemacs ace-window)
+    (setq! aw-ignored-buffers (delq 'treemacs-mode aw-ignored-buffers))))
 
 
 ;; :ui

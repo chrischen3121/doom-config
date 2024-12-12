@@ -106,35 +106,50 @@
       (:prefix-map ("c" . "<code>")
        :desc "Compile" "c" #'+default/compile
        :desc "Format buffer/region" "f" #'+format/region-or-buffer
-       :desc "List errors" "e" #'+default/diagnostics
        :desc "Inlay Hints Mode" "i" #'lsp-inlay-hints-mode
        (:when (modulep! :tools make)
          :desc "Make run target" "m" #'+make/run
          :desc "Make run last" "M" #'+make/run-last)
-
        (:when (and (modulep! :tools lsp) (not (modulep! :tools lsp +eglot)))
          :desc "LSP Code actions" "a" #'lsp-execute-code-action
          :desc "LSP Organize imports" "o" #'lsp-organize-imports
-         :desc "LSP Rename" "r" #'lsp-rename)
+         :desc "LSP Rename" "r" #'lsp-rename
+         (:prefix-map ("w" . "<workspaces>")
+          :desc "Start workspace" "s" #'lsp
+          :desc "Describe workspace" "d" #'lsp-describe-session
+          :desc "Disconnect workspace" "D" #'lsp-disconnect
+          :desc "Shutdown workspace" "q" #'lsp-workspace-shutdown
+          :desc "Add directory" "a" #'lsp-workspace-folders-add
+          :desc "Remove directory" "r" #'lsp-workspace-folders-remove
+          :desc "Remove all directories" "R" #'lsp-workspace-folders-remove-all
+          :desc "Unblock directories" "b" #'lsp-workspace-blocks-remove))
        (:when (modulep! :tools lsp +peek)
-         :desc "LSP Doc glance" "g" #'lsp-ui-doc-glance)
+         :desc "Peek documentation" "p" #'lsp-ui-doc-glance)
        (:when (modulep! :completion vertico)
          :desc "Jump to symbol" "j"   #'consult-lsp-symbols))
 
       ;; C-c k --- lookup
       (:prefix-map ("k" . "<lookup>")
-       :desc "Jump to definition" "l" #'+lookup/definition
+       :desc "Jump to definition" "." #'+lookup/definition
        :desc "Jump to references" "r" #'+lookup/references
+       :desc "Jump to documentation" "k" #'+lookup/documentation
        :desc "Find implementations" "i" #'+lookup/implementations
-       :desc "Jump to documentation" "d" #'+lookup/documentation
        :desc "Find type definition" "t" #'+lookup/type-definition
        :desc "Search online" "o" #'+lookup/online
+       (:when (modulep! :completion vertico)
+         :desc "Search symbol" "s" #'consult-lsp-symbols)
        (:when (modulep! :tools lookup +docsets)
+         :prefix-map ("d" . "<docsets>")
          :desc "Search in docsets" "s" #'+lookup/in-docsets
-         :desc "Search in all docsets" "S" #'+lookup/in-all-docsets
-         :desc "Install offline docsets""D" #'dash-docs-install-docset)
+         :desc "Search in all docsets" "a" #'+lookup/in-all-docsets
+         :desc "Install offline docsets""i" #'dash-docs-install-docset)
        (:when (modulep! :tools lsp +peek)
-         :desc "LSP Doc glance" "g" #'lsp-ui-doc-glance))
+         :prefix-map ("p" . "<lsp-peek>")
+         :desc "Peek documentation" "p" #'lsp-ui-doc-glance
+         :desc "Peek definition" "d" #'lsp-ui-peek-find-definitions
+         :desc "Peek references" "r" #'lsp-ui-peek-find-references
+         :desc "Peek type definition" "t" #'lsp-ui-peek-find-type-definition
+         :desc "Peek implementations" "i" #'lsp-ui-peek-find-implementations))
 
       ;; DONE C-c f --- file
       (:prefix-map ("f" . "<file>")
