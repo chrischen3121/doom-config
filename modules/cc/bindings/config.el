@@ -94,7 +94,6 @@
        (:when (modulep! :ui indent-guides)
          :desc "Indent guides" "i" #'indent-bars-mode))
 
-
       ;; C-c y --- snippets
       (:prefix-map ("y" . "<snippets>")
        :desc "New snippet" "n" #'+snippets/new
@@ -121,7 +120,7 @@
           :desc "Shutdown workspace" "q" #'lsp-workspace-shutdown
           :desc "Add directory" "a" #'lsp-workspace-folders-add
           :desc "Remove directory" "r" #'lsp-workspace-folders-remove
-          :desc "Remove all directories" "R" #'lsp-workspace-folders-remove-all
+          :desc "Remove all directories" "R" #'lsp-workspace-remove-all-folders
           :desc "Unblock directories" "b" #'lsp-workspace-blocks-remove))
        (:when (modulep! :tools lsp +peek)
          :desc "Peek documentation" "p" #'lsp-ui-doc-glance)
@@ -151,7 +150,7 @@
          :desc "Peek type definition" "t" #'lsp-ui-peek-find-type-definition
          :desc "Peek implementations" "i" #'lsp-ui-peek-find-implementations))
 
-      ;; DONE C-c f --- file
+      ;; C-c f --- file
       (:prefix-map ("f" . "<file>")
        :desc "Recent files" "r"
        (cond ((modulep! :completion vertico) #'consult-recent-file)

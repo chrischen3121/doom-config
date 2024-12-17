@@ -68,7 +68,11 @@
     (setf
      (alist-get 'prog-mode +spell-excluded-faces-alist)
      '(font-lock-constant-face
-       font-lock-string-face)) ; TODO: wait for official fix, should disable spell-fu in string
+       font-lock-string-face))
+    (setq! spell-fu-ignore-modes
+           '(emacs-lisp-mode prog-mode python-mode c++-mode))
+    ;; TODO: wait for official fix, should disable spell-fu in string
+
     (map!
      :map general-override-mode-map
      :prefix ("C-c 1 s" . "<spell-check>")

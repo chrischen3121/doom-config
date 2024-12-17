@@ -27,6 +27,14 @@
   (after! company-box
     (setq-hook! 'company-box-mode-hook company-box-doc-delay 2)))
 
+(defun merge-sort (a b)
+  "Merge two sorted lists A and B."
+  (if (or (null a) (null b))
+      b
+    (if (< (car a) (car b))
+        (cons (car a) (merge-sort (cdr a) b))
+      (cons (car b) (merge-sort a (cdr b))))))
+
 ;; :editor
 ;; fold
 (when (modulep! :editor fold)
@@ -72,7 +80,7 @@
 ;; :tools
 ;; lsp +peek
 (when (modulep! :tools lsp +peek)
-    ;; TODO: lsp default keymap is disorganized, try some and remove this keymap
+  ;; TODO: lsp default keymap is disorganized, try some and remove this keymap
   (setq! lsp-keymap-prefix (kbd "C-c l"))
   (after! lsp-mode
     (add-hook! 'lsp-mode-hook #'lsp-enable-which-key-integration))
@@ -112,92 +120,100 @@
 (when (modulep! :tools debugger)
   (map!
    :map dap-mode-map
-   (:prefix ("C-c c g" . "<debugger>")
-    :desc "start" "d" #'+debugger/start
+   (:prefix-map ("C-c g" . "<debugger>")
+    :desc "start" "g" #'+debugger/start
     :desc "continue" "c" #'dap-continue
     :desc "next" "n" #'dap-next
     :desc "step-in" "i" #'dap-step-in
     :desc "step-out" "o" #'dap-step-out
     :desc "restart" "r" #'dap-debug-restart
-    :desc "quit" "q" #'+debugger/quit)
-   (:prefix ("C-c g b" . "breakpoints")
-    :desc "Toggle bp" "b" #'dap-breakpoint-toggle
-    :desc "Add bp" "a" #'dap-breakpoint-add
-    :desc "Delete bp" "d" #'dap-breakpoint-delete
-    :desc "Delete all bp" "D" #'dap-breakpoint-delete-all
-    :desc "Add condition" "c" #'dap-breakpoint-condition
-    :desc "Hit condition" "h" #'dap-breakpoint-hit-condition
-    :desc "Log message" "l" #'dap-breakpoint-log-message)
-   (:prefix "C-c m r"
-    :desc "Dap eval" "e" #'dap-eval
-    :desc "Dap eval region" "r" #'dap-eval-region
-    :desc "Dap eval at point" "t" #'dap-eval-thing-at-point)))
+    :desc "quit" "q" #'+debugger/quit
+    (:prefix-map ("b" . "<breakpoints>")
+     :desc "Toggle bp" "b" #'dap-breakpoint-toggle
+     :desc "Add bp" "a" #'dap-breakpoint-add
+     :desc "Delete bp" "d" #'dap-breakpoint-delete
+     :desc "Delete all bp" "D" #'dap-breakpoint-delete-all
+     :desc "Add condition" "c" #'dap-breakpoint-condition
+     :desc "Hit condition" "h" #'dap-breakpoint-hit-condition
+     :desc "Log message" "l" #'dap-breakpoint-log-message)
+    (:prefix-map ("e" . "<eval>")
+     :desc "Dap eval" "e" #'dap-eval
+     :desc "Dap eval region" "r" #'dap-eval-region
+     :desc "Dap eval at point" "t" #'dap-eval-thing-at-point))))
 
-;; :tools
-;; upload
-;; TODO: add descriptions for ssh-deploy keybindings
-(when (modulep! :tools upload)
-  (map! :after ssh-deploy
-        :desc "<ssh-upload>" "C-c r u" #'ssh-deploy-prefix-map))
+  ;; :tools
+  ;; upload
+  ;; TODO: add descriptions for ssh-deploy keybindings
+  (when (modulep! :tools upload)
+    (map! :after ssh-deploy
+          :desc "<ssh-upload>" "C-c r u" #'ssh-deploy-prefix-map))
 
-;; :ui
-;; indent-guide
-(when (modulep! :ui indent-guides)
-  (defun cc/inhibit-for-specified-modes ()
-    "Inhibit indent-guides mode if the current mode is in the specified list."
-    (member major-mode '(org-mode)))
+  ;; :ui
+  ;; indent-guide
+  (when (modulep! :ui indent-guides)
+    (defun cc/inhibit-for-specified-modes ()
+      "Inhibit indent-guides mode if the current mode is in the specified list."
+      (member major-mode '(org-mode)))
 ;;;###package indent-bars
-  (add-hook! '+indent-guides-inhibit-functions #'cc/inhibit-for-specified-modes))
+    (add-hook! '+indent-guides-inhibit-functions #'cc/inhibit-for-specified-modes))
 
-;; :tools
-;; eval
-;; check `quickrun--language-alist' for languages
-;; to add new or overwrite, See:
-;; https://github.com/emacsorphanage/quickrun?tab=readme-ov-file#user-defined-command
-;; TODO check with python
-;; (when (modulep! :tools eval)
-;;   (map! :map (prog-mode-map emacs-lisp-mode-map)
-;;         :prefix ("C-c m e" . "eval")
-;;         :desc "Eval line" "l" #'+eval/line-or-region
-;;         :desc "Eval buffer" "b" #'+eval/buffer-or-region
-;;         :desc "Region to REPL" "s" #'+eval/send-region-to-repl
-;;         :desc "Open REPL same window" "r" #'+eval/open-repl-same-window
-;;         :desc "Open REPL other window" "R" #'+eval/open-repl-other-window))
+  ;; :tools
+  ;; eval
+  ;; check `quickrun--language-alist' for languages
+  ;; to add new or overwrite, See:
+  ;; https://github.com/emacsorphanage/quickrun?tab=readme-ov-file#user-defined-command
+  ;; TODO check with python
+  ;; (when (modulep! :tools eval)
+  ;;   (map! :map (prog-mode-map emacs-lisp-mode-map)
+  ;;         :prefix ("C-c m e" . "eval")
+  ;;         :desc "Eval line" "l" #'+eval/line-or-region
+  ;;         :desc "Eval buffer" "b" #'+eval/buffer-or-region
+  ;;         :desc "Region to REPL" "s" #'+eval/send-region-to-repl
+  ;;         :desc "Open REPL same window" "r" #'+eval/open-repl-same-window
+  ;;         :desc "Open REPL other window" "R" #'+eval/open-repl-other-window))
 
-;; [Packages]
-;; Rainbow mode: highlight color string
-;; (use-package! rainbow-mode
-;;   :hook ((emacs-lisp-mode html-mode css-mode) . rainbow-mode))
+  ;; [Packages]
+  ;; Rainbow mode: highlight color string
+  ;; (use-package! rainbow-mode
+  ;;   :hook ((emacs-lisp-mode html-mode css-mode) . rainbow-mode))
 
-;; Codeium: NOTE wait for the async company-backend
-;; cape-capf-super solution is still experimental
+  ;; rainbow-mode
+  (use-package! rainbow-mode
+    :hook ((emacs-lisp-mode html-mode css-mode scss-mode) . rainbow-mode)
+    :config
+    (add-hook! 'rainbow-mode-hook
+      (hl-line-mode (if rainbow-mode -1 +1))))
 
-
-;; rainbow-mode
-(use-package! rainbow-mode
-  :hook ((emacs-lisp-mode html-mode css-mode scss-mode) . rainbow-mode)
-  :config
-  (add-hook! 'rainbow-mode-hook
-    (hl-line-mode (if rainbow-mode -1 +1))))
-
-;; Github Copilot
-(use-package! copilot
-  :hook ((prog-mode git-commit-setup conf-mode yaml-mode) . copilot-mode)
-  :config
-  (setq! copilot-indent-offset-warning-disable t)
-  (map! :map copilot-completion-map
-        "<backtab>" #'copilot-accept-completion
-        "M-w" #'copilot-accept-completion-by-word
-        "M-l" #'copilot-accept-completion-by-line
-        "M-n" #'copilot-next-completion
-        "M-p" #'copilot-previous-completion)
+  ;; Github Copilot
+  (use-package! copilot
+    :hook ((prog-mode git-commit-setup conf-mode yaml-mode) . copilot-mode)
+    :config
+    (setq! copilot-indent-offset-warning-disable t)
+    (map! :map copilot-completion-map
+          "<backtab>" #'copilot-accept-completion
+          "M-w" #'copilot-accept-completion-by-word
+          "M-l" #'copilot-accept-completion-by-line
+          "M-n" #'copilot-next-completion
+          "M-p" #'copilot-previous-completion)
 ;;;###package whitespace
-  ;; For Github Copilot compatibility
-  ;; Cursor Jump to End of Line When Typing
-  ;; If you are using whitespace-mode, make sure to remove newline-mark from whitespace-style.
-  (setq! whitespace-style (delq 'newline-mark whitespace-style)))
+    ;; For Github Copilot compatibility
+    ;; Cursor Jump to End of Line When Typing
+    ;; If you are using whitespace-mode, make sure to remove newline-mark from whitespace-style.
+    (setq! whitespace-style (delq 'newline-mark whitespace-style)))
 
-;; Langs
-(add-hook! 'sh-mode-hook
-  (defun cc/set-default-shell ()
-    (sh-set-shell "bash")))
+  ;; TODO may try Codeium later on
+  ;; codeium-completion-at-point should be the first in the completion-at-point-functions
+  ;; which is imcompatible with lsp
+  ;; enable company-preview-frontend if using codeium
+  ;; (use-package! codeium
+  ;;   :init
+  ;;   (codeium-init)
+  ;;   (add-hook! 'prog-mode-hook
+  ;;     (defun cc/set-codeium-capf ()
+  ;;       :local (add-to-list 'completion-at-point-functions
+  ;;                           #'codeium-completion-at-point))))
+
+  ;; Langs
+  (add-hook! 'sh-mode-hook
+    (defun cc/set-default-shell ()
+      (sh-set-shell "bash")))

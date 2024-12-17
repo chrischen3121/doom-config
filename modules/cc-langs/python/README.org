@@ -52,10 +52,11 @@ Use ~poetry~ to manage dependencies.
 #+end_src
 
 * TODO List
-- [ ] pyright configuration
-- [ ] type checking
-- [ ] sphinx doc?
+- [X] pyright configuration
+- [X] type checking
+- [X] disable spelling check for comments
+- [X] sphinx doc?
+- [X] copilot, codeium
+- [X] codelens? basedpyright doesn't support
 - [ ] debugging
-- [ ] code len?
-- [ ] tree-sitter
-- [ ] copilot, codium
+- [ ] tree-sitter (use emacs29+ built-in instead)

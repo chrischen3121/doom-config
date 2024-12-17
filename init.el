@@ -66,7 +66,7 @@
 
        :checkers
        syntax                          ; tasing you for every semicolon you forget
-       (spell +aspell +everywhere)   ; tasing you for misspelling mispelling
+       (spell +aspell)   ; tasing you for misspelling mispelling (+everywhere disabled)
        ;;[opt]grammar                       ; tasing grammar mistake every you make
 
        :tools
@@ -85,7 +85,7 @@
        pdf                 ; pdf enhancements
        tmux
        ;;terraform         ; May try it: infrastructure as code, try it when using cloud services
-       ;;tree-sitter       ; syntax and parsing, sitting in a tree...
+       ;;tree-sitter       ; use the built-in in Emacs29+ instead
        upload            ; map local to remote projects via ssh/ftp
 
        :os
