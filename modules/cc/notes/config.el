@@ -161,7 +161,10 @@
 (when (modulep! :lang org +roam2)
   (after! org-roam
     (when (>= emacs-major-version 29)
-      (setq! org-roam-database-connector 'sqlite-builtin))
+      ;; HACK https://github.com/org-roam/org-roam-ui/issues/289
+      ;; emacs29 will set value to sqlite-builtin, only first file tag works
+      (setq! org-roam-database-connector 'sqlite)
+      )
 
     (setq! org-roam-directory cc/org-roam-directory
            org-roam-db-location cc/org-roam-db-location
@@ -184,9 +187,7 @@
            org-roam-ui-update-on-save t
            org-roam-ui-open-on-start t)
     :init
-    ;; HACK https://github.com/org-roam/org-roam-ui/issues/289
-    ;; emacs29 will set value to sqlite-builtin, only first file tag works
-    (setq! org-roam-database-connector 'sqlite)
+
     (map! :prefix ("C-c n u" . "<org-roam-ui>")
           :desc "Start roam UI" "u" #'org-roam-ui-mode
           :desc "Open new UI page" "o" #'org-roam-ui-open
