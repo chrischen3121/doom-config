@@ -119,27 +119,20 @@
 ;; debugger
 (when (modulep! :tools debugger)
   (map!
-   :map dap-mode-map
-   (:prefix-map ("C-c g" . "<debugger>")
-    :desc "start" "g" #'+debugger/start
-    :desc "continue" "c" #'dap-continue
-    :desc "next" "n" #'dap-next
-    :desc "step-in" "i" #'dap-step-in
-    :desc "step-out" "o" #'dap-step-out
-    :desc "restart" "r" #'dap-debug-restart
-    :desc "quit" "q" #'+debugger/quit
-    (:prefix-map ("b" . "<breakpoints>")
-     :desc "Toggle bp" "b" #'dap-breakpoint-toggle
-     :desc "Add bp" "a" #'dap-breakpoint-add
-     :desc "Delete bp" "d" #'dap-breakpoint-delete
-     :desc "Delete all bp" "D" #'dap-breakpoint-delete-all
-     :desc "Add condition" "c" #'dap-breakpoint-condition
-     :desc "Hit condition" "h" #'dap-breakpoint-hit-condition
-     :desc "Log message" "l" #'dap-breakpoint-log-message)
-    (:prefix-map ("e" . "<eval>")
-     :desc "Dap eval" "e" #'dap-eval
-     :desc "Dap eval region" "r" #'dap-eval-region
-     :desc "Dap eval at point" "t" #'dap-eval-thing-at-point))))
+   :prefix-map ("C-c g" . "<debugger>")
+   :desc "run" "s" #'+debugger/start
+   :desc "quit" "q" #'+debugger/quit)
+  (remove-hook! 'dap-ui-mode-hook #'dap-ui-controls-mode)
+  (remove-hook! 'dap-mode-hook #'dap-tooltip-mode)
+  (setq! dap-auto-configure-features
+         '(sessions locals breakpoints expressions))
+  (after! dap-mode
+    (map!
+     :map dap-mode-map
+     :prefix "C-c g"
+     :desc "dap-debug" "g" #'dap-debug
+     :desc "dap-hydra" "h" #'dap-hydra))
+  )
 
 ;; :tools
 ;; upload
