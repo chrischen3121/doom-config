@@ -27,8 +27,8 @@
        deft              ; notational velocity for Emacs
        doom              ; what makes DOOM look the way it does
        doom-dashboard    ; a nifty splash screen for Emacs
-       doom-quit         ; DOOM quit-message prompts when you quit Emacs
-       (emoji +ascii +unicode)  ; 🙂
+       doom-quit         ; DOOM quit-message prompts when you quit Emacs ;
+       (emoji +unicode)  ; 🙂
        hl-todo           ; highlight TODO/FIXME/NOTE/DEPRECATED/HACK/REVIEW
        indent-guides     ; highlighted indent columns
        minimap           ; show a map of the code on the side
@@ -85,7 +85,7 @@
        pdf                 ; pdf enhancements
        tmux
        ;;terraform         ; May try it: infrastructure as code, try it when using cloud services
-       ;;tree-sitter       ; use the built-in in Emacs29+ instead
+       tree-sitter       ; TODO use the built-in in Emacs29+ instead later on
        upload            ; map local to remote projects via ssh/ftp
 
        :os
@@ -114,18 +114,19 @@
        ;;fortran           ; in FORTRAN, GOD is REAL (unless declared INTEGER)
        ;;fsharp            ; ML stands for Microsoft's Language
        ;;fstar             ; (dependent) types and (monadic) effects and Z3
+       graphviz
        ;;gdscript          ; the language you waited for
        ;;(go +lsp)         ; the hipster dialect
        ;;(graphql +lsp)    ; Give queries a REST
        ;;(haskell +lsp)    ; a language that's lazier than I am
        ;;hy                ; readability of scheme w/ speed of python
        ;;idris             ; a language you can depend on
-       (json +lsp)       ; At least it ain't XML
+       (json +lsp +tree-sitter)       ; At least it ain't XML
        ;;(java +lsp)       ; the poster child for carpal tunnel syndrome
-       ;;[opt](javascript +lsp) ; all(hope(abandon(ye(who(enter(here))))))
+       (javascript +lsp +tree-sitter) ; all(hope(abandon(ye(who(enter(here))))))
        ;;julia             ; a better, faster MATLAB
        ;;kotlin            ; a better, slicker Java(Script)
-       (latex +cdlatex)      ;[opt]flags writing papers in Emacs has never been so fun
+       (latex +cdlatex)      ; NOTE may try +lsp
        ;;lean              ; for folks with too much to prove
        ;;ledger            ; be audit you can be
        ;;lua               ; one-based indices? one-based indices
@@ -138,12 +139,15 @@
        plantuml          ; diagrams for confusing people more
        ;;purescript        ; javascript, but functional
        (python +lsp +pyenv +poetry +pyright +tree-sitter) ; beautiful is better than ugly
-       ;;[opt] qt                ; the 'cutest' gui framework ever
+       qt                ; the 'cutest' gui framework ever
        ;;racket            ; a DSL for DSLs
+       rst                 ; ReST in peace TODO pipx install rstfmt for formatting
+       (rest + jq)         ; Emacs as a REST client +jq Enable support for reading and processing REST responses with jq
+       (sh +lsp +tree-sitter)
        ;;swift             ; who asked for emoji variables?
        ;;terra             ; Earth and Moon in alignment for performance.
-       ;;web               ; the tubes
-       (yaml +lsp)        ; JSON, but readable
+       (web +lsp +tree-sitter)   ; support for various web languages, including HTML5, CSS, SASS/SCSS, as well as Django
+       (yaml +lsp +tree-sitter)        ; JSON, but readable
        ;;zig               ; C, but simpler
 
        :email

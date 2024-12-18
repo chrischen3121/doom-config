@@ -1,4 +1,5 @@
 ;; -*- no-byte-compile: t; -*-
 ;;; cc-langs/python/packages.el
 
-(package! sphinx-doc)
+(unless (modulep! :lang rst)
+  (package! sphinx-doc))

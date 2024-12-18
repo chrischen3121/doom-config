@@ -141,79 +141,137 @@
      :desc "Dap eval region" "r" #'dap-eval-region
      :desc "Dap eval at point" "t" #'dap-eval-thing-at-point))))
 
-  ;; :tools
-  ;; upload
-  ;; TODO: add descriptions for ssh-deploy keybindings
-  (when (modulep! :tools upload)
-    (map! :after ssh-deploy
-          :desc "<ssh-upload>" "C-c r u" #'ssh-deploy-prefix-map))
+;; :tools
+;; upload
+;; TODO: add descriptions for ssh-deploy keybindings
+(when (modulep! :tools upload)
+  (map! :after ssh-deploy
+        :desc "<ssh-upload>" "C-c r u" #'ssh-deploy-prefix-map))
 
-  ;; :ui
-  ;; indent-guide
-  (when (modulep! :ui indent-guides)
-    (defun cc/inhibit-for-specified-modes ()
-      "Inhibit indent-guides mode if the current mode is in the specified list."
-      (member major-mode '(org-mode)))
+;; :ui
+;; indent-guide
+(when (modulep! :ui indent-guides)
+  (defun cc/inhibit-for-specified-modes ()
+    "Inhibit indent-guides mode if the current mode is in the specified list."
+    (member major-mode '(org-mode)))
 ;;;###package indent-bars
-    (add-hook! '+indent-guides-inhibit-functions #'cc/inhibit-for-specified-modes))
+  (add-hook! '+indent-guides-inhibit-functions #'cc/inhibit-for-specified-modes))
 
-  ;; :tools
-  ;; eval
-  ;; check `quickrun--language-alist' for languages
-  ;; to add new or overwrite, See:
-  ;; https://github.com/emacsorphanage/quickrun?tab=readme-ov-file#user-defined-command
-  ;; TODO check with python
-  ;; (when (modulep! :tools eval)
-  ;;   (map! :map (prog-mode-map emacs-lisp-mode-map)
-  ;;         :prefix ("C-c m e" . "eval")
-  ;;         :desc "Eval line" "l" #'+eval/line-or-region
-  ;;         :desc "Eval buffer" "b" #'+eval/buffer-or-region
-  ;;         :desc "Region to REPL" "s" #'+eval/send-region-to-repl
-  ;;         :desc "Open REPL same window" "r" #'+eval/open-repl-same-window
-  ;;         :desc "Open REPL other window" "R" #'+eval/open-repl-other-window))
+;; :tools
+;; eval
+;; check `quickrun--language-alist' for languages
+;; to add new or overwrite, See:
+;; https://github.com/emacsorphanage/quickrun?tab=readme-ov-file#user-defined-command
+;; TODO check with python
+;; (when (modulep! :tools eval)
+;;   (map! :map (prog-mode-map emacs-lisp-mode-map)
+;;         :prefix ("C-c m e" . "eval")
+;;         :desc "Eval line" "l" #'+eval/line-or-region
+;;         :desc "Eval buffer" "b" #'+eval/buffer-or-region
+;;         :desc "Region to REPL" "s" #'+eval/send-region-to-repl
+;;         :desc "Open REPL same window" "r" #'+eval/open-repl-same-window
+;;         :desc "Open REPL other window" "R" #'+eval/open-repl-other-window))
 
-  ;; [Packages]
-  ;; Rainbow mode: highlight color string
-  ;; (use-package! rainbow-mode
-  ;;   :hook ((emacs-lisp-mode html-mode css-mode) . rainbow-mode))
+;; [Packages]
+;; Rainbow mode: highlight color string
+;; (use-package! rainbow-mode
+;;   :hook ((emacs-lisp-mode html-mode css-mode) . rainbow-mode))
 
-  ;; rainbow-mode
-  (use-package! rainbow-mode
-    :hook ((emacs-lisp-mode html-mode css-mode scss-mode) . rainbow-mode)
-    :config
-    (add-hook! 'rainbow-mode-hook
-      (hl-line-mode (if rainbow-mode -1 +1))))
+;; rainbow-mode
+(use-package! rainbow-mode
+  :hook ((emacs-lisp-mode html-mode css-mode scss-mode) . rainbow-mode)
+  :config
+  (add-hook! 'rainbow-mode-hook
+    (hl-line-mode (if rainbow-mode -1 +1))))
 
-  ;; Github Copilot
-  (use-package! copilot
-    :hook ((prog-mode git-commit-setup conf-mode yaml-mode) . copilot-mode)
-    :config
-    (setq! copilot-indent-offset-warning-disable t)
-    (map! :map copilot-completion-map
-          "<backtab>" #'copilot-accept-completion
-          "M-w" #'copilot-accept-completion-by-word
-          "M-l" #'copilot-accept-completion-by-line
-          "M-n" #'copilot-next-completion
-          "M-p" #'copilot-previous-completion)
+;; Github Copilot
+(use-package! copilot
+  :hook ((prog-mode git-commit-setup conf-mode yaml-mode) . copilot-mode)
+  :config
+  (setq! copilot-indent-offset-warning-disable t)
+  (map! :map copilot-completion-map
+        "<backtab>" #'copilot-accept-completion
+        "M-w" #'copilot-accept-completion-by-word
+        "M-l" #'copilot-accept-completion-by-line
+        "M-n" #'copilot-next-completion
+        "M-p" #'copilot-previous-completion)
 ;;;###package whitespace
-    ;; For Github Copilot compatibility
-    ;; Cursor Jump to End of Line When Typing
-    ;; If you are using whitespace-mode, make sure to remove newline-mark from whitespace-style.
-    (setq! whitespace-style (delq 'newline-mark whitespace-style)))
+  ;; For Github Copilot compatibility
+  ;; Cursor Jump to End of Line When Typing
+  ;; If you are using whitespace-mode, make sure to remove newline-mark from whitespace-style.
+  (setq! whitespace-style (delq 'newline-mark whitespace-style)))
 
-  ;; TODO may try Codeium later on
-  ;; codeium-completion-at-point should be the first in the completion-at-point-functions
-  ;; which is imcompatible with lsp
-  ;; enable company-preview-frontend if using codeium
-  ;; (use-package! codeium
-  ;;   :init
-  ;;   (codeium-init)
-  ;;   (add-hook! 'prog-mode-hook
-  ;;     (defun cc/set-codeium-capf ()
-  ;;       :local (add-to-list 'completion-at-point-functions
-  ;;                           #'codeium-completion-at-point))))
+;; TODO may try Codeium later on
+;; codeium-completion-at-point should be the first in the completion-at-point-functions
+;; which is imcompatible with lsp
+;; enable company-preview-frontend if using codeium
+;; (use-package! codeium
+;;   :init
+;;   (codeium-init)
+;;   (add-hook! 'prog-mode-hook
+;;     (defun cc/set-codeium-capf ()
+;;       :local (add-to-list 'completion-at-point-functions
+;;                           #'codeium-completion-at-point))))
 
-  ;; Langs
-  (add-hook! 'sh-mode-hook
-    (defun cc/set-default-shell ()
-      (sh-set-shell "bash")))
+;; Langs
+(add-hook! 'sh-mode-hook
+  (defun cc/set-default-shell ()
+    (sh-set-shell "bash")))
+
+(when (modulep! :tools tree-sitter)
+  (setq! +tree-sitter-hl-enabled-modes
+         '(python-mode
+           ;; FIXME not confirmed below
+           cc-mode
+           json-mode
+           yaml-mode
+           sh-mode
+           css-mode
+           html-mode
+           dockerfile-mode
+           editorconfig-mode
+           makefile-mode
+           cmake-mode
+           js2-mode
+           typescript-mode
+           )))
+
+;; built-in treesit
+;; TODO no syntax hightlight feature in built-in treesit
+;; (when (>= emacs-major-version 29)
+;;
+;;   (use-package! treesit
+;;     :preface
+;;     (defun cc/install-treesit-grammars ()
+;;       (interactive)
+;;       (dolist (grammar
+;;                '((python "https://github.com/tree-sitter/tree-sitter-python")
+;;                  (elisp "https://github.com/Wilfred/tree-sitter-elisp")
+;;                  (bash "https://github.com/tree-sitter/tree-sitter-bash")
+;;                  (cmake "https://github.com/uyha/tree-sitter-cmake")
+;;                  (html "https://github.com/tree-sitter/tree-sitter-html")
+;;                  (javascript "https://github.com/tree-sitter/tree-sitter-javascript" "master" "src")
+;;                  (json "https://github.com/tree-sitter/tree-sitter-json")
+;;                  (yaml "https://github.com/ikatyang/tree-sitter-yaml")))
+;;         (add-to-list 'treesit-language-source-alist grammar)
+;;         (unless (treesit-language-available-p (car grammar))
+;;           (treesit-install-language-grammar (car grammar)))))
+;;     :config
+;;     (cc/install-treesit-grammars)
+;;     (dolist (mapping
+;;              '((python-mode . python-ts-mode)
+;;                (sh-mode . bash-ts-mode)
+;;                (cmake-mode . cmake-ts-mode)
+;;                (js-mode . js-ts-mode)
+;;                (json-mode . json-ts-mode)
+;;                (yaml-mode . yaml-ts-mode)))
+;;       (add-to-list 'major-mode-remap-alist mapping))
+;;     (setq! font-lock-support-mode #'tree-sitter-lock-mode)
+;;     ;; TODO to modify all hooks...
+;;     (setq! c++-ts-mode-hook c++-mode-hook)
+;;     )
+;;   (use-package combobulate
+;;     :init
+;;     (setq! combobulate-key-prefix "C-c ;") ; FIXME waiting for PR
+;;     (add-hook! 'prog-mode-hook #'combobulate-mode))
+;;   )
