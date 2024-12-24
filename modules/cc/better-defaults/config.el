@@ -78,7 +78,8 @@
      :prefix ("C-c 1 s" . "<spell-check>")
      :desc "Correct word at point" "c" #'+spell/correct
      :desc "Add word at point" "a" #'+spell/add-word
-     :desc "Remove word at point" "r" #'+spell/remove-word
+     :desc "Remove word at point" "R" #'+spell/remove-word
+     :desc "Reset word cache" "r" #'spell-fu-reset
      :desc "Goto next error" "n" #'spell-fu-goto-next-error
      :desc "Goto previous error" "p" #'spell-fu-goto-previous-error)
     (add-hook! 'spell-fu-mode-hook
