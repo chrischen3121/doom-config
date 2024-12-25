@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: plantuml snippet
+# key: <uml
+# --
+#+begin_src plantuml :file images/puml/${1:filename}.png
+@startuml
+$0
+@enduml
+#+end_src
