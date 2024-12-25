@@ -2,7 +2,7 @@
 # name: plantuml snippet
 # key: <uml
 # --
-#+begin_src plantuml :file images/puml/${1:filename}.png
+#+begin_src plantuml :file puml/${1:dir}/${2:filename}.png
 @startuml
 $0
 @enduml

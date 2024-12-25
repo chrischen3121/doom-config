@@ -145,8 +145,8 @@
            :desc "Insert precise note" "M-e" #'org-noter-insert-precise-note))))
 
 (when (modulep! :lang plantuml)
-  (after! plantuml
-    (setq! plantuml-default-exec-mode 'executable)))
+  (setq! plantuml-default-exec-mode 'executable
+         plantuml-indent-level 4))
 
 ;; :ui
 ;; deft
