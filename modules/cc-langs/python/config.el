@@ -22,6 +22,7 @@
   )
 
 (when (modulep! :lang python +poetry)
+  (setq! poetry-tracking-strategy 'projectile)
   (map! :map python-mode-map
         :desc "poetry" "C-c m p" #'poetry))
 
