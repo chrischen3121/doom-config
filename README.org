@@ -13,8 +13,8 @@ Most important prefix keys:
 *** Common Keys
 - ~C-c 1~: check
 - ~C-c 2~: fold
-- ~C-c 3~: workspace
 - ~C-c 4~: tab
+- ~C-c w~: workspace
 - ~C-c y~: yasnippet
 
 *** F<key>
@@ -35,7 +35,7 @@ Most important prefix keys:
 | ~C-c 1 g~          | Grammar commands |
 | ~C-c 1 s~          | Spell commands   |
 | ~C-c 2~            | <fold>           |
-| ~C-c 3~            | <workspace>      |
+| ~C-c w~            | <workspace>      |
 | ~C-c 4~            | <tab>            |
 | ~C-.~              | Ace jump         |
 | ~M-.~ or ~C-c s w~ | Dictionary       |

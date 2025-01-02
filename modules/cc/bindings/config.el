@@ -4,7 +4,7 @@
 ;; persp-mode and projectile in different prefixes
 (when (modulep! :ui workspaces)
   (setq! persp-keymap-prefix (kbd "C-c w p"))
-  (which-key-add-key-based-replacements "C-c w p" "persp-mode"))
+  (which-key-add-key-based-replacements "C-c w p" "<persp-mode>"))
 
 ;; Unset global keybindings
 (undefine-key! global-map
@@ -223,17 +223,15 @@
          ;; workspace
          :desc "New workspace" "n" #'+workspace/new-named
          :desc "Save workspace" "s" #'+workspace/save
-         :desc "Restore workspace" "r" #'+workspace/load
+         :desc "Load workspace" "l" #'+workspace/load
          :desc "Delete workspace" "d" #'+workspace/delete
          :desc "Switch workspace" "w" #'+workspace/switch-to
-         :desc "Display workspaces" "l" #'+workspace/display
+         :desc "Display workspaces" "L" #'+workspace/display
          :desc "Switch to last workspace" "o" #'+workspace/other
 
          ;; session
-         :desc "[Session] Load" "L" #'doom/load-session
-         :desc "[Session] Save" "S" #'doom/save-session
-         :desc "[Session] Load last" "q" #'doom/quickload-session))
-
+         :desc "Load last session" "q" #'doom/quickload-session
+         ))
 
       ;; C-c s --- search
       (:prefix-map ("s" . "<search>")
