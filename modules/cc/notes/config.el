@@ -33,14 +33,11 @@
 (defvar cc/org-pdf-notes-dir "~/org/pdf-notes/"
   "Org pdf notes directory.")
 
-(defvar cc/org-roam-directory "~/org/roam/"
-  "Org-roam directory.")
+(defvar cc/org-roam-base-dir "~/org/roam/"
+  "Org-roam base directory in which all roam projects are stored.")
 
 (defvar cc/org-roam-journal-directory "~/org/roam/journal/"
   "Org-roam journal directory.")
-
-(defvar cc/org-roam-db-location "~/org/roam/org-roam.db"
-  "Org-roam database location.")
 
 (defvar cc/org-roam-graph-viewer "google-chrome"
   "Org-roam graph viewer.")
@@ -64,7 +61,7 @@
        :desc "Insert link" "l" #'org-insert-link)
 
 
-      ;; local prefix l
+      ;; local prefix m
       (:prefix "C-c m"
 
        ;; i -- create org-id
@@ -160,8 +157,6 @@
            ":PROPERTIES:\n\\(.+\n\\)+:END:\n")))
 
 
-
-
 (when (modulep! :lang org +roam2)
   (after! org-roam
     (when (>= emacs-major-version 29)
@@ -173,7 +168,6 @@
 
       (setq! org-roam-database-connector 'sqlite)
       )
-
     (setq! org-roam-directory cc/org-roam-directory
            org-roam-db-location cc/org-roam-db-location
            org-roam-db-gc-threshold most-positive-fixnum
@@ -183,8 +177,14 @@
            '(("d" "default" plain "%?"
               :if-new (file+head "${slug}-%<%Y%m%d>.org"
                                  "#+title: ${title}\n")
-              :unnarrowed t)
-             ))
+              :unnarrowed t)))
+
+    ;; To export roam note correctly
+    (advice-add 'org-export-dispatch
+                :before
+                (lambda (&rest _)
+                  (require 'org-roam-export)))
+
     (org-roam-db-autosync-mode))
 
   (use-package! org-roam-ui
@@ -195,7 +195,6 @@
            org-roam-ui-update-on-save t
            org-roam-ui-open-on-start t)
     :init
-
     (map! :prefix ("C-c n u" . "<org-roam-ui>")
           :desc "Start roam UI" "u" #'org-roam-ui-mode
           :desc "Open new UI page" "o" #'org-roam-ui-open

@@ -260,26 +260,26 @@
        ("n" . "<note>")
        (:when (modulep! :lang org +roam2)
          :desc "Fleet note" "j" #'org-roam-dailies-find-today
-         :desc "Find note" "f" #'org-roam-node-find
+         :desc "Find note" "f" #'cc/org-roam-find-by-dir
          :desc "Find ref" "r" #'org-roam-ref-find
          :desc "Show graph" "g" #'org-roam-graph
          :desc "Insert node" "i" #'org-roam-node-insert
-         :desc "Capture" "c" #'org-roam-capture
+         :desc "Capture" "c" #'cc/org-roam-capture-by-dir
          :desc "Show backlinks" "b" #'org-roam-buffer-toggle
          :desc "Show backlinks(dedicated)" "B" #'org-roam-buffer-display-dedicated
          :desc "Sync db" "s" #'org-roam-db-sync
          :desc "Refile node" "w" #'org-roam-refile
-         (:prefix ("a" . "alias")
+         (:prefix ("a" . "<alias>")
           :desc "Add alias" "a" #'org-roam-alias-add
           :desc "Remove alias" "r" #'org-roam-alias-remove)
-         (:prefix ("r" . "ref")
+         (:prefix ("r" . "<ref>")
           :desc "Add ref" "a" #'org-roam-ref-add
           :desc "Remove ref" "r" #'org-roam-ref-remove
           :desc "Find ref" "f" #'org-roam-ref-find)
-         (:prefix ("t" . "tag")
+         (:prefix ("t" . "<tag>")
           :desc "Add tag" "a" #'org-roam-tag-add
           :desc "Remove tag" "r" #'org-roam-tag-remove)
-         (:prefix ("d" . "by date")
+         (:prefix ("d" . "<by date>")
           :desc "Goto date" "d" #'org-roam-dailies-goto-date
           :desc "Capture date" "c" #'org-roam-dailies-capture-date
           :desc "Goto tomorrow" "m" #'org-roam-dailies-goto-tomorrow
