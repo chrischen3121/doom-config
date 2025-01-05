@@ -165,12 +165,9 @@
       (unless (functionp 'emacsql-sqlite)
         (defun emacsql-sqlite (db &rest args)
           (apply 'emacsql-sqlite-open db args)))
-
       (setq! org-roam-database-connector 'sqlite)
       )
-    (setq! org-roam-directory cc/org-roam-directory
-           org-roam-db-location cc/org-roam-db-location
-           org-roam-db-gc-threshold most-positive-fixnum
+    (setq! org-roam-db-gc-threshold most-positive-fixnum
            org-roam-graph-viewer cc/org-roam-graph-viewer
            org-roam-dailies-directory cc/org-roam-journal-directory
            org-roam-capture-templates

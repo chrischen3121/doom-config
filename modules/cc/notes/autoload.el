@@ -26,7 +26,8 @@
 (defun cc/org-roam-find-by-dir (&rest args)
   "Wrapped `org-roam-node-find' that prompts for a directory first."
   (interactive)
-  (cc/org-roam-choose-directory)
+  (unless (bound-and-true-p org-roam-directory)
+    (cc/org-roam-choose-directory))
   (apply #'org-roam-node-find args))
 
 
@@ -34,5 +35,6 @@
 (defun cc/org-roam-capture-by-dir (&rest args)
   "Wrapped `org-roam-capture' that prompts for a directory first."
   (interactive)
-  (cc/org-roam-choose-directory)
+  (unless (bound-and-true-p org-roam-directory)
+    (cc/org-roam-choose-directory))
   (apply #'org-roam-capture args))

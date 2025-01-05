@@ -260,6 +260,7 @@
        ("n" . "<note>")
        (:when (modulep! :lang org +roam2)
          :desc "Fleet note" "j" #'org-roam-dailies-find-today
+         :desc "Choose roam dir" "n" #'cc/org-roam-choose-directory
          :desc "Find note" "f" #'cc/org-roam-find-by-dir
          :desc "Find ref" "r" #'org-roam-ref-find
          :desc "Show graph" "g" #'org-roam-graph
