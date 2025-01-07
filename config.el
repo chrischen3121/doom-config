@@ -3,11 +3,24 @@
 ;; Place your private configuration here! Remember, you do not need to run 'doom
 ;; sync' after modifying this file!
 
+;; Using "mycustom" instead of "custom" to keep the custom file clean
+(load! "mycustom")
 
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets. It is optional.
 (setq! user-full-name "Chris Chen"
        user-mail-address "chrischen3121@gmail.com")
+
+;; org-directory must be set before doom-package:org has loaded
+;; set if cc/org-home-dir is bound
+(when (boundp 'cc/default-org-dir)
+  (setq org-directory cc/default-org-dir))
+
+
+(when (boundp 'cc/notes-base-dir)
+  (setq! cc/roam-notes-dir (concat cc/notes-base-dir "roamnotes/")
+         cc/org-pdf-notes-dir (concat cc/notes-base-dir "pdfnotes/")
+         cc/roam-journals-dir (concat cc/notes-base-dir "journals/")))
 
 
 
@@ -49,5 +62,3 @@
 ;; they are implemented.
 ;;
 
-;; Using "mycustom" instead of "custom" to keep the custom file clean
-(load! "mycustom")

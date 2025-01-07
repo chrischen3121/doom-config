@@ -24,23 +24,19 @@
 ;; C-c m f footnote prefix
 ;; C-c C-c -- jump between definition and reference
 ;; +strike-through+
-(defvar cc/org-home-dir "~/org/"
+
+(defvar cc/default-org-dir "~/org/"
   "Org directory")
 
-(defvar cc/deft-notes-dir "~/org/notes/"
-  "Deft notes directory.")
+(defvar cc/org-id-locations "~/org/.org-id-locations"
+  "Org id locations file.")
 
-(defvar cc/org-pdf-notes-dir "~/org/pdf-notes/"
-  "Org pdf notes directory.")
-
-(defvar cc/org-roam-base-dir "~/org/roam/"
-  "Org-roam base directory in which all roam projects are stored.")
-
-(defvar cc/org-roam-journal-directory "~/org/roam/journal/"
-  "Org-roam journal directory.")
+(defvar cc/notes-base-dir "~/org/notes/"
+  "Org notes directory.")
 
 (defvar cc/org-roam-graph-viewer "google-chrome"
   "Org-roam graph viewer.")
+
 
 (map! :after org
       :map org-mode-map
@@ -63,30 +59,30 @@
 
       ;; local prefix m
       (:prefix "C-c m"
+               ;; i -- create org-id
+               (:prefix ("i" . "<org-id>")
+                :desc "Create org-id" "i" #'org-id-get-create
+                :desc "Update org-id-locations" "u" #'org-roam-update-org-id-locations)
 
-       ;; i -- create org-id
-       :desc "Create org-id" "i" #'org-id-get-create
+               ;; p -- preview/plot
+               (:prefix ("p" . "<preview/plot>")
+                :desc "Preview latex fragment" "l" #'org-latex-preview
+                :desc "Preview image" "i" #'org-display-inline-images
+                :desc "Plot table" "p" #'org-plot/gnuplot)
 
-       ;; p -- preview/plot
-       (:prefix ("p" . "<preview/plot>")
-        :desc "Preview latex fragment" "l" #'org-latex-preview
-        :desc "Preview image" "i" #'org-display-inline-images
-        :desc "Plot table" "p" #'org-plot/gnuplot)
-
-       ;; f -- footnote
-       :desc "Insert footnote" "f" #'org-footnote-new
-       ))
+               ;; f -- footnote
+               :desc "Insert footnote" "f" #'org-footnote-new
+               ))
 
 
 ;; org configuration
 (remove-hook! 'org-load-hook #'+org-init-smartparens-h)
+
 (after! org
   (require 'org-indent)
   (remove-hook 'org-mode-hook #'org-indent-mode)
   (setq! org-startup-indented nil
          org-ellipsis " ▼"
-         org-directory cc/org-home-dir
-
          ;; pretty latex preview
          org-pretty-entities t
          org-pretty-entities-include-sub-superscripts nil
@@ -150,7 +146,7 @@
 (when (modulep! :ui deft)
   (map! :desc "Search notes" "C-c s n" #'deft)
   (after! deft
-    (setq! deft-directory cc/deft-notes-dir
+    (setq! deft-directory cc/roam-notes-dir
            deft-default-extension "org"
            deft-use-filename-as-title t
            deft-strip-summary-regex
@@ -167,9 +163,10 @@
           (apply 'emacsql-sqlite-open db args)))
       (setq! org-roam-database-connector 'sqlite)
       )
-    (setq! org-roam-db-gc-threshold most-positive-fixnum
+    (setq! org-roam-directory cc/roam-notes-dir
+           org-roam-db-gc-threshold most-positive-fixnum
            org-roam-graph-viewer cc/org-roam-graph-viewer
-           org-roam-dailies-directory cc/org-roam-journal-directory
+           org-roam-dailies-directory cc/roam-journals-dir
            org-roam-capture-templates
            '(("d" "default" plain "%?"
               :if-new (file+head "${slug}-%<%Y%m%d>.org"

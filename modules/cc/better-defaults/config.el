@@ -132,7 +132,11 @@
 ;; enable project follow mode
 (when (modulep! :ui treemacs)
   (after! treemacs
-    (setq! treemacs-project-follow-mode t))
+    (setq! treemacs-project-follow-mode t)
+    (map! :map treemacs-mode-map
+          :desc "Select window" "C-x o" #'treemacs-select-window
+          :prefix ("C-c C-w" . "<tree-workspace>")
+          :prefix ("C-c C-p" . "<tree-project>")))
   (after! (:and treemacs ace-window)
     (setq! aw-ignored-buffers (delq 'treemacs-mode aw-ignored-buffers))))
 

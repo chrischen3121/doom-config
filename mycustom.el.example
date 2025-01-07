@@ -14,13 +14,10 @@
   (setq! cc/personal-aspell-dict-dir "~/dicts/spell-fu/"))
 
 (when (modulep! :cc notes)
-  (setq! cc/org-home-dir "~/org/"
+  (setq! cc/default-org-dir "~/org/"
+         cc/org-id-locations "~/org/.orgids"
+         cc/notes-base-dir "~/org/notes/"
          cc/org-agenda-dir "~/org/todos/"
-         cc/org-pdf-notes-dir "~/org/pdf-notes/"
-         cc/deft-notes-dir "~/org/notes/"
-         cc/org-roam-directory "~/org/roam/"
-         cc/org-roam-db-location "~/org/roam/org-roam.db"
-         cc/org-roam-journal-directory "~/org/roam/journal/"
          cc/org-roam-graph-viewer "google-chrome"))
 
 (when (modulep! :cc agenda)

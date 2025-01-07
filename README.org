@@ -36,21 +36,18 @@ Most important prefix keys:
 | ~C-c 1 s~          | Spell commands   |
 | ~C-c 2~            | <fold>           |
 | ~C-c w~            | <workspace>      |
-| ~C-c 4~            | <tab>            |
-| ~C-.~              | Ace jump         |
+| ~C-.~ or ~C-c j~   | Ace jump         |
 | ~M-.~ or ~C-c s w~ | Dictionary       |
 | ~C-c t z~          | Zen mode         |
 | ~C-c m r~          | <run/eval>       |
+| ~F1~ or ~C-c t t~  | Treemacs         |
 
 ** Packages to Try
 - code action ~C-c a~
-- workspace ~C-c w w~
 - grammar check ~C-c 1 g~
 - calendar ~C-c o c~
-- *treemacs* ~C-c o p~
+- *treemacs* ~C-c t t~ or ~F1~
   - ~C-c C-p p~ treemacs project
-- tabs ~C-c w t~
-- ace jump ~C-c j~
 - outline-all ~C-c C-f~
 
 ** Packages may Try

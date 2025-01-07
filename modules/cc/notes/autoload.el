@@ -13,11 +13,13 @@
 (defun cc/org-roam-choose-directory ()
   "Choose a directory to use as the org-roam directory."
   (interactive)
-  (let ((chosen-dir
+
+  (let ((ignored-dirs '("public" "images"))
+        (chosen-dir
          (completing-read "Choose directory: "
-                          (directory-files cc/org-roam-base-dir nil "^[^.]"))))
+                          (directory-files cc/roam-notes-dir nil "^[A-Z]"))))
     (setq! org-roam-directory
-           (expand-file-name chosen-dir cc/org-roam-base-dir)
+           (expand-file-name chosen-dir cc/roam-notes-dir)
            org-roam-db-location
            (expand-file-name ".cache/org-roam.db" org-roam-directory))))
 

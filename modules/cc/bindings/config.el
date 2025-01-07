@@ -56,12 +56,7 @@
 (map! :after which-key
       :desc "ibuffer" "C-x C-b" #'ibuffer
       :desc "Switch buffer" "C-x b" #'switch-to-buffer
-      :desc "Switch buffer" "C-x 4 b" #'switch-to-buffer-other-window
-      (:when (modulep! :ui treemacs)
-        "<f1>" #'+treemacs/toggle
-        "C-x C-o" #'treemacs-select-window
-        :prefix ("C-c C-w" . "tree-workspace")
-        :prefix ("C-c C-p" . "tree-project")))
+      :desc "Switch buffer" "C-x 4 b" #'switch-to-buffer-other-window)
 
 ;; "C-c" keybindings
 (map! :after which-key
