@@ -27,6 +27,13 @@
   (after! company-box
     (setq-hook! 'company-box-mode-hook company-box-doc-delay 2)))
 
+;; :completion
+;; corfu
+(when (modulep! :completion corfu)
+  )
+
+
+
 (defun merge-sort (a b)
   "Merge two sorted lists A and B."
   (if (or (null a) (null b))
@@ -52,19 +59,6 @@
         :desc "Fold all" "f" #'+fold/close-all
         :desc "Unfold all" "u" #'+fold/open-all
         :desc "Delete folded" "d" #'vimish-fold-delete))
-
-
-;; :editor
-;; yasnippet
-(when (modulep! :editor snippets)
-  (map! :after yasnippet
-        :map yas-minor-mode-map
-        "C-c &" nil
-        (:prefix "C-c i"
-         :desc "Snippet" "s" #'yas-insert-snippet)
-        (:prefix "C-c y"
-         :desc "Reload snippets" "r" #'yas-reload-all
-         :desc "Insert snippet" "i" #'yas-insert-snippet)))
 
 ;; :tools
 ;; editorconfig

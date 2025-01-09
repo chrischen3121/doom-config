@@ -20,7 +20,8 @@
 
 (doom! :input
        :completion
-       (company +childframe) ;[opt]flags the ultimate code completion backend
+       ;; (company +childframe) ;[opt]flags the ultimate code completion backend
+       (corfu +orderless +icons)
        (vertico +icons)    ; the search engine of the future
 
        :ui

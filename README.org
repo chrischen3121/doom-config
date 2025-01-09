@@ -9,6 +9,7 @@ Most important prefix keys:
 - ~C-c~: global prefix key
 - ~C-c m~: local prefix key
 - ~C-c c~: ~+code~
+- ~C-c C-l~: show embark buffer within a minibuffer completion session
 
 *** Common Keys
 - ~C-c 1~: check
@@ -18,8 +19,8 @@ Most important prefix keys:
 - ~C-c y~: yasnippet
 
 *** F<key>
-- ~F1~, ~C-c o t~: *treemacs*
-- ~F2~, ~C-c t i~: *lsp-imenu/imenu*
+- ~C-c o t~: *treemacs*
+- ~C-c t i~: *lsp-imenu/imenu*
 - ~F10~: menu popup
 - ~F11~: fullscreen
 - ~F12~: switch light/dark theme

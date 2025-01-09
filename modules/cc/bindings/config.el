@@ -89,13 +89,6 @@
        (:when (modulep! :ui indent-guides)
          :desc "Indent guides" "i" #'indent-bars-mode))
 
-      ;; C-c y --- snippets
-      (:prefix-map ("y" . "<snippets>")
-       :desc "New snippet" "n" #'+snippets/new
-       :desc "Edit snippet" "e" #'+snippets/edit
-       :desc "Find snippet" "f" #'+snippets/find
-       :desc "Browse snippets" "b" #'+default/browse-templates)
-
       ;; C-c c --- code
       (:prefix-map ("c" . "<code>")
        :desc "Compile" "c" #'+default/compile
@@ -105,6 +98,7 @@
          :desc "Make run target" "m" #'+make/run
          :desc "Make run last" "M" #'+make/run-last)
        (:when (and (modulep! :tools lsp) (not (modulep! :tools lsp +eglot)))
+         :after lsp
          :desc "LSP Code actions" "a" #'lsp-execute-code-action
          :desc "LSP Organize imports" "o" #'lsp-organize-imports
          :desc "LSP Rename" "r" #'lsp-rename
@@ -118,9 +112,20 @@
           :desc "Remove all directories" "R" #'lsp-workspace-remove-all-folders
           :desc "Unblock directories" "b" #'lsp-workspace-blocks-remove))
        (:when (modulep! :tools lsp +peek)
+         :after lsp-ui-peek
          :desc "Peek documentation" "p" #'lsp-ui-doc-glance)
        (:when (modulep! :completion vertico)
-         :desc "Jump to symbol" "j"   #'consult-lsp-symbols))
+         :desc "Jump to symbol" "j"   #'consult-lsp-symbols)
+       (:when (modulep! :editor snippets)
+         (:prefix-map ("y" . "<snippets>")
+          :desc "New snippet" "n" #'+snippets/new
+          :desc "Edit snippet" "e" #'+snippets/edit
+          :desc "Find snippet" "f" #'+snippets/find
+          :desc "Browse snippets" "b" #'+default/browse-templates
+          :map yas-minor-mode-map
+          "C-c &" nil
+          :desc "Reload snippets" "r" #'yas-reload-all
+          :desc "Insert snippet" "i" #'yas-insert-snippet)))
 
       ;; C-c k --- lookup
       (:prefix-map ("k" . "<lookup>")
@@ -138,6 +143,7 @@
          :desc "Search in all docsets" "a" #'+lookup/in-all-docsets
          :desc "Install offline docsets""i" #'dash-docs-install-docset)
        (:when (modulep! :tools lsp +peek)
+         :after lsp-ui-peek
          :prefix-map ("p" . "<lsp-peek>")
          :desc "Peek documentation" "p" #'lsp-ui-doc-glance
          :desc "Peek definition" "d" #'lsp-ui-peek-find-definitions
@@ -247,8 +253,9 @@
        :desc "Current file name" "f" #'+default/insert-file-path
        :desc "From clipboard" "y" #'+default/yank-pop
        (:when (modulep! :ui emoji)
-         :desc "Emoji" "e" #'emojify-insert-emoji))
-
+         :desc "Emoji" "e" #'emojify-insert-emoji)
+       (:when (modulep! :editor snippets)
+         :desc "Insert snippet" "s" #'yas-insert-snippet))
 
       ;; C-c n --- note
       (:prefix-map
