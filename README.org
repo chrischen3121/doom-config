@@ -9,7 +9,7 @@ Most important prefix keys:
 - ~C-c~: global prefix key
 - ~C-c m~: local prefix key
 - ~C-c c~: ~+code~
-- ~C-c C-l~: show embark buffer within a minibuffer completion session
+- ~C-c C-l~: embark-collect the current candidate list
 
 *** Common Keys
 - ~C-c 1~: check
@@ -54,6 +54,34 @@ Most important prefix keys:
 ** Packages may Try
 - docker
 
+* Load Order
+** Sessions
+- Interactive session: the typical session
+- Batch session: emacs commands
+- CLI session: ~/bin/doom~ commands
+
+| File                         | Interactive | Batch | CLI |
+|------------------------------+-------------+-------+-----|
+| =.emacs.d/init.el=           | ✔          | ❌    | ❌  |
+| =$DOOMDIR/init.el=           | ✔          | ✔    | ✔  |
+| =$DOOMDIR/modules/*/init.el= | ✔          | ✔    | ✔  |
+| =$DOOMDIR/cli.el=            | ❌          | ❌    | ✔  |
+| Module's =cli.el=            | ❌          | ❌    | ✔  |
+| Module's =config.el=         | ✔          | ❌    | ❌  |
+| =$DOOMDIR/config.el=         | ✔          | ❌    | ❌  |
+
+- ~init.el~
+  - Configure Emacs or perform setup/teardown operations that must be set early
+  - Reconfigure packages defined in Doom modules with ~use-package-hook!~
+- ~config.el~
+  - Use ~after!~ or ~use-package!~ to configure packages
+
+** Other Files
+- =cli.el=: Define or reconfigure ~bin/doom~ cli commands
+- =doctor.el=: Perform sanity checks when you execute ~doom docter~
+  - Use ~warn!~, ~error!~, ~explain!~ to print useful information
+- =test/**/test-*.el=: unit tests
+
 * Package Location
 - =~/.config/emacs/.local/straight/repos=
 - =~/.config/emacs/elpa=
@@ -68,12 +96,40 @@ Most important prefix keys:
 | M-e / M-i  | insert precise note |
 | <tab>      | insert selection    |
 
+* Doom Cookies
+- ~;;;###package~
+  - let ~doom/help-packages~ know where to find config for packages where no ~after!~ or ~use-package!~ call is involved.
+- ~;;;###if FORM~:
+  - ~FORM~ is evaluated to determine whether or not to include this file for autoloads scanning
+    ~on doom sync~ or byte-compilation ~on doom compile~.
+
+* Debuging
+- ~emacs --debug-init~
+- ~C-h d d~: ~doom-debug-mode~
+  - ~M-x toggle-debug-on-error~
+
+** Backtrace from ~bin/doom~
+#+begin_src sh
+doom -d sync
+doom --debug install
+DEBUG=1 doom update
+#+end_src
+
 * Hints
 - ~M-RET~ for vertico: submit directly without selection
 - ~general-override-mode-map~ have a high priority than most other keymaps.
   - It's designed to override bindings in all other keymaps.
   - This ensures that certain global keybindings are always available regardless of the current mode or context.
 - [[https://github.com/doomemacs/doomemacs/blob/master/modules/completion/vertico/README.org][vertico usage]]
+** Help Documentations =C-h=
+- face: =F=
+- bindings: =b=
+- char: ='=
+- find library .el file: =P=
+- doom manual: =d h=
+- doom modules: =d m=
+- autodefs: =u=
+- packages: =p=
 
 ** Hook Sequence
 1. ~doom-before-init-hook~
@@ -87,7 +143,6 @@ Most important prefix keys:
 *** others
 - ~doom-first-input-hook~
 - ~doom-first-buffer-hook~
-
 
 ** ~emacs-everwhere~
 *** Gnome Wayland
