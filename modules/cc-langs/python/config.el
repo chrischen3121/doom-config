@@ -7,8 +7,8 @@
   (setq-hook! python-mode python-indent-offset
               cc/python-indent-offset)
 
-  (setq! python-shell-interpreter "ipython"
-         python-shell-interpreter-arg "-i --simple-prompt")
+  (setq! python-shell-interpreter "python3")
+
 
   (when (modulep! :lang rst)
     (use-package! sphinx-doc

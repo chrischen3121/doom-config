@@ -240,6 +240,10 @@
        (cond ((modulep! :completion vertico)   #'consult-line)
              ((modulep! :completion ivy)       #'swiper)
              ((modulep! :completion helm)      #'swiper))
+       (:when (modulep! :completion vertico)
+         :desc "Search symbol" "s" #'+vertico/search-symbol-at-point ; consult-line
+         :desc "Consult line" "l" #'consult-line
+         )
        :desc "List colors" "C" #'list-colors-display
        (:when (modulep! :tools lookup)
          :desc "Word dictionary" "w" #'+lookup/dictionary-definition
@@ -252,6 +256,7 @@
        :desc "Unicode" "u" #'insert-char
        :desc "Current file name" "f" #'+default/insert-file-path
        :desc "From clipboard" "y" #'+default/yank-pop
+       :desc "Insert nerd icons" "n" #'nerd-icons-insert ; TODO: check module (when ...)
        (:when (modulep! :ui emoji)
          :desc "Emoji" "e" #'emojify-insert-emoji)
        (:when (modulep! :editor snippets)

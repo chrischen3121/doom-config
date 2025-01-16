@@ -15,14 +15,15 @@
 ;;      Alternatively, press 'gd' (or 'C-c c d') on a module to browse its
 ;;      directory (for easy access to its source code).
 
-;; just for the annoying "Package cl is deprecated" warning
+;; Ignore "Package cl is deprecated" warning
 (setq byte-compile-warnings '(cl-functions))
 
 (doom! :input
+       ;; ...
        :completion
-       ;; (company +childframe) ;[opt]flags the ultimate code completion backend
-       (corfu +orderless +icons)
-       (vertico +icons)    ; the search engine of the future
+       ;; (company +childframe) ; TODO [opt]flags the ultimate code completion backend
+       (corfu +orderless +icons) ; TODO
+       (vertico +icons +orderless)    ; the search engine of the future
 
        :ui
        deft              ; notational velocity for Emacs

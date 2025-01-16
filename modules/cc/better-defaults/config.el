@@ -40,6 +40,8 @@
   (after! calendar
     (setq! calendar-week-start-day 1)))
 
+
+
 ;; :app
 ;; everywhere
 ;; TODO: may be used to edit anki cards
@@ -101,8 +103,8 @@
 ;;;###package vertico
   (map! :map vertico-map
         "C-l" #'vertico-directory-delete-word
-        "M-h" #'+vertico/enter-or-preview))
-
+        "M-h" #'+vertico/enter-or-preview
+        "C-c p" #'+vertico/embark-preview))
 
 
 ;; :editor
