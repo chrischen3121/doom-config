@@ -205,7 +205,7 @@
       (:prefix-map
        ("o" . "<open>")
        (:when (modulep! :app calendar)
-         :desc "Calendar" "c" #'calendar)
+         :desc "Calendar" "c" #'+calendar/open-calendar)
        (:when (modulep! :term vterm)
          :desc "vterm" "t" #'+vterm/toggle
          :desc "vterm here" "T" #'+vterm/here)

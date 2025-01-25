@@ -4,6 +4,7 @@
 (defvar cc/personal-aspell-dict-dir "~/dicts/"
   "Personal aspell dictionary directory.")
 
+
 ;; Change newline behavior
 (add-hook! 'doom-first-buffer-hook
   (defun cc/change-newline-behavior ()
@@ -36,11 +37,27 @@
 
 ;; :app
 ;; calendar
-(when (modulep! :app calendar)
-  (after! calendar
-    (setq! calendar-week-start-day 1)))
+;; Usage:
+;; calfw: https://github.com/kiwanami/emacs-calfw
+(defcustom cc/gcal-calendar-ids-alist nil
+  "Alist of calendar ids for gcal."
+  :type 'alist
+  :group 'cc-calendar)
+(defcustom cc/gcal-client-id nil
+  "Google calendar client id."
+  :type 'string
+  :group 'cc-calendar)
+(defcustom cc/gcal-client-secret nil
+  "Google calendar client secret."
+  :type 'string
+  :group 'cc-calendar)
 
-
+(after! org-gcal
+  (setq! org-gcal-client-id cc/gcal-client-id
+         org-gcal-client-secret cc/gcal-client-secret
+         org-gcal-fetch-file-alist cc/gcal-calendar-ids-alist))
+(setq! calendar-week-start-day 1
+       cfw:org-overwrite-default-keybinding t)
 
 ;; :app
 ;; everywhere

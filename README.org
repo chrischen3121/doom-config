@@ -1,6 +1,5 @@
 * doom-config
 Configurations for Doom Emacs
-
 ** Icon Fonts
 ~M-x nerd-icons-install-fonts~
 
@@ -54,6 +53,8 @@ Most important prefix keys:
 ** Packages may Try
 - docker
 
+* Customized Variables
+** cc-calendar
 * Load Order
 ** Sessions
 - Interactive session: the typical session
@@ -152,17 +153,3 @@ DEBUG=1 doom update
 
 ** ~lookup~
 - Use ~dash-docs-install-docset~ to install offline docsets
-
-* TODOs
-- poetry-tracking-mode or manually poetry-virtualenv-toggle
-  - checking with ein:run
-- ~run-python~
-  - use ~ipython~ interpreter with popup
-- disable leader-map, and redefine keybindings
-- try projectile default keymap ~C-c M-p p~
-  - move most-used ones into ~C-c p~
-
-** Workflow Optimization
-  - org-noter
-  - python
-  - C++
