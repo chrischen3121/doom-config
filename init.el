@@ -167,11 +167,12 @@
 
        :cc
        appearance
+       defaults
        bindings
-       better-defaults
        notes
        agenda
        dev
+       app
 
        :cc-langs
        elisp

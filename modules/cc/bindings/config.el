@@ -253,12 +253,14 @@
 
       ;; C-c i --- insert
       (:prefix-map ("i". "<insert>")
-       :desc "Unicode" "u" #'insert-char
        :desc "Current file name" "f" #'+default/insert-file-path
        :desc "From clipboard" "y" #'+default/yank-pop
-       :desc "Insert nerd icons" "n" #'nerd-icons-insert ; TODO: check module (when ...)
-       (:when (modulep! :ui emoji)
-         :desc "Emoji" "e" #'emojify-insert-emoji)
+       (:prefix-map ("i" . "<icons>")
+        :desc "Unicode" "u" #'insert-char
+        :desc "Insert nerd icons" "n" #'nerd-icons-insert
+        (:when (modulep! :ui emoji)
+          :desc "Emoji" "e" #'emojify-insert-emoji))
+
        (:when (modulep! :editor snippets)
          :desc "Insert snippet" "s" #'yas-insert-snippet))
 

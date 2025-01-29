@@ -53,6 +53,8 @@ Most important prefix keys:
 ** Packages may Try
 - docker
 
+* Directories
+- ~doom-cache-dir~
 * Customized Variables
 ** cc-calendar
 * Load Order
