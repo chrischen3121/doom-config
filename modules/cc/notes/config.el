@@ -25,19 +25,6 @@
 ;; C-c C-c -- jump between definition and reference
 ;; +strike-through+
 
-(defvar cc/default-org-dir "~/org/"
-  "Org directory")
-
-(defvar cc/org-id-locations "~/org/.org-id-locations"
-  "Org id locations file.")
-
-(defvar cc/notes-base-dir "~/org/notes/"
-  "Org notes directory.")
-
-(defvar cc/org-roam-graph-viewer "google-chrome"
-  "Org-roam graph viewer.")
-
-
 (map! :after org
       :map org-mode-map
 
@@ -142,61 +129,16 @@
          plantuml-indent-level 4))
 
 ;; :ui
+;; TODO
 ;; deft
-(when (modulep! :ui deft)
-  (map! :desc "Search notes" "C-c s n" #'deft)
-  (after! deft
-    (setq! deft-directory cc/roam-notes-dir
-           deft-default-extension "org"
-           deft-use-filename-as-title t
-           deft-strip-summary-regex
-           ":PROPERTIES:\n\\(.+\n\\)+:END:\n")))
-
-
-(when (modulep! :lang org +roam2)
-  (after! org-roam
-    (when (>= emacs-major-version 29)
-      ;; HACK https://github.com/org-roam/org-roam-ui/issues/289
-      ;; emacs29 will set value to sqlite-builtin, only first file tag works
-      (unless (functionp 'emacsql-sqlite)
-        (defun emacsql-sqlite (db &rest args)
-          (apply 'emacsql-sqlite-open db args)))
-      (setq! org-roam-database-connector 'sqlite)
-      )
-    (setq! org-roam-directory cc/roam-notes-dir
-           org-roam-db-gc-threshold most-positive-fixnum
-           org-roam-graph-viewer cc/org-roam-graph-viewer
-           org-roam-dailies-directory cc/roam-journals-dir
-           org-roam-capture-templates
-           '(("d" "default" plain "%?"
-              :if-new (file+head "${slug}-%<%Y%m%d>.org"
-                                 "#+title: ${title}\n")
-              :unnarrowed t)))
-
-    ;; To export roam note correctly
-    (advice-add 'org-export-dispatch
-                :before
-                (lambda (&rest _)
-                  (require 'org-roam-export)))
-
-    (org-roam-db-autosync-mode))
-
-  (use-package! org-roam-ui
-    :commands org-roam-ui-mode
-    :config
-    (setq! org-roam-ui-sync-theme t
-           org-roam-ui-follow t
-           org-roam-ui-update-on-save t
-           org-roam-ui-open-on-start t)
-    :init
-    (map! :prefix ("C-c n u" . "<org-roam-ui>")
-          :desc "Start roam UI" "u" #'org-roam-ui-mode
-          :desc "Open new UI page" "o" #'org-roam-ui-open
-          :desc "Sync UI theme" "s" #'org-roam-ui-sync-theme
-          :map org-mode-map
-          :desc "Show ui node local" "g" #'org-roam-ui-node-local
-          :desc "Zoom ui node" "z" #'org-roam-ui-node-zoom)))
-
+;; (when (modulep! :ui deft)
+;;   (map! :desc "Search notes" "C-c s n" #'deft)
+;;   (after! deft
+;;     (setq! deft-directory cc/roam-notes-dir
+;;            deft-default-extension "org"
+;;            deft-use-filename-as-title t
+;;            deft-strip-summary-regex
+;;            ":PROPERTIES:\n\\(.+\n\\)+:END:\n")))
 
 (use-package! anki-editor
   ;;:after-call (org-mode-hook)
@@ -231,3 +173,5 @@
   (setq! org-download-image-dir "images/screenshots/"
          org-download-heading-lvl 1
          org-download-annotate-function (lambda (_link) "")))
+
+(load! "roam")

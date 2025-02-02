@@ -4,13 +4,13 @@
 ;; Place your private configuration here! Remember, you do not need to run 'doom
 ;; sync' after modifying this file!
 
-;; Using "mycustom" instead of "custom" to keep the custom file clean
-(load! "mycustom")
-
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets. It is optional.
 (setq! user-full-name "Chris Chen"
        user-mail-address "chrischen3121@gmail.com")
+
+(when (modulep! :cc appearance)
+  (cc/set-doom-ui-appearance))
 
 ;; org-directory must be set before doom-package:org has loaded
 ;; set if cc/org-home-dir is bound

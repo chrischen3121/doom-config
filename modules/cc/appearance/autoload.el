@@ -2,9 +2,9 @@
 
 (defvar cc/default-font "Hack" "Adjust default font for your system.")
 (defvar cc/default-font-size 24)
-(defvar cc/default-unicode-font "Noto Sans CJK SC"
-  "Adjust unicode font for your system.")
-(defvar cc/default-unicode-font-size 24)
+;; (defvar cc/default-unicode-font "Noto Sans CJK SC"
+;;   "Adjust unicode font for your system.")
+;; (defvar cc/default-unicode-font-size 24)
 (defvar cc/light-theme 'doom-one-light)
 (defvar cc/dark-theme 'doom-tomorrow-night)
 (defvar cc/theme-dark-p nil
@@ -58,15 +58,16 @@
   "Set up the fonts and themes for the current system."
   (setq! doom-font
          (font-spec :family cc/default-font :size cc/default-font-size)
-         doom-variable-pitch-font
-         (font-spec :family cc/default-font :size cc/default-unicode-font-size)
          doom-big-font
          (font-spec :family cc/default-font
                     :size (+ cc/default-font-size (/ cc/default-font-size 3)))
-         doom-serif-font
-         (font-spec :family cc/default-unicode-font :size cc/default-unicode-font-size)
-         doom-symbol-font
-         (font-spec :family cc/default-unicode-font :size cc/default-unicode-font-size))
+         ;; doom-variable-pitch-font
+         ;; (font-spec :family cc/default-font :size cc/default-unicode-font-size)
+         ;; doom-serif-font
+         ;; (font-spec :family cc/default-unicode-font :size cc/default-unicode-font-size)
+         ;; doom-symbol-font
+         ;; (font-spec :family cc/default-unicode-font :size cc/default-unicode-font-size)
+         )
   (custom-set-faces!
     ;; ace-window
     '(aw-leading-char-face :inherit 'font-lock-builtin-face :height 4.5)

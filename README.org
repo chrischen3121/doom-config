@@ -1,3 +1,44 @@
+* Load Order
+** Sessions
+- Interactive session: the typical session
+- Batch session: emacs commands
+- CLI session: ~/bin/doom~ commands
+
+| File                         | Interactive | Batch | CLI |
+|------------------------------+-------------+-------+-----|
+| =.emacs.d/init.el=           | ✔          | ❌    | ❌  |
+| =$DOOMDIR/init.el=           | ✔          | ✔    | ✔  |
+| =$DOOMDIR/modules/*/init.el= | ✔          | ✔    | ✔  |
+| =$DOOMDIR/cli.el=            | ❌          | ❌    | ✔  |
+| Module's =cli.el=            | ❌          | ❌    | ✔  |
+| Module's =config.el=         | ✔          | ❌    | ❌  |
+| =$DOOMDIR/config.el=         | ✔          | ❌    | ❌  |
+
+- ~init.el~
+  - Configure Emacs or perform setup/teardown operations that must be set early
+  - Reconfigure packages defined in Doom modules with ~use-package-hook!~
+- ~config.el~
+  - Use ~after!~ or ~use-package!~ to configure packages
+
+** Other Files
+- =cli.el=: Define or reconfigure ~bin/doom~ cli commands
+- =doctor.el=: Perform sanity checks when you execute ~doom docter~
+  - Use ~warn!~, ~error!~, ~explain!~ to print useful information
+- =test/**/test-*.el=: unit tests
+
+** Hook Sequence
+1. ~doom-before-init-hook~
+2. load doom modules::core
+3. ~doom-after-modules-init-hook~
+4. load =doom/config.el=, then =doom/custom.el=
+5. ~doom-load-theme-hook~
+6. ~doom-after-init-hook~ (show benchmark)
+7. ~doom-init-ui-hook~
+
+*** others
+- ~doom-first-input-hook~
+- ~doom-first-buffer-hook~
+
 * doom-config
 Configurations for Doom Emacs
 ** Icon Fonts
@@ -57,33 +98,7 @@ Most important prefix keys:
 - ~doom-cache-dir~
 * Customized Variables
 ** cc-calendar
-* Load Order
-** Sessions
-- Interactive session: the typical session
-- Batch session: emacs commands
-- CLI session: ~/bin/doom~ commands
 
-| File                         | Interactive | Batch | CLI |
-|------------------------------+-------------+-------+-----|
-| =.emacs.d/init.el=           | ✔          | ❌    | ❌  |
-| =$DOOMDIR/init.el=           | ✔          | ✔    | ✔  |
-| =$DOOMDIR/modules/*/init.el= | ✔          | ✔    | ✔  |
-| =$DOOMDIR/cli.el=            | ❌          | ❌    | ✔  |
-| Module's =cli.el=            | ❌          | ❌    | ✔  |
-| Module's =config.el=         | ✔          | ❌    | ❌  |
-| =$DOOMDIR/config.el=         | ✔          | ❌    | ❌  |
-
-- ~init.el~
-  - Configure Emacs or perform setup/teardown operations that must be set early
-  - Reconfigure packages defined in Doom modules with ~use-package-hook!~
-- ~config.el~
-  - Use ~after!~ or ~use-package!~ to configure packages
-
-** Other Files
-- =cli.el=: Define or reconfigure ~bin/doom~ cli commands
-- =doctor.el=: Perform sanity checks when you execute ~doom docter~
-  - Use ~warn!~, ~error!~, ~explain!~ to print useful information
-- =test/**/test-*.el=: unit tests
 
 * Package Location
 - =~/.config/emacs/.local/straight/repos=
@@ -134,18 +149,6 @@ DEBUG=1 doom update
 - autodefs: =u=
 - packages: =p=
 
-** Hook Sequence
-1. ~doom-before-init-hook~
-2. load doom modules::core
-3. ~doom-after-modules-init-hook~
-4. load =doom/config.el=, then =doom/custom.el=
-5. ~doom-load-theme-hook~
-6. ~doom-after-init-hook~ (show benchmark)
-7. ~doom-init-ui-hook~
-
-*** others
-- ~doom-first-input-hook~
-- ~doom-first-buffer-hook~
 
 ** ~emacs-everwhere~
 *** Gnome Wayland

@@ -172,10 +172,13 @@
        notes
        agenda
        dev
-       app
+       ;; app
 
        :cc-langs
        elisp
        cpp
        python
        )
+
+;; Using "mycustom" instead of "custom" to keep the custom file clean
+(load! "mycustom")

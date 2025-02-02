@@ -2,15 +2,15 @@
 (when (modulep! :cc appearance)
   (setq! cc/default-font "Hack"
          cc/default-font-size 20
-         cc/default-unicode-font "WenQuanYi Micro Hei"
-         cc/default-unicode-font-size 20
+         ;; cc/default-unicode-font "WenQuanYi Micro Hei"
+         ;; cc/default-unicode-font-size 20
          ;; recommended: doom-acario-light, doom-one-light, doom-nord,  doom-oksolar-light
          cc/light-theme 'doom-one-light
          ;; recommended: doom-one, doom-peacock, doom-tomorrow-night, doom-opera
          cc/dark-theme 'doom-tomorrow-night)
   (cc/set-doom-ui-appearance))
 
-(when (modulep! :cc better-defaults)
+(when (modulep! :cc defaults)
   (setq! cc/personal-aspell-dict-dir "~/dicts/spell-fu/"))
 
 (when (modulep! :cc notes)
