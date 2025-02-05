@@ -17,11 +17,11 @@
 
 ;; Frame related
 
-
-;; make file executable if it has shebang
+;; TODO not working
 (add-hook! 'after-save-hook
-           #'executable-make-buffer-file-executable-if-script-p)
-
+           ;; make file executable if it has shebang
+           #'executable-make-buffer-file-executable-if-script-p
+           #'delete-trailing-whitespace)
 
 ;; projectile keybindings
 (after! projectile

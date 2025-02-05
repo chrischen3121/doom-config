@@ -158,3 +158,10 @@ DEBUG=1 doom update
 
 ** ~lookup~
 - Use ~dash-docs-install-docset~ to install offline docsets
+
+* Coding Rules
+** Variable Names
+- Customizable
+- Global Variable
+
+** Function Names

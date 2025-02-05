@@ -1,5 +1,5 @@
 ;; -*- no-byte-compile: t; -*-
-;;; cc/appearance/config.el -*- lexical-binding: t; -*-
+;;; cc/ui/config.el -*- lexical-binding: t; -*-
 ;;;
 
 ;; other frame settings: 'default-frame-alist

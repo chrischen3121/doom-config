@@ -9,7 +9,7 @@
 (setq! user-full-name "Chris Chen"
        user-mail-address "chrischen3121@gmail.com")
 
-(when (modulep! :cc appearance)
+(when (modulep! :cc ui)
   (cc/set-doom-ui-appearance))
 
 ;; org-directory must be set before doom-package:org has loaded
@@ -62,4 +62,3 @@
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
 ;;
-

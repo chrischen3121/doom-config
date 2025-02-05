@@ -166,7 +166,7 @@
        (default +smartparens) ;; +bindings
 
        :cc
-       appearance
+       ui
        defaults
        bindings
        notes
