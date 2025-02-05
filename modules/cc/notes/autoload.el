@@ -1,7 +1,7 @@
 ;; -*- no-byte-compile: t; -*-
 ;;; cc/notes/autoload.el -*- lexical-binding: t; -*-
 
-;; TODO use emacs cache to store the org-roam directory
+;; TODO use emacs cache to store the org-roam directory, use C-c n n to switch between directories
 
 ;;;###autoload
 (defun cc/open-pdf-note-files ()
