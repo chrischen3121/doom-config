@@ -1,6 +1,8 @@
 ;; -*- no-byte-compile: t; -*-
 ;;; cc/notes/autoload.el -*- lexical-binding: t; -*-
 
+;; TODO use emacs cache to store the org-roam directory
+
 ;;;###autoload
 (defun cc/open-pdf-note-files ()
   "Open all PDF note files in `cc/org-pdf-notes-dir'."
@@ -21,7 +23,8 @@
     (setq! org-roam-directory
            (expand-file-name chosen-dir cc/roam-notes-dir)
            org-roam-db-location
-           (expand-file-name ".cache/org-roam.db" org-roam-directory))))
+           (expand-file-name ".cache/org-roam.db" org-roam-directory)))
+  (dired org-roam-directory))
 
 
 ;;;###autoload
