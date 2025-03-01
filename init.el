@@ -16,7 +16,7 @@
 ;;      directory (for easy access to its source code).
 
 ;; Ignore "Package cl is deprecated" warning
-(setq byte-compile-warnings '(cl-functions))
+;; (setq byte-compile-warnings '(cl-functions))
 
 (doom! :input
        ;; ...

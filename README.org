@@ -1,32 +1,4 @@
-* Load Order
-** Sessions
-- Interactive session: the typical session
-- Batch session: emacs commands
-- CLI session: ~/bin/doom~ commands
-
-| File                         | Interactive | Batch | CLI |
-|------------------------------+-------------+-------+-----|
-| =.emacs.d/init.el=           | ✔          | ❌    | ❌  |
-| =$DOOMDIR/init.el=           | ✔          | ✔    | ✔  |
-| =$DOOMDIR/modules/*/init.el= | ✔          | ✔    | ✔  |
-| =$DOOMDIR/cli.el=            | ❌          | ❌    | ✔  |
-| Module's =cli.el=            | ❌          | ❌    | ✔  |
-| Module's =config.el=         | ✔          | ❌    | ❌  |
-| =$DOOMDIR/config.el=         | ✔          | ❌    | ❌  |
-
-- ~init.el~
-  - Configure Emacs or perform setup/teardown operations that must be set early
-  - Reconfigure packages defined in Doom modules with ~use-package-hook!~
-- ~config.el~
-  - Use ~after!~ or ~use-package!~ to configure packages
-
-** Other Files
-- =cli.el=: Define or reconfigure ~bin/doom~ cli commands
-- =doctor.el=: Perform sanity checks when you execute ~doom docter~
-  - Use ~warn!~, ~error!~, ~explain!~ to print useful information
-- =test/**/test-*.el=: unit tests
-
-** Hook Sequence
+* Hook Sequence
 1. ~doom-before-init-hook~
 2. load doom modules::core
 3. ~doom-after-modules-init-hook~
@@ -39,33 +11,39 @@
 - ~doom-first-input-hook~
 - ~doom-first-buffer-hook~
 
-* doom-config
-Configurations for Doom Emacs
+* Configuration
 ** Icon Fonts
 ~M-x nerd-icons-install-fonts~
 
-** Keybindings
+* Keybindings
+** Prefix Keys:
+- *C-c g*: global prefix key
+  - *C-c g c* checker
+  - *C-c g *
+- *C-c m*: local prefix key
+- *C-c c*: code prefix key
+
 Most important prefix keys:
 - ~C-c~: global prefix key
 - ~C-c m~: local prefix key
 - ~C-c c~: ~+code~
 - ~C-c C-l~: embark-collect the current candidate list
 
-*** Common Keys
+** Common Keys
 - ~C-c 1~: check
 - ~C-c 2~: fold
 - ~C-c 4~: tab
 - ~C-c w~: workspace
 - ~C-c y~: yasnippet
 
-*** F<key>
+** F<key>
 - ~C-c o t~: *treemacs*
 - ~C-c t i~: *lsp-imenu/imenu*
 - ~F10~: menu popup
 - ~F11~: fullscreen
 - ~F12~: switch light/dark theme
 
-*** Useful Keybindings
+** Useful Keybindings
 | keybinding         | Command          |
 |--------------------+------------------|
 | ~C-c o c~          | Open calendar    |
@@ -113,13 +91,6 @@ Most important prefix keys:
 | e / i      | insert a page note  |
 | M-e / M-i  | insert precise note |
 | <tab>      | insert selection    |
-
-* Doom Cookies
-- ~;;;###package~
-  - let ~doom/help-packages~ know where to find config for packages where no ~after!~ or ~use-package!~ call is involved.
-- ~;;;###if FORM~:
-  - ~FORM~ is evaluated to determine whether or not to include this file for autoloads scanning
-    ~on doom sync~ or byte-compilation ~on doom compile~.
 
 * Debuging
 - ~emacs --debug-init~

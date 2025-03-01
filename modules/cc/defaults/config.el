@@ -20,8 +20,7 @@
 ;; TODO not working
 (add-hook! 'after-save-hook
            ;; make file executable if it has shebang
-           #'executable-make-buffer-file-executable-if-script-p
-           #'delete-trailing-whitespace)
+           #'executable-make-buffer-file-executable-if-script-p)
 
 ;; projectile keybindings
 (after! projectile

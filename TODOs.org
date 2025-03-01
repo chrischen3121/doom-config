@@ -1,3 +1,6 @@
+* TODOs
+- [ ] make temp buffer like *info* to be not temp
+
 * TODO python-mode
 - [ ] poetry-tracking-mode or manually ~poetry-virtualenv-toggle~
 - [ ] checking with ~ein:run~
@@ -7,6 +10,3 @@
 * WAIT projectile :WAITING:
 - [ ] try default keymap ~C-c M-p p~
   - move most-used ones into ~C-c p~
-
-* vertico
-- emoji issue
