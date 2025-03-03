@@ -21,9 +21,9 @@
 (doom! :input
        ;; ...
        :completion
+       (vertico +icons)    ; the search engine of the future
        ;; (company +childframe) ; TODO [opt]flags the ultimate code completion backend
        (corfu +orderless +icons) ; TODO
-       (vertico +icons +orderless)    ; the search engine of the future
 
        :ui
        deft              ; notational velocity for Emacs

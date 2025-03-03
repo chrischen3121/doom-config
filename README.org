@@ -11,16 +11,19 @@
 - ~doom-first-input-hook~
 - ~doom-first-buffer-hook~
 
+* Feature Providers
+| Feature                | Providers       |
+|------------------------+-----------------|
+| Project search/replace | vertico+ripgrep |
+
 * Configuration
 ** Icon Fonts
 ~M-x nerd-icons-install-fonts~
 
 * Keybindings
 ** Prefix Keys:
-- *C-c g*: global prefix key
-  - *C-c g c* checker
-  - *C-c g *
-- *C-c m*: local prefix key
+- *C-c C-c*: global prefix key?
+- *C-c l*: local prefix key
 - *C-c c*: code prefix key
 
 Most important prefix keys:
