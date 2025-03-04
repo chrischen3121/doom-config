@@ -18,27 +18,23 @@
 ;; Ignore "Package cl is deprecated" warning
 ;; (setq byte-compile-warnings '(cl-functions))
 
-(doom! :input
-       ;; ...
-       :completion
+(doom! :completion
        (vertico +icons)    ; the search engine of the future
-       ;; (company +childframe) ; TODO [opt]flags the ultimate code completion backend
-       (corfu +orderless +icons) ; TODO
+       (corfu +orderless +icons) ; the ultimate code completion backend
 
        :ui
-       deft              ; notational velocity for Emacs
        doom              ; what makes DOOM look the way it does
        doom-dashboard    ; a nifty splash screen for Emacs
        doom-quit         ; DOOM quit-message prompts when you quit Emacs ;
-       (emoji +unicode)  ; 🙂
-       hl-todo           ; highlight TODO/FIXME/NOTE/DEPRECATED/HACK/REVIEW
-       indent-guides     ; highlighted indent columns
+       hl-todo           ; highlight TODO/FIXME/NOTE/DEPRECATED/HACK/REVIEW/BUG/XXX
+       indent-guides     ; TODO highlighted indent columns https://github.com/jdtsmith/indent-bars/wiki/indent%E2%80%90bars-config-Wiki#tree-sitter-config
        minimap           ; show a map of the code on the side
        modeline          ; snazzy, Atom-inspired modeline, plus API
        nav-flash         ; blink cursor line after big motions
        ophints           ; highlight the region an operation acts on
        (popup +defaults)   ; tame sudden yet inevitable temporary windows
        ;; tabs              ; a tab bar for Emacs
+       ;; TODO neotree or treemacs
        (treemacs +lsp)   ; a project drawer, like neotree but cooler
        unicode           ; extended unicode support for various languages
        (vc-gutter +diff-hl +pretty) ; vcs diff in the fringe
