@@ -88,16 +88,6 @@
      :prefix "C-c 1"
      :desc "Check grammar" "g" #'langtool-check)))
 
-;; :completion
-;; vertico
-(when (modulep! :completion vertico)
-;;;###package vertico
-  (map! :map vertico-map
-        "C-l" #'vertico-directory-delete-word
-        "M-h" #'+vertico/enter-or-preview
-        "C-c p" #'+vertico/embark-preview))
-
-
 ;; :editor
 ;; word-wrap
 (when (modulep! :editor word-wrap)

@@ -47,20 +47,42 @@
     "C-x 4" "other-window"
     "C-x 5" "other-frame"
     "C-x p" "project"
-    "C-x a" "abbrev"
     "C-h 4" "info"
+    "C-h d p" "doom/help-packages"
     "C-c M-d" "doom/leader"
     "C-c M-d l" "doom/localleader"))
 
 ;; Global keybindings
-(map! :after which-key
-      :desc "ibuffer" "C-x C-b" #'ibuffer
+(map! :desc "ibuffer" "C-x C-b" #'ibuffer
       :desc "Switch buffer" "C-x b" #'switch-to-buffer
       :desc "Switch buffer" "C-x 4 b" #'switch-to-buffer-other-window)
+
+;; "C-x" keybindings
+(map! :prefix "C-x"
+      ;; C-x a --- agenda
+      (:prefix-map ("a" . "<agenda>")
+       :desc "Find agenda file" "f" #'+default/find-in-notes
+       :desc "Agenda view""a" #'org-agenda
+       :desc "Agenda capture" "c" #'org-capture
+       (:map org-mode-map
+        :prefix ("e" . "<effort>")
+        :desc "Add estimate" "a" #'org-set-effort
+        :desc "Edit estimate" "e" #'org-clock-modify-effort-estimate
+        :desc "Clock in" "i" #'org-clock-in
+        :desc "Clock out" "o" #'org-clock-out
+        :desc "Cancel clock" "c" #'org-clock-cancel
+        :desc "Goto clock" "g" #'org-clock-goto)))
 
 ;; "C-c" keybindings
 (map! :after which-key
       :prefix "C-c"
+
+      ;; C-c a -- action
+      (:prefix-map
+       ("a" . "<action>")
+       (:when (modulep! :completion vertico)
+         :desc "Embark act" ";" #'embark-act
+         :desc "Embark dwim" "e" #'embark-dwim))
 
       ;; C-c u --- undo
       (:prefix-map ("u" . "<undo>")
@@ -184,22 +206,6 @@
        :desc "Find file" "f" #'projectile-find-file
        :desc "Project dired" "d" #'+default/browse-project
        :desc "Search symbol" "." #'+default/search-project-for-symbol-at-point)
-
-
-      ;; C-c a --- agenda
-      (:prefix-map ("a" . "<agenda>")
-       :desc "Find agenda file" "f" #'+default/find-in-notes
-       :desc "Agenda view""a" #'org-agenda
-       :desc "Agenda capture" "c" #'org-capture
-       (:map org-mode-map
-        :prefix ("e" . "<effort>")
-        :desc "Add estimate" "a" #'org-set-effort
-        :desc "Edit estimate" "e" #'org-clock-modify-effort-estimate
-        :desc "Clock in" "i" #'org-clock-in
-        :desc "Clock out" "o" #'org-clock-out
-        :desc "Cancel clock" "c" #'org-clock-cancel
-        :desc "Goto clock" "g" #'org-clock-goto))
-
 
       ;; C-c o --- open
       (:prefix-map

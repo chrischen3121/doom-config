@@ -1,5 +1,5 @@
 ;; cc/ui/autoload.el -*- lexical-binding: t; -*-
-
+(require 'ring)
 (defvar cc/theme-dark-p nil
   "Whether the current theme is dark.")
 

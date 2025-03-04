@@ -17,13 +17,17 @@
 (when (boundp 'cc/default-org-dir)
   (setq org-directory cc/default-org-dir))
 
-
 (when (boundp 'cc/notes-base-dir)
   (setq! cc/roam-notes-dir (concat cc/notes-base-dir "roamnotes/")
          cc/org-pdf-notes-dir (concat cc/notes-base-dir "pdfnotes/")
          cc/roam-journals-dir (concat cc/notes-base-dir "journals/")))
 
-
+;; load config files
+(let ((config-dir (expand-file-name "config.d" doom-user-dir)))
+  (if (file-directory-p config-dir)
+      (dolist (file (directory-files config-dir t "\\.el$"))
+        (load file))
+    (error "Private config dir %s does not exist" config-dir)))
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
