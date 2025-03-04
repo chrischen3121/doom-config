@@ -178,10 +178,10 @@
   (setq! copilot-indent-offset-warning-disable t)
   (map! :map copilot-completion-map
         "<backtab>" #'copilot-accept-completion
-        "M-w" #'copilot-accept-completion-by-word
-        "M-l" #'copilot-accept-completion-by-line
-        "M-n" #'copilot-next-completion
-        "M-p" #'copilot-previous-completion)
+        "C-M-w" #'copilot-accept-completion-by-word
+        "C-M-l" #'copilot-accept-completion-by-line
+        "C-M-n" #'copilot-next-completion
+        "C-M-p" #'copilot-previous-completion)
 ;;;###package whitespace
   ;; For Github Copilot compatibility
   ;; Cursor Jump to End of Line When Typing
