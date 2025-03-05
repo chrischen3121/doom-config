@@ -21,7 +21,7 @@
 ;; C-c . -- Set a timestamp
 ;; S-LEFT/S-Right -- Change by one day
 ;; ====== Footnotes =========
-;; C-c m f footnote prefix
+;; C-c l f footnote prefix
 ;; C-c C-c -- jump between definition and reference
 ;; +strike-through+
 
@@ -45,7 +45,7 @@
 
 
       ;; local prefix m
-      (:prefix "C-c m"
+      (:prefix "C-c l"
                ;; i -- create org-id
                (:prefix ("i" . "<org-id>")
                 :desc "Create org-id" "i" #'org-id-get-create
@@ -90,7 +90,7 @@
 
 (when (modulep! :tools pdf)
   (map! (:map pdf-view-mode-map
-         :prefix "C-c m"
+         :prefix "C-c l"
          :desc "Toggle slice mode" "s"
          #'pdf-view-auto-slice-minor-mode
          :desc "Toggle themed mode" "t"
@@ -150,7 +150,7 @@
          anki-editor-use-math-jax t)
   :init
   (map! :map org-mode-map
-        :prefix ("C-c m a" . "<anki>")
+        :prefix ("C-c l a" . "<anki>")
         :desc "Push cards" "p" #'anki-editor-push-notes
         :desc "Cloze dwim" "c" #'anki-editor-cloze-dwim
         :desc "Cloze region" "r" #'anki-editor-cloze-region
@@ -164,7 +164,7 @@
              org-download-rename-at-point)
   :init
   (map! :map org-mode-map
-        :prefix ("C-c m d" . "<org-download>")
+        :prefix ("C-c l d" . "<org-download>")
         :desc "Insert screenshot" "i" #'org-download-screenshot
         :desc "Insert from clipboard" "y" #'org-download-clipboard
         :desc "Rename at point" "r" #'org-download-rename-at-point

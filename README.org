@@ -22,13 +22,12 @@
 
 * Keybindings
 ** Prefix Keys:
-- *C-c C-c*: global prefix key?
+- *C-c g*: global prefix key
 - *C-c l*: local prefix key
 - *C-c c*: code prefix key
 
 Most important prefix keys:
 - ~C-c~: global prefix key
-- ~C-c m~: local prefix key
 - ~C-c c~: ~+code~
 - ~C-c C-l~: embark-collect the current candidate list
 
@@ -61,7 +60,7 @@ Most important prefix keys:
 | ~C-.~ or ~C-c j~   | Ace jump         |
 | ~M-.~ or ~C-c s w~ | Dictionary       |
 | ~C-c t z~          | Zen mode         |
-| ~C-c m r~          | <run/eval>       |
+| ~C-c l r~          | <run/eval>       |
 | ~F1~ or ~C-c t t~  | Treemacs         |
 
 ** Packages to Try

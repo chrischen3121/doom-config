@@ -23,11 +23,10 @@
          cc/roam-journals-dir (concat cc/notes-base-dir "journals/")))
 
 ;; load config files
-(let ((config-dir (expand-file-name "config.d" doom-user-dir)))
-  (if (file-directory-p config-dir)
-      (dolist (file (directory-files config-dir t "\\.el$"))
-        (load file))
-    (error "Private config dir %s does not exist" config-dir)))
+(load! "config.d/defaults.el")
+(load! "config.d/completion.el")
+(load! "config.d/ui.el")
+(load! "config.d/bindings.el")
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.

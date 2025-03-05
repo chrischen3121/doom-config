@@ -104,7 +104,7 @@
         "C-l" #'dired-up-directory
         "C-c C-r" nil
         "C-c C-e" nil
-        (:prefix "C-c m"
+        (:prefix "C-c l"
          :desc "Rsync" "r" #'dired-rsync
          :desc "Edit mode" "e" #'wdired-change-to-wdired-mode
          (:when (modulep! :tools upload)

@@ -6,27 +6,6 @@
   (setq! persp-keymap-prefix (kbd "C-c w p"))
   (which-key-add-key-based-replacements "C-c w p" "<persp-mode>"))
 
-;; Unset global keybindings
-(undefine-key! global-map
-  "C-z"
-  "C-x C-z")
-
-(setq!
- doom-leader-key nil
- doom-localleader-key nil
- doom-leader-alt-key "C-c M-d"
- doom-localleader-alt-key "C-c M-d l")
-
-(remove-hook! 'doom-first-input-hook #'which-key-mode)
-(add-hook! 'doom-first-buffer-hook
-           :append
-           #'which-key-mode)
-
-;; which-key sort by description
-(after! which-key
-  (setq! which-pkey-sort-order 'which-key-description-order))
-
-
 ;; Autoloads
 (autoload 'org-capture-goto-target "org-capture" nil t)
 (autoload 'recentf-open-files "recentf" nil t)
@@ -37,8 +16,6 @@
   (which-key-add-key-based-replacements
     "C-x <RET>" "coding-system"
     "M-s h" "highlight"
-    "C-x 8" "emoji"
-    "C-x 8 e" "emoji"
     "C-x n" "narrow/widen"
     "C-x r" "register"
     "C-x t" "tab"
@@ -47,7 +24,6 @@
     "C-x 4" "other-window"
     "C-x 5" "other-frame"
     "C-x p" "project"
-    "C-h 4" "info"
     "C-h d p" "doom/help-packages"
     "C-c M-d" "doom/leader"
     "C-c M-d l" "doom/localleader"))

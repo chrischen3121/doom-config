@@ -6,7 +6,7 @@
 (when (modulep! :completion company)
   (after! company
     (setq! company-tooltip-limit 12)
-    (map! :prefix ("C-c m c" . "<company>")
+    (map! :prefix ("C-c l c" . "<company>")
           "f" #'company-files
           "d" #'company-dabbrev
           "D" #'company-dabbrev-code
@@ -113,7 +113,7 @@
 ;; debugger
 (when (modulep! :tools debugger)
   (map!
-   :prefix-map ("C-c g" . "<debugger>")
+   :prefix-map ("C-c d" . "<debugger>")
    :desc "run" "s" #'+debugger/start
    :desc "quit" "q" #'+debugger/quit)
   (remove-hook! 'dap-ui-mode-hook #'dap-ui-controls-mode)
@@ -123,7 +123,7 @@
   (after! dap-mode
     (map!
      :map dap-mode-map
-     :prefix "C-c g"
+     :prefix "C-c d"
      :desc "dap-debug" "g" #'dap-debug
      :desc "dap-hydra" "h" #'dap-hydra))
   )
@@ -152,7 +152,7 @@
 ;; TODO check with python
 ;; (when (modulep! :tools eval)
 ;;   (map! :map (prog-mode-map emacs-lisp-mode-map)
-;;         :prefix ("C-c m e" . "eval")
+;;         :prefix ("C-c l e" . "eval")
 ;;         :desc "Eval line" "l" #'+eval/line-or-region
 ;;         :desc "Eval buffer" "b" #'+eval/buffer-or-region
 ;;         :desc "Region to REPL" "s" #'+eval/send-region-to-repl

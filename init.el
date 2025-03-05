@@ -32,7 +32,7 @@
        modeline          ; snazzy, Atom-inspired modeline, plus API
        nav-flash         ; blink cursor line after big motions
        ophints           ; highlight the region an operation acts on
-       (popup +defaults)   ; tame sudden yet inevitable temporary windows
+       (popup +defaults)   ; Not all windows are created equally.
        ;; tabs              ; a tab bar for Emacs
        ;; TODO neotree or treemacs
        (treemacs +lsp)   ; a project drawer, like neotree but cooler
@@ -169,6 +169,9 @@
        agenda
        dev
        ;; app
+
+       :cc-new
+       bindings
 
        :cc-langs
        elisp

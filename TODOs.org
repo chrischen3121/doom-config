@@ -1,6 +1,7 @@
 * TODOs
-- [ ] make temp buffer like *info* to be not temp
+- [X] make temp buffer like *info* to be not temp -> +popup/raise
 - [ ] try :os tty with corfu-terminal
+- [ ] :desc
 
 * TODO python-mode
 - [ ] poetry-tracking-mode or manually ~poetry-virtualenv-toggle~
