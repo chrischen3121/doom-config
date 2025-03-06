@@ -45,3 +45,10 @@
       (interactive)
       (+workspace/save (persp-name (get-current-persp))))
     (map! "C-c w s" #'+workspace/save-current)))
+
+(when (modulep! :ui zen)
+  (setq! +zen-text-scale 0.8)
+  (add-hook! 'writeroom-mode-enable-hook
+    (display-line-numbers-mode -1))
+  (add-hook! 'writeroom-mode-disable-hook
+    (display-line-numbers-mode +1)))

@@ -77,8 +77,8 @@
        (:when (modulep! :lang org +present)
          :desc "Org presentation" "p" #'org-tree-slide-mode)
        (:when (modulep! :ui zen)
-         :desc "Zen mode" "z" #'+zen/toggle
-         :desc "Zen mode (fullscreen)" "Z" #'+zen/toggle-fullscreen)
+         :desc "Zen" "Z" #'+zen/toggle
+         :desc "Zen(fullscreen)" "z" #'+zen/toggle-fullscreen)
        (:when (modulep! :ui indent-guides)
          :desc "Indent guides" "i" #'indent-bars-mode))
 

@@ -110,23 +110,6 @@
          (:when (modulep! :tools upload)
            :desc "SSH Upload" "u" #'ssh-deploy-upload-handler))))
 
-;; :ui
-;; zen
-(when (modulep! :ui zen)
-  (after! writeroom-mode
-    (setq! +zen-text-scale 0.8)
-    (add-hook! 'writeroom-mode-enable-hook
-      (display-line-numbers-mode -1))
-    (add-hook! 'writeroom-mode-disable-hook
-      (display-line-numbers-mode +1))
-    (when (modulep! :ui tabs)
-      (add-hook! 'writeroom-mode-enable-hook
-        (centaur-tabs-local-mode +1)
-        (display-line-numbers-mode -1))
-      (add-hook! 'writeroom-mode-disable-hook
-        (centaur-tabs-local-mode -1)
-        (display-line-numbers-mode +1)))))
-
 ;; [Packages]
 ;; Whole line or region
 (use-package! whole-line-or-region
