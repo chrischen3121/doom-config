@@ -1,5 +1,4 @@
-;; -*- no-byte-compile: t; -*-
-;; init.el -*- lexical-binding: t; -*-
+;; init.el -*- lexical-binding: t; no-byte-compile: t; -*-
 
 ;; This file controls what Doom modules are enabled and what order they load
 ;; in. Remember to run 'doom sync' after modifying it!

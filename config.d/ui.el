@@ -39,4 +39,9 @@
     (setq! aw-ignored-buffers (delq 'treemacs-mode aw-ignored-buffers))))
 
 (when (modulep! :ui workspaces)
-  (setq! persp-keymap-prefix nil))
+  (setq! persp-keymap-prefix nil)
+  (after! persp-mode
+    (defun +workspace/save-current ()
+      (interactive)
+      (+workspace/save (persp-name (get-current-persp))))
+    (map! "C-c w s" #'+workspace/save-current)))
