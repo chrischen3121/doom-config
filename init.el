@@ -33,7 +33,6 @@
        nav-flash         ; blink cursor line after big motions
        ophints           ; highlight the region an operation acts on
        (popup +defaults)   ; Not all windows are created equally.
-       ;; tabs              ; a tab bar for Emacs
        ;; TODO neotree or treemacs
        (treemacs +lsp)   ; a project drawer, like neotree but cooler
        unicode           ; extended unicode support for various languages

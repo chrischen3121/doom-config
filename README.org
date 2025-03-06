@@ -39,7 +39,7 @@ Most important prefix keys:
 - ~C-c y~: yasnippet
 
 ** F<key>
-- ~C-c o t~: *treemacs*
+- ~C-c t t~: *treemacs*
 - ~C-c t i~: *lsp-imenu/imenu*
 - ~F10~: menu popup
 - ~F11~: fullscreen
@@ -50,7 +50,7 @@ Most important prefix keys:
 |--------------------+------------------|
 | ~C-c o c~          | Open calendar    |
 | ~C-c o t/T~        | Open vterm       |
-| ~C-c o t~          | Open treemacs    |
+| ~C-c t t~          | Open treemacs    |
 | ~C-c n d~          | Open deft        |
 | ~C-c 1~            | <checkers>       |
 | ~C-c 1 g~          | Grammar commands |
@@ -67,7 +67,6 @@ Most important prefix keys:
 - code action ~C-c a~
 - grammar check ~C-c 1 g~
 - calendar ~C-c o c~
-- *treemacs* ~C-c t t~ or ~F1~
   - ~C-c C-p p~ treemacs project
 - outline-all ~C-c C-f~
 

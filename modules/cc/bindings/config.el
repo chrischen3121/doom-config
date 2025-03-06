@@ -75,6 +75,7 @@
        :desc "Treemacs" "t" #'+treemacs/toggle
        :desc "Tab/Space switch" "T" #'doom/toggle-indent-style
        :desc "Read-only mode" "r" #'read-only-mode
+       :desc "Word wrap" "w" #'+word-wrap-mode
        (:when (modulep! :checkers syntax)
          :desc "Flycheck" "c" #'flycheck-mode)
        (:when (modulep! :ui minimap)

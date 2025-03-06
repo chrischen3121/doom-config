@@ -63,9 +63,6 @@
          ;; (font-spec :family cc/default-unicode-font :size cc/default-unicode-font-size)
          )
   (custom-set-faces!
-    ;; ace-window
-    '(aw-leading-char-face :inherit 'font-lock-builtin-face :height 4.5)
-    ;; spell-fu
     `(spell-fu-incorrect-face :underline (:style wave :color ,(doom-color 'blue)))
     ;; volatile-highlights
     `(vhl/default-face :inherit 'region :background ,(doom-color 'gray)))

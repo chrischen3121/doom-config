@@ -111,41 +111,6 @@
            :desc "SSH Upload" "u" #'ssh-deploy-upload-handler))))
 
 ;; :ui
-;; treemacs
-;; enable project follow mode
-(when (modulep! :ui treemacs)
-  (after! treemacs
-    (setq! treemacs-project-follow-mode t)
-    (map! :map treemacs-mode-map
-          :desc "Select window" "C-x o" #'treemacs-select-window
-          :prefix ("C-c C-w" . "<tree-workspace>")
-          :prefix ("C-c C-p" . "<tree-project>")))
-  (after! (:and treemacs ace-window)
-    (setq! aw-ignored-buffers (delq 'treemacs-mode aw-ignored-buffers))))
-
-
-;; :ui
-;; tabs
-(when (modulep! :ui tabs)
-  (after! centaur-tabs
-    (setq! centaur-tabs-style "wave"
-           centaur-tabs-set-bar nil
-           centaur-tabs-height 36
-           centaur-tabs-close-button "x")
-    (add-hook!
-      (dired-mode special-mode vterm-mode)
-      :append
-      ;; maybe :local
-      #'centaur-tabs-local-mode)
-    (map! :map centaur-tabs-mode-map
-          :prefix ("C-c w t" . "tabs")
-          :desc "Tab forward" "f" #'centaur-tabs-forward
-          :desc "Tab backward" "b" #'centaur-tabs-backward
-          :desc "Switch to tab" "j" #'centaur-tabs-ace-jump
-          :desc "Tab close" "c" #'centaur-tabs-close-tab)))
-
-
-;; :ui
 ;; zen
 (when (modulep! :ui zen)
   (after! writeroom-mode
