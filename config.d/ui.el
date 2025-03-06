@@ -9,15 +9,24 @@
   (setq! +doom-dashboard-name "Happy Hacking!"))
 
 (when (modulep! :ui treemacs)
-  ;; TODO check on follow mode
   (map! :map treemacs-mode-map
+        "C-c C-p" nil
+        "C-c C-w" nil
         :desc "Select window" "C-x o" #'treemacs-select-window
         (:prefix
          ("p" . "<tree-project>")
-         "p" #'treemacs-projectile)
+         :desc "Switch project" "p" #'treemacs-projectile
+         :desc "Add project" "a" #'treemacs-add-project-to-workspace
+         :desc "Remove project" "k" #'treemacs-remove-project-from-workspace
+         :desc "Unfold all" "c" #'treemacs-collapse-all-projects
+         :desc "Rename project" "r" #'treemacs-rename-project)
         (:prefix
          ("w" . "<tree-workspace>")
-         "w" #'treemacs-switch-workspace))
+         :desc "Create workspace" "c" #'treemacs-create-workspace
+         :desc "Remove workspace" "k" #'treemacs-remove-workspace
+         :desc "Edit workspaces" "e" #'treemacs-edit-workspaces
+         :desc "Rename workspace" "r" #'treemacs-rename-workspace
+         :desc "Switch workspace" "w" #'treemacs-switch-workspace))
   (setq! +treemacs-git-mode 'deferred))
 
 (when (modulep! :ui window-select)

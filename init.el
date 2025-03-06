@@ -36,7 +36,7 @@
        ;; TODO neotree or treemacs
        (treemacs +lsp)   ; a project drawer, like neotree but cooler
        unicode           ; extended unicode support for various languages
-       (vc-gutter +diff-hl +pretty) ; vcs diff in the fringe
+       vc-gutter ; (vc-gutter +pretty) ; vcs diff in the fringe
        (window-select +numbers)     ; visually switch windows
        workspaces        ; tab emulation, persistence & separate workspaces
        zen               ; distraction-free coding or writing
