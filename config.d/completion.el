@@ -1,5 +1,6 @@
-;; -*- lexical-binding: t; no-byte-compile: t; -*-
+;;; -*- lexical-binding: t; no-byte-compile: t; -*-;;;
 ;;; config.d/completion.el
+
 ;; TODO try cape-dict
 (when (modulep! :completion vertico)
   (map! :map vertico-map

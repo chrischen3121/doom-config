@@ -128,18 +128,6 @@
   (setq! plantuml-default-exec-mode 'executable
          plantuml-indent-level 4))
 
-;; :ui
-;; TODO
-;; deft
-;; (when (modulep! :ui deft)
-;;   (map! :desc "Search notes" "C-c s n" #'deft)
-;;   (after! deft
-;;     (setq! deft-directory cc/roam-notes-dir
-;;            deft-default-extension "org"
-;;            deft-use-filename-as-title t
-;;            deft-strip-summary-regex
-;;            ":PROPERTIES:\n\\(.+\n\\)+:END:\n")))
-
 (use-package! anki-editor
   ;;:after-call (org-mode-hook)
   :commands (anki-editor-push-notes

@@ -40,7 +40,3 @@
 ;; doom-one, doom-peacock, doom-tomorrow-night, doom-opera
 
 (map! "<f12>" #'cc/switch-light-dark-theme)
-
-
-(when (modulep! :ui doom-dashboard)
-  (setq! +doom-dashboard-name "Happy Hacking!"))

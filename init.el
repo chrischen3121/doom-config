@@ -16,7 +16,7 @@
 ;;      directory (for easy access to its source code).
 
 ;; Ignore "Package cl is deprecated" warning
-;; (setq byte-compile-warnings '(cl-functions))
+(setq byte-compile-warnings '(cl-functions))
 
 (doom! :completion
        (vertico +icons)    ; the search engine of the future
@@ -27,7 +27,7 @@
        doom-dashboard    ; a nifty splash screen for Emacs
        doom-quit         ; DOOM quit-message prompts when you quit Emacs ;
        hl-todo           ; highlight TODO/FIXME/NOTE/DEPRECATED/HACK/REVIEW/BUG/XXX
-       indent-guides     ; TODO highlighted indent columns https://github.com/jdtsmith/indent-bars/wiki/indent%E2%80%90bars-config-Wiki#tree-sitter-config
+       indent-guides     ; highlighted indent columns
        minimap           ; show a map of the code on the side
        modeline          ; snazzy, Atom-inspired modeline, plus API
        nav-flash         ; blink cursor line after big motions

@@ -135,15 +135,6 @@
   (map! :after ssh-deploy
         :desc "<ssh-upload>" "C-c r u" #'ssh-deploy-prefix-map))
 
-;; :ui
-;; indent-guide
-(when (modulep! :ui indent-guides)
-  (defun cc/inhibit-for-specified-modes ()
-    "Inhibit indent-guides mode if the current mode is in the specified list."
-    (member major-mode '(org-mode)))
-;;;###package indent-bars
-  (add-hook! '+indent-guides-inhibit-functions #'cc/inhibit-for-specified-modes))
-
 ;; :tools
 ;; eval
 ;; check `quickrun--language-alist' for languages

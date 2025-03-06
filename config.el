@@ -1,4 +1,3 @@
-;; -*- no-byte-compile: t; -*-
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
 
 ;; Place your private configuration here! Remember, you do not need to run 'doom
@@ -26,7 +25,9 @@
 (load! "config.d/defaults.el")
 (load! "config.d/completion.el")
 (load! "config.d/ui.el")
-(load! "config.d/bindings.el")
+
+(load! "config.d/langs/cpp.el")
+(load! "config.d/langs/python.el")
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
