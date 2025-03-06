@@ -1,32 +1,26 @@
 ;; -*- no-byte-compile: t; -*-
 ;;; cc/bindings/config.el -*- lexical-binding: t; -*-
 
-;; persp-mode and projectile in different prefixes
-(when (modulep! :ui workspaces)
-  (setq! persp-keymap-prefix (kbd "C-c w p"))
-  (which-key-add-key-based-replacements "C-c w p" "<persp-mode>"))
-
 ;; Autoloads
 (autoload 'org-capture-goto-target "org-capture" nil t)
 (autoload 'recentf-open-files "recentf" nil t)
 (autoload 'projectile-recentf "projectile" nil t)
 
 ;; Adding which-key descriptions
-(after! which-key
-  (which-key-add-key-based-replacements
-    "C-x <RET>" "coding-system"
-    "M-s h" "highlight"
-    "C-x n" "narrow/widen"
-    "C-x r" "register"
-    "C-x t" "tab"
-    "C-x w" "win-select"
-    "C-x x" "buffer-ops"
-    "C-x 4" "other-window"
-    "C-x 5" "other-frame"
-    "C-x p" "project"
-    "C-h d p" "doom/help-packages"
-    "C-c M-d" "doom/leader"
-    "C-c M-d l" "doom/localleader"))
+(which-key-add-key-based-replacements
+  "C-x <RET>" "coding-system"
+  "M-s h" "highlight"
+  "C-x n" "narrow/widen"
+  "C-x r" "register"
+  "C-x t" "tab"
+  "C-x w" "win-select"
+  "C-x x" "buffer-ops"
+  "C-x 4" "other-window"
+  "C-x 5" "other-frame"
+  "C-x p" "project"
+  "C-h d p" "doom/help-packages"
+  "C-c M-d" "doom/leader"
+  "C-c M-d l" "doom/localleader")
 
 ;; Global keybindings
 (map! :desc "ibuffer" "C-x C-b" #'ibuffer
@@ -66,7 +60,7 @@
        :desc "Undo tree redo" "r" #'undo-fu-only-redo
        :desc "Undo tree redo all" "R" #'undo-fu-redo-all)
 
-      ;; DONE C-c t --- toggle
+      ;; C-c t --- toggle
       (:prefix-map ("t" . "<toggle>")
        :desc "Big font mode" "b" #'doom-big-font-mode
        :desc "Fullscreen" "F" #'toggle-frame-fullscreen
@@ -200,23 +194,6 @@
        (:when (modulep! :tools docker)
          :desc "Docker" "d" #'docker))
 
-      ;; C-c w --- workspace
-      (:prefix-map
-       ("w" . "<workspace>")
-       (:when (modulep! :ui workspaces)
-         ;; workspace
-         :desc "New workspace" "n" #'+workspace/new-named
-         :desc "Save workspace" "s" #'+workspace/save
-         :desc "Load workspace" "l" #'+workspace/load
-         :desc "Delete workspace" "d" #'+workspace/delete
-         :desc "Switch workspace" "w" #'+workspace/switch-to
-         :desc "Display workspaces" "L" #'+workspace/display
-         :desc "Switch to last workspace" "o" #'+workspace/other
-
-         ;; session
-         :desc "Load last session" "q" #'doom/quickload-session
-         ))
-
       ;; C-c s --- search
       (:prefix-map ("s" . "<search>")
        :desc "Search line" "l"
@@ -290,9 +267,9 @@
 
 ;; local keybindings
 (map! :after which-key
-      :prefix ("C-c m" . "<local>")
+      :prefix "C-c l"
 
-      ;; C-c m r --- run/eval
+      ;; C-c l r --- run/eval
       (:prefix-map
        ("r" . "<run/eval>")
        (:when (modulep! :tools eval)
@@ -303,7 +280,7 @@
          :desc "Open REPL" "i" #'+eval/open-repl-other-window))
 
 
-      ;; C-c m t --- tmux
+      ;; C-c l t --- tmux
       (:when (modulep! :tools tmux)
         :map prog-mode-map
         :prefix-map ("t" . "<tmux>")

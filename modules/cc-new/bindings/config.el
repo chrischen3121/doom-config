@@ -34,6 +34,20 @@
          :desc "Close all popups" "c" #'+popup/close-all)
        )
 
+      ;; C-c w --- workspace
+      (:prefix-map
+       ("w" . "<workspace>")
+       (:when (modulep! :ui workspaces)
+         :desc "Make workspace" "m" #'+workspace/new-named
+         :desc "Save workspace" "s" #'+workspace/save
+         :desc "Load workspace" "l" #'+workspace/load
+         :desc "Remove workspace" "r" #'+workspace/delete
+         :desc "Switch workspace" "o" #'+workspace/switch-to
+         :desc "Display workspaces" "d" #'+workspace/display
+         )
+       ;; session
+       :desc "Load last session" "w" #'doom/quickload-session)
+
       ;; C-c l -- local keybindings
       ;; which related to current major mode
       (:prefix-map
@@ -52,4 +66,7 @@
          :desc "Emoji" "e" #'cape-emoji
          :desc "dabbrev" "d" #'cape-dabbrev)
        )
-      )
+      (:prefix-map
+       ("m" . "<make>")
+       :desc "Make frame" "f" #'make-frame
+       ))
