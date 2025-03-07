@@ -1,5 +1,5 @@
-;; -*- no-byte-compile: t; -*-
-;;; cc/notes/config.el -*- lexical-binding: t; -*-
+;; -*- no-byte-compile: t; lexical-binding: t; -*-
+;;; cc/notes/config.el
 ;; TODO: org-format-latex-options
 ;; TODO: may try +jupyter +pandoc +pretty(latex highlighting)
 ;;
@@ -10,7 +10,6 @@
 ;; C-x n s, C-x n w -- Narrow/Unnarrow buffer
 ;; C-c s o -- Search in an outline tree as much as possible
 ;; C-c - -- Cycle bullets (-, +, *, ...)
-;; C-c <TAB> -- org-toggle-inline-images
 ;; C-c ; -- Toggle the "COMMENT" keyword
 ;; ====== Tags ==========
 ;; C-c C-c -- Set a tag
@@ -44,7 +43,7 @@
        :desc "Insert link" "l" #'org-insert-link)
 
 
-      ;; local prefix m
+      ;; local prefix l
       (:prefix "C-c l"
                ;; i -- create org-id
                (:prefix ("i" . "<org-id>")
@@ -57,9 +56,12 @@
                 :desc "Preview image" "i" #'org-display-inline-images
                 :desc "Plot table" "p" #'org-plot/gnuplot)
 
-               ;; f -- footnote
-               :desc "Insert footnote" "f" #'org-footnote-new
-               ))
+               )
+
+      (:prefix "C-c i"
+       ;; f -- footnote
+       :desc "Insert footnote" "f" #'org-footnote-new
+       ))
 
 
 ;; org configuration

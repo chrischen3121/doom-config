@@ -49,6 +49,9 @@
 ;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
 ;;(unpin! t)
 
+(disable-packages! vimish-fold
+                   evil-vimish-fold)
+
 ;; TODO Org
 
 ;; org-noter

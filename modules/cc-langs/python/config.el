@@ -9,6 +9,11 @@
 
   (setq! python-shell-interpreter "python3")
 
+  (map! :map python-mode-map
+        "C-c <TAB> a" nil ; python-add-import
+        "C-c <TAB> s" nil
+        "C-c <TAB> f" nil
+        "C-c <TAB> r" nil)
 
   (when (modulep! :lang rst)
     (use-package! sphinx-doc

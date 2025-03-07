@@ -2,7 +2,6 @@
 ;;; cc/better-defaults/packages.el
 
 (disable-packages! company-dict
-                   evil-vimish-fold
                    eglot)
 
 (package! rainbow-mode)

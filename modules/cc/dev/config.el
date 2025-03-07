@@ -42,23 +42,6 @@
         (cons (car a) (merge-sort (cdr a) b))
       (cons (car b) (merge-sort a (cdr b))))))
 
-;; :editor
-;; fold
-(when (modulep! :editor fold)
-  (after! outline
-    (setq-hook! 'outline-minor-mode-hook
-      outline-minor-mode-prefix (kbd "C-c 2 l"))
-    (which-key-add-keymap-based-replacements
-      outline-minor-mode-map "C-c 2 l" "<outline>")
-    (undefine-key! outline-minor-mode-map "C-c @"))
-
-;;;###package vimish-fold
-  (map! :map (prog-mode-map yaml-mode-map)
-        :prefix ("C-c 2" . "<fold>")
-        :desc "Fold/Unfold" "2" #'+fold/toggle
-        :desc "Fold all" "f" #'+fold/close-all
-        :desc "Unfold all" "u" #'+fold/open-all
-        :desc "Delete folded" "d" #'vimish-fold-delete))
 
 ;; :tools
 ;; editorconfig

@@ -42,7 +42,7 @@
        :editor
        file-templates    ; auto-snippets for empty files
        fold              ; (nigh) universal code folding
-       format            ; automated prettiness +format/buffer will use lsp if available
+       (format +lsp)       ; automated prettiness +format/buffer will use lsp if available
        ;; multiple-cursors ; editing in many places at once, seems interesting https://emacsrocks.com/e13.html
        ;; objed             ; text object editing for the innocent
        ;; parinfer          ; turn lisp into python, sort of
