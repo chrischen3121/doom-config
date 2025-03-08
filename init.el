@@ -43,12 +43,10 @@
        file-templates    ; auto-snippets for empty files
        fold              ; (nigh) universal code folding
        (format +lsp)       ; automated prettiness +format/buffer will use lsp if available
-       ;; multiple-cursors ; editing in many places at once, seems interesting https://emacsrocks.com/e13.html
-       ;; objed             ; text object editing for the innocent
-       ;; parinfer          ; turn lisp into python, sort of
+       multiple-cursors ; editing in many places at once, demo: https://emacsrocks.com/e13.html
        snippets             ; my elves. They type so I don't have to
        word-wrap            ; soft wrapping with language-aware indent
-
+       
        :emacs
        (dired +icons)    ; making dired pretty [functional]
        (ibuffer +icons)  ; interactive buffer management

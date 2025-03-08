@@ -15,12 +15,12 @@
         "C-c C-p" #'+corfu/move-to-minibuffer
         "C-SPC" #'corfu-insert-separator
         :map corfu-popupinfo-map
-        "M-p" #'corfu-popupinfo-scroll-down
-        "M-n" #'corfu-popupinfo-scroll-up
-        "M-<" #'corfu-popupinfo-beginning
-        "M->" #'corfu-popupinfo-end)
-  (after! cape
-    (map! "M-/" #'cape-dabbrev
-          "C-M-/" #'dabbrev-expand)))
+        "C-M-p" #'corfu-popupinfo-scroll-down
+        "C-<up>" #'corfu-popupinfo-scroll-down
+        "C-M-n" #'corfu-popupinfo-scroll-up
+        "C-<down>" #'corfu-popupinfo-scroll-up
+        "C-M-a" #'corfu-popupinfo-beginning
+        "C-M-e" #'corfu-popupinfo-end)
 
-;; completion.el ends here
+  (after! cape
+    (map! "M-/" #'cape-dabbrev)))

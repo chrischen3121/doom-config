@@ -88,14 +88,6 @@
      :prefix "C-c 1"
      :desc "Check grammar" "g" #'langtool-check)))
 
-;; :editor
-;; word-wrap
-(when (modulep! :editor word-wrap)
-  (+global-word-wrap-mode +1)
-  (after! word-wrap
-    (add-to-list '+word-wrap-disabled-modes 'vterm-mode)))
-
-
 ;; :emacs
 ;; dired
 (when (modulep! :emacs dired)

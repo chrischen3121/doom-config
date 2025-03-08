@@ -43,10 +43,18 @@
          :desc "Load workspace" "l" #'+workspace/load
          :desc "Remove workspace" "r" #'+workspace/delete
          :desc "Switch workspace" "o" #'+workspace/switch-to
-         :desc "Display workspaces" "d" #'+workspace/display
-         )
+         :desc "Display workspaces" "d" #'+workspace/display)
        ;; session
        :desc "Load last session" "w" #'doom/quickload-session)
+
+      (:prefix-map
+       ("e" . "<edit>")
+       (:when (modulep! :editor multiple-cursors)
+         (:prefix ("m" . "<multicursors>")
+          :desc "Edit lines" "e" #'mc/edit-lines
+          :desc "Mark next like this" "n" #'mc/mark-next-like-this
+          :desc "Mark previous like this" "p" #'mc/mark-previous-like-this
+          :desc "Mark all like this" "a" #'mc/mark-all-like-this)))
 
       ;; C-c l -- local keybindings
       ;; which related to current major mode
@@ -54,10 +62,27 @@
        ("l" . "<local>")
        )
 
+      ;; C-c t -- toggle
+      (:prefix-map
+       ("t" . "<toggle>")
+       (:when (modulep! :ui zen)
+         :desc "zen-mode" "z" #'+zen/toggle)
+       (:when (modulep! :editor word-wrap)
+         :desc "word-wrap-mode" "w" #'+word-wrap-mode))
+
       ;; C-c c -- code keybindings
       (:prefix-map
        ("c" . "<code>")
+
        )
+
+      ;; C-c y -- yasnippets
+      (:when (modulep! :editor snippets)
+        (:prefix-map ("y" . "<snippets>")
+         :desc "New snippet" "n" #'+snippets/new
+         :desc "Edit snippet" "e" #'+snippets/edit
+         :desc "Find snippet" "f" #'+snippets/find
+         :desc "Browse snippets" "b" #'+default/browse-templates))
 
       ;; C-c i -- insert keybindings
       (:prefix-map

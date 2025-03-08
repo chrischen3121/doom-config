@@ -69,16 +69,12 @@
        :desc "Treemacs" "t" #'+treemacs/toggle
        :desc "Tab/Space switch" "T" #'doom/toggle-indent-style
        :desc "Read-only mode" "r" #'read-only-mode
-       :desc "Word wrap" "w" #'+word-wrap-mode
        (:when (modulep! :checkers syntax)
          :desc "Flycheck" "c" #'flycheck-mode)
        (:when (modulep! :ui minimap)
          :desc "Minimap" "m" #'minimap-mode)
        (:when (modulep! :lang org +present)
          :desc "Org presentation" "p" #'org-tree-slide-mode)
-       (:when (modulep! :ui zen)
-         :desc "Zen" "Z" #'+zen/toggle
-         :desc "Zen(fullscreen)" "z" #'+zen/toggle-fullscreen)
        (:when (modulep! :ui indent-guides)
          :desc "Indent guides" "i" #'indent-bars-mode))
 
@@ -108,17 +104,7 @@
          :after lsp-ui-peek
          :desc "Peek documentation" "p" #'lsp-ui-doc-glance)
        (:when (modulep! :completion vertico)
-         :desc "Jump to symbol" "j"   #'consult-lsp-symbols)
-       (:when (modulep! :editor snippets)
-         (:prefix-map ("y" . "<snippets>")
-          :desc "New snippet" "n" #'+snippets/new
-          :desc "Edit snippet" "e" #'+snippets/edit
-          :desc "Find snippet" "f" #'+snippets/find
-          :desc "Browse snippets" "b" #'+default/browse-templates
-          :map yas-minor-mode-map
-          "C-c &" nil
-          :desc "Reload snippets" "r" #'yas-reload-all
-          :desc "Insert snippet" "i" #'yas-insert-snippet)))
+         :desc "Jump to symbol" "j"   #'consult-lsp-symbols))
 
       ;; C-c k --- lookup
       (:prefix-map ("k" . "<lookup>")
