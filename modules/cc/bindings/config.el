@@ -22,11 +22,6 @@
   "C-c M-d" "doom/leader"
   "C-c M-d l" "doom/localleader")
 
-;; Global keybindings
-(map! :desc "ibuffer" "C-x C-b" #'ibuffer
-      :desc "Switch buffer" "C-x b" #'switch-to-buffer
-      :desc "Switch buffer" "C-x 4 b" #'switch-to-buffer-other-window)
-
 ;; "C-x" keybindings
 (map! :prefix "C-x"
       ;; C-x a --- agenda
@@ -53,12 +48,6 @@
        (:when (modulep! :completion vertico)
          :desc "Embark act" ";" #'embark-act
          :desc "Embark dwim" "e" #'embark-dwim))
-
-      ;; C-c u --- undo
-      (:prefix-map ("u" . "<undo>")
-       :desc "Undo" "u" #'undo-fu-only-undo
-       :desc "Undo tree redo" "r" #'undo-fu-only-redo
-       :desc "Undo tree redo all" "R" #'undo-fu-redo-all)
 
       ;; C-c t --- toggle
       (:prefix-map ("t" . "<toggle>")

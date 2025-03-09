@@ -88,20 +88,6 @@
      :prefix "C-c 1"
      :desc "Check grammar" "g" #'langtool-check)))
 
-;; :emacs
-;; dired
-(when (modulep! :emacs dired)
-  (map! :after dired
-        :map dired-mode-map
-        "C-l" #'dired-up-directory
-        "C-c C-r" nil
-        "C-c C-e" nil
-        (:prefix "C-c l"
-         :desc "Rsync" "r" #'dired-rsync
-         :desc "Edit mode" "e" #'wdired-change-to-wdired-mode
-         (:when (modulep! :tools upload)
-           :desc "SSH Upload" "u" #'ssh-deploy-upload-handler))))
-
 ;; [Packages]
 ;; Whole line or region
 (use-package! whole-line-or-region

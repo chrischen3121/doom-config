@@ -24,6 +24,12 @@
 (after! which-key
   (setq! which-pkey-sort-order 'which-key-description-order))
 
+;; C-x keybindings
+(map! :after which-key
+      :prefix "C-x"
+      :desc "ibuffer" "C-x C-b" #'ibuffer)
+
+;; C-c keybindings
 (map! :after which-key
       :prefix "C-c"
 
@@ -54,7 +60,15 @@
           :desc "Edit lines" "e" #'mc/edit-lines
           :desc "Mark next like this" "n" #'mc/mark-next-like-this
           :desc "Mark previous like this" "p" #'mc/mark-previous-like-this
-          :desc "Mark all like this" "a" #'mc/mark-all-like-this)))
+          :desc "Mark all like this" "a" #'mc/mark-all-like-this))
+
+       (:when (modulep! :emacs undo)
+         (:prefix ("u" . "<undo>")
+          :desc "Undo" "u" #'undo-fu-only-undo
+          :desc "Undo tree redo" "r" #'undo-fu-only-redo
+          :desc "Undo tree redo all" "R" #'undo-fu-redo-all)
+         )
+       )
 
       ;; C-c l -- local keybindings
       ;; which related to current major mode

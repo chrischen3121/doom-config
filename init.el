@@ -53,6 +53,9 @@
        undo              ; persistent, smarter undo for your inevitable mistakes (undo-fu)
        vc                ; version-control and Emacs, sitting in a tree (gitignore, gitconfig)
 
+       :email
+       ;; (mu4e +gmail +org)
+
        :term
        eshell
        vterm             ; the best terminal emulation in Emacs
