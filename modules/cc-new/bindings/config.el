@@ -76,9 +76,18 @@
        ("l" . "<local>")
        )
 
+      ;; C-c o -- open
+      (:prefix-map
+       ("o" . "<open>")
+       (:when (modulep! :term vterm)
+         :desc "vterm" "t" #'+vterm/toggle)
+       )
+
       ;; C-c t -- toggle
       (:prefix-map
        ("t" . "<toggle>")
+       (:when (modulep! :ui treemacs)
+         :desc "Treemacs" "t" #'+treemacs/toggle)
        (:when (modulep! :ui zen)
          :desc "zen-mode" "z" #'+zen/toggle)
        (:when (modulep! :editor word-wrap)

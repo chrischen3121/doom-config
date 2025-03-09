@@ -54,14 +54,13 @@
        vc                ; version-control and Emacs, sitting in a tree (gitignore, gitconfig)
 
        :email
-       ;; (mu4e +gmail +org)
+       ;; (mu4e +gmail +org) ; Should give it a try
 
        :term
-       eshell
        vterm             ; the best terminal emulation in Emacs
 
        :checkers
-       syntax                          ; tasing you for every semicolon you forget
+       syntax            ; tasing you for every semicolon you forget
        (spell +aspell)   ; tasing you for misspelling mispelling (+everywhere disabled)
        ;;[opt]grammar                       ; tasing grammar mistake every you make
 
@@ -145,11 +144,6 @@
        (web +lsp +tree-sitter)   ; support for various web languages, including HTML5, CSS, SASS/SCSS, as well as Django
        (yaml +lsp +tree-sitter)        ; JSON, but readable
        ;;zig               ; C, but simpler
-
-       :email
-       ;; TODO may try this later, when writing email with org is needed
-       ;;(mu4e +org +gmail)
-       ;;(wanderlust +gmail)
 
        :app
        calendar

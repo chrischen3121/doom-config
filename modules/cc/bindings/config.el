@@ -55,7 +55,6 @@
        :desc "Fullscreen" "F" #'toggle-frame-fullscreen
        :desc "Flymake" "f" #'flymake-mode ; TODO: just give it a try
        :desc "Line numbers" "l" #'doom/toggle-line-numbers
-       :desc "Treemacs" "t" #'+treemacs/toggle
        :desc "Tab/Space switch" "T" #'doom/toggle-indent-style
        :desc "Read-only mode" "r" #'read-only-mode
        (:when (modulep! :checkers syntax)
@@ -158,9 +157,6 @@
        ("o" . "<open>")
        (:when (modulep! :app calendar)
          :desc "Calendar" "c" #'+calendar/open-calendar)
-       (:when (modulep! :term vterm)
-         :desc "vterm" "t" #'+vterm/toggle
-         :desc "vterm here" "T" #'+vterm/here)
        (:when (modulep! :tools ein)
          (:prefix-map ("j" . "<jupyter>")
           :desc "Jupyter run" "r" #'ein:run

@@ -26,6 +26,7 @@
 (load! "config.d/completion.el")
 (load! "config.d/ui.el")
 (load! "config.d/editor.el")
+(load! "config.d/emacs.el")
 
 (load! "config.d/langs/cpp.el")
 (load! "config.d/langs/python.el")
