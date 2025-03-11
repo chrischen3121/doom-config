@@ -62,7 +62,7 @@
        :checkers
        grammar           ; aid your writing by combining lang-tool and writegood-mode
        (spell +aspell)   ; tasing you for misspelling mispelling (+everywhere disabled)
-       syntax            ; tasing you for every semicolon you forget
+       (syntax +icons)   ; tasing you for every semicolon you forget
 
        :tools
        ;; NOTE TODOs needs to be verified with python/C++ environments

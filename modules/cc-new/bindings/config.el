@@ -24,6 +24,9 @@
 (after! which-key
   (setq! which-pkey-sort-order 'which-key-description-order))
 
+(after! which-key
+  (which-key-add-key-based-replacements "C-c 1" "<checker>"))
+
 ;; C-x keybindings
 (map! :after which-key
       :prefix "C-x"
@@ -54,6 +57,7 @@
        ;; session
        :desc "Load last session" "w" #'doom/quickload-session)
 
+      ;; C-c e -- edit/writing
       (:prefix-map
        ("e" . "<edit>")
        (:when (modulep! :editor multiple-cursors)
@@ -95,6 +99,7 @@
       ;; C-c o -- open
       (:prefix-map
        ("o" . "<open>")
+       :desc "New frame" "f" #'make-frame
        (:when (modulep! :term vterm)
          :desc "vterm" "t" #'+vterm/toggle)
        )
@@ -112,12 +117,14 @@
          :desc "writegood-mode" "w" #'writegood-mode)
        (:when (modulep! :checkers spell)
          :desc "spell-fu-mode" "s" #'spell-fu-mode)
+       (:when (and (modulep! :checkers syntax)
+                   (not (modulep! :checkers syntax +flymake)))
+         :desc "Flycheck" "c" #'flycheck-mode)
        )
 
       ;; C-c c -- code keybindings
       (:prefix-map
        ("c" . "<code>")
-
        )
 
       ;; C-c y -- yasnippets
@@ -135,7 +142,4 @@
          :desc "Emoji" "e" #'cape-emoji
          :desc "dabbrev" "d" #'cape-dabbrev)
        )
-      (:prefix-map
-       ("m" . "<make>")
-       :desc "Make frame" "f" #'make-frame
-       ))
+      )

@@ -57,8 +57,8 @@
 ;; :tools
 ;; lsp +peek
 (when (modulep! :tools lsp +peek)
-  ;; TODO: lsp default keymap is disorganized, try some and remove this keymap
-  (setq! lsp-keymap-prefix (kbd "C-c l"))
+  (map! :map lsp-mode-map
+        "s-l" nil)
   (after! lsp-mode
     (add-hook! 'lsp-mode-hook #'lsp-enable-which-key-integration))
   (after! lsp-ui

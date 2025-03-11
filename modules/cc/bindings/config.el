@@ -52,13 +52,10 @@
       ;; C-c t --- toggle
       (:prefix-map ("t" . "<toggle>")
        :desc "Big font mode" "b" #'doom-big-font-mode
-       :desc "Fullscreen" "F" #'toggle-frame-fullscreen
-       :desc "Flymake" "f" #'flymake-mode ; TODO: just give it a try
+       :desc "Fullscreen" "f" #'toggle-frame-fullscreen
        :desc "Line numbers" "l" #'doom/toggle-line-numbers
        :desc "Tab/Space switch" "T" #'doom/toggle-indent-style
        :desc "Read-only mode" "r" #'read-only-mode
-       (:when (modulep! :checkers syntax)
-         :desc "Flycheck" "c" #'flycheck-mode)
        (:when (modulep! :ui minimap)
          :desc "Minimap" "m" #'minimap-mode)
        (:when (modulep! :lang org +present)

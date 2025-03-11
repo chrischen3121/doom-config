@@ -41,13 +41,6 @@
   (after! emacs-everywhere
     (setq! emacs-everywhere-major-mode-function #'org-mode)))
 
-;; :checkers
-;; syntax
-(when (modulep! :checkers syntax)
-  (after! flycheck
-    (setq! flycheck-keymap-prefix (kbd "C-c 1"))
-    (which-key-add-key-based-replacements "C-c 1" "<checker>")))
-
 ;; [Packages]
 ;; Whole line or region
 (use-package! whole-line-or-region
