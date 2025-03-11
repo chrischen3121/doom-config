@@ -93,25 +93,6 @@
           :desc "Symbols" "s" #'lsp-treemacs-symbols)))
 
 ;; :tools
-;; debugger
-(when (modulep! :tools debugger)
-  (map!
-   :prefix-map ("C-c d" . "<debugger>")
-   :desc "run" "s" #'+debugger/start
-   :desc "quit" "q" #'+debugger/quit)
-  (remove-hook! 'dap-ui-mode-hook #'dap-ui-controls-mode)
-  (remove-hook! 'dap-mode-hook #'dap-tooltip-mode)
-  (setq! dap-auto-configure-features
-         '(sessions locals breakpoints expressions))
-  (after! dap-mode
-    (map!
-     :map dap-mode-map
-     :prefix "C-c d"
-     :desc "dap-debug" "g" #'dap-debug
-     :desc "dap-hydra" "h" #'dap-hydra))
-  )
-
-;; :tools
 ;; upload
 ;; TODO: add descriptions for ssh-deploy keybindings
 (when (modulep! :tools upload)

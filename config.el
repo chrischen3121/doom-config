@@ -29,6 +29,7 @@
 (load! "config.d/editor.el")
 (load! "config.d/emacs.el")
 (load! "config.d/checkers.el")
+(load! "config.d/tools.el")
 
 (load! "config.d/langs/cpp.el")
 (load! "config.d/langs/python.el")

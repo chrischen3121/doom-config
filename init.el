@@ -65,10 +65,9 @@
        (syntax +icons)   ; tasing you for every semicolon you forget
 
        :tools
-       ;; NOTE TODOs needs to be verified with python/C++ environments
        ansible
-       ;;biblio            ; Bibtex Writes a PhD for you (citation needed)
-       (debugger +lsp)     ; TODO FIXME stepping through code, to help you add bugs
+       direnv
+       (debugger +lsp)
        (docker +lsp)
        editorconfig        ; let someone else argue about tabs vs spaces
        ein                 ; TODO try Jupyter notebooks with emacs

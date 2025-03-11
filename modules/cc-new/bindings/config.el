@@ -127,6 +127,17 @@
        ("c" . "<code>")
        )
 
+      ;; C-c d -- debugging
+      (:prefix-map
+       ("d" . "<debug>")
+       (:when (modulep! :tools debugger)
+         :map prog-mode-map
+         :desc "Run" "r" #'+debugger/start
+         :desc "Quit" "q" #'+debugger/quit
+         :desc "Run last" "l" #'+debugger/start-last
+         )
+       )
+
       ;; C-c y -- yasnippets
       (:when (modulep! :editor snippets)
         (:prefix-map ("y" . "<snippets>")
