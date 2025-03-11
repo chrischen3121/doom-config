@@ -85,8 +85,8 @@
           :desc "Disconnect workspace" "D" #'lsp-disconnect
           :desc "Shutdown workspace" "q" #'lsp-workspace-shutdown
           :desc "Add directory" "a" #'lsp-workspace-folders-add
-          :desc "Remove directory" "k" #'lsp-workspace-folders-remove
-          :desc "Remove all directories" "K" #'lsp-workspace-remove-all-folders
+          :desc "Remove directory" "r" #'lsp-workspace-folders-remove
+          :desc "Remove all directories" "R" #'lsp-workspace-remove-all-folders
           :desc "Unblock directories" "b" #'lsp-workspace-blocks-remove))
        (:when (modulep! :tools lsp +peek)
          :after lsp-ui-peek
@@ -212,14 +212,14 @@
          :desc "Refile node" "w" #'org-roam-refile
          (:prefix ("a" . "<alias>")
           :desc "Add alias" "a" #'org-roam-alias-add
-          :desc "Remove alias" "k" #'org-roam-alias-remove)
+          :desc "Remove alias" "r" #'org-roam-alias-remove)
          (:prefix ("r" . "<ref>")
           :desc "Add ref" "a" #'org-roam-ref-add
-          :desc "Remove ref" "k" #'org-roam-ref-remove
+          :desc "Remove ref" "r" #'org-roam-ref-remove
           :desc "Find ref" "f" #'org-roam-ref-find)
          (:prefix ("t" . "<tag>")
           :desc "Add tag" "a" #'org-roam-tag-add
-          :desc "Remove tag" "k" #'org-roam-tag-remove)
+          :desc "Remove tag" "r" #'org-roam-tag-remove)
          (:prefix ("d" . "<by date>")
           :desc "Goto date" "d" #'org-roam-dailies-goto-date
           :desc "Capture date" "c" #'org-roam-dailies-capture-date

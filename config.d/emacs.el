@@ -14,3 +14,7 @@
          ;; (:when (modulep! :tools upload)
          ;;   :desc "SSH Upload" "u" #'ssh-deploy-upload-handler)
          )))
+
+(when (modulep! :emacs ibuffer)
+  (map! :map ibuffer-mode-map
+        "K" #'doom/kill-all-buffers))

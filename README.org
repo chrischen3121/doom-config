@@ -48,13 +48,12 @@ Most important prefix keys:
 | ~C-c o c~          | Open calendar    |
 | ~C-c o t/T~        | Open vterm       |
 | ~C-c t t~          | Open treemacs    |
-| ~C-c n d~          | Open deft        |
-| ~C-c 1~            | <checkers>       |
-| ~C-c 1 g~          | Grammar commands |
-| ~C-c 1 s~          | Spell commands   |
+| ~C-c !~            | <checkers>       |
+| ~C-c e w~          | Writing commands |
+| ~C-c e s~          | Spell commands   |
 | ~C-c <TAB>~        | <fold>           |
 | ~C-c w~            | <workspace>      |
-| ~C-.~ or ~C-c j~   | Ace jump         |
+| ~C-j~              | Ace jump         |
 | ~M-.~ or ~C-c s w~ | Dictionary       |
 | ~C-c t z~          | Zen mode         |
 | ~C-c l r~          | <run/eval>       |

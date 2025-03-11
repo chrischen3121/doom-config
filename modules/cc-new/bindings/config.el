@@ -27,7 +27,7 @@
 ;; C-x keybindings
 (map! :after which-key
       :prefix "C-x"
-      :desc "ibuffer" "C-x C-b" #'ibuffer)
+      :desc "ibuffer" "C-b" #'ibuffer)
 
 ;; C-c keybindings
 (map! :after which-key
@@ -50,6 +50,7 @@
          :desc "Remove workspace" "r" #'+workspace/delete
          :desc "Switch workspace" "o" #'+workspace/switch-to
          :desc "Display workspaces" "d" #'+workspace/display)
+       :desc "Kill all buffers" "k" #'doom/kill-all-buffers
        ;; session
        :desc "Load last session" "w" #'doom/quickload-session)
 
@@ -61,13 +62,28 @@
           :desc "Mark next like this" "n" #'mc/mark-next-like-this
           :desc "Mark previous like this" "p" #'mc/mark-previous-like-this
           :desc "Mark all like this" "a" #'mc/mark-all-like-this))
-
        (:when (modulep! :emacs undo)
          (:prefix ("u" . "<undo>")
           :desc "Undo" "u" #'undo-fu-only-undo
           :desc "Undo tree redo" "r" #'undo-fu-only-redo
-          :desc "Undo tree redo all" "R" #'undo-fu-redo-all)
-         )
+          :desc "Undo tree redo all" "R" #'undo-fu-redo-all))
+       (:when (modulep! :checkers spell)
+         (:prefix ("s" . "<spell>")
+          :desc "Correct this word" "c" #'+spell/correct
+          :desc "Add word to dict""a" #'+spell/add-word
+          :desc "Remove word" "r" #'+spell/remove-word
+          (:unless (modulep! :checkers spell +flyspell)
+            :desc "Toggle spell-fu" "t" #'spell-fu-mode
+            :desc "Reset word cache" "k" #'spell-fu-reset
+            :desc "Next error" "n" #'spell-fu-goto-next-error
+            :desc "Previous error" "p" #'spell-fu-goto-previous-error)))
+       (:prefix
+        ("w" . "<writing>")
+        (:when (modulep! :checkers grammar)
+          (:desc "Grammar check" "c" #'langtool-check
+           :desc "Grammar correct" "e" #'langtool-correct-buffer
+           :desc "Grade level" "g" #'writegood-grade-level
+           :desc "Read ease score" "r" #'writegood-reading-ease)))
        )
 
       ;; C-c l -- local keybindings
@@ -91,7 +107,12 @@
        (:when (modulep! :ui zen)
          :desc "zen-mode" "z" #'+zen/toggle)
        (:when (modulep! :editor word-wrap)
-         :desc "word-wrap-mode" "w" #'+word-wrap-mode))
+         :desc "Visual line mode" "v" #'+word-wrap-mode)
+       (:when (modulep! :checkers grammar)
+         :desc "writegood-mode" "w" #'writegood-mode)
+       (:when (modulep! :checkers spell)
+         :desc "spell-fu-mode" "s" #'spell-fu-mode)
+       )
 
       ;; C-c c -- code keybindings
       (:prefix-map

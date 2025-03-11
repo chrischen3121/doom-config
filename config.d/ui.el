@@ -17,15 +17,15 @@
          ("p" . "<tree-project>")
          :desc "Switch project" "o" #'treemacs-projectile
          :desc "Add project" "a" #'treemacs-add-project-to-workspace
-         :desc "Remove project" "k" #'treemacs-remove-project-from-workspace
+         :desc "Remove project" "r" #'treemacs-remove-project-from-workspace
          :desc "Unfold all" "c" #'treemacs-collapse-all-projects
-         :desc "Rename project" "r" #'treemacs-rename-project)
+         :desc "Rename project" "m" #'treemacs-rename-project)
         (:prefix
          ("w" . "<tree-workspace>")
          :desc "Create workspace" "c" #'treemacs-create-workspace
-         :desc "Remove workspace" "k" #'treemacs-remove-workspace
+         :desc "Remove workspace" "r" #'treemacs-remove-workspace
          :desc "Edit workspaces" "e" #'treemacs-edit-workspaces
-         :desc "Rename workspace" "r" #'treemacs-rename-workspace
+         :desc "Rename workspace" "m" #'treemacs-rename-workspace
          :desc "Switch workspace" "o" #'treemacs-switch-workspace))
   (setq! +treemacs-git-mode 'deferred))
 

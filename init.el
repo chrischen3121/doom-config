@@ -54,15 +54,15 @@
        vc                ; version-control and Emacs, sitting in a tree (gitignore, gitconfig)
 
        :email
-       ;; (mu4e +gmail +org) ; Should give it a try
+       ;; (mu4e +gmail +org) ; TODO Should give it a try
 
        :term
        vterm             ; the best terminal emulation in Emacs
 
        :checkers
-       syntax            ; tasing you for every semicolon you forget
+       grammar           ; aid your writing by combining lang-tool and writegood-mode
        (spell +aspell)   ; tasing you for misspelling mispelling (+everywhere disabled)
-       ;;[opt]grammar                       ; tasing grammar mistake every you make
+       syntax            ; tasing you for every semicolon you forget
 
        :tools
        ;; NOTE TODOs needs to be verified with python/C++ environments
@@ -172,4 +172,5 @@
        )
 
 ;; Using "mycustom" instead of "custom" to keep the custom file clean
+;; TODO should move to at the end of config.el
 (load! "mycustom")

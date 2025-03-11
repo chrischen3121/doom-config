@@ -22,11 +22,13 @@
          cc/roam-journals-dir (concat cc/notes-base-dir "journals/")))
 
 ;; load config files
+(load! "config.d/custom-variables.el")
 (load! "config.d/defaults.el")
 (load! "config.d/completion.el")
 (load! "config.d/ui.el")
 (load! "config.d/editor.el")
 (load! "config.d/emacs.el")
+(load! "config.d/checkers.el")
 
 (load! "config.d/langs/cpp.el")
 (load! "config.d/langs/python.el")

@@ -7,7 +7,7 @@
        ;; recommended: doom-one, doom-peacock, doom-tomorrow-night, doom-opera
        cc/dark-theme 'doom-tomorrow-night)
 
-(setq! cc/personal-aspell-dict-dir "~/dicts/spell-fu/")
+(setq! personal-aspell-en-dict "~/dicts/spell-fu/en.pws")
 
 (setq! cc/default-org-dir "~/org/"
        cc/org-id-locations "~/org/.orgids"
