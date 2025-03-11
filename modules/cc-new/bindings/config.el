@@ -102,6 +102,8 @@
        :desc "New frame" "f" #'make-frame
        (:when (modulep! :term vterm)
          :desc "vterm" "t" #'+vterm/toggle)
+       (:when (modulep! :tools docker)
+         :desc "Docker" "d" #'docker)
        )
 
       ;; C-c t -- toggle
@@ -125,6 +127,21 @@
       ;; C-c c -- code keybindings
       (:prefix-map
        ("c" . "<code>")
+       (:when (modulep! :tools eval)
+         :prefix ("e" . "<eval>")
+         (:map prog-mode-map
+          :desc "Eval buffer" "b" #'+eval/buffer
+          :desc "Eval region" "r" #'+eval/region
+          :desc "Eval line" "l" #'+eval/line-or-region
+          :desc "Send to REPL" "s" #'+eval/send-region-to-repl
+          :desc "Open REPL" "o" #'+eval/open-repl-other-window
+          :desc "Open REPL here" "O" #'+eval/open-repl-same-window)
+         (:map emacs-lisp-mode-map
+          :desc "Eval buffer" "b" #'eval-buffer
+          :desc "Eval defun" "d" #'eval-defun
+          :desc "Eval region" "r" #'eval-region
+          :desc "Eval last sexp" "e" #'eval-last-sexp)
+         )
        )
 
       ;; C-c d -- debugging

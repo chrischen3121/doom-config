@@ -99,21 +99,6 @@
   (map! :after ssh-deploy
         :desc "<ssh-upload>" "C-c r u" #'ssh-deploy-prefix-map))
 
-;; :tools
-;; eval
-;; check `quickrun--language-alist' for languages
-;; to add new or overwrite, See:
-;; https://github.com/emacsorphanage/quickrun?tab=readme-ov-file#user-defined-command
-;; TODO check with python
-;; (when (modulep! :tools eval)
-;;   (map! :map (prog-mode-map emacs-lisp-mode-map)
-;;         :prefix ("C-c l e" . "eval")
-;;         :desc "Eval line" "l" #'+eval/line-or-region
-;;         :desc "Eval buffer" "b" #'+eval/buffer-or-region
-;;         :desc "Region to REPL" "s" #'+eval/send-region-to-repl
-;;         :desc "Open REPL same window" "r" #'+eval/open-repl-same-window
-;;         :desc "Open REPL other window" "R" #'+eval/open-repl-other-window))
-
 ;; [Packages]
 ;; Rainbow mode: highlight color string
 ;; (use-package! rainbow-mode

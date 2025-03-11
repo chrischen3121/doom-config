@@ -158,9 +158,7 @@
          (:prefix-map ("j" . "<jupyter>")
           :desc "Jupyter run" "r" #'ein:run
           :desc "Jupyter login" "l" #'ein:login
-          :desc "Jupyter stop" "s" #'ein:stop))
-       (:when (modulep! :tools docker)
-         :desc "Docker" "d" #'docker))
+          :desc "Jupyter stop" "s" #'ein:stop)))
 
       ;; C-c s --- search
       (:prefix-map ("s" . "<search>")
@@ -232,21 +230,9 @@
       (:prefix-map ("r" . "<remote>"))
       )
 
-
 ;; local keybindings
 (map! :after which-key
       :prefix "C-c l"
-
-      ;; C-c l r --- run/eval
-      (:prefix-map
-       ("r" . "<run/eval>")
-       (:when (modulep! :tools eval)
-         :map prog-mode-map
-         :desc "Eval buffer" "b" #'+eval/buffer-or-region
-         :desc "Eval line" "r" #'+eval/line-or-region
-         :desc "Send to REPL" "s" #'+eval/send-region-to-repl
-         :desc "Open REPL" "i" #'+eval/open-repl-other-window))
-
 
       ;; C-c l t --- tmux
       (:when (modulep! :tools tmux)
