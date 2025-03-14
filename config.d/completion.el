@@ -1,7 +1,6 @@
 ;;; -*- lexical-binding: t; no-byte-compile: t; -*-;;;
 ;;; config.d/completion.el
 
-;; TODO try cape-dict
 (when (modulep! :completion vertico)
   (map! :map vertico-map
         "C-l" #'vertico-directory-delete-word
@@ -14,6 +13,7 @@
   (map! :map corfu-map
         "C-c C-p" #'+corfu/move-to-minibuffer
         "C-SPC" #'corfu-insert-separator
+        "<tab>" #'corfu-quick-complete
         :map corfu-popupinfo-map
         "C-M-p" #'corfu-popupinfo-scroll-down
         "C-<up>" #'corfu-popupinfo-scroll-down

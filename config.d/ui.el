@@ -27,7 +27,10 @@
          :desc "Edit workspaces" "e" #'treemacs-edit-workspaces
          :desc "Rename workspace" "m" #'treemacs-rename-workspace
          :desc "Switch workspace" "o" #'treemacs-switch-workspace))
-  (setq! +treemacs-git-mode 'deferred))
+  (setq! +treemacs-git-mode 'deferred)
+  (when (modulep! :ui treemacs +lsp)
+    (setq! lsp-treemacs-sync-mode t))
+  )
 
 (when (modulep! :ui window-select)
   (custom-set-faces!

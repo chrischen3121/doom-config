@@ -73,7 +73,7 @@
        ;; ein                 ; TODO try Jupyter notebooks with emacs
        (eval +overlay)     ; TODO run code, run (also, repls)
        (lookup +dictionary)    ; navigate your code and its documentation
-       (lsp +peek)         ; TODO M-x vscode
+       lsp
        magit               ; a git porcelain for Emacs. NOTE Add (+forge) when dealing with issues and PRs
        make                ; run make tasks from Emacs
        pdf                 ; pdf enhancements

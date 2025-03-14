@@ -67,29 +67,9 @@
       (:prefix-map ("c" . "<code>")
        :desc "Compile" "c" #'+default/compile
        :desc "Format buffer/region" "f" #'+format/region-or-buffer
-       :desc "Inlay Hints Mode" "i" #'lsp-inlay-hints-mode
        (:when (modulep! :tools make)
          :desc "Make run target" "m" #'+make/run
-         :desc "Make run last" "M" #'+make/run-last)
-       (:when (and (modulep! :tools lsp) (not (modulep! :tools lsp +eglot)))
-         :after lsp
-         :desc "LSP Code actions" "a" #'lsp-execute-code-action
-         :desc "LSP Organize imports" "o" #'lsp-organize-imports
-         :desc "LSP Rename" "r" #'lsp-rename
-         (:prefix-map ("w" . "<workspaces>")
-          :desc "Start workspace" "s" #'lsp
-          :desc "Describe workspace" "d" #'lsp-describe-session
-          :desc "Disconnect workspace" "D" #'lsp-disconnect
-          :desc "Shutdown workspace" "q" #'lsp-workspace-shutdown
-          :desc "Add directory" "a" #'lsp-workspace-folders-add
-          :desc "Remove directory" "r" #'lsp-workspace-folders-remove
-          :desc "Remove all directories" "R" #'lsp-workspace-remove-all-folders
-          :desc "Unblock directories" "b" #'lsp-workspace-blocks-remove))
-       (:when (modulep! :tools lsp +peek)
-         :after lsp-ui-peek
-         :desc "Peek documentation" "p" #'lsp-ui-doc-glance)
-       (:when (modulep! :completion vertico)
-         :desc "Jump to symbol" "j"   #'consult-lsp-symbols))
+         :desc "Make run last" "M" #'+make/run-last))
 
       ;; C-c f --- file
       (:prefix-map ("f" . "<file>")

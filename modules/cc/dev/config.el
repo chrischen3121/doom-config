@@ -27,13 +27,6 @@
   (after! company-box
     (setq-hook! 'company-box-mode-hook company-box-doc-delay 2)))
 
-;; :completion
-;; corfu
-(when (modulep! :completion corfu)
-  )
-
-
-
 (defun merge-sort (a b)
   "Merge two sorted lists A and B."
   (if (or (null a) (null b))
@@ -53,44 +46,6 @@
   (after! ein
     ;; for jupyter-lab, otherwise use "notebook"
     (setq! ein:jupyter-server-use-subcommand "server")))
-
-;; :tools
-;; lsp +peek
-(when (modulep! :tools lsp +peek)
-  (map! :map lsp-mode-map
-        "s-l" nil)
-  (after! lsp-mode
-    (add-hook! 'lsp-mode-hook #'lsp-enable-which-key-integration))
-  (after! lsp-ui
-    (setq! lsp-ui-sideline-show-diagnostics t
-           lsp-ui-sideline-show-code-actions t
-           lsp-ui-sideline-show-symbol t
-           lsp-ui-sideline-delay 1
-           lsp-ui-imenu-buffer-position 'left
-           lsp-ui-imenu-auto-refresh t
-           ;; lsp-ui-imenu-refresh-delay 2
-           )
-    (map!
-     :map lsp-ui-mode-map
-     [remap xref-find-definitions] #'lsp-ui-peek-find-definitions
-     [remap xref-find-references]  #'lsp-ui-peek-find-references
-     ;; :desc "Open lsp-ui imenu" "<f2>" #'lsp-ui-imenu
-     ;; :desc "Close lsp-ui imenu" "<f2>" #'lsp-ui-imenu--kill
-     )))
-
-(when (modulep! :ui treemacs +lsp)
-  (after! treemacs
-    (setq! lsp-treemacs-sync-mode 1)
-    (map! :prefix-map ("C-c l t" . "<lsp-treemacs>")
-          :desc "Browse project" "b" #'+treemacs/toggle
-          :desc "Errors list" "e" #'lsp-treemacs-errors-list
-          :desc "LSP UI Errors List" "E" #'lsp-ui-flycheck-list
-          :desc "Incoming call hierarchy" "i" #'lsp-treemacs-call-hierarchy
-          :desc "Outgoing call hierarchy" "o" (cmd!! #'lsp-treemacs-call-hierarchy t)
-          :desc "Type hierarchy" "t" #'lsp-treemacs-type-hierarchy
-          :desc "Implementation" "I" #'lsp-treemacs-implementations
-          :desc "References tree" "r" (cmd!! #'lsp-treemacs-references t)
-          :desc "Symbols" "s" #'lsp-treemacs-symbols)))
 
 ;; :tools
 ;; upload

@@ -34,7 +34,7 @@
       :desc "Search in outline tree" "C-c s o" #'org-sparse-tree
 
       ;; C-c i --- insert
-      (:prefix "C-c i"
+      (:prefix-map ("C-c i o" . "<org-insert>")
        :desc "Org insert date" "d" #'org-timestamp-inactive
        :desc "Org insert time" "t" #'org-timestamp
        :desc "Set a tag" "T" #'org-set-tags-command

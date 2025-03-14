@@ -110,29 +110,16 @@
       (:prefix-map
        ("k" . "<lookup>")
        (:when (modulep! :tools lookup)
+         :desc "Jump to definition" "." #'+lookup/definition
          :desc "Jump to references" "r" #'+lookup/references
          :desc "Jump to documentation" "k" #'+lookup/documentation
          :desc "Find implementations" "i" #'+lookup/implementations
          :desc "Find type definition" "t" #'+lookup/type-definition
          :desc "Search online" "o" #'+lookup/online
-         :desc "Search dictionary" "d" #'+lookup/dictionary-definition
-         )
+         :desc "Search dictionary" "d" #'+lookup/dictionary-definition)
        (:when (and (modulep! :completion vertico)
                    (modulep! :tools lsp))
          :desc "Search symbols" "s" #'consult-lsp-symbols)
-       ;; (:when (modulep! :tools lookup +docsets)
-       ;;   :prefix-map ("d" . "<docsets>")
-       ;;   :desc "Search in docsets" "s" #'+lookup/in-docsets
-       ;;   :desc "Search in all docsets" "a" #'+lookup/in-all-docsets
-       ;;   :desc "Install offline docsets""i" #'dash-docs-install-docset)
-       ;; (:when (modulep! :tools lsp +peek)
-       ;;   :after lsp-ui-peek
-       ;;   :prefix-map ("p" . "<lsp-peek>")
-       ;;   :desc "Peek documentation" "p" #'lsp-ui-doc-glance
-       ;;   :desc "Peek definition" "d" #'lsp-ui-peek-find-definitions
-       ;;   :desc "Peek references" "r" #'lsp-ui-peek-find-references
-       ;;   :desc "Peek type definition" "t" #'lsp-ui-peek-find-type-definition
-       ;;   :desc "Peek implementations" "i" #'lsp-ui-peek-find-implementations)
        )
 
       ;; C-c t -- toggle
@@ -171,7 +158,33 @@
           :desc "Eval region" "r" #'eval-region
           :desc "Eval last sexp" "e" #'eval-last-sexp)
          )
+       (:when (and (modulep! :tools lsp)
+                   (not (modulep! :tools lsp +eglot)))
+         :map lsp-mode-map
+         :desc "Action" "a" #'lsp-execute-code-action
+         (:prefix ("l" . "<lsp>")
+          :desc "Organize imports" "i" #'lsp-organize-imports
+          :desc "Rename" "r" #'lsp-rename
+          :desc "Inlay Hints Mode" "I" #'lsp-inlay-hints-mode)
+         (:prefix ("s". "<session>")
+          :desc "Describe session" "d" #'lsp-describe-session
+          :desc "Disconnect" "q" #'lsp-disconnect
+          :desc "Shutdown" "k" #'lsp-workspace-shutdown
+          :desc "Add folder" "a" #'lsp-workspace-folders-add
+          :desc "Remove folder" "r" #'lsp-workspace-folders-remove
+          :desc "Remove all folders" "R" #'lsp-workspace-remove-all-folders
+          :desc "Unblock folders" "b" #'lsp-workspace-blocklist-remove
+          :desc "Switch client" "s" #'+lsp/switch-client)
+         (:when (modulep! :ui treemacs +lsp)
+           :prefix ("t" . "<treemacs-lsp>")
+           :desc "Incoming call hierarchy" "i" #'lsp-treemacs-call-hierarchy
+           :desc "Outgoing call hierarchy" "o" (cmd!! #'lsp-treemacs-call-hierarchy t)
+           :desc "Type hierarchy" "t" #'lsp-treemacs-type-hierarchy
+           :desc "References tree" "r" (cmd!! #'lsp-treemacs-references t)
+           )
+         )
        )
+
 
       ;; C-c d -- debugging
       (:prefix-map
@@ -196,7 +209,8 @@
       (:prefix-map
        ("i" . "<insert>")
        (:when (modulep! :completion corfu)
+         :desc "From dict" "d" #'cape-dict
          :desc "Emoji" "e" #'cape-emoji
-         :desc "dabbrev" "d" #'cape-dabbrev)
+         :desc "dabbrev" "a" #'cape-dabbrev)
        )
       )

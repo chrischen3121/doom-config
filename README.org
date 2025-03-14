@@ -37,7 +37,7 @@ Most important prefix keys:
 
 ** F<key>
 - ~C-c t t~: *treemacs*
-- ~C-c t i~: *lsp-imenu/imenu*
+- ~C-c c i~: *lsp-imenu/imenu*
 - ~F10~: menu popup
 - ~F11~: fullscreen
 - ~F12~: switch light/dark theme
