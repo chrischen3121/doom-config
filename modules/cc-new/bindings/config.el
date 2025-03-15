@@ -53,7 +53,8 @@
          :desc "Remove workspace" "r" #'+workspace/delete
          :desc "Switch workspace" "o" #'+workspace/switch-to
          :desc "Display workspaces" "d" #'+workspace/display)
-       :desc "Kill all buffers" "k" #'doom/kill-all-buffers
+       :desc "Kill other buffers" "k" #'doom/kill-other-buffers
+       :desc "Kill all buffers" "K" #'doom/kill-all-buffers
        ;; session
        :desc "Load last session" "w" #'doom/quickload-session)
 

@@ -71,7 +71,7 @@
        (docker +lsp)
        editorconfig        ; let someone else argue about tabs vs spaces
        ;; ein                 ; TODO try Jupyter notebooks with emacs
-       (eval +overlay)     ; TODO run code, run (also, repls)
+       (eval +overlay)     ; run code, run (also, repls)
        (lookup +dictionary)    ; navigate your code and its documentation
        lsp
        magit               ; a git porcelain for Emacs. NOTE Add (+forge) when dealing with issues and PRs
