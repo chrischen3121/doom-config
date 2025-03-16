@@ -74,8 +74,9 @@
        (eval +overlay)     ; run code, run (also, repls)
        (lookup +dictionary)    ; navigate your code and its documentation
        lsp
-       magit               ; a git porcelain for Emacs. NOTE Add (+forge) when dealing with issues and PRs
+       magit               ; a git porcelain for Emacs
        make                ; run make tasks from Emacs
+       ;; pass             ; password manager for nerds
        pdf                 ; pdf enhancements
        tmux
        ;;terraform         ; May try it: infrastructure as code, try it when using cloud services

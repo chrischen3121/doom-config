@@ -144,21 +144,26 @@
       ;; C-c c -- code keybindings
       (:prefix-map
        ("c" . "<code>")
-       (:when (modulep! :tools eval)
-         :prefix ("e" . "<eval>")
-         (:map prog-mode-map
-          :desc "Eval buffer" "b" #'+eval/buffer
-          :desc "Eval region" "r" #'+eval/region
-          :desc "Eval line" "l" #'+eval/line-or-region
-          :desc "Send to REPL" "s" #'+eval/send-region-to-repl
-          :desc "Open REPL" "o" #'+eval/open-repl-other-window
-          :desc "Open REPL here" "O" #'+eval/open-repl-same-window)
-         (:map emacs-lisp-mode-map
-          :desc "Eval buffer" "b" #'eval-buffer
-          :desc "Eval defun" "d" #'eval-defun
-          :desc "Eval region" "r" #'eval-region
-          :desc "Eval last sexp" "e" #'eval-last-sexp)
-         )
+       (:prefix
+        ("e" . "<eval/run>")
+        (:when (modulep! :tools eval)
+          (:map prog-mode-map
+           :desc "Eval buffer" "b" #'+eval/buffer
+           :desc "Eval region" "r" #'+eval/region
+           :desc "Eval line" "l" #'+eval/line-or-region
+           :desc "Send to REPL" "s" #'+eval/send-region-to-repl
+           :desc "Open REPL" "o" #'+eval/open-repl-other-window
+           :desc "Open REPL here" "O" #'+eval/open-repl-same-window)
+          (:map emacs-lisp-mode-map
+           :desc "Eval buffer" "b" #'eval-buffer
+           :desc "Eval defun" "d" #'eval-defun
+           :desc "Eval region" "r" #'eval-region
+           :desc "Eval last sexp" "e" #'eval-last-sexp)
+          )
+        (:when (modulep! :tools make)
+          :desc "Make run" "m" #'+make/run
+          :desc "Make run last" "M" #'+make/run-last)
+        )
        (:when (and (modulep! :tools lsp)
                    (not (modulep! :tools lsp +eglot)))
          :map lsp-mode-map

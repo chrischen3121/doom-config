@@ -67,9 +67,7 @@
       (:prefix-map ("c" . "<code>")
        :desc "Compile" "c" #'+default/compile
        :desc "Format buffer/region" "f" #'+format/region-or-buffer
-       (:when (modulep! :tools make)
-         :desc "Make run target" "m" #'+make/run
-         :desc "Make run last" "M" #'+make/run-last))
+       )
 
       ;; C-c f --- file
       (:prefix-map ("f" . "<file>")
@@ -99,7 +97,6 @@
        :desc "Search project" "s" #'+default/search-project
        :desc "Switch project" "p" #'projectile-switch-project
        :desc "Recent files" "R" #'projectile-recentf
-       :desc "List todos" "t" #'magit-todos-list
        :desc "Replace in project" "r" #'projectile-replace
        :desc "Find file" "f" #'projectile-find-file
        :desc "Project dired" "d" #'+default/browse-project

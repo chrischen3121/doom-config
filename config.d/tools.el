@@ -35,3 +35,13 @@
         :map lsp-ui-mode-map
         :desc "Open lsp-ui imenu" "C-c c i" #'lsp-ui-imenu)
   )
+
+(when (modulep! :tools pdf)
+  (map! (:map pdf-view-mode-map
+         :prefix ("C-c t p" . "<pdf-toggles>")
+         :desc "Toggle slice mode" "s"
+         #'pdf-view-auto-slice-minor-mode
+         :desc "Toggle themed mode" "t"
+         #'pdf-view-themed-minor-mode))
+  (setq-hook! 'pdf-view-mode-hook
+    pdf-view-themed-minor-mode 1))

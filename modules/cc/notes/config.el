@@ -90,17 +90,6 @@
       (sp-local-pair "$" "$"
                      :unless '(sp-point-after-word-p)))))
 
-(when (modulep! :tools pdf)
-  (map! (:map pdf-view-mode-map
-         :prefix "C-c l"
-         :desc "Toggle slice mode" "s"
-         #'pdf-view-auto-slice-minor-mode
-         :desc "Toggle themed mode" "t"
-         #'pdf-view-themed-minor-mode))
-  (add-hook! 'pdf-view-mode-hook
-    (defun pdf-view-follow-theme ()
-      (pdf-view-themed-minor-mode 1))))
-
 (when (modulep! :lang org +noter)
   (map! :prefix ("C-c n p" . "<pdfnotes>")
         :desc "Find pdfnotes file" "f" #'cc/open-pdf-note-files
