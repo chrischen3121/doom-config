@@ -83,67 +83,29 @@
        tree-sitter       ; TODO may use the built-in in Emacs29+ instead later on, if highlight is supported
        upload            ; map local to remote projects via ssh/ftp
 
-       :os
-       ;; (:if IS-MAC macos)  ; improve compatibility with macOS
-       ;; tty               ; Enable as needed, improve the terminal Emacs experience,
-
        :lang
-       ;;agda              ; types of types of types of types...
-       ;;beancount         ; mind the GAAP
        (cc +lsp +tree-sitter)         ; C > C++ == 1
-       ;;clojure           ; java with a lisp
-       ;;[opt]common-lisp       ; if you've seen one lisp, you've seen them all
-       ;;coq               ; proofs-as-programs
-       ;;crystal           ; ruby at the speed of c
-       ;;csharp            ; unity, .NET, and mono shenanigans
+       ;;common-lisp       ; if you've seen one lisp, you've seen them all
        ;;data              ; config/data formats
-       ;;(dart +flutter)   ; paint ui and not much else
-       ;;dhall
-       ;;elixir            ; erlang done right
-       ;;elm               ; care for a cup of TEA?
-       emacs-lisp        ; drown in parentheses
-       ;;erlang            ; an elegant language for a more civilized age
+       emacs-lisp          ; drown in parentheses
        ;;ess               ; emacs speaks statistics
-       ;;factor
-       ;;faust             ; dsp, but you get to keep your soul
-       ;;fortran           ; in FORTRAN, GOD is REAL (unless declared INTEGER)
-       ;;fsharp            ; ML stands for Microsoft's Language
-       ;;fstar             ; (dependent) types and (monadic) effects and Z3
-       graphviz
-       ;;gdscript          ; the language you waited for
-       ;;(go +lsp)         ; the hipster dialect
+       graphviz            ; language for visualizing graphs
        ;;(graphql +lsp)    ; Give queries a REST
-       ;;(haskell +lsp)    ; a language that's lazier than I am
-       ;;hy                ; readability of scheme w/ speed of python
-       ;;idris             ; a language you can depend on
        (json +lsp +tree-sitter)       ; At least it ain't XML
        ;;(java +lsp)       ; the poster child for carpal tunnel syndrome
-       (javascript +lsp +tree-sitter) ; all(hope(abandon(ye(who(enter(here))))))
-       ;;julia             ; a better, faster MATLAB
-       ;;kotlin            ; a better, slicker Java(Script)
+       ;;(javascript +lsp +tree-sitter) ; all(hope(abandon(ye(who(enter(here))))))
        (latex +cdlatex)      ; NOTE may try +lsp
-       ;;lean              ; for folks with too much to prove
-       ;;ledger            ; be audit you can be
        ;;lua               ; one-based indices? one-based indices
        markdown            ; writing docs for people to ignore
-       ;;nim               ; python + lisp at the speed of c
-       ;;nix               ; I hereby declare "nix geht mehr!"
-       ;;ocaml             ; an objective came
        (org +noter +roam2 +pretty +present)
-       ;;php               ; perl's insecure younger brother
-       plantuml          ; diagrams for confusing people more
-       ;;purescript        ; javascript, but functional
+       plantuml            ; diagrams for confusing people more
        (python +lsp +pyenv +poetry +pyright +tree-sitter) ; beautiful is better than ugly
-       qt                ; the 'cutest' gui framework ever
-       ;;racket            ; a DSL for DSLs
-       rst                 ; ReST in peace TODO pipx install rstfmt for formatting
-       (rest + jq)         ; Emacs as a REST client +jq Enable support for reading and processing REST responses with jq
+       qt                  ; the 'cutest' gui framework ever
+       rst                 ; ReST in peace
+       ;; (rest + jq)      ; TODO Emacs as a REST client +jq Enable support for reading and processing REST responses with jq
        (sh +lsp +tree-sitter)
-       ;;swift             ; who asked for emoji variables?
-       ;;terra             ; Earth and Moon in alignment for performance.
        (web +lsp +tree-sitter)   ; support for various web languages, including HTML5, CSS, SASS/SCSS, as well as Django
        (yaml +lsp +tree-sitter)        ; JSON, but readable
-       ;;zig               ; C, but simpler
 
        :app
        calendar
