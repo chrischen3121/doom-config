@@ -78,9 +78,9 @@
        make                ; run make tasks from Emacs
        ;; pass             ; password manager for nerds
        pdf                 ; pdf enhancements
-       tmux
-       ;;terraform         ; May try it: infrastructure as code, try it when using cloud services
-       tree-sitter       ; TODO use the built-in in Emacs29+ instead later on
+       ;; tmux
+       ;;terraform         ; May try it: infrastructure as code, try it when using multiple cloud services
+       tree-sitter       ; TODO may use the built-in in Emacs29+ instead later on, if highlight is supported
        upload            ; map local to remote projects via ssh/ftp
 
        :os

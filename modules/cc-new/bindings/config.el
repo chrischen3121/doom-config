@@ -58,6 +58,40 @@
        ;; session
        :desc "Load last session" "w" #'doom/quickload-session)
 
+      ;; C-c f -- file
+      (:prefix-map
+       ("f" . "<file>")
+       :desc "Recent files" "r"
+       (cond ((modulep! :completion vertico) #'consult-recent-file)
+             (t #'recentf-open-files))
+       :desc "Copy this file" "c" #'doom/copy-this-file
+       :desc "Delete this file" "d" #'doom/delete-this-file
+       :desc "Move this file" "m" #'doom/move-this-file
+       :desc "Locate file" "l"
+       (cond ((modulep! :completion vertico) #'consult-locate)
+             (t #'locate))
+       :desc "Find file under here (-r)" "." #'+default/find-file-under-here
+       (:when (modulep! :lang org +roam2)
+         :desc "Find roam note" "n" #'org-roam-node-find)
+       :desc "Find agenda file" "a" #'+default/find-in-notes
+       :desc "Find in doom" "p" #'doom/find-file-in-private-config
+       :desc "Browse in doom" "P" #'doom/open-private-config
+       :desc "Find in emacsd" "e" #'doom/find-file-in-emacsd
+       :desc "Browse in emacsd" "E" #'doom/browse-in-emacsd
+       :desc "Sudo this file" "s" #'doom/sudo-this-file
+       :desc "Sudo find file" "S" #'doom/sudo-find-file
+       :desc "Copy file path" "y" #'+default/yank-buffer-path
+       (:when (modulep! :tools upload)
+         (:prefix ("u" . "<upload>")
+          :desc "Upload" "u" #'ssh-deploy-upload-handler
+          :desc "Upload forced" "U" #'ssh-deploy-upload-handler-forced
+          :desc "Download" "d" #'ssh-deploy-download-handler
+          :desc "Delete" "D" #'ssh-deploy-delete-handler
+          :desc "Browse remote" "b" #'ssh-deploy-browse-remote-handler
+          :desc "Remote changes" "e" #'ssh-deploy-remote-changes-handler
+          :desc "Open remote file" "f"#'ssh-deploy-open-remote-file-handler
+          :desc "Diff" "x" #'ssh-deploy-diff-handler)))
+
       ;; C-c e -- edit/writing
       (:prefix-map
        ("e" . "<edit>")
