@@ -27,6 +27,16 @@
 (after! which-key
   (which-key-add-key-based-replacements "C-c 1" "<checker>"))
 
+(after! projectile
+  (keymap-set projectile-mode-map "C-c p c"
+              'projectile-command-map)
+  (which-key-add-keymap-based-replacements projectile-mode-map
+    "C-c p c" "<projectile-command>"
+    "C-c p c 4" "other-window"
+    "C-c p c 5" "other-frame"
+    "C-c p c x" "execute"
+    "C-c p c s" "search"))
+
 ;; C-x keybindings
 (map! :after which-key
       :prefix "C-x"
@@ -245,12 +255,17 @@
          :desc "Find snippet" "f" #'+snippets/find
          :desc "Browse snippets" "b" #'+default/browse-templates))
 
-      ;; C-c i -- insert keybindings
+      ;; C-c i -- insert
       (:prefix-map
        ("i" . "<insert>")
        (:when (modulep! :completion corfu)
          :desc "From dict" "d" #'cape-dict
          :desc "Emoji" "e" #'cape-emoji
          :desc "dabbrev" "a" #'cape-dabbrev)
+       )
+
+      ;; C-c p -- project
+      (:prefix-map
+       ("p" . "<project>")
        )
       )

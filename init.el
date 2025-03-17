@@ -117,7 +117,7 @@
 
        :cc
        ;;ui
-       defaults
+       ;;defaults
        bindings
        notes
        agenda
@@ -126,6 +126,7 @@
 
        :cc-new
        theme
+       defaults
        bindings
 
 

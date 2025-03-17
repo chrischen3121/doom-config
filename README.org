@@ -53,7 +53,7 @@ Most important prefix keys:
 | ~C-c e s~          | Spell commands   |
 | ~C-c <TAB>~        | <fold>           |
 | ~C-c w~            | <workspace>      |
-| ~C-j~              | Ace jump         |
+| ~C-c j~            | Ace jump         |
 | ~M-.~ or ~C-c s w~ | Dictionary       |
 | ~C-c t z~          | Zen mode         |
 | ~C-c l r~          | <run/eval>       |

@@ -1,28 +1,21 @@
-;; -*- no-byte-compile: t; -*-
-;;; cc/defaults/config.el -*- lexical-binding: t; -*-
+;;; -*- lexical-binding: t; no-byte-compile: t; -*-
+;;; cc-new/defaults/config.el
 
-
-
-;; Change newline behavior
-(add-hook! 'doom-first-buffer-hook
-  (defun cc/change-newline-behavior ()
-    (advice-remove 'newline-and-indent
-                   '+default--newline-indent-and-continue-comments-a)))
+;; TODO Change newline behavior
+;; (add-hook! 'doom-first-buffer-hook
+;;   (defun cc/change-newline-behavior ()
+;;     (advice-remove 'newline-and-indent
+;;                    '+default--newline-indent-and-continue-comments-a)))
 
 ;; recentf
 (after! recentf
   (setq! recentf-max-saved-items 21)
   (add-to-list 'recentf-exclude "autosave"))
 
-;; Frame related
-
-;; TODO not working
+;; make file executable if it has shebang
 (add-hook! 'after-save-hook
-           ;; make file executable if it has shebang
            #'executable-make-buffer-file-executable-if-script-p)
 
-;; [Packages]
-;; Whole line or region
 (use-package! whole-line-or-region
   :hook (doom-first-input . whole-line-or-region-global-mode))
 
@@ -32,4 +25,4 @@
 (use-package! ace-jump-mode
   :commands ace-jump-mode
   :init
-  (map! "C-j" #'ace-jump-mode))
+  (map! :desc "Ace jump" "C-c j" #'ace-jump-mode))
