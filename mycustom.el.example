@@ -1,7 +1,7 @@
 ;; -*- no-byte-compile: t; -*-
 ;;; mycustom.el -*- lexical-binding: t; -*-
-(setq! cc/default-font "Hack"
-       cc/default-font-size 24
+(setq! cc/mono-font "Hack"
+       cc/mono-font-size 24
        ;; recommended: doom-acario-light, doom-one-light, doom-nord,  doom-oksolar-light
        cc/light-theme 'doom-one-light
        ;; recommended: doom-one, doom-peacock, doom-tomorrow-night, doom-opera

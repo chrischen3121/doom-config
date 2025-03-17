@@ -2,7 +2,6 @@
 (defvar cc/theme-dark-p nil
   "Whether the current theme is dark.")
 
-(autoload 'ring-insert "ring" nil t)
 
 ;;;###autoload
 (defun cc/switch-to-light-theme ()

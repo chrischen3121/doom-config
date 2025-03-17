@@ -116,7 +116,7 @@
        (default +smartparens) ;; +bindings
 
        :cc
-       ui
+       ;;ui
        defaults
        bindings
        notes
@@ -125,7 +125,9 @@
        ;; app
 
        :cc-new
+       theme
        bindings
+
 
        :cc-langs
        elisp

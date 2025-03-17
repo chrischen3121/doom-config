@@ -10,6 +10,9 @@
    '(font-lock-constant-face
      font-lock-string-face))
 
+  (custom-set-faces!
+    `(spell-fu-incorrect-face :underline (:style wave :color ,(doom-color 'blue))))
+
   (add-hook! 'spell-fu-mode-hook
     (defun add-personal-dictionary ()
       (spell-fu-dictionary-add
