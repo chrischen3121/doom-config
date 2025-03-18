@@ -235,7 +235,6 @@
          )
        )
 
-
       ;; C-c d -- debugging
       (:prefix-map
        ("d" . "<debug>")
@@ -267,5 +266,13 @@
       ;; C-c p -- project
       (:prefix-map
        ("p" . "<project>")
+       )
+
+      ;; C-c P -- profiling
+      (:prefix-map
+       ("P" . "<profiling>")
+       :desc "Start profiling" "s" #'profiler-start
+       :desc "Stop profiling" "t" #'profiler-stop
+       :desc "Report" "r" #'profiler-report
        )
       )

@@ -65,7 +65,6 @@
 
 
 ;; org configuration
-(remove-hook! 'org-load-hook #'+org-init-smartparens-h)
 
 (after! org
   (require 'org-indent)
@@ -83,12 +82,6 @@
                   (org-level-2 . 1.1)
                   (org-level-3 . 1.05)))
     (set-face-attribute (car face) nil :weight 'bold :height (cdr face))))
-
-(when (modulep! :config default +smartparens)
-  (after! smartparens
-    (sp-with-modes 'org-mode
-      (sp-local-pair "$" "$"
-                     :unless '(sp-point-after-word-p)))))
 
 (when (modulep! :lang org +noter)
   (map! :prefix ("C-c n p" . "<pdfnotes>")

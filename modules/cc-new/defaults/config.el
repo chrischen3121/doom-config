@@ -12,6 +12,14 @@
   (setq! recentf-max-saved-items 21)
   (add-to-list 'recentf-exclude "autosave"))
 
+(when (modulep! :config default +smartparens)
+  (remove-hook! 'org-load-hook #'+org-init-smartparens-h)
+  (after! smartparens
+    (sp-with-modes 'org-mode
+      (sp-local-pair "$" "$"
+                     :unless '(sp-point-after-word-p))))
+  )
+
 ;; make file executable if it has shebang
 (add-hook! 'after-save-hook
            #'executable-make-buffer-file-executable-if-script-p)
