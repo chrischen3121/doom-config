@@ -121,14 +121,13 @@
        bindings
        notes
        agenda
-       dev
        ;; app
 
        :cc-new
        theme
        defaults
        bindings
-
+       dev
 
        :cc-langs
        cpp
