@@ -1,5 +1,5 @@
-;; no-byte-compile: t
-;;; cc-langs/python/config.el -*- lexical-binding: t; -*-
+;;; -*- lexical-binding: t; no-byte-compile: t; -*-
+;;; cc-langs/python/config.el
 (when (modulep! :lang python)
   (defvar cc/python-indent-offset 4
     "The number of spaces to indent inside python blocks.")
@@ -8,6 +8,18 @@
               cc/python-indent-offset)
 
   (setq! python-shell-interpreter "python3")
+
+  (when (modulep! :ui indent-guides)
+    (add-hook! 'python-mode-hook
+      (defun configure-indent-guides ()
+        (setq-local indent-bars-treesit-support t
+                    indent-bars-treesit-wrap
+                    '((python argument_list parameters
+                       list list_comprehension
+                       dictionary dictionary_comprehension
+                       parenthesized_expression subscript)
+                      (python list_comprehension))
+                    indent-bars-treesit-ignore-blank-lines-types '("module")))))
 
   (map! :map python-mode-map
         "C-c <TAB> a" nil ; python-add-import

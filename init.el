@@ -84,10 +84,10 @@
        upload            ; map local to remote projects via ssh/ftp
 
        :lang
-       (cc +lsp +tree-sitter)         ; C > C++ == 1
+       emacs-lisp          ; drown in parentheses
+       (cc +lsp +tree-sitter) ; C > C++ == 1
        ;;common-lisp       ; if you've seen one lisp, you've seen them all
        ;;data              ; config/data formats
-       emacs-lisp          ; drown in parentheses
        ;;ess               ; emacs speaks statistics
        graphviz            ; language for visualizing graphs
        ;;(graphql +lsp)    ; Give queries a REST
@@ -131,7 +131,6 @@
 
 
        :cc-langs
-       elisp
        cpp
        python
        )

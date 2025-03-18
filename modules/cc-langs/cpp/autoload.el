@@ -1,5 +1,5 @@
-;; no-byte-compile: t
-;;; cc-langs/cpp/autoload.el -*- lexical-binding: t; -*-
+;;; -*- lexical-binding: t; no-byte-compile: t; -*-
+;;; cc-langs/cpp/autoload.el
 
 
 ;;;###autoload

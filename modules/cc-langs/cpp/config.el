@@ -1,14 +1,13 @@
-;; no-byte-compile: t
-;;; cc-langs/cpp/config.el -*- lexical-binding: t; -*-
+;;; -*- lexical-binding: t; no-byte-compile: t; -*-
+;;; cc-langs/cpp/config.el
 
 ;;; References:
 ;; https://github.com/doomemacs/doomemacs/tree/master/modules/lang/cc
 ;; https://emacs-lsp.github.io/lsp-mode/tutorials/CPP-guide/
 
 (when (modulep! :lang cc)
-  (add-hook! 'c++-mode-hook
-    (setq-local tab-width 2))
-
+  (setq-hook! 'c++-mode-hook
+    tab-width 2)
 
   (add-to-list 'auto-mode-alist '("conanfile\\.txt\\'" . conf-windows-mode))
   (map! :after cc-mode
@@ -21,6 +20,13 @@
         :desc "Debug(gdb)" "g" #'gdb
         :desc "Debug(dap-debug)" "d" #'dap-debug))
 
+(when (modulep! :ui indent-guides)
+  (add-hook! 'c-mode-common-hook
+    (defun configure-indent-guides ()
+      (setq-local indent-bars-treesit-support t
+                  indent-bars-treesit-wrap
+                  '((c argument_list parameter_list
+                     init_declarator parenthesized_expression))))))
 
 (when (and (modulep! :tools lsp) (modulep! :lang cc))
   (after! lsp-clangd

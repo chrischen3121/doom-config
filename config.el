@@ -30,9 +30,7 @@
 (load! "config.d/emacs.el")
 (load! "config.d/checkers.el")
 (load! "config.d/tools.el")
-
-(load! "config.d/langs/cpp.el")
-(load! "config.d/langs/python.el")
+(load! "config.d/langs.el")
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
