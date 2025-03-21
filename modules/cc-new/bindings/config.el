@@ -22,10 +22,24 @@
            #'which-key-mode)
 
 (after! which-key
-  (setq! which-pkey-sort-order 'which-key-description-order))
-
-(after! which-key
-  (which-key-add-key-based-replacements "C-c 1" "<checker>"))
+  (setq! which-pkey-sort-order 'which-key-description-order
+         which-key-use-C-h-commands t)
+  (which-key-add-key-based-replacements "C-c 1" "<checker>")
+  ;; Adding which-key descriptions
+  (which-key-add-key-based-replacements
+    "C-x <RET>" "coding-system"
+    "M-s h" "highlight"
+    "C-x n" "<narrow/widen>"
+    "C-x r" "register"
+    "C-x t" "tab"
+    "C-x w" "win-select"
+    "C-x x" "buffer-ops"
+    "C-x 4" "other-window"
+    "C-x 5" "other-frame"
+    "C-x p" "project"
+    "C-h d p" "doom/help-packages"
+    "C-c M-d" "doom/leader"
+    "C-c M-d l" "doom/localleader"))
 
 (after! projectile
   (keymap-set projectile-mode-map "C-c p c"
@@ -40,7 +54,19 @@
 ;; C-x keybindings
 (map! :after which-key
       :prefix "C-x"
-      :desc "ibuffer" "C-b" #'ibuffer)
+      :desc "ibuffer" "C-b" #'ibuffer
+      (:prefix-map ("a" . "<agenda>")
+       :desc "Find agenda file" "f" #'+default/find-in-notes
+       :desc "Agenda view""a" #'org-agenda
+       :desc "Agenda capture" "c" #'org-capture
+       (:map org-mode-map
+        :prefix ("e" . "<effort>")
+        :desc "Add estimate" "a" #'org-set-effort
+        :desc "Edit estimate" "e" #'org-clock-modify-effort-estimate
+        :desc "Clock in" "i" #'org-clock-in
+        :desc "Clock out" "o" #'org-clock-out
+        :desc "Cancel clock" "c" #'org-clock-cancel
+        :desc "Goto clock" "g" #'org-clock-goto)))
 
 ;; C-c keybindings
 (map! :after which-key
@@ -141,6 +167,16 @@
        ("l" . "<local>")
        )
 
+      ;; C-c a -- action
+      (:prefix-map
+       ("a" . "<action>")
+       (:when (modulep! :completion vertico)
+         :desc "Embark act" ";" #'embark-act
+         :desc "Embark dwim" "e" #'embark-dwim)
+       (:when (and (modulep! :tools lsp)
+                   (not (modulep! :tools lsp +eglot)))
+         :desc "Code action" "c" #'lsp-execute-code-action))
+
       ;; C-c o -- open
       (:prefix-map
        ("o" . "<open>")
@@ -170,10 +206,15 @@
       ;; C-c t -- toggle
       (:prefix-map
        ("t" . "<toggle>")
+       :desc "Line numbers mode" "l" #'doom/toggle-line-numbers
+       (:when (modulep! :ui minimap)
+         :desc "Minimap" "m" #'minimap-mode)
        (:when (modulep! :ui treemacs)
          :desc "Treemacs" "t" #'+treemacs/toggle)
        (:when (modulep! :ui zen)
          :desc "zen-mode" "z" #'+zen/toggle)
+       (:when (modulep! :ui indent-guides)
+         :desc "Indent guides" "i" #'indent-bars-mode)
        (:when (modulep! :editor word-wrap)
          :desc "Visual line mode" "v" #'+word-wrap-mode)
        (:when (modulep! :checkers grammar)
@@ -183,11 +224,16 @@
        (:when (and (modulep! :checkers syntax)
                    (not (modulep! :checkers syntax +flymake)))
          :desc "Flycheck" "c" #'flycheck-mode)
+       (:when (modulep! :lang org +present)
+         :map org-mode-map
+         :desc "Org presentation" "p" #'org-tree-slide-mode)
        )
 
-      ;; C-c c -- code keybindings
+      ;; C-c c -- code
       (:prefix-map
        ("c" . "<code>")
+       :desc "Compile" "c" #'+default/compile
+       :desc "Format buffer/region" "f" #'+format/region-or-buffer
        (:prefix
         ("e" . "<eval/run>")
         (:when (modulep! :tools eval)
@@ -252,21 +298,79 @@
          :desc "New snippet" "n" #'+snippets/new
          :desc "Edit snippet" "e" #'+snippets/edit
          :desc "Find snippet" "f" #'+snippets/find
-         :desc "Browse snippets" "b" #'+default/browse-templates))
+         :desc "Browse snippets" "b" #'+:default/browse-templates))
 
       ;; C-c i -- insert
       (:prefix-map
        ("i" . "<insert>")
+       :desc "From clipboard" "c" #'+default/yank-pop
        (:when (modulep! :completion corfu)
          :desc "From dict" "d" #'cape-dict
          :desc "Emoji" "e" #'cape-emoji
          :desc "dabbrev" "a" #'cape-dabbrev)
+       (:when (modulep! :editor snippets)
+         :desc "Insert snippet" "s" #'yas-insert-snippet)
        )
 
-      ;; C-c p -- project
+      ;; C-c n --- note
       (:prefix-map
-       ("p" . "<project>")
+       ("n" . "<note>")
+       (:when (modulep! :lang org +roam2)
+         :desc "Fleet note" "j" #'org-roam-dailies-find-today
+         :desc "Choose roam dir" "n" #'cc/org-roam-choose-directory
+         :desc "Find note" "f" #'cc/org-roam-find-by-dir
+         :desc "Find ref" "r" #'org-roam-ref-find
+         :desc "Show graph" "g" #'org-roam-graph
+         :desc "Insert node" "i" #'org-roam-node-insert
+         :desc "Capture" "c" #'cc/org-roam-capture-by-dir
+         :desc "Show backlinks" "b" #'org-roam-buffer-toggle
+         :desc "Show backlinks(dedicated)" "B" #'org-roam-buffer-display-dedicated
+         :desc "Sync db" "s" #'org-roam-db-sync
+         :desc "Refile node" "w" #'org-roam-refile
+         (:prefix ("a" . "<alias>")
+          :desc "Add alias" "a" #'org-roam-alias-add
+          :desc "Remove alias" "r" #'org-roam-alias-remove)
+         (:prefix ("r" . "<ref>")
+          :desc "Add ref" "a" #'org-roam-ref-add
+          :desc "Remove ref" "r" #'org-roam-ref-remove
+          :desc "Find ref" "f" #'org-roam-ref-find)
+         (:prefix ("t" . "<tag>")
+          :desc "Add tag" "a" #'org-roam-tag-add
+          :desc "Remove tag" "r" #'org-roam-tag-remove)
+         (:prefix ("d" . "<by date>")
+          :desc "Goto date" "d" #'org-roam-dailies-goto-date
+          :desc "Capture date" "c" #'org-roam-dailies-capture-date
+          :desc "Goto tomorrow" "m" #'org-roam-dailies-goto-tomorrow
+          :desc "Goto today" "t" #'org-roam-dailies-goto-today
+          :desc "Goto yesterday" "y" #'org-roam-dailies-goto-yesterday
+          :desc "Find dir" "f" #'org-roam-dailies-find-directory)
+         (:map org-roam-mode-map
+          :desc "Visit node" "v" #'org-roam-node-visit)
+         ))
+
+      ;; C-c o --- open
+      (:prefix-map
+       ("o" . "<open>")
+       :desc "Color list" "C" #'list-colors-display
+       (:when (modulep! :app calendar)
+         :desc "Calendar" "c" #'+calendar/open-calendar)
+       (:when (modulep! :tools ein)
+         (:prefix-map ("j" . "<jupyter>")
+          :desc "Jupyter run" "r" #'ein:run
+          :desc "Jupyter login" "l" #'ein:login
+          :desc "Jupyter stop" "s" #'ein:stop))
        )
+
+      ;; C-c p --- project
+      (:prefix-map ("p" . "<project>")
+       :desc "Open current editorconfig" "e" #'editorconfig-find-current-editorconfig
+       :desc "Search project" "s" #'+default/search-project
+       :desc "Switch project" "p" #'projectile-switch-project
+       :desc "Recent files" "R" #'projectile-recentf
+       :desc "Replace in project" "r" #'projectile-replace
+       :desc "Find file" "f" #'projectile-find-file
+       :desc "Project dired" "d" #'+default/browse-project
+       :desc "Search symbol" "." #'+default/search-project-for-symbol-at-point)
 
       ;; C-c P -- profiling
       (:prefix-map
@@ -275,4 +379,19 @@
        :desc "Stop profiling" "t" #'profiler-stop
        :desc "Report" "r" #'profiler-report
        )
+
+      ;; C-c s --- search
+      (:prefix-map ("s" . "<search>")
+       :desc "Search line" "l"
+       (cond ((modulep! :completion vertico)   #'consult-line)
+             ((modulep! :completion ivy)       #'swiper)
+             ((modulep! :completion helm)      #'swiper))
+       (:when (modulep! :completion vertico)
+         :desc "Search symbol" "s" #'+vertico/search-symbol-at-point ; consult-line
+         :desc "Consult line" "l" #'consult-line
+         )
+       (:when (modulep! :tools lookup)
+         :desc "Word dictionary" "w" #'+lookup/dictionary-definition
+         :desc "Thesaurus/θɪˈsɔːrəs/" "t" #'+lookup/synonyms
+         :desc "Find file" "f" #'+lookup/file))
       )
