@@ -1,5 +1,6 @@
-;;; cc-new/bindings/config.el -*- lexical-binding: t; -*-
-;; -*- no-byte-compile: t; -*-
+;;; -*- lexical-binding: t; no-byte-compile: t; -*-
+;;; cc-new/bindings/config.el
+
 
 ;; Unset global keybindings
 (undefine-key! global-map
@@ -9,24 +10,12 @@
   "C-h 4" ; info other window
   )
 
-(setq!
- doom-leader-key nil
- doom-localleader-key nil
- doom-leader-alt-key "C-c M-d"
- doom-localleader-alt-key "C-c M-d l")
-
-;; which-key configuration
-(remove-hook! 'doom-first-input-hook #'which-key-mode)
-(add-hook! 'doom-first-buffer-hook
-           :append
-           #'which-key-mode)
-
 (after! which-key
   (setq! which-pkey-sort-order 'which-key-description-order
          which-key-use-C-h-commands t)
-  (which-key-add-key-based-replacements "C-c 1" "<checker>")
   ;; Adding which-key descriptions
   (which-key-add-key-based-replacements
+    "C-c 1" "<checker>"
     "C-x <RET>" "coding-system"
     "M-s h" "highlight"
     "C-x n" "<narrow/widen>"

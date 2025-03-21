@@ -118,7 +118,7 @@
        :cc
        ;;ui
        ;;defaults
-       bindings
+       ;;bindings
        notes
        agenda
        ;; app
