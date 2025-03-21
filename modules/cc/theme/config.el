@@ -1,5 +1,5 @@
 ;;; -*- lexical-binding: t; no-byte-compile: t; -*-
-;;; cc-new/theme/config.el
+;;; cc/theme/config.el
 
 (setq! doom-font (font-spec :family cc/mono-font :size cc/mono-font-size)
        doom-big-font

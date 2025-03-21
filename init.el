@@ -116,18 +116,12 @@
        (default +smartparens) ;; +bindings
 
        :cc
-       ;;ui
-       ;;defaults
-       ;;bindings
-       notes
-       agenda
-       ;; app
-
-       :cc-new
        theme
        defaults
        bindings
        dev
+       notes
+       agenda
 
        :cc-langs
        cpp

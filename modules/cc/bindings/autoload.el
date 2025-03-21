@@ -1,5 +1,5 @@
 ;;; -*- lexical-binding: t; no-byte-compile: t; -*-
-;;; cc-new/bindings/autoload.el
+;;; cc/bindings/autoload.el
 (autoload 'org-capture-goto-target "org-capture" nil t)
 (autoload 'recentf-open-files "recentf" nil t)
 (autoload 'projectile-recentf "projectile" nil t)

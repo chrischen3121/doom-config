@@ -1,5 +1,5 @@
 ;;; -*- lexical-binding: t; no-byte-compile: t; -*-
-;;; cc-new/theme/autoload.el
+;;; cc/theme/autoload.el
 
 (autoload 'ring-insert "ring" nil t)
 

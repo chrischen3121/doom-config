@@ -1,5 +1,5 @@
 ;; -*- no-byte-compile: t; -*-
-;;; cc-new/defaults/packages.el
+;;; cc/defaults/packages.el
 
 (disable-packages! evil)
 

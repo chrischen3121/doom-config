@@ -1,5 +1,5 @@
 ;;; -*- lexical-binding: t; no-byte-compile: t; -*-
-;;; cc-new/theme/init.el
+;;; cc/theme/init.el
 (defcustom cc/mono-font
   (string-trim-right
    (font-get-system-font) " [0-9]+$")
