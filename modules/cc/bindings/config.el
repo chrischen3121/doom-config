@@ -18,8 +18,8 @@
 ;;            #'which-key-mode)
 (setq! doom-leader-key nil
        doom-localleader-key nil
-       doom-leader-alt-key "C-c M-l"
-       doom-localleader-alt-key "C-c M-d")
+       doom-leader-alt-key "C-c M-;"
+       doom-localleader-alt-key "C-c M-l")
 
 (setq! which-pkey-sort-order 'which-key-description-order
        which-key-use-C-h-commands t)
@@ -248,7 +248,9 @@
           )
         (:when (modulep! :tools make)
           :desc "Make run" "m" #'+make/run
-          :desc "Make run last" "M" #'+make/run-last)
+          :desc "Make run last" "l" #'+make/run-last)
+        (:when (modulep! :lang cc)
+          :desc "CMake run" "c" #'cmake-command-run)
         )
        (:when (and (modulep! :tools lsp)
                    (not (modulep! :tools lsp +eglot)))
@@ -313,12 +315,12 @@
        ("n" . "<note>")
        (:when (modulep! :lang org +roam2)
          :desc "Fleet note" "j" #'org-roam-dailies-find-today
-         :desc "Choose roam dir" "n" #'cc/org-roam-choose-directory
-         :desc "Find note" "f" #'cc/org-roam-find-by-dir
+         :desc "Choose roam dir" "n" #'cc/org-roam-choose-dir
+         :desc "Find note" "f" #'org-roam-node-find
          :desc "Find ref" "r" #'org-roam-ref-find
          :desc "Show graph" "g" #'org-roam-graph
          :desc "Insert node" "i" #'org-roam-node-insert
-         :desc "Capture" "c" #'cc/org-roam-capture-by-dir
+         :desc "Capture" "c" #'org-roam-capture
          :desc "Show backlinks" "b" #'org-roam-buffer-toggle
          :desc "Show backlinks(dedicated)" "B" #'org-roam-buffer-display-dedicated
          :desc "Sync db" "s" #'org-roam-db-sync

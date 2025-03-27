@@ -97,7 +97,7 @@
        (latex +cdlatex)      ; NOTE may try +lsp
        ;;lua               ; one-based indices? one-based indices
        markdown            ; writing docs for people to ignore
-       (org +noter +roam2 +pretty +present)
+       (org +roam2 +pretty +present) ; TODO +noter
        plantuml            ; diagrams for confusing people more
        (python +lsp +pyenv +poetry +pyright +tree-sitter) ; beautiful is better than ugly
        qt                  ; the 'cutest' gui framework ever

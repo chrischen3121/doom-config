@@ -1,5 +1,5 @@
-;; -*- no-byte-compile: t; -*-
-;;; cc/notes/roam.el -*- lexical-binding: t; -*-
+;;; -*- lexical-binding: t; no-byte-compile: t; ---
+;;; cc/notes/roam.el
 
 (when (modulep! :lang org +roam2)
   (after! org-roam
@@ -11,7 +11,11 @@
           (apply 'emacsql-sqlite-open db args)))
       (setq! org-roam-database-connector 'sqlite)
       )
-    (setq! org-roam-directory cc/roam-notes-dir
+    (advice-add 'org-roam-node-find :before #'cc/org-roam-choose-dir-if-not-set)
+    (advice-add 'org-roam-capture :before #'cc/org-roam-choose-dir-if-not-set)
+    (advice-add 'org-roam-node-insert :before #'cc/org-roam-choose-dir-if-not-set)
+
+    (setq! org-roam-directory nil ; cc/roam-notes-dir
            org-roam-db-gc-threshold most-positive-fixnum
            org-roam-graph-viewer cc/org-roam-graph-viewer
            org-roam-dailies-directory cc/roam-journals-dir
@@ -25,10 +29,7 @@
     (advice-add 'org-export-dispatch
                 :before
                 (lambda (&rest _)
-                  (require 'org-roam-export)))
-
-    ;; (org-roam-db-autosync-mode)
-    )
+                  (require 'org-roam-export))))
 
   (use-package! org-roam-ui
     :commands org-roam-ui-mode

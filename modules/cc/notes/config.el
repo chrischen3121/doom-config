@@ -34,42 +34,32 @@
       :desc "Search in outline tree" "C-c s o" #'org-sparse-tree
 
       ;; C-c i --- insert
-      (:prefix-map ("C-c i o" . "<org-insert>")
-       :desc "Org insert date" "d" #'org-timestamp-inactive
-       :desc "Org insert time" "t" #'org-timestamp
+      (:prefix "C-c i"
+       :desc "Org insert date" "t" #'org-timestamp-inactive
+       :desc "Org insert time" "T" #'org-timestamp
        :desc "Set a tag" "T" #'org-set-tags-command
        :desc "Set property" "p" #'org-set-property
        :desc "Create org-id" "i" #'org-id-get-create
-       :desc "Insert link" "l" #'org-insert-link)
-
+       :desc "Insert link" "l" #'org-insert-link
+       :desc "Insert footnote" "f" #'org-footnote-new)
 
       ;; local prefix l
-      (:prefix "C-c l"
-               ;; i -- create org-id
-               (:prefix ("i" . "<org-id>")
-                :desc "Create org-id" "i" #'org-id-get-create
-                :desc "Update org-id-locations" "u" #'org-roam-update-org-id-locations)
+      (:prefix
+       "C-c l"
+       (:prefix ("r" . "<roam>")
+        :desc "Update org-id-locations" "u" #'org-roam-update-org-id-locations)
 
-               ;; p -- preview/plot
-               (:prefix ("p" . "<preview/plot>")
-                :desc "Preview latex fragment" "l" #'org-latex-preview
-                :desc "Preview image" "i" #'org-display-inline-images
-                :desc "Plot table" "p" #'org-plot/gnuplot)
-
-               )
-
-      (:prefix "C-c i"
-       ;; f -- footnote
-       :desc "Insert footnote" "f" #'org-footnote-new
-       ))
-
-
-;; org configuration
+       ;; p -- preview/plot
+       (:prefix ("p" . "<preview/plot>")
+        :desc "Preview latex fragment" "l" #'org-latex-preview
+        :desc "Preview image" "i" #'org-display-inline-images
+        :desc "Plot table" "p" #'org-plot/gnuplot))
+      )
 
 (after! org
-  (require 'org-indent)
   (remove-hook 'org-mode-hook #'org-indent-mode)
   (setq! org-startup-indented nil
+         ;; TODO org-id-locations cc/org-id-locations
          org-ellipsis " ▼"
          ;; pretty latex preview
          org-pretty-entities t
@@ -83,9 +73,10 @@
                   (org-level-3 . 1.05)))
     (set-face-attribute (car face) nil :weight 'bold :height (cdr face))))
 
+;; TODO org-noter
 (when (modulep! :lang org +noter)
   (map! :prefix ("C-c n p" . "<pdfnotes>")
-        :desc "Find pdfnotes file" "f" #'cc/open-pdf-note-files
+        :desc "Find note files" "f" #'cc/open-pdf-note-files
         :desc "Org noter" "o" #'org-noter)
   (after! org-noter
     (setq! org-noter-notes-search-path `(,cc/org-pdf-notes-dir)

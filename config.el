@@ -11,16 +11,6 @@
 (when (modulep! :cc ui)
   (cc/set-doom-ui-appearance))
 
-;; org-directory must be set before doom-package:org has loaded
-;; set if cc/org-home-dir is bound
-(when (boundp 'cc/default-org-dir)
-  (setq org-directory cc/default-org-dir))
-
-(when (boundp 'cc/notes-base-dir)
-  (setq! cc/roam-notes-dir (concat cc/notes-base-dir "roamnotes/")
-         cc/org-pdf-notes-dir (concat cc/notes-base-dir "pdfnotes/")
-         cc/roam-journals-dir (concat cc/notes-base-dir "journals/")))
-
 ;; load config files
 (load! "config.d/custom-variables.el")
 (load! "config.d/defaults.el")
@@ -31,6 +21,7 @@
 (load! "config.d/checkers.el")
 (load! "config.d/tools.el")
 (load! "config.d/langs.el")
+(load! "config.d/org.el")
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
