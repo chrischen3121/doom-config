@@ -9,15 +9,24 @@
 (when (modulep! :lang cc)
   (add-to-list 'auto-mode-alist '("conanfile\\.txt\\'" . conf-unix-mode))
   (setq-hook! 'c++-mode-hook tab-width 2)
+  (add-hook! 'compilation-finish-functions #'cc/close-compilation-buffer-if-successful)
   (map! :after cc-mode
         :map c++-mode-map
-        :prefix "C-c l"
-        :desc "Compile" "c" #'cc/cpp-compile
-        :desc "Run" "r" #'cc/cpp-run
-        :desc "Quick run" "q" #'cc/cpp-quick-run
-        :desc "Woman" "w" #'woman ; or C-h W
-        :desc "Debug(gdb)" "g" #'gdb
-        :desc "Debug(dap-debug)" "d" #'dap-debug)
+        (:prefix "C-c r"
+         :desc "C++ Quick run" "q" #'cc/cpp-quick-run
+         )
+        (:prefix "C-c c"
+         :desc "Quick compile" "c" #'cc/cpp-quick-compile
+         :desc "Disassemble" "d" #'disaster
+         (:prefix
+          ("b" . "<build>")
+          (:when (modulep! :tools make)
+            :desc "make command" "m" #'+make/run
+            :desc "make last" "l" #'+make/run-last)
+          (:when (modulep! :lang cc)
+            :desc "cmake command" "c" #'cmake-command-run)
+          )
+         ))
 
   ;; cmake-mode
   (setq-hook! 'cmake-mode-hook cmake-tab-width 4)

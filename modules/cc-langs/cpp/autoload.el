@@ -3,7 +3,7 @@
 
 
 ;;;###autoload
-(defun cc/cpp-compile ()
+(defun cc/cpp-quick-compile ()
   "compile c++ file and focus on compilation window"
   (interactive)
   (unless (file-exists-p "Makefile")
@@ -12,28 +12,18 @@
            (format "g++ -std=c++20 -Wall -g -o %s %s" (file-name-sans-extension file) file))))
   (compile compile-command))
 
-
 ;;;###autoload
-(defun cc/cpp-run ()
-  "Open or send to vterm and run"
-  (interactive)
-  (let ((file (file-name-sans-extension (file-name-nondirectory buffer-file-name))))
-    (if (get-buffer "*vterm*")
-        (progn
-          ;; Switch to the *vterm* buffer in another window.
-          (switch-to-buffer-other-window "*vterm*")
-          (vterm-send-string (format "./%s\n" file)))
-      (progn
-        ;; If *vterm* buffer doesn't exist, open it in another window.
-        (vterm-other-window)
-        (vterm-send-string (format "./%s\n" file))))))
+(defun cc/close-compilation-buffer-if-successful (buffer string)
+  "Close the *compilation* BUFFER if it succeeded without errors."
+  (when (string-match "finished" string)
+    (kill-buffer buffer)))
 
 ;;;###autoload
 (defun cc/cpp-quick-run ()
-  "Compile and run c++ file"
+  "Run compiled c++ executable"
   (interactive)
-  (cc/cpp-compile)
-  (cc/cpp-run))
+  (let ((file (file-name-sans-extension (file-name-nondirectory buffer-file-name))))
+    (shell-command (format "./%s" file))))
 
 ;;;###autoload
 (defun cc/focus-on-cmake-help ()

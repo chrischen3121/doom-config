@@ -241,11 +241,6 @@
         :desc "Eval defun" "d" #'eval-defun
         :desc "Eval region" "r" #'eval-region
         :desc "Eval last sexp" "e" #'eval-last-sexp)
-       (:when (modulep! :tools make)
-         :desc "Make run" "m" #'+make/run
-         :desc "Make run last" "l" #'+make/run-last)
-       (:when (modulep! :lang cc)
-         :desc "CMake run" "c" #'cmake-command-run)
        )
 
       ;; C-c c -- code
