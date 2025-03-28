@@ -19,19 +19,22 @@
 
 ;; Github Copilot
 (use-package! copilot
-  :hook ((prog-mode git-commit-setup conf-mode yaml-mode) . copilot-mode)
+  :hook ((emacs-lisp-mode) . copilot-mode)
   :config
   (setq! copilot-indent-offset-warning-disable t)
-  (map! :map copilot-completion-map
-        "<backtab>" #'copilot-accept-completion
-        "C-M-w" #'copilot-accept-completion-by-word
-        "C-M-l" #'copilot-accept-completion-by-line
-        "C-M-n" #'copilot-next-completion
-        "C-M-p" #'copilot-previous-completion)
+
   ;; For Github Copilot compatibility
   ;; Cursor Jump to End of Line When Typing
   ;; If you are using whitespace-mode, make sure to remove newline-mark from whitespace-style.
-  (setq! whitespace-style (delq 'newline-mark whitespace-style)))
+  (setq! whitespace-style (delq 'newline-mark whitespace-style))
+  (map! :desc "Copilot mode" "C-c t p" #'copilot-mode
+        :map copilot-completion-map
+        "<backtab>" #'copilot-accept-completion
+        "M-<return>" #'copilot-accept-completion
+        "M-w" #'copilot-accept-completion-by-word
+        "M-l" #'copilot-accept-completion-by-line
+        "M-n" #'copilot-next-completion
+        "M-p" #'copilot-previous-completion))
 
 ;; TODO may try Codeium later on
 ;; codeium-completion-at-point should be the first in the completion-at-point-functions

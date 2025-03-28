@@ -5,11 +5,10 @@
 ;; https://github.com/doomemacs/doomemacs/tree/master/modules/lang/cc
 ;; https://emacs-lsp.github.io/lsp-mode/tutorials/CPP-guide/
 
-(when (modulep! :lang cc)
-  (setq-hook! 'c++-mode-hook
-    tab-width 2)
 
-  (add-to-list 'auto-mode-alist '("conanfile\\.txt\\'" . conf-windows-mode))
+(when (modulep! :lang cc)
+  (add-to-list 'auto-mode-alist '("conanfile\\.txt\\'" . conf-unix-mode))
+  (setq-hook! 'c++-mode-hook tab-width 2)
   (map! :after cc-mode
         :map c++-mode-map
         :prefix "C-c l"
@@ -18,7 +17,14 @@
         :desc "Quick run" "q" #'cc/cpp-quick-run
         :desc "Woman" "w" #'woman ; or C-h W
         :desc "Debug(gdb)" "g" #'gdb
-        :desc "Debug(dap-debug)" "d" #'dap-debug))
+        :desc "Debug(dap-debug)" "d" #'dap-debug)
+
+  ;; cmake-mode
+  (setq-hook! 'cmake-mode-hook cmake-tab-width 4)
+  (map! :map cmake-mode-map
+        :desc "CMake doc" "C-c k k" #'cmake-help)
+  (advice-add #'cmake-help :after #'cc/focus-on-cmake-help)
+  )
 
 (when (modulep! :ui indent-guides)
   (add-hook! 'c-mode-common-hook
@@ -42,4 +48,3 @@
              "--header-insertion-decorators=0"))
     (set-lsp-priority! 'clangd 2)))
 
-(setq-hook! 'cmake-mode-hook cmake-tab-width 4)

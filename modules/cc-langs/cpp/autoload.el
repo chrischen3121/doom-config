@@ -34,3 +34,10 @@
   (interactive)
   (cc/cpp-compile)
   (cc/cpp-run))
+
+;;;###autoload
+(defun cc/focus-on-cmake-help ()
+  "Focus on cmake-help buffer"
+  (let ((help-buffer (get-buffer "*CMake Help*")))
+    (when help-buffer
+      (select-window (get-buffer-window help-buffer)))))

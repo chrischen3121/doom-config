@@ -22,7 +22,7 @@
 (when (modulep! :editor snippets)
   (map! :map yas-minor-mode-map
         "C-c &" nil
-        "C-M-/" #'yas-expand
+        "C-M-/" #'yasnippet-capf
         :desc "Reload snippets" "C-c y r" #'yas-reload-all
         :desc "Insert snippet" "C-c y i" #'yas-insert-snippet))
 

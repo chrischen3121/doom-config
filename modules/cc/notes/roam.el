@@ -2,6 +2,10 @@
 ;;; cc/notes/roam.el
 
 (when (modulep! :lang org +roam2)
+  (advice-add 'org-roam-node-find :before #'cc/org-roam-choose-dir-if-not-set)
+  (advice-add 'org-roam-capture :before #'cc/org-roam-choose-dir-if-not-set)
+  (advice-add 'org-roam-node-insert :before #'cc/org-roam-choose-dir-if-not-set)
+
   (after! org-roam
     (when (>= emacs-major-version 29)
       ;; HACK https://github.com/org-roam/org-roam-ui/issues/289
@@ -9,14 +13,9 @@
       (unless (functionp 'emacsql-sqlite)
         (defun emacsql-sqlite (db &rest args)
           (apply 'emacsql-sqlite-open db args)))
-      (setq! org-roam-database-connector 'sqlite)
-      )
-    (advice-add 'org-roam-node-find :before #'cc/org-roam-choose-dir-if-not-set)
-    (advice-add 'org-roam-capture :before #'cc/org-roam-choose-dir-if-not-set)
-    (advice-add 'org-roam-node-insert :before #'cc/org-roam-choose-dir-if-not-set)
+      (setq! org-roam-database-connector 'sqlite))
 
-    (setq! org-roam-directory nil ; cc/roam-notes-dir
-           org-roam-db-gc-threshold most-positive-fixnum
+    (setq! org-roam-db-gc-threshold most-positive-fixnum
            org-roam-graph-viewer cc/org-roam-graph-viewer
            org-roam-dailies-directory cc/roam-journals-dir
            org-roam-capture-templates

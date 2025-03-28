@@ -12,9 +12,11 @@
    :desc "dap-hydra" "h" #'dap-hydra)
   )
 
-
 (when (modulep! :tools lsp)
-  (add-hook! 'lsp-mode-hook #'lsp-enable-which-key-integration)
+  (add-hook! 'lsp-mode-hook #'lsp-enable-which-key-integration
+    (defun cc/lsp-ensure-copilot-server ()
+      (lsp-ensure-server 'copilot-ls)))
+
   (setq! lsp-idle-delay 0.8
          lsp-copilot-enabled t
          lsp-headerline-breadcrumb-enable t
@@ -32,6 +34,7 @@
          )
   (map! :map lsp-mode-map
         "s-l" nil
+        :desc "Format buffer" "C-c c f" #'lsp-format-buffer
         :map lsp-ui-mode-map
         :desc "Open lsp-ui imenu" "C-c c i" #'lsp-ui-imenu)
   )

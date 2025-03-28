@@ -225,33 +225,34 @@
          :desc "Org presentation" "p" #'org-tree-slide-mode)
        )
 
+      ;; C-c r -- run/eval
+      (:prefix-map
+       ("r" . "<run/eval>")
+       (:when (modulep! :tools eval)
+         (:map prog-mode-map
+          :desc "Eval buffer" "b" #'+eval/buffer
+          :desc "Eval region" "r" #'+eval/region
+          :desc "Eval line" "l" #'+eval/line-or-region
+          :desc "Send to REPL" "s" #'+eval/send-region-to-repl
+          :desc "Open REPL" "o" #'+eval/open-repl-other-window
+          :desc "Open REPL here" "O" #'+eval/open-repl-same-window))
+       (:map emacs-lisp-mode-map
+        :desc "Eval buffer" "b" #'eval-buffer
+        :desc "Eval defun" "d" #'eval-defun
+        :desc "Eval region" "r" #'eval-region
+        :desc "Eval last sexp" "e" #'eval-last-sexp)
+       (:when (modulep! :tools make)
+         :desc "Make run" "m" #'+make/run
+         :desc "Make run last" "l" #'+make/run-last)
+       (:when (modulep! :lang cc)
+         :desc "CMake run" "c" #'cmake-command-run)
+       )
+
       ;; C-c c -- code
       (:prefix-map
        ("c" . "<code>")
        :desc "Compile" "c" #'+default/compile
        :desc "Format buffer/region" "f" #'+format/region-or-buffer
-       (:prefix
-        ("e" . "<eval/run>")
-        (:when (modulep! :tools eval)
-          (:map prog-mode-map
-           :desc "Eval buffer" "b" #'+eval/buffer
-           :desc "Eval region" "r" #'+eval/region
-           :desc "Eval line" "l" #'+eval/line-or-region
-           :desc "Send to REPL" "s" #'+eval/send-region-to-repl
-           :desc "Open REPL" "o" #'+eval/open-repl-other-window
-           :desc "Open REPL here" "O" #'+eval/open-repl-same-window)
-          (:map emacs-lisp-mode-map
-           :desc "Eval buffer" "b" #'eval-buffer
-           :desc "Eval defun" "d" #'eval-defun
-           :desc "Eval region" "r" #'eval-region
-           :desc "Eval last sexp" "e" #'eval-last-sexp)
-          )
-        (:when (modulep! :tools make)
-          :desc "Make run" "m" #'+make/run
-          :desc "Make run last" "l" #'+make/run-last)
-        (:when (modulep! :lang cc)
-          :desc "CMake run" "c" #'cmake-command-run)
-        )
        (:when (and (modulep! :tools lsp)
                    (not (modulep! :tools lsp +eglot)))
          :map lsp-mode-map
@@ -260,7 +261,7 @@
           :desc "Organize imports" "i" #'lsp-organize-imports
           :desc "Rename" "r" #'lsp-rename
           :desc "Inlay Hints Mode" "I" #'lsp-inlay-hints-mode)
-         (:prefix ("s". "<session>")
+         (:prefix ("s". "<lsp-session>")
           :desc "Describe session" "d" #'lsp-describe-session
           :desc "Disconnect" "q" #'lsp-disconnect
           :desc "Shutdown" "k" #'lsp-workspace-shutdown

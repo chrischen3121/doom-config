@@ -25,8 +25,9 @@
 (defun cc/org-roam-choose-dir-if-not-set ()
   "Choose a directory to use as the org-roam directory if not set."
   (interactive)
-  (unless (bound-and-true-p org-roam-directory)
-    (cc/org-roam-choose-dir)))
+  ;; org roam db file exists
+  (unless (file-exists-p org-roam-db-location)
+        (cc/org-roam-choose-dir)))
 
 ;; ;;;###autoload
 ;; (defun cc/org-roam-find-by-dir (&rest args)
