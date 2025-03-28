@@ -22,7 +22,6 @@
   :hook ((emacs-lisp-mode) . copilot-mode)
   :config
   (setq! copilot-indent-offset-warning-disable t)
-
   ;; For Github Copilot compatibility
   ;; Cursor Jump to End of Line When Typing
   ;; If you are using whitespace-mode, make sure to remove newline-mark from whitespace-style.
@@ -34,7 +33,11 @@
         "M-w" #'copilot-accept-completion-by-word
         "M-l" #'copilot-accept-completion-by-line
         "M-n" #'copilot-next-completion
-        "M-p" #'copilot-previous-completion))
+        "M-p" #'copilot-previous-completion)
+  (when (modulep! :tools lsp)
+    (unless lsp-copilot-enabled
+      (add-hook! (prog-mode yaml-mode conf-mode) #'copilot-mode)))
+  )
 
 ;; TODO may try Codeium later on
 ;; codeium-completion-at-point should be the first in the completion-at-point-functions

@@ -37,6 +37,11 @@
         :desc "Format buffer" "C-c c f" #'lsp-format-buffer
         :map lsp-ui-mode-map
         :desc "Open lsp-ui imenu" "C-c c i" #'lsp-ui-imenu)
+  (map! :after lsp-inline-completion
+        :map lsp-inline-completion-active-map
+        "M-<return>" #'lsp-inline-completion-accept
+        "M-n" #'lsp-inline-completion-next
+        "M-p" #'lsp-inline-completion-previous)
   )
 
 (when (modulep! :tools pdf)
