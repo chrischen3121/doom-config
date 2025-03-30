@@ -1,6 +1,7 @@
 ;;; -*- lexical-binding: t; no-byte-compile: t; -*-
 ;;; cc-langs/cpp/autoload.el
-
+(defvar cc/cpp-quick-compile-command "g++ -std=c++20 -Wall -g -o"
+  "The command to compile c++ file")
 
 ;;;###autoload
 (defun cc/cpp-quick-compile ()
@@ -9,7 +10,8 @@
   (unless (file-exists-p "Makefile")
     (set (make-local-variable 'compile-command)
          (let ((file (file-name-nondirectory buffer-file-name)))
-           (format "g++ -std=c++20 -Wall -g -o %s %s" (file-name-sans-extension file) file))))
+           (format "%s %s %s" cc/cpp-quick-compile-command
+                   (file-name-sans-extension file) file))))
   (compile compile-command))
 
 ;;;###autoload

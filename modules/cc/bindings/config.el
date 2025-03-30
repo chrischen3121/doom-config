@@ -257,12 +257,13 @@
           :desc "Rename" "r" #'lsp-rename
           :desc "Inlay Hints Mode" "I" #'lsp-inlay-hints-mode)
          (:prefix ("s". "<lsp-session>")
-          :desc "Describe session" "d" #'lsp-describe-session
+          :desc "Describe session" "?" #'lsp-describe-session
           :desc "Disconnect" "q" #'lsp-disconnect
-          :desc "Shutdown" "k" #'lsp-workspace-shutdown
+          :desc "Restart" "r" #'lsp-workspace-restart
+          :desc "Shutdown" "d" #'lsp-workspace-shutdown
           :desc "Add folder" "a" #'lsp-workspace-folders-add
-          :desc "Remove folder" "r" #'lsp-workspace-folders-remove
-          :desc "Remove all folders" "R" #'lsp-workspace-remove-all-folders
+          :desc "Remove folder" "k" #'lsp-workspace-folders-remove
+          :desc "Remove all folders" "K" #'lsp-workspace-remove-all-folders
           :desc "Unblock folders" "b" #'lsp-workspace-blocklist-remove
           :desc "Switch client" "s" #'+lsp/switch-client)
          (:when (modulep! :ui treemacs +lsp)

@@ -11,7 +11,7 @@
   (setq-hook! 'c++-mode-hook tab-width 2)
   (add-hook! 'compilation-finish-functions #'cc/close-compilation-buffer-if-successful)
   (map! :after cc-mode
-        :map c++-mode-map
+        :map (c++-mode-map cmake-mode-map)
         (:prefix "C-c r"
          :desc "C++ Quick run" "q" #'cc/cpp-quick-run
          )

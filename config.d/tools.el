@@ -25,13 +25,14 @@
          lsp-ui-sideline-show-diagnostics t
          lsp-ui-sideline-show-code-actions t
          lsp-ui-sideline-show-symbol nil
-
          lsp-ui-sideline-delay 1
+
+         lsp-inline-completion-idle-delay 0.5
+
          lsp-ui-imenu-buffer-position 'left
          lsp-ui-imenu-auto-refresh t
          ;; lsp-ui-doc
-         lsp-ui-doc-enable nil
-         )
+         lsp-ui-doc-enable nil)
   (map! :map lsp-mode-map
         "s-l" nil
         :desc "Format buffer" "C-c c f" #'lsp-format-buffer
@@ -39,6 +40,7 @@
         :desc "Open lsp-ui imenu" "C-c c i" #'lsp-ui-imenu)
   (map! :after lsp-inline-completion
         :map lsp-inline-completion-active-map
+        "<backtab>" #'lsp-inline-completion-accept
         "M-<return>" #'lsp-inline-completion-accept
         "M-n" #'lsp-inline-completion-next
         "M-p" #'lsp-inline-completion-previous)
