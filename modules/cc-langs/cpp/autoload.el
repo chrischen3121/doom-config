@@ -28,6 +28,17 @@
     (shell-command (format "./%s" file))))
 
 ;;;###autoload
+(defun cc/find-topmost-cmake-build-dir ()
+  "Find the topmost directory containing a CMakeLists.txt, create a build/ directory if it doesn't exist, and return the build directory path."
+  (let ((dir (locate-dominating-file default-directory "CMakeLists.txt")))
+    (if dir
+        (let ((build-dir (expand-file-name "build" dir)))
+          (unless (file-directory-p build-dir)
+            (make-directory build-dir))
+          build-dir)
+      (error "No CMakeLists.txt found in any parent directory"))))
+
+;;;###autoload
 (defun cc/focus-on-cmake-help ()
   "Focus on cmake-help buffer"
   (let ((help-buffer (get-buffer "*CMake Help*")))
