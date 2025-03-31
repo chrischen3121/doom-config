@@ -28,33 +28,50 @@
     (shell-command (format "./%s" file))))
 
 ;;;###autoload
-(defun cc/find-topmost-cmake-build-dir ()
-  "Find the topmost directory containing a CMakeLists.txt, create a build/ directory if it doesn't exist, and return the build directory path."
-  (let ((dir (locate-dominating-file default-directory "CMakeLists.txt")))
-    (if dir
-        (let ((build-dir (expand-file-name "build" dir)))
-          (unless (file-directory-p build-dir)
-            (make-directory build-dir))
-          build-dir)
-      (error "No CMakeLists.txt found in any parent directory"))))
-
-;;;###autoload
-(defun cc/cmake-configure ()
-  "Run 'cmake -B build' in the topmost directory containing a CMakeLists.txt."
-  (interactive)
-  (let ((build-dir (cc/find-topmost-cmake-build-dir)))
-    (shell-command (format "cmake -B %s" build-dir))))
-
-;;;###autoload
-(defun cc/cmake-build ()
-  "Run 'cmake --build build' in the topmost directory containing a CMakeLists.txt."
-  (interactive)
-  (let ((build-dir (cc/find-topmost-cmake-build-dir)))
-    (shell-command (format "cmake --build %s" build-dir))))
-
-;;;###autoload
 (defun cc/focus-on-cmake-help ()
   "Focus on cmake-help buffer"
   (let ((help-buffer (get-buffer "*CMake Help*")))
     (when help-buffer
       (select-window (get-buffer-window help-buffer)))))
+
+;;;###autoload
+(defun cc//find-cmake-build-dir ()
+  "Find the build directory"
+  (let ((build-dir (expand-file-name "build" default-directory)))
+    (unless (file-directory-p build-dir)
+      (make-directory build-dir))
+    build-dir))
+
+;;;###autoload
+(defun cc/cmake-generate-build-files ()
+  "Run 'cmake -B [build]' to generate build files"
+  (interactive)
+  (let ((build-dir (cc//find-cmake-build-dir)))
+    (cmake-command-run (format "-B %s" build-dir))))
+
+;;;###autoload
+(defun cc/cmake-build ()
+  "Run 'cmake --build [build]' to build project"
+  (interactive)
+  (let ((build-dir (cc//find-cmake-build-dir)))
+    (cmake-command-run (format "--build %s" build-dir))))
+
+;;;###autoload
+(defun cc/cmake-compile-commands ()
+  "Run 'cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1' to generate compile_commands.json"
+  (interactive)
+  (let ((build-dir (cc//find-cmake-build-dir)))
+    (cmake-command-run (format "-DCMAKE_EXPORT_COMPILE_COMMANDS=on -B %s" build-dir))
+    (let* ((compile-json-name "compile_commands.json")
+           (compile-json-origin (expand-file-name compile-json-name build-dir)))
+      (unless (file-exists-p compile-json-name)
+        (make-symbolic-link compile-json-origin compile-json-name)))))
+
+;;;###autoload
+(defun cc/cmake-ctest ()
+  "Run 'ctest --test-dir [build]' to test project"
+  (interactive)
+  (let ((build-dir (cc//find-cmake-build-dir)))
+    (shell-command (format "ctest --test-dir %s" build-dir))
+    (with-current-buffer "*Shell Command Output*"
+      (view-mode t))))

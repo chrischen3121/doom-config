@@ -11,28 +11,40 @@
   (setq-hook! 'c++-mode-hook tab-width 2)
   (add-hook! 'compilation-finish-functions #'cc/close-compilation-buffer-if-successful)
   (map! :after cc-mode
-        :map (c++-mode-map cmake-mode-map)
-        (:prefix "C-c r"
-         :desc "C++ Quick run" "q" #'cc/cpp-quick-run
-         )
-        (:prefix "C-c c"
-         :desc "Quick compile" "c" #'cc/cpp-quick-compile
-         :desc "Disassemble" "d" #'disaster
-         (:prefix
-          ("b" . "<build>")
-          (:when (modulep! :tools make)
-            :desc "make command" "m" #'+make/run
-            :desc "make last" "l" #'+make/run-last)
-          (:when (modulep! :lang cc)
-            :desc "cmake command" "c" #'cmake-command-run)
-          )
-         ))
+        (:map c++-mode-map
+              (:prefix "C-c r"
+               :desc "C++ Quick run" "q" #'cc/cpp-quick-run
+               )
+              (:prefix "C-c c"
+               :desc "Quick compile" "c" #'cc/cpp-quick-compile
+               :desc "Disassemble" "d" #'disaster
+               (:prefix
+                ("b" . "<build>")
+                (:when (modulep! :tools make)
+                  :desc "make command" "m" #'+make/run
+                  :desc "make last" "l" #'+make/run-last))))
+        (:map cmake-mode-map
+              (:prefix
+               "C-c c"
+               (:prefix
+                ("b" . "<build>")
+                (:when (modulep! :lang cc)
+                  :desc "CMake command" "c" #'cmake-command-run)
+                (:when (modulep! :cc-langs cpp)
+                  :desc "CMake generate build files" "g" #'cc/cmake-generate-build-files
+                  :desc "CMake build" "b" #'cc/cmake-build
+                  :desc "CMake ctest" "t" #'cc/cmake-ctest
+                  )))))
 
   ;; cmake-mode
   (setq-hook! 'cmake-mode-hook cmake-tab-width 4)
   (map! :map cmake-mode-map
         :desc "CMake doc" "C-c k k" #'cmake-help)
   (advice-add #'cmake-help :after #'cc/focus-on-cmake-help)
+
+  (when (modulep! :ui popup)
+    (set-popup-rules! '(("^\\*CMake" :size 0.4 :quit t :select t)
+                        ("^\\*Shell Command Output\\*" :size 0.4 :quit t :select t))))
   )
 
 (when (modulep! :ui indent-guides)
