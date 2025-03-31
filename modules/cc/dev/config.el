@@ -25,7 +25,8 @@
   ;; For Github Copilot compatibility
   ;; Cursor Jump to End of Line When Typing
   ;; If you are using whitespace-mode, make sure to remove newline-mark from whitespace-style.
-  (setq! whitespace-style (delq 'newline-mark whitespace-style))
+  ;; TODO may not be needed anymore
+  ;; (setq! whitespace-style (delq 'newline-mark whitespace-style))
   (map! :desc "Copilot mode" "C-c t p" #'copilot-mode
         :map copilot-completion-map
         "<backtab>" #'copilot-accept-completion
@@ -38,6 +39,12 @@
     (unless lsp-copilot-enabled
       (add-hook! (prog-mode yaml-mode conf-mode) #'copilot-mode)))
   )
+
+;; aider
+(use-package! aider
+  :commands (aider-transient-menu)
+  :init
+  (map! :desc "Aider menu" "C-c a" #'aider-transient-menu))
 
 ;; TODO may try Codeium later on
 ;; codeium-completion-at-point should be the first in the completion-at-point-functions

@@ -53,7 +53,7 @@
   :config
   (setq! copilot-indent-offset-warning-disable t)
   (map! :map copilot-completion-map
-        "<backtab>" #'copilot-accept-completion
+        ;; "<backtab>" #'copilot-accept-completion
         "C-M-w" #'copilot-accept-completion-by-word
         "C-M-l" #'copilot-accept-completion-by-line
         "C-M-n" #'copilot-next-completion
