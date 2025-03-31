@@ -39,6 +39,20 @@
       (error "No CMakeLists.txt found in any parent directory"))))
 
 ;;;###autoload
+(defun cc/cmake-configure ()
+  "Run 'cmake -B build' in the topmost directory containing a CMakeLists.txt."
+  (interactive)
+  (let ((build-dir (cc/find-topmost-cmake-build-dir)))
+    (shell-command (format "cmake -B %s" build-dir))))
+
+;;;###autoload
+(defun cc/cmake-build ()
+  "Run 'cmake --build build' in the topmost directory containing a CMakeLists.txt."
+  (interactive)
+  (let ((build-dir (cc/find-topmost-cmake-build-dir)))
+    (shell-command (format "cmake --build %s" build-dir))))
+
+;;;###autoload
 (defun cc/focus-on-cmake-help ()
   "Focus on cmake-help buffer"
   (let ((help-buffer (get-buffer "*CMake Help*")))
