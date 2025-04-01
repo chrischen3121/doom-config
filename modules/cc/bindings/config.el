@@ -161,7 +161,7 @@
       ;; which related to current major mode
       (:prefix-map
        ("l" . "<local>")
-              (:when (modulep! :completion vertico)
+       (:when (modulep! :completion vertico)
          :desc "Embark act" "a" #'embark-act
          :desc "Embark dwim" "e" #'embark-dwim)
        )
@@ -233,8 +233,23 @@
         :desc "Eval buffer" "b" #'eval-buffer
         :desc "Eval defun" "d" #'eval-defun
         :desc "Eval region" "r" #'eval-region
-        :desc "Eval last sexp" "e" #'eval-last-sexp)
-       )
+        :desc "Eval last sexp" "e" #'eval-last-sexp))
+
+      ;; C-c d -- debug
+      (:prefix-map
+       ("d". "<debug>")
+       (:when (modulep! :tools debugger)
+         :map prog-mode-map
+         :desc "Start" "d" #'+debugger/start
+         :desc "Stop" "s" #'+debugger/quit)
+       (:when (modulep! :tools lsp)
+         :desc "dap-debug" "g" #'dap-debug
+         :desc "dap-hydra" "h" #'dap-hydra
+         :map lsp-mode-map
+         :desc "Edit dap template" "t" #'dap-debug-edit-template
+         (:prefix ("b" . "<breakpoint>")
+          :desc "Toggle" "b" #'dap-breakpoint-toggle
+          :desc "Delete all" "d" #'dap-breakpoint-delete-all)))
 
       ;; C-c c -- code
       (:prefix-map
@@ -267,17 +282,6 @@
            :desc "Type hierarchy" "t" #'lsp-treemacs-type-hierarchy
            :desc "References tree" "r" (cmd!! #'lsp-treemacs-references t)
            )
-         )
-       )
-
-      ;; C-c d -- debugging
-      (:prefix-map
-       ("d" . "<debug>")
-       (:when (modulep! :tools debugger)
-         :map prog-mode-map
-         :desc "Run" "r" #'+debugger/start
-         :desc "Quit" "q" #'+debugger/quit
-         :desc "Run last" "l" #'+debugger/start-last
          )
        )
 

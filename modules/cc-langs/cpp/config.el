@@ -32,6 +32,7 @@
                   :desc "CMake command" "c" #'cmake-command-run)
                 (:when (modulep! :cc-langs cpp)
                   :desc "CMake generate build files" "g" #'cc/cmake-generate-build-files
+                  :desc "CMake debug build files" "d" #'cc/cmake-gen-debug-build-files
                   :desc "CMake build" "b" #'cc/cmake-build
                   :desc "CMake ctest" "t" #'cc/cmake-ctest
                   )))))
@@ -69,3 +70,8 @@
              "--header-insertion-decorators=0"))
     (set-lsp-priority! 'clangd 2)))
 
+(when (modulep! :tools debugger +lsp)
+  (add-hook! 'c-mode-common-hook
+    (defun setup-debugger ()
+      (require 'dap-gdb)
+      (setq dap-gdb-debug-program '("gdb" "-i" "dap")))))

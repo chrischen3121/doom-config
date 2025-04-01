@@ -3,14 +3,7 @@
 (when (modulep! :tools debugger)
   (remove-hook! 'dap-ui-mode-hook #'dap-ui-controls-mode)
   (remove-hook! 'dap-mode-hook #'dap-tooltip-mode)
-  (setq! dap-auto-configure-features
-         '(sessions locals breakpoints expressions))
-  (map!
-   :map lsp-mode-map
-   :prefix "C-c d"
-   :desc "dap-debug" "g" #'dap-debug
-   :desc "dap-hydra" "h" #'dap-hydra)
-  )
+  (setq! dap-auto-configure-features '(locals breakpoints)))
 
 (when (modulep! :tools lsp)
   (add-hook! 'lsp-mode-hook #'lsp-enable-which-key-integration

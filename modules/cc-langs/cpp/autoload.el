@@ -49,6 +49,15 @@
   (let ((build-dir (cc//find-cmake-build-dir)))
     (cmake-command-run (format "-B %s" build-dir))))
 
+;; TODO: reduce duplication
+;; implement a more general function, let the user input the options
+;;;###autoload
+(defun cc/cmake-gen-debug-build-files ()
+  "Run 'cmake -DCMAKE_BUILD_TYPE=Debug -B [build]' to generate debug build files"
+  (interactive)
+  (let ((build-dir (cc//find-cmake-build-dir)))
+    (cmake-command-run (format "-DCMAKE_BUILD_TYPE=Debug -B %s" build-dir))))
+
 ;;;###autoload
 (defun cc/cmake-build ()
   "Run 'cmake --build [build]' to build project"
