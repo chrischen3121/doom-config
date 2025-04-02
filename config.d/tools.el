@@ -35,8 +35,10 @@
         :map lsp-inline-completion-active-map
         "<backtab>" #'lsp-inline-completion-accept
         "M-<return>" #'lsp-inline-completion-accept
+        "C-n" nil
+        "C-p" nil
         "M-n" #'lsp-inline-completion-next
-        "M-p" #'lsp-inline-completion-previous)
+        "M-p" #'lsp-inline-completion-prev)
   )
 
 (when (modulep! :tools pdf)

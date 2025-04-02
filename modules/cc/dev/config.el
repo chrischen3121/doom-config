@@ -46,14 +46,10 @@
   :init
   (map! :desc "Aider menu" "C-c a" #'aider-transient-menu))
 
-;; TODO may try Codeium later on
-;; codeium-completion-at-point should be the first in the completion-at-point-functions
-;; which is imcompatible with lsp
-;; enable company-preview-frontend if using codeium
+
+;; codeium
 ;; (use-package! codeium
 ;;   :init
-;;   (codeium-init)
-;;   (add-hook! 'prog-mode-hook
-;;     (defun cc/set-codeium-capf ()
-;;       :local (add-to-list 'completion-at-point-functions
-;;                           #'codeium-completion-at-point))))
+;;   (add-to-list 'completion-at-point-functions #'codeium-completion-at-point)
+;;   :config
+;;   (setq use-dialog-box nil))

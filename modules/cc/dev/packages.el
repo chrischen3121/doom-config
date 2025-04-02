@@ -10,14 +10,13 @@
   :recipe (:host github
            :repo "copilot-emacs/copilot.el"
            :files ("*.el")))
+
+;; (package! codeium
+;;   :recipe (:host github
+;;            :repo "Exafunction/codeium.el"
+;;            :files ("*.el")))
+
 (package! aider
   :recipe (:host github
            :repo "tninja/aider.el"
            :files ("*.el")))
-
-;; TODO no syntax hightlight feature in built-in treesit
-;; (package! combobulate
-;;   :recipe (:host github
-;;            :repo "mickeynp/combobulate"
-;;            :branch "development"
-;;            :files ("*.el")))
