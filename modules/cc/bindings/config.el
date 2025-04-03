@@ -152,9 +152,7 @@
         ("w" . "<writing>")
         (:when (modulep! :checkers grammar)
           (:desc "Grammar check" "c" #'langtool-check
-           :desc "Grammar correct" "e" #'langtool-correct-buffer
-           :desc "Grade level" "g" #'writegood-grade-level
-           :desc "Read ease score" "r" #'writegood-reading-ease)))
+           :desc "Grammar correct" "e" #'langtool-correct-buffer)))
        )
 
       ;; C-c l -- local keybindings
@@ -206,8 +204,6 @@
          :desc "Indent guides" "i" #'indent-bars-mode)
        (:when (modulep! :editor word-wrap)
          :desc "Visual line mode" "v" #'+word-wrap-mode)
-       (:when (modulep! :checkers grammar)
-         :desc "writegood-mode" "w" #'writegood-mode)
        (:when (modulep! :checkers spell)
          :desc "spell-fu-mode" "s" #'spell-fu-mode)
        (:when (and (modulep! :checkers syntax)

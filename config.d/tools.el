@@ -6,12 +6,14 @@
   (setq! dap-auto-configure-features '(locals breakpoints)))
 
 (when (modulep! :tools lsp)
-  (add-hook! 'lsp-mode-hook #'lsp-enable-which-key-integration
-    (defun cc/lsp-ensure-copilot-server ()
-      (lsp-ensure-server 'copilot-ls)))
+  (add-hook! 'lsp-mode-hook
+             #'lsp-enable-which-key-integration
+             ;; (defun cc/lsp-ensure-copilot-server ()
+             ;;   (lsp-ensure-server 'copilot-ls))
+             )
 
   (setq! lsp-idle-delay 0.8
-         lsp-copilot-enabled t
+         lsp-copilot-enabled nil
          lsp-headerline-breadcrumb-enable t
          lsp-signature-render-documentation nil
 

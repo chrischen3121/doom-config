@@ -20,6 +20,11 @@
 ;; Github Copilot
 (use-package! copilot
   :hook ((emacs-lisp-mode) . copilot-mode)
+  :init
+  (add-hook! (prog-mode yaml-mode conf-mode) #'copilot-mode)
+  ;; (when (modulep! :tools lsp)
+  ;;   (unless lsp-copilot-enabled
+  ;;     (add-hook! (prog-mode yaml-mode conf-mode) #'copilot-mode)))
   :config
   (setq! copilot-indent-offset-warning-disable t)
   ;; For Github Copilot compatibility
@@ -34,11 +39,7 @@
         "M-w" #'copilot-accept-completion-by-word
         "M-l" #'copilot-accept-completion-by-line
         "M-n" #'copilot-next-completion
-        "M-p" #'copilot-previous-completion)
-  (when (modulep! :tools lsp)
-    (unless lsp-copilot-enabled
-      (add-hook! (prog-mode yaml-mode conf-mode) #'copilot-mode)))
-  )
+        "M-p" #'copilot-previous-completion))
 
 ;; aider
 (use-package! aider
