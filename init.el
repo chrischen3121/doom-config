@@ -99,7 +99,8 @@
        markdown            ; writing docs for people to ignore
        (org +roam2 +pretty +present) ; TODO +noter
        plantuml            ; diagrams for confusing people more
-       (python +lsp +pyenv +poetry +pyright +tree-sitter) ; beautiful is better than ugly
+       (python +lsp +tree-sitter) ; ruff lsp server with uv
+       ;; (python +lsp +pyenv +poetry +pyright +tree-sitter) ; basedpyright lsp server with poetry, pyenv
        qt                  ; the 'cutest' gui framework ever
        rst                 ; ReST in peace
        ;; (rest + jq)      ; TODO Emacs as a REST client +jq Enable support for reading and processing REST responses with jq

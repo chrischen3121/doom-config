@@ -4,10 +4,12 @@
   (defvar cc/python-indent-offset 4
     "The number of spaces to indent inside python blocks.")
 
-  (setq-hook! python-mode python-indent-offset
-              cc/python-indent-offset)
+  (setq-hook! 'python-mode-hook
+    python-indent-offset cc/python-indent-offset)
 
-  (setq! python-shell-interpreter "python3")
+  ;; set default python interpreter
+  (setq! python-shell-interpreter "python3"
+         doom-modeline-env-enable-python nil)
 
   (when (modulep! :ui indent-guides)
     (add-hook! 'python-mode-hook
