@@ -8,7 +8,6 @@
 
   (after! org-roam
     (setq! org-roam-db-gc-threshold most-positive-fixnum
-           org-roam-graph-viewer cc/org-roam-graph-viewer
            org-roam-dailies-directory cc/roam-journals-dir
            org-roam-capture-templates
            '(("d" "default" plain "%?"

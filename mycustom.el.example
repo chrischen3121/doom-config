@@ -1,6 +1,6 @@
 ;; -*- no-byte-compile: t; -*-
 ;;; mycustom.el -*- lexical-binding: t; -*-
-(setq! cc/mono-font "Hack"
+(setq! ; cc/mono-font "Hack"
        cc/mono-font-size 24
        ;; recommended: doom-acario-light, doom-one-light, doom-nord,  doom-oksolar-light
        cc/light-theme 'doom-one-light
@@ -12,6 +12,4 @@
 (setq! cc/default-org-dir "~/org/"
        cc/org-id-locations "~/org/.orgids"
        cc/notes-base-dir "~/org/notes/"
-       cc/org-agenda-dir "~/org/todos/"
-       cc/org-roam-graph-viewer "google-chrome"
        cc/org-agenda-dir "~/org/todos/")

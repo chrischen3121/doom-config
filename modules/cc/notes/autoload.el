@@ -19,7 +19,9 @@
            (expand-file-name chosen-dir cc/roam-notes-dir)
            org-roam-db-location
            (expand-file-name ".cache/org-roam.db" org-roam-directory))
-    (org-roam-db-sync)))
+    (unless (file-exists-p org-roam-db-location)
+      (org-roam-db-sync)
+      )))
 
 ;;;###autoload
 (defun cc/org-roam-choose-dir-if-not-set ()
@@ -27,7 +29,7 @@
   (interactive)
   ;; org roam db file exists
   (unless (file-exists-p org-roam-db-location)
-        (cc/org-roam-choose-dir)))
+    (cc/org-roam-choose-dir)))
 
 ;; ;;;###autoload
 ;; (defun cc/org-roam-find-by-dir (&rest args)
