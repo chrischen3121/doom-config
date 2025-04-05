@@ -1,4 +1,0 @@
-#+title: :cc notes
-
-* TODO List
-- [ ] add org-project configuration to export to github.io

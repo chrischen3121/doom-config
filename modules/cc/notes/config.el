@@ -24,9 +24,10 @@
 ;; C-c C-c -- jump between definition and reference
 ;; +strike-through+
 
+(after! org (require 'org-indent))
+
 (map! :after org
       :map org-mode-map
-
       ;; non prefix
       "M-S-<return>" #'org-table-copy-down
       "S-<return>" #'org-insert-todo-heading
