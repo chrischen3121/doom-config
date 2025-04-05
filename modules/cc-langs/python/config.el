@@ -4,6 +4,11 @@
   (defvar cc/python-indent-offset 4
     "The number of spaces to indent inside python blocks.")
 
+  (after! pyvenv
+    (setq! pyvenv-activate ".venv")
+    (add-hook! 'python-mode-hook #'pyvenv-tracking-mode))
+
+
   (setq-hook! 'python-mode-hook
     python-indent-offset cc/python-indent-offset)
 

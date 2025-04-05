@@ -111,7 +111,8 @@
        :desc "Find in emacsd" "e" #'doom/find-file-in-emacsd
        :desc "Browse in emacsd" "E" #'doom/browse-in-emacsd
        :desc "Sudo this file" "s" #'doom/sudo-this-file
-       :desc "Sudo find file" "S" #'doom/sudo-find-file
+       :desc "Find file""f" #'find-file
+       :desc "Sudo find file" "F" #'doom/sudo-find-file
        :desc "Copy file path" "y" #'+default/yank-buffer-path
        (:when (modulep! :tools upload)
          (:prefix ("u" . "<upload>")
@@ -359,7 +360,9 @@
        :desc "Replace in project" "r" #'projectile-replace
        :desc "Find file" "f" #'projectile-find-file
        :desc "Project dired" "d" #'+default/browse-project
-       :desc "Search symbol" "." #'+default/search-project-for-symbol-at-point)
+       :desc "Search symbol" "." #'+default/search-project-for-symbol-at-point
+       :desc "Add dir local variable" "v" #'add-dir-local-variable
+       :desc "Add file local variable" "V" #'add-file-local-variable)
 
       ;; C-c P -- profiling
       (:prefix-map
