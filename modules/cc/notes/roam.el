@@ -7,14 +7,6 @@
   (advice-add 'org-roam-node-insert :before #'cc/org-roam-choose-dir-if-not-set)
 
   (after! org-roam
-    (when (>= emacs-major-version 29)
-      ;; HACK https://github.com/org-roam/org-roam-ui/issues/289
-      ;; emacs29 will set value to sqlite-builtin, only first file tag works
-      (unless (functionp 'emacsql-sqlite)
-        (defun emacsql-sqlite (db &rest args)
-          (apply 'emacsql-sqlite-open db args)))
-      (setq! org-roam-database-connector 'sqlite))
-
     (setq! org-roam-db-gc-threshold most-positive-fixnum
            org-roam-graph-viewer cc/org-roam-graph-viewer
            org-roam-dailies-directory cc/roam-journals-dir
