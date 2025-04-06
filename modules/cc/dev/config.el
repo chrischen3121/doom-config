@@ -32,7 +32,7 @@
   ;; If you are using whitespace-mode, make sure to remove newline-mark from whitespace-style.
   ;; TODO may not be needed anymore
   ;; (setq! whitespace-style (delq 'newline-mark whitespace-style))
-  (map! :desc "Copilot mode" "C-c t p" #'copilot-mode
+  (map! :desc "Copilot mode" "C-c t a" #'copilot-mode
         :map copilot-completion-map
         "<backtab>" #'copilot-accept-completion
         "M-<return>" #'copilot-accept-completion
