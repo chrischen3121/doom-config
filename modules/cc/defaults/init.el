@@ -1,7 +1,7 @@
 ;;; -*- lexical-binding: t; no-byte-compile: t; -*-
-;;; config.d/custom-variables.el
+;;; cc/defaults/init.el
 
-(defcustom personal-aspell-en-dict "~/dicts/en.pws"
+(defcustom cc/personal-aspell-en-dict "~/dicts/en.pws"
   "Personal aspell dictionary directory."
   :type 'file
   :group 'cc-config)

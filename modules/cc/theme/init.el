@@ -5,19 +5,19 @@
    (font-get-system-font) " [0-9]+$")
   "The default monospace font for the system."
   :type 'string
-  :group 'cc)
+  :group 'cc-ui)
 
-(defcustom cc/mono-font-size 16
+(defcustom cc/font-size 16
   "The default monospace font size."
   :type 'integer
-  :group 'cc)
+  :group 'cc-ui)
 
 (defcustom cc/light-theme 'doom-one-light
   "The default light theme."
   :type 'symbol
-  :group 'cc)
+  :group 'cc-ui)
 
 (defcustom cc/dark-theme 'doom-tomorrow-night
   "The default dark theme."
   :type 'symbol
-  :group 'cc)
+  :group 'cc-ui)

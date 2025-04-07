@@ -16,7 +16,7 @@
   (add-hook! 'spell-fu-mode-hook
     (defun add-personal-dictionary ()
       (spell-fu-dictionary-add
-       (spell-fu-get-personal-dictionary "en" personal-aspell-en-dict))))
+       (spell-fu-get-personal-dictionary "en" cc/personal-aspell-en-dict))))
   )
 
 (when (and (modulep! :checkers syntax)

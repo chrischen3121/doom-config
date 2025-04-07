@@ -12,7 +12,6 @@
   (cc/set-doom-ui-appearance))
 
 ;; load config files
-(load! "config.d/custom-variables.el")
 (load! "config.d/defaults.el")
 (load! "config.d/completion.el")
 (load! "config.d/ui.el")

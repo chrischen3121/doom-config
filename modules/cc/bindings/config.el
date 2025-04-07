@@ -310,7 +310,6 @@
          :desc "Choose roam dir" "n" #'cc/org-roam-choose-dir
          :desc "Find note" "f" #'org-roam-node-find
          :desc "Find ref" "r" #'org-roam-ref-find
-         :desc "Show graph" "g" #'org-roam-graph
          :desc "Insert node" "i" #'org-roam-node-insert
          :desc "Capture" "c" #'org-roam-capture
          :desc "Show backlinks" "b" #'org-roam-buffer-toggle
