@@ -21,7 +21,12 @@
 ;;            :repo "Exafunction/codeium.el"
 ;;            :files ("*.el")))
 
-(package! aider
+;; (package! aider
+;;   :recipe (:host github
+;;            :repo "tninja/aider.el"
+;;            :files ("*.el")))
+
+(package! aidermacs
   :recipe (:host github
-           :repo "tninja/aider.el"
+           :repo "MatthewZMD/aidermacs"
            :files ("*.el")))

@@ -64,6 +64,17 @@
   :init
   (map! :desc "Aider menu" "C-c a" #'aider-transient-menu))
 
+;; aidermacs
+(use-package! aidermacs
+  :commands aidermacs-transient-menu
+  :init
+  (map! :desc "Aider menu" "C-c a" #'aidermacs-transient-menu)
+  :config
+  (setq! aidermacs-use-architect-mode t
+         aidermacs-default-model "sonnet"
+         aidermacs-auto-commits nil
+         ;; aidermacs-config-file "~/.aider.conf.yml"
+         ))
 
 ;; codeium
 ;; (use-package! codeium
