@@ -13,8 +13,16 @@
   :init
   (map! :desc "Aider menu" "C-c a" #'aidermacs-transient-menu)
   :config
+  (setenv "ANTHROPIC_API_KEY" cc/anthropic-key)
+  (setenv "OPENAI_API_KEY" cc/openai-key)
+  (setenv "GEMINI_API_KEY" cc/gemini-key)
+  (setenv "DEEPSEEK_API_KEY" cc/deepseek-key)
   (setq! aidermacs-use-architect-mode t
          aidermacs-default-model "sonnet"
+         ;; for architect reasoning
+         aidermacs-architect-model "gemini/gemini-2.5-pro-exp-03-25"
+         ;; for code generation
+         aidermacs-editor-model "sonnet"
          aidermacs-auto-commits nil
          ;; aidermacs-config-file "~/.aider.conf.yml"
          ))
