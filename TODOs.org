@@ -1,5 +1,6 @@
 * TODOs
 - [X] make temp buffer like *info* to be not temp -> +popup/raise
+- [ ] try milanglacier/minuet-ai.el for auto-completion with qwen2.5-coder
 - [ ] try :os tty with corfu-terminal
 - [ ] copilot chat side window to the right on laptop
 - [ ] copilot completion may double insert the last paren/character
