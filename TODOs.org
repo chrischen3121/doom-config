@@ -1,7 +1,8 @@
 * TODOs
 - [X] make temp buffer like *info* to be not temp -> +popup/raise
 - [ ] try :os tty with corfu-terminal
-- [ ] copilot chat side window to the right
+- [ ] copilot chat side window to the right on laptop
+- [ ] Can't close emacs when there is a copilot chat buffer (check persp-mode)
 
 * TODO python-mode
 - [X] basedpyright doesn't support ~+format/buffer~
