@@ -47,11 +47,16 @@
   :commands copilot-chat-transient
   :init
   (map! :desc "Copilot chat menu" "C-c c p" #'copilot-chat-transient)
-  :config
   (add-hook! 'git-commit-setup-hook #'copilot-chat-insert-commit-message)
+  :config
   (setq! copilot-chat-backend 'curl
          copilot-chat-frontend 'org
-         copilot-chat-default-model cc/copilot-chat-model))
+         copilot-chat-default-model cc/copilot-chat-model
+         copilot-chat-commit-prompt
+         (concat
+          copilot-chat-commit-prompt
+          "Keep the subject line of a Git commit message to 50 characters or less.\n"))
+  )
 
 ;; aider
 (use-package! aider
