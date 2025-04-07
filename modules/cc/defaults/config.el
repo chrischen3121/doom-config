@@ -34,3 +34,5 @@
   :commands ace-jump-mode
   :init
   (map! :desc "Ace jump" "C-c j" #'ace-jump-mode))
+
+(add-hook! comint-mode #'visual-line-mode)

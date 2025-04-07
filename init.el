@@ -123,6 +123,7 @@
        dev
        notes
        agenda
+       ai
 
        :cc-langs
        cpp

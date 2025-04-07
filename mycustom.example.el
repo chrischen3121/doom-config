@@ -20,3 +20,9 @@
 
 ;; cc-dev
 (setq! cc/copilot-chat-model "gpt-4o")
+
+;; cc-ai
+(setq! cc/openai-key ""
+       cc/anthropic-key ""
+       cc/gemini-key ""
+       cc/deepseek-key "")

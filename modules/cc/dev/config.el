@@ -58,24 +58,6 @@
           "Keep the subject line of a Git commit message to 50 characters or less.\n"))
   )
 
-;; aider
-(use-package! aider
-  :commands (aider-transient-menu)
-  :init
-  (map! :desc "Aider menu" "C-c a" #'aider-transient-menu))
-
-;; aidermacs
-(use-package! aidermacs
-  :commands aidermacs-transient-menu
-  :init
-  (map! :desc "Aider menu" "C-c a" #'aidermacs-transient-menu)
-  :config
-  (setq! aidermacs-use-architect-mode t
-         aidermacs-default-model "sonnet"
-         aidermacs-auto-commits nil
-         ;; aidermacs-config-file "~/.aider.conf.yml"
-         ))
-
 ;; codeium
 ;; (use-package! codeium
 ;;   :init
