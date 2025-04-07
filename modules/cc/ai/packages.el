@@ -1,15 +1,9 @@
 ;; -*- no-byte-compile: t; -*-
 ;;; cc/ai/packages.el
 
-;; (package! aider
-;;   :recipe (:host github
-;;            :repo "tninja/aider.el"
-;;            :files ("*.el")))
+;; (package! aider)
 
-(package! aidermacs
-  :recipe (:host github
-           :repo "MatthewZMD/aidermacs"
-           :files ("*.el")))
+(package! aidermacs)
 
 (package! gptel :recipe (:nonrecursive t))
 

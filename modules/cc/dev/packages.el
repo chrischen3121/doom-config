@@ -6,17 +6,13 @@
 
 (package! rainbow-mode)
 
-(package! copilot
-  :recipe (:host github
-           :repo "copilot-emacs/copilot.el"
-           :files ("*.el")))
+(package! copilot)
 
-(package! copilot-chat
-  :recipe (:host github
-           :repo "chep/copilot-chat.el"
-           :files ("*.el")))
+(package! copilot-chat)
 
 ;; (package! codeium
 ;;   :recipe (:host github
 ;;            :repo "Exafunction/codeium.el"
 ;;            :files ("*.el")))
+
+;; (package! minuet)
