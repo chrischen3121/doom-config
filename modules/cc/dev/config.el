@@ -1,6 +1,9 @@
 ;;; -*- no-byte-compile: t; lexical-binding: t; -*-
 ;;; cc/dev/config.el
 
+(defvar cc/copilot-chat-model "claude-3.7-sonnet"
+  "Default model for Copilot Chat.")
+
 ;; :tools
 ;; ein (jupyter notebook)
 (when (modulep! :tools ein)
@@ -36,10 +39,22 @@
         :map copilot-completion-map
         "<backtab>" #'copilot-accept-completion
         "M-<return>" #'copilot-accept-completion
+        "C-<return>" #'copilot-accept-completion
         "M-w" #'copilot-accept-completion-by-word
         "M-l" #'copilot-accept-completion-by-line
         "M-n" #'copilot-next-completion
         "M-p" #'copilot-previous-completion))
+
+;; Github Copilot Chat
+(use-package! copilot-chat
+  :commands copilot-chat-transient
+  :init
+  (map! :desc "Copilot chat menu" "C-c c p" #'copilot-chat-transient)
+  :config
+  (add-hook! 'git-commit-setup-hook #'copilot-chat-insert-commit-message)
+  (setq! copilot-chat-backend 'curl
+         copilot-chat-frontend 'org
+         copilot-chat-default-model cc/copilot-chat-model))
 
 ;; aider
 (use-package! aider
