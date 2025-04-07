@@ -1,10 +1,11 @@
 * TODOs
 - [X] make temp buffer like *info* to be not temp -> +popup/raise
 - [ ] try :os tty with corfu-terminal
+- [ ] copilot chat side window to the right
 
 * TODO python-mode
-- [ ] basedpyright doesn't support ~+format/buffer~
-- [ ] poetry-tracking-mode or manually ~poetry-virtualenv-toggle~
+- [X] basedpyright doesn't support ~+format/buffer~
+- [X] poetry-tracking-mode or manually ~poetry-virtualenv-toggle~
 - [ ] checking with ~ein:run~
 - [ ] ~run-python~
   - use ~ipython~ interpreter with popup
