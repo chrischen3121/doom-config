@@ -4,7 +4,7 @@
 ;; cc-ui
 (setq! cc/mono-font "Hack"
        cc/font-size 24
-       ;; recommended: doom-acario-light, doom-one-light, doom-nord,  doom-oksolar-light
+       ;; recommended: doom-one-light, doom-acario-light(cold), doom-oksolar-light(warm)
        cc/light-theme 'doom-one-light
        ;; recommended: doom-one, doom-peacock, doom-tomorrow-night, doom-opera
        cc/dark-theme 'doom-tomorrow-night)
