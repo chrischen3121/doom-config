@@ -2,9 +2,11 @@
 ;;; config.d/checkers.el
 
 (when (modulep! :checkers spell)
-  (setq! spell-fu-idle-delay 0.5)
-  ;; exclude what faces to preform spellchecking on
+  (setq! spell-fu-idle-delay 0.5
+         spell-fu-word-delimit-camel-case t
+         ispell-dictionary "en_US")
 
+  ;; exclude what faces to preform spellchecking on
   (setf
    (alist-get 'prog-mode +spell-excluded-faces-alist)
    '(font-lock-constant-face
@@ -13,8 +15,9 @@
   (custom-set-faces!
     `(spell-fu-incorrect-face :underline (:style wave :color ,(doom-color 'blue))))
 
+
   (add-hook! 'spell-fu-mode-hook
-    (defun add-personal-dictionary ()
+    (defun add-personal-dictionaries ()
       (spell-fu-dictionary-add
        (spell-fu-get-personal-dictionary "en" cc/personal-aspell-en-dict))))
   )
