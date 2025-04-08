@@ -15,4 +15,4 @@
 ;;            :repo "Exafunction/codeium.el"
 ;;            :files ("*.el")))
 
-;; (package! minuet)
+(package! minuet)

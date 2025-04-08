@@ -50,10 +50,10 @@
   (map! :map python-mode-map
         :desc "poetry" "C-c l p" #'poetry))
 
-(when (modulep! :lang python +pyright)
+(when (modulep! :lang python +lsp)
   (map! :map lsp-mode-map
-        :desc "LSP Organize imports" "C-c c o"
-        #'lsp-pyright-organize-imports))
+        :desc "Organize imports" "C-c c o"
+        #'lsp-organize-imports))
 
 (when (modulep! :tools debugger)
   (add-hook! 'dap-stopped-hook

@@ -73,6 +73,9 @@
        ("g" . "<global>")
        (:when (modulep! :ui popup)
          :desc "Close all popups" "c" #'+popup/close-all)
+       (:when (modulep! :completion vertico)
+         :desc "Embark act" "a" #'embark-act
+         :desc "Embark dwim" "e" #'embark-dwim)
        )
 
       ;; C-c w --- workspace
@@ -160,9 +163,6 @@
       ;; which related to current major mode
       (:prefix-map
        ("l" . "<local>")
-       (:when (modulep! :completion vertico)
-         :desc "Embark act" "a" #'embark-act
-         :desc "Embark dwim" "e" #'embark-dwim)
        )
 
       ;; C-c o -- open
@@ -253,7 +253,6 @@
        ("c" . "<code>")
        :desc "Compile" "c" #'+default/compile
        :desc "Format buffer/region" "f" #'+format/region-or-buffer
-       :desc "Embark act" "a" #'embark-act
        (:when (and (modulep! :tools lsp)
                    (not (modulep! :tools lsp +eglot)))
          :map lsp-mode-map

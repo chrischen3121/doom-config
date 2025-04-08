@@ -58,7 +58,6 @@
           "Keep the subject line of a Git commit message to 50 characters or less.\n"))
   )
 
-
 ;; minuet configuration
 ;; (use-package! minuet
 ;;   :init
@@ -80,6 +79,7 @@
 ;;   (plist-put minuet-openai-fim-compatible-options :name "Ollama")
 ;;   (plist-put minuet-openai-fim-compatible-options :api-key "TERM")
 ;;   (plist-put minuet-openai-fim-compatible-options :model "qwen2.5-coder")
+
 ;;   (minuet-set-optional-options minuet-openai-fim-compatible-options :max_tokens 56)
 ;;   )
 
