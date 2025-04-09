@@ -7,6 +7,13 @@
   :type 'string
   :group 'cc-ui)
 
+(defcustom cc/unicode-font
+  (string-trim-right
+   (font-get-system-normal-font) " [0-9]+$")
+  "The default unicode font for the system."
+  :type 'string
+  :group 'cc-ui)
+
 (defcustom cc/font-size 16
   "The default monospace font size."
   :type 'integer
