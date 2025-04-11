@@ -23,4 +23,5 @@
         "C-M-e" #'corfu-popupinfo-end)
 
   (after! cape
-    (map! "M-/" #'cape-dabbrev)))
+    (map! :mode (text-mode yaml-mode)
+          "M-/" #'cape-dabbrev)))

@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: fora
+# uuid: fora
+# key: fora
+# --
+for (auto &${1:item} : ${2:collection}) {
+    `%`$0
+}

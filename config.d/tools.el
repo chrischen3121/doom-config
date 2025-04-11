@@ -11,11 +11,22 @@
              ;; (defun cc/lsp-ensure-copilot-server ()
              ;;   (lsp-ensure-server 'copilot-ls))
              )
+  (when (modulep! :editor snippets)
+    (add-hook! 'lsp-mode-hook #'yas-minor-mode-on
+      ;; TODO: may combine lsp capf with yasnippet
+      ;; (defun +cc/custom-lsp-completion ()
+      ;;   (remove-hook! 'completion-at-point-functions #'lsp-completion-at-point t)
+      ;;   (add-hook! 'completion-at-point-functions
+      ;;     (cape-capf-super
+      ;;      #'lsp-completion-at-point
+      ;;      #'yasnippet-capf) t))
+      ))
 
   (setq! lsp-idle-delay 0.8
          lsp-copilot-enabled nil
          lsp-headerline-breadcrumb-enable t
          lsp-signature-render-documentation nil
+         lsp-enable-snippet nil
 
          lsp-ui-sideline-show-diagnostics t
          lsp-ui-sideline-show-code-actions t

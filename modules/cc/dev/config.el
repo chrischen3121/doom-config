@@ -87,6 +87,7 @@
 ;; codeium
 ;; (use-package! codeium
 ;;   :init
+;;   TODO: (cape-capf-super #'lsp-completion-at-point #'codeium-completion-at-point)
 ;;   (add-to-list 'completion-at-point-functions #'codeium-completion-at-point)
 ;;   :config
 ;;   (setq use-dialog-box nil))

@@ -20,9 +20,18 @@
         "<return>" nil))
 
 (when (modulep! :editor snippets)
+  (remove-hook! 'yas-minor-mode-hook #'+corfu-add-yasnippet-capf-h)
+  ;; (when (modulep! :tools lsp)
+  ;;   (after! lsp-mode
+  ;;     (remove-hook! 'completion-at-point-functions #'lsp-completion-at-point)
+  ;;     (add-hook! 'completion-at-point-functions (cape-capf-super
+  ;;                                                #'lsp-completion-at-point
+  ;;                                                #'yasnippet-capf)))
+  ;;   )
   (map! :map yas-minor-mode-map
         "C-c &" nil
-        "C-M-/" #'yasnippet-capf
+        "M-/" #'yasnippet-capf
+        "C-M-/" #'yas-expand
         :desc "Reload snippets" "C-c y r" #'yas-reload-all
         :desc "Insert snippet" "C-c y i" #'yas-insert-snippet))
 
