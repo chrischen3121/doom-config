@@ -28,6 +28,13 @@
     (shell-command (format "./%s" file))))
 
 ;;;###autoload
+(defun cc/cpp-quick-debug ()
+  "Run compiled c++ executable with gdb"
+  (interactive)
+  (let ((file (file-name-sans-extension (file-name-nondirectory buffer-file-name))))
+    (gdb (format "gdb -i mi %s" file))))
+
+;;;###autoload
 (defun cc/focus-on-cmake-help ()
   "Focus on cmake-help buffer"
   (let ((help-buffer (get-buffer "*CMake Help*")))
