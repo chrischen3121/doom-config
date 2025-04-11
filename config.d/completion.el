@@ -24,4 +24,7 @@
 
   (after! cape
     (map! :mode (text-mode yaml-mode)
-          "M-/" #'cape-dabbrev)))
+          "M-/" #'cape-dabbrev))
+  (custom-set-faces!
+    '(corfu-current :background "moccasin"))
+  )

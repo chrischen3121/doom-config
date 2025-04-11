@@ -8,7 +8,10 @@
 
 (when (modulep! :lang cc)
   (add-to-list 'auto-mode-alist '("conanfile\\.txt\\'" . conf-unix-mode))
-  (setq-hook! 'c++-mode-hook tab-width 2)
+  (setq-hook! 'c++-mode-hook
+    standard-indent cc/cc-default-tab-width
+    c-basic-offset cc/cc-default-tab-width
+    tab-width cc/cc-default-tab-width)
   (add-hook! 'compilation-finish-functions #'cc/close-compilation-buffer-if-successful)
   (map! :after cc-mode
         (:map c++-mode-map

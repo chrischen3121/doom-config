@@ -12,15 +12,14 @@
              ;;   (lsp-ensure-server 'copilot-ls))
              )
   (when (modulep! :editor snippets)
-    (add-hook! 'lsp-mode-hook #'yas-minor-mode-on
-      ;; TODO: may combine lsp capf with yasnippet
-      ;; (defun +cc/custom-lsp-completion ()
-      ;;   (remove-hook! 'completion-at-point-functions #'lsp-completion-at-point t)
-      ;;   (add-hook! 'completion-at-point-functions
-      ;;     (cape-capf-super
-      ;;      #'lsp-completion-at-point
-      ;;      #'yasnippet-capf) t))
-      ))
+    (add-hook! 'lsp-mode-hook #'yas-minor-mode-on)
+    (add-hook! 'lsp-completion-mode-hook
+      (defun +cc/custom-lsp-completion ()
+        (remove-hook 'completion-at-point-functions #'lsp-completion-at-point t)
+        (add-hook 'completion-at-point-functions
+                  (cape-capf-super #'lsp-completion-at-point #'yasnippet-capf) t)
+        )))
+
 
   (setq! lsp-idle-delay 0.8
          lsp-copilot-enabled nil
@@ -33,6 +32,7 @@
          lsp-ui-sideline-show-symbol nil
          lsp-ui-sideline-delay 1
 
+         lsp-inline-completion-enable nil
          lsp-inline-completion-idle-delay 0.5
 
          lsp-ui-imenu-buffer-position 'left
