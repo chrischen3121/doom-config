@@ -17,7 +17,8 @@
 ;;;###autoload
 (defun cc/close-compilation-buffer-if-successful (buffer string)
   "Close the *compilation* BUFFER if it succeeded without errors."
-  (when (string-match "finished" string)
+  (when (and (string-prefix-p "*compilation*" (buffer-name buffer))
+             (string-prefix-p "finished" string))
     (kill-buffer buffer)))
 
 ;;;###autoload

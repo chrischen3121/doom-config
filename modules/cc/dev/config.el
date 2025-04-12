@@ -8,7 +8,6 @@
     ;; for jupyter-lab, otherwise use "notebook"
     (setq! ein:jupyter-server-use-subcommand "server")))
 
-
 ;; [Packages]
 ;; Rainbow mode: highlight color string
 (use-package! rainbow-mode
@@ -31,7 +30,7 @@
   ;; Cursor Jump to End of Line When Typing
   ;; If you are using whitespace-mode, make sure to remove newline-mark from whitespace-style.
   ;; TODO may not be needed anymore
-  ;; (setq! whitespace-style (delq 'newline-mark whitespace-style))
+  (setq! whitespace-style (delq 'newline-mark whitespace-style))
   (map! :desc "Copilot mode" "C-c t a" #'copilot-mode
         :map copilot-completion-map
         "<backtab>" #'copilot-accept-completion
