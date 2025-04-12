@@ -54,7 +54,7 @@
          copilot-chat-default-model cc/copilot-chat-model
          copilot-chat-commit-prompt
          (concat
-          "Important: The commit summary(includeing commit type), should be <= 50 characters.\n"
+          "Important: The commit type plus summary should be <= 50 characters.\n"
           copilot-chat-commit-prompt))
   )
 
