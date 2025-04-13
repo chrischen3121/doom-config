@@ -12,6 +12,7 @@
     standard-indent cc/cc-default-tab-width
     c-basic-offset cc/cc-default-tab-width
     tab-width cc/cc-default-tab-width)
+  (add-hook! 'c++-mode-hook (c-set-style "gnu"))
   (add-hook! 'compilation-finish-functions #'cc/close-compilation-buffer-if-successful)
   (map! :after cc-mode
         (:map c++-mode-map

@@ -58,8 +58,12 @@
           copilot-chat-commit-prompt
           "The commit message \"<type>[optional scope]: <description>\" should be <= 50 characters.\n"))
 
-  ;; Add to advice persp-kill-emacs-h
-  (advice-add #'save-buffers-kill-emacs :before #'cc/close-copilot-chat-buffers)
+  ;; close all copilot chat buffers when quitting emacs
+  (advice-add #'save-buffers-kill-emacs
+              :before (lambda (&rest _)
+                        (dolist (buf (buffer-list))
+                          (when (string-prefix-p "*Copilot Chat" (buffer-name buf))
+                            (kill-buffer buf)))))
   )
 
 ;; minuet configuration

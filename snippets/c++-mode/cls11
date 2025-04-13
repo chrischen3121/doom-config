@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: cls11
+# uuid: d7c41f87-9b8a-479d-bb12-89f4cbdd46a7
+# key: cls11
+# --
+class ${1:Name} {
+  public:
+    ${1:$(doom-snippets-c++-class-name yas-text)}()${2:;$(doom-snippets-c++-class-method-decl-choice)}
+    ${1:$(doom-snippets-c++-class-name yas-text)}(const ${1:$(doom-snippets-c++-class-name yas-text)} &other)${3:;$(doom-snippets-c++-class-method-decl-choice)}
+    ${1:$(doom-snippets-c++-class-name yas-text)}(${1:$(doom-snippets-c++-class-name yas-text)} &&other)${4: noexcept}${5:;$(doom-snippets-c++-class-method-decl-choice)}
+    ${6:virtual }~${1:$(doom-snippets-c++-class-name yas-text)}()${15: noexcept}${7:;$(doom-snippets-c++-class-method-decl-choice)}
+    ${1:$(doom-snippets-c++-class-name yas-text)}& operator=(const ${1:$(doom-snippets-c++-class-name yas-text)} &other)${8:;$(doom-snippets-c++-class-method-decl-choice)}
+    ${1:$(doom-snippets-c++-class-name yas-text)}& operator=(${1:$(doom-snippets-c++-class-name yas-text)} &&other)${9: noexcept}${10:;$(doom-snippets-c++-class-method-decl-choice)}
+$0
+
+  protected:
+  private:
+};
