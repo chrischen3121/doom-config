@@ -49,16 +49,17 @@
   (add-hook! 'git-commit-setup-hook #'copilot-chat-insert-commit-message)
   :config
 
+
   (setq! copilot-chat-backend 'curl
          copilot-chat-frontend 'org
          copilot-chat-default-model cc/copilot-chat-model
          copilot-chat-commit-prompt
          (concat
-          "Important: The commit type plus summary should be <= 50 characters.\n"
-          copilot-chat-commit-prompt))
+          copilot-chat-commit-prompt
+          "The commit message \"<type>[optional scope]: <description>\" should be <= 50 characters.\n"))
 
   ;; Add to advice persp-kill-emacs-h
-  (advice-add #'save-buffers-kill-terminal :before #'cc/close-copilot-chat-buffers)
+  (advice-add #'save-buffers-kill-emacs :before #'cc/close-copilot-chat-buffers)
   )
 
 ;; minuet configuration
