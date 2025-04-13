@@ -58,7 +58,7 @@
           copilot-chat-commit-prompt))
 
   ;; Add to advice persp-kill-emacs-h
-  (advice-add #'persp-kill-emacs-h :before #'close-copilot-chat-buffers)
+  (advice-add #'persp-kill-emacs-h :before #'cc/close-copilot-chat-buffers)
   )
 
 ;; minuet configuration
