@@ -13,6 +13,7 @@
 
 ;; load config files
 (load! "config.d/defaults.el")
+(load! "config.d/org.el")
 (load! "config.d/completion.el")
 (load! "config.d/ui.el")
 (load! "config.d/editor.el")
@@ -20,7 +21,6 @@
 (load! "config.d/checkers.el")
 (load! "config.d/tools.el")
 (load! "config.d/langs.el")
-(load! "config.d/org.el")
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.

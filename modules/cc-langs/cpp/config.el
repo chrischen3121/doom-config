@@ -13,6 +13,7 @@
     c-basic-offset cc/cc-default-tab-width
     tab-width cc/cc-default-tab-width)
   (add-hook! 'c++-mode-hook (c-set-style "gnu"))
+  (add-hook! 'lsp-completion-mode-hook #'cc/cpp-set-lsp-capf)
   (add-hook! 'compilation-finish-functions #'cc/close-compilation-buffer-if-successful)
   (map! :after cc-mode
         (:map c++-mode-map

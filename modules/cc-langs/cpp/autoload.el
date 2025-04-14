@@ -4,6 +4,14 @@
   "The command to compile c++ file")
 
 ;;;###autoload
+(defun cc/cpp-set-lsp-capf ()
+  (when (derived-mode-p 'c++-mode)
+    (setq-local completion-at-point-functions
+                `(,(cape-capf-super #'lsp-completion-at-point #'yasnippet-capf)
+                  cape-file
+                  t))))
+
+;;;###autoload
 (defun cc/cpp-quick-compile ()
   "compile c++ file and focus on compilation window"
   (interactive)

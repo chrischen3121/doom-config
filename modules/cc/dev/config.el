@@ -48,8 +48,6 @@
   (map! :desc "Copilot chat menu" "C-c c p" #'copilot-chat-transient)
   (add-hook! 'git-commit-setup-hook #'copilot-chat-insert-commit-message)
   :config
-
-
   (setq! copilot-chat-backend 'curl
          copilot-chat-frontend 'org
          copilot-chat-default-model cc/copilot-chat-model
@@ -60,11 +58,7 @@
 
   ;; close all copilot chat buffers when quitting emacs
   (advice-add #'save-buffers-kill-emacs
-              :before (lambda (&rest _)
-                        (dolist (buf (buffer-list))
-                          (when (string-prefix-p "*Copilot Chat" (buffer-name buf))
-                            (kill-buffer buf)))))
-  )
+              :before #'cc/close-all-copilot-chat-buffers))
 
 ;; minuet configuration
 ;; (use-package! minuet
