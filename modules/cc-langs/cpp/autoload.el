@@ -4,7 +4,23 @@
   "The command to compile c++ file")
 
 ;;;###autoload
+(defun cc/cpp-set-default-sytle (&optional style)
+  "Set the default style for C/C++ mode."
+  (if style
+      (c-set-style style)
+    (c-set-style "gnu")))
+
+;;;###autoload
+(defun cc/cpp-set-default-capf ()
+  "Set the completion-at-point-functions for C++ mode src blocks."
+  (setq-local completion-at-point-functions
+              '(yasnippet-capf
+                cape-file
+                t)))
+
+;;;###autoload
 (defun cc/cpp-set-lsp-capf ()
+  "Set the completion-at-point-functions for C++ mode(with lsp-mode)."
   (when (derived-mode-p 'c++-mode)
     (setq-local completion-at-point-functions
                 `(,(cape-capf-super #'lsp-completion-at-point #'yasnippet-capf)
