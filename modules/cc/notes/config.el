@@ -62,6 +62,7 @@
   (setq! org-startup-indented nil
          ;; TODO org-id-locations cc/org-id-locations
          org-ellipsis " ▼"
+         org-appear-autoemphasis nil
          ;; pretty latex preview
          org-pretty-entities t
          org-pretty-entities-include-sub-superscripts nil

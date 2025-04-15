@@ -5,9 +5,17 @@
   (advice-add 'org-roam-node-find :before #'cc/org-roam-choose-dir-if-not-set)
   (advice-add 'org-roam-capture :before #'cc/org-roam-choose-dir-if-not-set)
   (advice-add 'org-roam-node-insert :before #'cc/org-roam-choose-dir-if-not-set)
+  (setq org-roam-completion-functions nil)
 
   (after! org-roam
+    (setq-hook! 'org-mode-hook
+      completion-at-point-functions
+      `(cape-file
+        ,(cape-capf-super #'pcomplete-completions-at-point #'yasnippet-capf)
+        cape-dabbrev
+        t))
     (setq! org-roam-db-gc-threshold most-positive-fixnum
+           org-roam-completion-everywhere nil
            org-roam-dailies-directory cc/roam-journals-dir
            org-roam-capture-templates
            '(("d" "default" plain "%?"
