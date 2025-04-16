@@ -3,7 +3,7 @@
 # uuid: plantuml
 # key: plantuml
 # --
-#+begin_src plantuml :file images/puml/${2:filename}.png
+#+begin_src plantuml :file images/puml/${1:filename}.png
 @startuml
 $0
 @enduml

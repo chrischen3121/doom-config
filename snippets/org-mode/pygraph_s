@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: pygraph session
+# uuid: pygraphs
+# key: pygraph_s
+# --
+#+begin_src python :results graphics file output :file images/pyout/${1:filename}.png :session ${2:name}
+$0
+#+end_src

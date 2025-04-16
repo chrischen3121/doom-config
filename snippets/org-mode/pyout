@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: pyout
+# uuid: pyout
+# key: pyout
+# --
+#+begin_src python :results output
+$0
+#+end_src

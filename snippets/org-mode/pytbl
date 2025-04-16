@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: pytbl
+# uuid: pytbl
+# key: pytbl
+# --
+#+begin_src python :results value table
+$0
+#+end_src

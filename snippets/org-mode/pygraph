@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: pygraph
+# uuid: pygraph
+# key: pygraph
+# --
+#+begin_src python :results graphics file output :file images/pyout/${1:filename}.png
+$0
+#+end_src

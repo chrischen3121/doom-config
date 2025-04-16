@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: pyout session
+# uuid: pyouts
+# key: pyout_s
+# --
+#+begin_src python :results output :session ${1:name}
+$0
+#+end_src
