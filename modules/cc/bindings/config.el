@@ -72,11 +72,7 @@
       (:prefix-map
        ("g" . "<global>")
        (:when (modulep! :ui popup)
-         :desc "Close all popups" "c" #'+popup/close-all)
-       (:when (modulep! :completion vertico)
-         :desc "Embark act" "a" #'embark-act
-         :desc "Embark dwim" "e" #'embark-dwim)
-       )
+         :desc "Close all popups" "c" #'+popup/close-all))
 
       ;; C-c w --- workspace
       (:prefix-map
@@ -253,6 +249,9 @@
        ("c" . "<code>")
        :desc "Compile" "c" #'+default/compile
        :desc "Format buffer/region" "f" #'+format/region-or-buffer
+       (:when (modulep! :completion vertico)
+         :desc "Embark act" "a" #'embark-act
+         :desc "Embark dwim" "d" #'embark-dwim)
        (:when (and (modulep! :tools lsp)
                    (not (modulep! :tools lsp +eglot)))
          :map lsp-mode-map
