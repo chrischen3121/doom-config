@@ -50,6 +50,10 @@
     "C-c p c x" "execute"
     "C-c p c s" "search"))
 
+;; C-h keybindings
+(map! :prefix "C-h"
+      :desc "Woman" "w" #'woman)
+
 ;; C-x keybindings
 (map! :prefix "C-x"
       :desc "ibuffer" "C-b" #'ibuffer

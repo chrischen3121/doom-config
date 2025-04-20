@@ -26,7 +26,6 @@
            (not (modulep! :checkers syntax +flymake)))
   (map! :map flycheck-mode-map
         "C-c !" nil
-        "C-h c" #'flycheck-describe-checker
         :prefix "C-c"
         "C-p" #'flycheck-previous-error
         "C-n" #'flycheck-next-error
@@ -36,6 +35,7 @@
          :desc "Next error" "n" #'flycheck-next-error
          :desc "Previous error" "p" #'flycheck-previous-error
          :desc "Copy errors" "w" #'flycheck-copy-errors-as-kill
+         :desc "Describe checker" "d" #'flycheck-describe-checker
          :desc "List errors" "l" #'flycheck-list-errors
          :desc "Setup checkers" "s" #'flycheck-verify-setup
          )))
