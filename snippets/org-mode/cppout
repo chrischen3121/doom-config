@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: cppout
+# uuid: cppout
+# key: cppout
+# --
+#+begin_src cpp :results output
+$0
+#+end_src
