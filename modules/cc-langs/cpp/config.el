@@ -21,10 +21,10 @@
         (:map c++-mode-map
               (:prefix "C-c r"
                :desc "C++ Quick run" "q" #'cc/cpp-quick-run
-               :desc "C++ Quick debug" "d" #'cc/cpp-quick-debug
-               )
+               :desc "C++ Quick debug" "d" #'cc/cpp-quick-debug)
               (:prefix "C-c c"
                :desc "Quick compile" "c" #'cc/cpp-quick-compile
+               :desc "C++ Insights" "i" #'cppinsights-run
                :desc "Disassemble" "d" #'disaster
                (:prefix
                 ("b" . "<build>")
