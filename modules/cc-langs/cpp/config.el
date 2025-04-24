@@ -5,9 +5,21 @@
 ;; https://github.com/doomemacs/doomemacs/tree/master/modules/lang/cc
 ;; https://emacs-lsp.github.io/lsp-mode/tutorials/CPP-guide/
 
+(defun cc/configure--disaster ()
+  ;; add to display-buffer-alist for disaster-buffer-assembly
+  (add-to-list 'display-buffer-alist
+               `(,disaster-buffer-assembly
+                 (display-buffer-reuse-window display-buffer-in-side-window)
+                 (side . right)
+                 (window-width . 0.4)
+                 (reusable-frames . visible)))
+  (advice-add #'disaster :after #'cc/focus-on-disaster-buffer)
+  (map! :map asm-mode-map "q" #'kill-buffer-and-window)
+  (add-hook! 'asm-mode-hook (display-line-numbers-mode -1)))
 
 (when (modulep! :lang cc)
   (add-to-list 'auto-mode-alist '("conanfile\\.txt\\'" . conf-unix-mode))
+  (after! disaster (cc/configure--disaster))
   (setq-hook! 'c++-mode-hook
     standard-indent cc/cc-default-tab-width
     c-basic-offset cc/cc-default-tab-width

@@ -116,3 +116,10 @@
     (shell-command (format "ctest --test-dir %s" build-dir))
     (with-current-buffer "*Shell Command Output*"
       (view-mode t))))
+
+;;;###autoload
+(defun cc/focus-on-disaster-buffer ()
+  "Focus on the *disaster assembly* buffer."
+  (let ((disaster-buffer (get-buffer disaster-buffer-assembly)))
+    (when disaster-buffer
+      (select-window (get-buffer-window disaster-buffer)))))
