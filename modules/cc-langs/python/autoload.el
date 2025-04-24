@@ -25,6 +25,6 @@
                             (interactive)
                             (quit-window t)))
               (use-local-map map)))
-          (switch-to-buffer-other-window buffer))
+          (+popup-buffer buffer))
       (when (file-exists-p temp-file)
         (delete-file temp-file)))))
