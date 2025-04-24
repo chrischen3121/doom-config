@@ -15,3 +15,6 @@
 (when (modulep! :emacs ibuffer)
   (map! :map ibuffer-mode-map
         "K" #'doom/kill-all-buffers))
+
+(when (modulep! :emacs undo)
+  (map! "C-z" #'undo-fu-only-undo))
