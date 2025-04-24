@@ -1,6 +1,27 @@
 ;;; -*- lexical-binding: t; no-byte-compile: t; -*-
 ;;; cc-langs/python/config.el
 (when (modulep! :lang python)
+  (defun cc/python-dis-region-or-buffer ()
+    "Disassemble the Python code in the current region or buffer and show it in a temp buffer."
+    (interactive)
+    (let* ((start (if (region-active-p) (region-beginning) (point-min)))
+           (end (if (region-active-p) (region-end) (point-max)))
+           (code (buffer-substring-no-properties start end))
+           (temp-file (make-temp-file "python-dis-" nil ".py"))
+           (buffer (get-buffer-create "*Python Disassembly*")))
+      (unwind-protect
+          (progn
+            (with-temp-file temp-file
+              (insert code))
+            (with-current-buffer buffer
+              (erase-buffer)
+              (call-process "python3" nil buffer nil "-m" "dis" temp-file)
+              (goto-char (point-min))
+              (read-only-mode 1))
+            (switch-to-buffer-other-window buffer))
+        (when (file-exists-p temp-file)
+          (delete-file temp-file)))))
+
   (defvar cc/python-indent-offset 4
     "The number of spaces to indent inside python blocks.")
 
@@ -32,7 +53,8 @@
         "C-c <TAB> a" nil ; python-add-import
         "C-c <TAB> s" nil
         "C-c <TAB> f" nil
-        "C-c <TAB> r" nil)
+        "C-c <TAB> r" nil
+        :desc "Disassemble region/buffer" "C-c c d" #'cc/python-dis-region-or-buffer)
 
   (when (modulep! :lang rst)
     (use-package! sphinx-doc
