@@ -97,7 +97,7 @@
        (latex +cdlatex)      ; NOTE may try +lsp
        ;;lua               ; one-based indices? one-based indices
        markdown            ; writing docs for people to ignore
-       (org +roam2 +pretty +present) ; TODO +noter
+       (org +roam2 +present) ; TODO +noter
        plantuml            ; diagrams for confusing people more
        (python +lsp +tree-sitter +pyright) ; ruff lsp server with uv
        ;; (python +lsp +pyenv +poetry +pyright +tree-sitter) ; basedpyright lsp server with poetry, pyenv
