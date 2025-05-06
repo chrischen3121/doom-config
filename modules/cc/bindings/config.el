@@ -21,8 +21,10 @@
        doom-leader-alt-key "C-c M-;"
        doom-localleader-alt-key "C-c M-l")
 
-(setq! which-pkey-sort-order 'which-key-description-order
-       which-key-use-C-h-commands t)
+(after! which-key
+  (setq! which-key-sort-order 'which-key-description-order
+         which-key-use-C-h-commands t))
+
 ;; Adding which-key descriptions
 (which-key-add-key-based-replacements
   "C-c 1" "<checker>"
