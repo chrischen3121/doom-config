@@ -79,5 +79,4 @@
     (after! gptel
       (cc/gptel-mcp-register-tools))
     (add-hook 'after-init-hook #'mcp-hub-start-all-server)
-    (add-hook 'gptel-mode-hook #'cc/gptel-enable-all-mcp-tools))
-  )
+    (add-hook 'gptel-mode-hook #'cc/gptel-enable-all-mcp-tools)))

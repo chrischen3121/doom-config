@@ -70,19 +70,15 @@
 ;;         "M-n" #'minuet-next-suggestion
 ;;         "<backtab>" #'minuet-accept-suggestion
 ;;         "M-<return>" #'minuet-accept-suggestion
+;;         "C-<return>" #'minuet-accept-suggestion
 ;;         "M-l" #'minuet-accept-suggestion-line
-;;         "M-e" #'minuet-dismiss-suggestion)
-;;   ;; You can use M-x minuet-configure-provider to interactively configure provider and model
-;;   (setq! minuet-provider 'openai-fim-compatible
-;;          minuet-n-completions 2
-;;          minuet-context-window 512
-;;          minuet-auto-suggestion-debounce-delay 0.8)
-;;   (plist-put minuet-openai-fim-compatible-options :end-point "http://localhost:11434/v1/completions")
-;;   (plist-put minuet-openai-fim-compatible-options :name "Ollama")
-;;   (plist-put minuet-openai-fim-compatible-options :api-key "TERM")
-;;   (plist-put minuet-openai-fim-compatible-options :model "qwen2.5-coder")
-
-;;   (minuet-set-optional-options minuet-openai-fim-compatible-options :max_tokens 56)
+;;         "C-g" #'minuet-dismiss-suggestion)
+;;   (setq! minuet-n-completions 2
+;;          minuet-context-window 768
+;;          minuet-auto-suggestion-debounce-delay 0.8
+;;          minuet-request-timeout 10)
+;;   (cc/minuet--use-claude)
+;;   ;; (cc/minuet--use-ollama)
 ;;   )
 
 ;; codeium

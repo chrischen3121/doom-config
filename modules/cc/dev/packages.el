@@ -15,4 +15,7 @@
 ;;            :repo "Exafunction/codeium.el"
 ;;            :files ("*.el")))
 
-(package! minuet)
+(package! minuet
+  :recipe (:host github
+           :repo "milanglacier/minuet-ai.el"
+           :files ("minuet.el")))
