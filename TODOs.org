@@ -1,10 +1,12 @@
 * TODOs
+- [ ] try ediff
+- [ ] try :os tty with corfu-terminal
 - [X] make temp buffer like *info* to be not temp -> +popup/raise
 - [X] try milanglacier/minuet-ai.el for auto-completion with qwen2.5-coder
-- [ ] try :os tty with corfu-terminal
-- [ ] copilot chat side window to the right on laptop
-- [ ] copilot completion may double insert the last paren/character
-- [ ] Can't close emacs when there is a copilot chat buffer (check persp-mode)
+
+- [X] copilot chat side window to the right on laptop
+- [X] copilot completion may double insert the last paren/character
+- [X] Can't close emacs when there is a copilot chat buffer (check persp-mode)
 
 * TODO python-mode
 - [X] basedpyright doesn't support ~+format/buffer~

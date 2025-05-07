@@ -11,7 +11,7 @@
 (use-package! aidermacs
   :commands aidermacs-transient-menu
   :init
-  (map! :desc "Aider menu" "C-c a" #'aidermacs-transient-menu)
+  (map! :desc "Aider" "C-c a a" #'aidermacs-transient-menu)
   :config
   (setenv "ANTHROPIC_API_KEY" cc/anthropic-key)
   (setenv "OPENAI_API_KEY" cc/openai-key)
@@ -36,11 +36,11 @@
              gptel-add-file
              gptel-rewrite)
   :init
-  (map! :prefix ("C-c x" . "gptel")
+  (map! :prefix ("C-c a" . "AI-tools")
         :desc "gptel menu" "x" #'gptel-menu
         :desc "Open chat" "c" #'gptel
-        :desc "Add region/buffer" "a" #'gptel-add
-        :desc "Add file" "f" #'gptel-add-file
+        :desc "Send region/buffer" "s" #'gptel-add
+        :desc "Send file" "f" #'gptel-add-file
         :desc "Rewrite region" "r" #'gptel-rewrite
         :desc "Tools enable" "t" #'cc/gptel-enable-all-mcp-tools
         :desc "Tools disable" "T" #'cc/gptel-disable-all-mcp-tools)
@@ -51,7 +51,7 @@
          gptel-log-level 'info
          gptel-use-tools t
          gptel-include-reasoning t
-         gptel-rewrite-default-action 'diff)
+         gptel-rewrite-default-action 'ediff)
   (setq! gptel-api-key cc/openai-key)
   (gptel-make-anthropic "Claude" :stream t :key cc/anthropic-key)
   (gptel-make-gemini "Gemini" :stream t :key cc/gemini-key)
@@ -74,7 +74,7 @@
         `(("filesystem" .
            (:command "npx" :args ("-y" "@modelcontextprotocol/server-filesystem" ,cc/mcp-fs-directory)))
           ("fetch" . (:command "uvx" :args ("mcp-server-fetch")))))
-  (map! :desc "mcp hub" "C-c x m" #'mcp-hub)
+  (map! :desc "mcp hub" "C-c a m" #'mcp-hub)
   (when cc/use-mcp-p
     (after! gptel
       (cc/gptel-mcp-register-tools))
