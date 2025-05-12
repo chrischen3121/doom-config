@@ -61,25 +61,25 @@
               :before #'cc/close-all-copilot-chat-buffers))
 
 ;; minuet configuration
-;; (use-package! minuet
-;;   :init
-;;   (add-hook! (prog-mode yaml-mode conf-mode) #'minuet-auto-suggestion-mode)
-;;   :config
-;;   (map! :map minuet-active-mode-map
-;;         "M-p" #'minuet-previous-suggestion
-;;         "M-n" #'minuet-next-suggestion
-;;         "<backtab>" #'minuet-accept-suggestion
-;;         "M-<return>" #'minuet-accept-suggestion
-;;         "C-<return>" #'minuet-accept-suggestion
-;;         "M-l" #'minuet-accept-suggestion-line
-;;         "C-g" #'minuet-dismiss-suggestion)
-;;   (setq! minuet-n-completions 2
-;;          minuet-context-window 768
-;;          minuet-auto-suggestion-debounce-delay 0.8
-;;          minuet-request-timeout 10)
-;;   (cc/minuet--use-claude)
-;;   ;; (cc/minuet--use-ollama)
-;;   )
+(use-package! minuet
+  :init
+  (add-hook! (prog-mode yaml-mode conf-mode) #'minuet-auto-suggestion-mode)
+  :config
+  (map! :map minuet-active-mode-map
+        "M-p" #'minuet-previous-suggestion
+        "M-n" #'minuet-next-suggestion
+        "<backtab>" #'minuet-accept-suggestion
+        "M-<return>" #'minuet-accept-suggestion
+        "C-<return>" #'minuet-accept-suggestion
+        "M-l" #'minuet-accept-suggestion-line
+        "C-g" #'minuet-dismiss-suggestion)
+  (setq! minuet-n-completions 2
+         minuet-context-window 768
+         minuet-auto-suggestion-debounce-delay 0.8
+         minuet-request-timeout 10)
+  (cc/minuet--use-claude)
+  ;; (cc/minuet--use-ollama)
+  )
 
 ;; codeium
 ;; (use-package! codeium
