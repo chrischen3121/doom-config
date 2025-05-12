@@ -73,9 +73,8 @@
         "C-<return>" #'minuet-accept-suggestion
         "M-l" #'minuet-accept-suggestion-line
         "C-g" #'minuet-dismiss-suggestion)
-  (setq! minuet-n-completions 2
-         minuet-context-window 768
-         minuet-auto-suggestion-debounce-delay 0.8
+  (setq! minuet-auto-suggestion-debounce-delay 0.8
+         minuet-auto-suggestion-throttle-delay 3.0
          minuet-request-timeout 10)
   (cc/minuet--use-claude)
   ;; (cc/minuet--use-ollama)
