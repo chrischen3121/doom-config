@@ -1,6 +1,14 @@
 #+title: :cc-langs python
+* TODO items
+- [ ] use ~uv~
 
 * System-wise Development Env
+** TODO ~uv~ approach
+#+begin_src bash
+uv tool install "python-lsp-server[all]"
+...
+#+end_src
+** ~pipx~ approach
 - Python interpreter: system builtin
 - Packages: ~pipx~
   - Make sure ~pipx~ is installed with system package manager. (e.g. ~python-pipx~ in Arch Linux)
