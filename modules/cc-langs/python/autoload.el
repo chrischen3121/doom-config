@@ -2,6 +2,24 @@
 ;;; cc-langs/python/autoload.el
 
 ;;;###autoload
+(defun cc/python-set-default-capf ()
+  "Set the completion-at-point-functions for Python mode."
+  (setq-local completion-at-point-functions
+              '(yasnippet-capf
+                cape-file
+                t)))
+
+;;;###autoload
+(defun cc/python-set-lsp-capf ()
+  "Set the completion-at-point-functions for Python mode(with lsp-mode)."
+  (when (derived-mode-p 'python-mode)
+    (setq-local completion-at-point-functions
+                `(,(cape-capf-super #'lsp-completion-at-point #'yasnippet-capf)
+                  cape-file
+                  python-completion-at-point
+                  t))))
+
+;;;###autoload
 (defun cc/python-dis-region-or-buffer ()
   "Disassemble the Python code in the current region or buffer and show it in a temp buffer."
   (interactive)

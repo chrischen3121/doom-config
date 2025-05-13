@@ -12,6 +12,10 @@
   (setq-hook! 'python-mode-hook
     python-indent-offset cc/python-indent-offset)
 
+  (add-hook! 'python-mode-hook
+             #'cc/python-set-default-capf)
+  (add-hook! 'lsp-completion-mode-hook #'cc/python-set-lsp-capf)
+
   ;; set default python interpreter
   (setq! python-shell-interpreter "python3"
          doom-modeline-env-enable-python nil)
@@ -53,6 +57,28 @@
         :desc "poetry" "C-c l p" #'poetry))
 
 (when (modulep! :lang python +lsp)
+  (after! lsp-ruff
+    (setq! lsp-ruff-advertize-fix-all nil
+           lsp-ruff-advertize-organize-imports t))
+  (after! lsp-pylsp
+    (setq! lsp-pylsp-plugins-jedi-completion-enabled t
+           lsp-pylsp-plugins-mccabe-enabled t
+           lsp-pylsp-plugins-mccabe-threshold 10
+           lsp-pylsp-plugins-ruff-enabled t
+           lsp-pylsp-plugins-ruff-format t
+           lsp-pylsp-plugins-pydocstyle-enabled nil
+           lsp-pylsp-plugins-pycodestyle-enabled nil
+           lsp-pylsp-plugins-flake8-enabled nil
+           lsp-pylsp-plugins-black-enabled nil
+           lsp-pylsp-plugins-isort-enabled nil
+           lsp-pylsp-plugins-mypy-enabled nil
+           lsp-pylsp-plugins-pylint-enabled nil
+           lsp-pylsp-plugins-pyflakes-enabled nil
+           lsp-pylsp-plugins-autopep8-enabled nil
+           lsp-pylsp-plugins-yapf-enabled nil))
+  (after! lsp-pyright
+    (setq! lsp-pyright-disable-organize-imports t
+           lsp-pyright-type-checking-mode "off"))
   (map! :map lsp-mode-map
         :desc "Organize imports" "C-c c o"
         #'lsp-organize-imports))

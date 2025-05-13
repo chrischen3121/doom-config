@@ -12,7 +12,7 @@
 
 ;;;###autoload
 (defun cc/cpp-set-default-capf ()
-  "Set the completion-at-point-functions for C++ mode src blocks."
+  "Set the completion-at-point-functions for C++ mode."
   (setq-local completion-at-point-functions
               '(yasnippet-capf
                 cape-file
