@@ -79,7 +79,7 @@
            lsp-pylsp-plugins-yapf-enabled nil))
   (after! lsp-pyright
     (setq! lsp-pyright-disable-organize-imports t
-           lsp-pyright-type-checking-mode "off"))
+           lsp-pyright-type-checking-mode "standard"))
   (map! :map lsp-mode-map
         :desc "Organize imports" "C-c c o"
         #'lsp-organize-imports))

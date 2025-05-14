@@ -3,7 +3,7 @@
 
 ;;;###autoload
 (defun cc/python-set-default-capf ()
-  "Set the completion-at-point-functions for Python mode."
+  "Set the `completion-at-point-functions' for Python mode."
   (setq-local completion-at-point-functions
               '(yasnippet-capf
                 cape-file
@@ -11,7 +11,7 @@
 
 ;;;###autoload
 (defun cc/python-set-lsp-capf ()
-  "Set the completion-at-point-functions for Python mode(with lsp-mode)."
+  "Set the `completion-at-point-functions' for Python mode(with lsp-mode)."
   (when (derived-mode-p 'python-mode)
     (setq-local completion-at-point-functions
                 `(,(cape-capf-super #'lsp-completion-at-point #'yasnippet-capf)

@@ -14,6 +14,12 @@
   :type 'string
   :group 'cc-ui)
 
+(defcustom cc/emoji-font
+  "Noto Color Emoji"
+  "The default emoji font for the system."
+  :type 'string
+  :group 'cc-ui)
+
 (defcustom cc/font-size 16
   "The default monospace font size."
   :type 'integer

@@ -5,13 +5,13 @@
 ;; (use-package! aider
 ;;   :commands (aider-transient-menu)
 ;;   :init
-;;   (map! :desc "Aider menu" "C-c a" #'aider-transient-menu))
+;;   (map! :desc "Aider menu" "C-c a a" #'aider-transient-menu))
 
 ;; aidermacs
 (use-package! aidermacs
   :commands aidermacs-transient-menu
   :init
-  (map! :desc "Aider menu" "C-c a" #'aidermacs-transient-menu)
+  (map! :desc "Aider menu" "C-c a a" #'aidermacs-transient-menu)
   :config
   (setenv "ANTHROPIC_API_KEY" cc/anthropic-key)
   (setenv "OPENAI_API_KEY" cc/openai-key)
@@ -36,8 +36,8 @@
              gptel-add-file
              gptel-rewrite)
   :init
-  (map! :prefix ("C-c x" . "gptel")
-        :desc "gptel menu" "x" #'gptel-menu
+  (map! :prefix ("C-c a g" . "gptel")
+        :desc "gptel menu" "g" #'gptel-menu
         :desc "Open chat" "c" #'gptel
         :desc "Add region/buffer" "a" #'gptel-add
         :desc "Add file" "f" #'gptel-add-file
@@ -77,7 +77,7 @@
           ("fetch" . (:command "uvx" :args ("mcp-server-fetch")))
           ;; ("git" . (:command "uvx" :args ("mcp-server-git" "--git-dir" ,cc/mcp-git-directory)))
           ))
-  (map! :desc "mcp hub" "C-c x m" #'mcp-hub)
+  (map! :desc "mcp hub" "C-c a m" #'mcp-hub)
   (when cc/use-mcp-p
     (after! gptel
       (cc/gptel-mcp-register-tools))

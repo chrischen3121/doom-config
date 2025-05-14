@@ -45,7 +45,7 @@
 (use-package! copilot-chat
   :commands copilot-chat-transient
   :init
-  (map! :desc "Copilot chat menu" "C-c c p" #'copilot-chat-transient)
+  (map! :desc "Copilot chat menu" "C-c a c" #'copilot-chat-transient)
   (add-hook! 'git-commit-setup-hook #'copilot-chat-insert-commit-message)
   :config
   (setq! copilot-chat-backend 'curl

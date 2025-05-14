@@ -167,6 +167,10 @@
        ("l" . "<local>")
        )
 
+      ;; C-c a -- ai
+      (:prefix
+       ("a" . "<ai>"))
+
       ;; C-c o -- open
       (:prefix-map
        ("o" . "<open>")

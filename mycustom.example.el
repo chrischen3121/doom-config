@@ -3,6 +3,8 @@
 
 ;; cc-ui
 (setq! cc/mono-font "Hack"
+       cc/unicode-font "Source Han Sans CN"
+       cc/emoji-font "Noto Color Emoji"
        cc/font-size 24
        ;; recommended: doom-one-light, doom-acario-light(cold), doom-oksolar-light(warm)
        cc/light-theme 'doom-one-light
@@ -19,8 +21,8 @@
        cc/org-agenda-dir "~/org/todos/")
 
 ;; cc-dev
-(setq! cc/copilot-chat-model "gpt-4o"
-       cc/cc-default-tab-width 2)
+(setq! cc/copilot-chat-model "claude-3.7-sonnet"
+       cc/cpp-default-tab-width 2)
 
 ;; cc-ai
 (setq! cc/openai-key ""

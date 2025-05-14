@@ -22,7 +22,7 @@
        (corfu +orderless +icons) ; the ultimate code completion backend
 
        :ui
-       doom              ; what makes DOOM look the way it does
+       doom              ; what makes DOOM look the way it does 😖😕
        doom-dashboard    ; a nifty splash screen for Emacs
        doom-quit         ; DOOM quit-message prompts when you quit Emacs ;
        hl-todo           ; highlight TODO/FIXME/NOTE/DEPRECATED/HACK/REVIEW/BUG/XXX
@@ -37,7 +37,7 @@
        vc-gutter         ; vcs diff in the fringe
        (window-select +numbers)     ; visually switch windows
        workspaces        ; tab emulation, persistence & separate workspaces
-       zen               ; distraction-free coding or writing
+       zen               ; distraction-free coding or writing:
 
        :editor
        file-templates    ; auto-snippets for empty files
@@ -99,7 +99,7 @@
        markdown            ; writing docs for people to ignore
        (org +roam2 +present) ; TODO +noter
        plantuml            ; diagrams for confusing people more
-       (python +lsp +tree-sitter) ; use pylsp+ruff; optional +pyright
+       (python +lsp +pyright +tree-sitter) ; use pylsp+ruff; optional +pyright
        ;; (python +lsp +pyenv +poetry +pyright +tree-sitter) ; basedpyright lsp server with poetry, pyenv
        qt                  ; the 'cutest' gui framework ever
        rst                 ; ReST in peace
