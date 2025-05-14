@@ -281,11 +281,11 @@
           :desc "Unblock folders" "b" #'lsp-workspace-blocklist-remove
           :desc "Switch client" "s" #'+lsp/switch-client)
          (:when (modulep! :ui treemacs +lsp)
-           :prefix ("t" . "<treemacs-lsp>")
-           :desc "Incoming call hierarchy" "i" #'lsp-treemacs-call-hierarchy
-           :desc "Outgoing call hierarchy" "o" (cmd!! #'lsp-treemacs-call-hierarchy t)
-           :desc "Type hierarchy" "t" #'lsp-treemacs-type-hierarchy
-           :desc "References tree" "r" (cmd!! #'lsp-treemacs-references t)
+           :desc "Errors List" "e" #'lsp-treemacs-errors-list
+           (:prefix ("t" . "<treemacs-lsp>")
+            :desc "Incoming call hierarchy" "i" #'lsp-treemacs-call-hierarchy
+            ;; :desc "Outgoing call hierarchy" "o" (cmd!! #'lsp-treemacs-call-hierarchy t)
+            :desc "Type hierarchy" "t" #'lsp-treemacs-type-hierarchy)
            )
          )
        )

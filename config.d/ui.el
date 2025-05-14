@@ -29,8 +29,9 @@
          :desc "Switch workspace" "o" #'treemacs-switch-workspace))
   (setq! +treemacs-git-mode 'deferred)
   (when (modulep! :ui treemacs +lsp)
-    (setq! lsp-treemacs-sync-mode t))
-  )
+    (setq! lsp-treemacs-sync-mode t
+           treemacs-width 25
+           lsp-treemacs-error-list-expand-depth 3)))
 
 (when (modulep! :ui window-select)
   (custom-set-faces!

@@ -21,9 +21,9 @@
   (add-to-list 'auto-mode-alist '("conanfile\\.txt\\'" . conf-unix-mode))
   (after! disaster (cc/configure--disaster))
   (setq-hook! 'c++-mode-hook
-    standard-indent cc/cc-default-tab-width
-    c-basic-offset cc/cc-default-tab-width
-    tab-width cc/cc-default-tab-width)
+    standard-indent cc/cpp-default-tab-width
+    c-basic-offset cc/cpp-default-tab-width
+    tab-width cc/cpp-default-tab-width)
   (add-hook! 'c++-mode-hook
              #'cc/cpp-set-default-sytle
              #'cc/cpp-set-default-capf)
