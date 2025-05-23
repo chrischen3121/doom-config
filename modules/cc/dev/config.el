@@ -33,9 +33,7 @@
   (setq! whitespace-style (delq 'newline-mark whitespace-style))
   (map! :desc "Copilot mode" "C-c t a" #'copilot-mode
         :map copilot-completion-map
-        "<backtab>" #'copilot-accept-completion
         "M-<return>" #'copilot-accept-completion
-        "C-<return>" #'copilot-accept-completion
         "M-w" #'copilot-accept-completion-by-word
         "M-l" #'copilot-accept-completion-by-line
         "M-n" #'copilot-next-completion
@@ -68,9 +66,7 @@
   (map! :map minuet-active-mode-map
         "M-p" #'minuet-previous-suggestion
         "M-n" #'minuet-next-suggestion
-        "<backtab>" #'minuet-accept-suggestion
         "M-<return>" #'minuet-accept-suggestion
-        "C-<return>" #'minuet-accept-suggestion
         "M-l" #'minuet-accept-suggestion-line
         "C-g" #'minuet-dismiss-suggestion)
   (setq! minuet-auto-suggestion-debounce-delay 0.8
