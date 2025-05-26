@@ -6,6 +6,11 @@
   :group 'cc-dev
   :type 'string)
 
+(defcustom cc/copilot-chat-commit-model "claude-sonnet-4"
+  "Default model for Copilot Chat commit messages."
+  :group 'cc-dev
+  :type 'string)
+
 (defun cc/minuet--use-claude ()
   (setenv "ANTHROPIC_API_KEY" cc/anthropic-key)
   (setq! minuet-provider 'claude

@@ -29,3 +29,26 @@
        cc/anthropic-key ""
        cc/gemini-key ""
        cc/deepseek-key "")
+
+;; ai-tools
+(setq!
+ ;; aidermacs
+ ;; models:
+ ;; deepseek-reasoner
+ ;; deepseek/deepseek-chat
+ ;; claude-sonnet-4-20250514
+ ;; gemini-2.5-pro-preview-05-06
+ aidermacs-use-architect-mode t
+ aidermacs-default-model "claude-sonnet-4-20250514"
+ aidermacs-weak-model "claude-3-5-haiku-latest"
+ aidermacs-architect-model "gemini-2.5-pro-preview-05-06"
+ ;; for code generation
+ aidermacs-editor-model "claude-sonnet-4-20250514"
+ aidermacs-auto-commits nil
+ ;; aidermacs-config-file "~/.aider.conf.yml"
+
+ ;; gptel
+ gptel-model 'claude-3-5-haiku-latest
+ gptel-temperature 0.8
+ gptel-max-tokens 4096
+ )

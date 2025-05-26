@@ -16,16 +16,7 @@
   (setenv "ANTHROPIC_API_KEY" cc/anthropic-key)
   (setenv "OPENAI_API_KEY" cc/openai-key)
   (setenv "GEMINI_API_KEY" cc/gemini-key)
-  (setenv "DEEPSEEK_API_KEY" cc/deepseek-key)
-  (setq! aidermacs-use-architect-mode t
-         aidermacs-default-model "sonnet"
-         ;; for architect reasoning
-         aidermacs-architect-model "gemini/gemini-2.5-pro-exp-03-25"
-         ;; for code generation
-         aidermacs-editor-model "sonnet"
-         aidermacs-auto-commits nil
-         ;; aidermacs-config-file "~/.aider.conf.yml"
-         ))
+  (setenv "DEEPSEEK_API_KEY" cc/deepseek-key))
 
 ;; gptel
 (use-package! gptel
@@ -46,12 +37,10 @@
         :desc "Tools disable" "T" #'cc/gptel-disable-all-mcp-tools)
   :config
   (setq! gptel-default-mode 'org-mode
-         gptel-temperature 1
-         gptel-max-tokens 8192
          gptel-log-level 'info
          gptel-use-tools t
          gptel-include-reasoning t
-         gptel-rewrite-default-action 'diff)
+         gptel-rewrite-default-action 'ediff)
   (setq! gptel-api-key cc/openai-key)
   (gptel-make-anthropic "Claude" :stream t :key cc/anthropic-key)
   (gptel-make-gemini "Gemini" :stream t :key cc/gemini-key)

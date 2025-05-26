@@ -49,6 +49,7 @@
   (setq! copilot-chat-backend 'curl
          copilot-chat-frontend 'org
          copilot-chat-default-model cc/copilot-chat-model
+         copilot-chat-commit-model cc/copilot-chat-commit-model
          copilot-chat-commit-prompt
          (concat
           copilot-chat-commit-prompt
