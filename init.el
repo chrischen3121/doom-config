@@ -16,6 +16,7 @@
 
 ;; Ignore "Package cl is deprecated" warning
 (setq byte-compile-warnings '(cl-functions))
+(add-to-list 'initial-frame-alist '(fullscreen . maximized))
 
 (doom! :completion
        (vertico +icons)    ; the search engine of the future

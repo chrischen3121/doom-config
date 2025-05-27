@@ -1,4 +1,5 @@
 ;;; -*- lexical-binding: t; no-byte-compile: t; -*-
+
 ;;; cc/theme/init.el
 (defcustom cc/mono-font
   (string-trim-right

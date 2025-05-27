@@ -12,5 +12,4 @@
     (set-theme-based-on-sys-style)
   (set-theme-based-on-time))
 
-(add-to-list 'initial-frame-alist '(fullscreen . maximized))
 (map! "<f12>" #'cc/switch-light-dark-theme)
