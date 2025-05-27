@@ -3,6 +3,7 @@
 
 (when (modulep! :editor fold)
   (map! :map (prog-mode-map
+              python-mode-map
               yaml-mode-map
               org-mode-map)
         :prefix ("C-c <TAB>" . "<fold>")
