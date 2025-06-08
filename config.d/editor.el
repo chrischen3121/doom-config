@@ -38,5 +38,7 @@
 
 (when (modulep! :editor word-wrap)
   (+global-word-wrap-mode +1)
+  (dolist (mode '(prog-mode yaml-mode emacs-lisp-mode python-mode c++-mode))
+    (add-to-list '+word-wrap-disabled-modes mode))
   (when (modulep! :term vterm)
     (add-to-list '+word-wrap-disabled-modes 'vterm-mode)))

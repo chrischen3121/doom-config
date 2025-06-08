@@ -11,12 +11,7 @@
 (use-package! aidermacs
   :commands aidermacs-transient-menu
   :init
-  (map! :desc "Aider menu" "C-c a a" #'aidermacs-transient-menu)
-  :config
-  (setenv "ANTHROPIC_API_KEY" cc/anthropic-key)
-  (setenv "OPENAI_API_KEY" cc/openai-key)
-  (setenv "GEMINI_API_KEY" cc/gemini-key)
-  (setenv "DEEPSEEK_API_KEY" cc/deepseek-key))
+  (map! :desc "Aider menu" "C-c a a" #'aidermacs-transient-menu))
 
 ;; gptel
 (use-package! gptel
