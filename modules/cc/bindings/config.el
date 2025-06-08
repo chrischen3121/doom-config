@@ -298,7 +298,8 @@
          :desc "Find snippet" "f" #'+snippets/find
          :desc "Browse snippets" "b" #'+default/browse-templates
          :desc "aya create" "m" #'aya-create
-         :desc "aya expand" "a" #'aya-expand))
+         :desc "aya expand" "a" #'aya-expand
+         :desc "Describe snippets" "d" #'yas-describe-tables))
 
       ;; C-c i -- insert
       (:prefix-map

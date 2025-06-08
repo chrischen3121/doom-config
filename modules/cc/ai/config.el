@@ -2,16 +2,19 @@
 ;;; cc/ai/config.el
 
 ;; aider
-;; (use-package! aider
-;;   :commands (aider-transient-menu)
-;;   :init
-;;   (map! :desc "Aider menu" "C-c a a" #'aider-transient-menu))
+(use-package! aider
+  :commands (aider-transient-menu)
+  :init
+  (map! :desc "aider.el menu" "C-c a e" #'aider-transient-menu
+        (:map aider-prompt-mode-map
+         :desc "Aider send region" "C-c C-e" #'aider-send-line-or-region
+         :desc "Switch to aider" "C-c C-b" #'aider-switch-to-buffer)))
 
 ;; aidermacs
 (use-package! aidermacs
   :commands aidermacs-transient-menu
   :init
-  (map! :desc "Aider menu" "C-c a a" #'aidermacs-transient-menu))
+  (map! :desc "Aidermacs menu" "C-c a a" #'aidermacs-transient-menu))
 
 ;; gptel
 (use-package! gptel

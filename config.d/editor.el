@@ -33,6 +33,7 @@
         "C-c &" nil
         "M-/" #'yasnippet-capf
         "C-M-/" #'yas-expand
+        "C-c y /" #'yas-expand
         :desc "Reload snippets" "C-c y r" #'yas-reload-all
         :desc "Insert snippet" "C-c y i" #'yas-insert-snippet))
 
