@@ -33,7 +33,10 @@
       "S-<return>" #'org-insert-todo-heading
       :desc "Open link" "C-c o l" #'org-open-at-point
       :desc "Search in outline tree" "C-c s o" #'org-sparse-tree
-
+      ;; C-x n --- narrow
+      (:prefix "C-x n"
+       :desc "Narrow to subtree" "n" #'org-narrow-to-subtree
+       :desc "Widen" "w" #'widen)
       ;; C-c i --- insert
       (:prefix "C-c i"
        :desc "Org insert date" "t" #'org-timestamp-inactive
