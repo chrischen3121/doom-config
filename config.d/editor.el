@@ -9,6 +9,7 @@
         :prefix ("C-c <TAB>" . "<fold>")
         :desc "Fold/Unfold" "<TAB>" #'+fold/toggle
         :desc "Fold all" "f" #'hs-hide-all
+        :desc "Fold level" "l" #'hs-hide-level
         :desc "Unfold all" "u" #'hs-show-all))
 
 (when (modulep! :editor multiple-cursors)
