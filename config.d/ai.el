@@ -7,7 +7,7 @@
   (setq! aidermacs-use-architect-mode t
          aidermacs-default-model "sonnet"
          aidermacs-weak-model "claude-3-5-haiku-latest"
-         aidermacs-architect-model "gemini/gemini-2.5-pro-preview-06-05"
+         ;; aidermacs-architect-model "gemini/gemini-2.5-pro-preview-06-05"
          aidermacs-auto-commits nil
          ;; May modify aidermacs-common-prompts
          )
