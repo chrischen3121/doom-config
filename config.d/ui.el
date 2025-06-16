@@ -31,7 +31,9 @@
   (when (modulep! :ui treemacs +lsp)
     (setq! lsp-treemacs-sync-mode t
            treemacs-width 25
-           lsp-treemacs-error-list-expand-depth 3)))
+           lsp-treemacs-error-list-expand-depth 3)
+    (map! :map lsp-treemacs-generic-map
+          :desc "Select window" "C-x o" #'other-window)))
 
 (when (modulep! :ui window-select)
   (custom-set-faces!

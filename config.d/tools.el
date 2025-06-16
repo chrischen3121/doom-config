@@ -25,18 +25,30 @@
          lsp-ui-sideline-show-symbol nil
          lsp-ui-sideline-delay 1
 
+         lsp-ui-imenu-buffer-position 'left
+         lsp-ui-imenu-auto-refresh t
+         lsp-imenu-detailed-outline nil
+         lsp-imenu-index-symbol-kinds '(Namespace Class Constructor Method Property Function)
+
          lsp-inline-completion-enable nil
          ;; lsp-inline-completion-idle-delay 0.5
 
-         lsp-ui-imenu-buffer-position 'left
-         lsp-ui-imenu-auto-refresh t
          ;; lsp-ui-doc
          lsp-ui-doc-enable nil)
   (map! :map lsp-mode-map
         "s-l" nil
         :desc "Format buffer" "C-c c f" #'lsp-format-buffer
+
         :map lsp-ui-mode-map
-        :desc "Open lsp-ui imenu" "C-c o i" #'lsp-ui-imenu)
+        :desc "Lsp Symbol List" "C-c c l s" #'lsp-ui-imenu
+        :desc "Lsp Symbol List" "C-c t i" #'lsp-ui-imenu
+
+        :map lsp-ui-imenu-mode-map
+        :desc "Next line" "n" #'next-line
+        :desc "Previous line" "p" #'previous-line
+        :desc "Next kind" "M-n" #'lsp-ui-imenu--next-kind
+        :desc "Previous kind" "M-p" #'lsp-ui-imenu--prev-kind
+        :desc "Refresh imenu" "g" #'lsp-ui-imenu--refresh)
   (map! :after lsp-inline-completion
         :map lsp-inline-completion-active-map
         "M-<return>" #'lsp-inline-completion-accept

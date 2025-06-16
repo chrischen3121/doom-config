@@ -208,7 +208,7 @@
        (:when (modulep! :ui zen)
          :desc "zen-mode" "z" #'+zen/toggle)
        (:when (modulep! :ui indent-guides)
-         :desc "Indent guides" "i" #'indent-bars-mode)
+         :desc "Indent guides" "<TAB>" #'indent-bars-mode)
        (:when (modulep! :editor word-wrap)
          :desc "Visual line mode" "v" #'+word-wrap-mode)
        (:when (modulep! :checkers spell)
