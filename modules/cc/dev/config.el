@@ -39,26 +39,6 @@
         "M-n" #'copilot-next-completion
         "M-p" #'copilot-previous-completion))
 
-;; Github Copilot Chat
-(use-package! copilot-chat
-  :commands copilot-chat-transient
-  :init
-  (map! :desc "Copilot chat menu" "C-c a c" #'copilot-chat-transient)
-  (add-hook! 'git-commit-setup-hook #'copilot-chat-insert-commit-message)
-  :config
-  (setq! copilot-chat-backend 'curl
-         copilot-chat-frontend 'org
-         copilot-chat-default-model cc/copilot-chat-model
-         copilot-chat-commit-model cc/copilot-chat-commit-model
-         copilot-chat-commit-prompt
-         (concat
-          copilot-chat-commit-prompt
-          "The commit message \"<type>[optional scope]: <description>\" should be <= 50 characters.\n"))
-
-  ;; close all copilot chat buffers when quitting emacs
-  (advice-add #'save-buffers-kill-emacs
-              :before #'cc/close-all-copilot-chat-buffers))
-
 ;; minuet configuration
 (use-package! minuet
   :init

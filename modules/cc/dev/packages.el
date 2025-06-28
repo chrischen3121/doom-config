@@ -6,10 +6,7 @@
 
 (package! rainbow-mode)
 
-;; (disable-packages! copilot
-;;                    copilot-chat)
 (package! copilot)
-(package! copilot-chat)
 
 ;; (package! codeium
 ;;   :recipe (:host github

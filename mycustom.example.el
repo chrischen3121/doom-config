@@ -21,8 +21,7 @@
        cc/org-agenda-dir "~/org/todos/")
 
 ;; cc-dev
-(setq! cc/copilot-chat-model "claude-3.7-sonnet"
-       cc/cpp-default-tab-width 2)
+(setq! cc/cpp-default-tab-width 2)
 
 ;; cc-ai
 (setq! cc/openai-key ""
