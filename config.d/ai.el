@@ -4,7 +4,7 @@
 (after! aidermacs
   ;; Comment with AI! triggers aider to make changes to your code.
   ;; AI? triggers aider to answer your question.
-  (setq! aidermacs-use-architect-mode t
+  (setq! aidermacs-default-chat-mode 'architect
          aidermacs-default-model "sonnet"
          aidermacs-weak-model "claude-3-5-haiku-latest"
          ;; aidermacs-architect-model "gemini/gemini-2.5-pro-preview-06-05"

@@ -37,7 +37,6 @@
  ;; deepseek/deepseek-chat
  ;; claude-sonnet-4-20250514
  ;; gemini-2.5-pro-preview-05-06
- aidermacs-use-architect-mode t
  aidermacs-default-model "claude-sonnet-4-20250514"
  aidermacs-weak-model "claude-3-5-haiku-latest"
  aidermacs-architect-model "gemini-2.5-pro-preview-05-06"
