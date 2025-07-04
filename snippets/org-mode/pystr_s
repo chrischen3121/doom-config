@@ -1,8 +1,0 @@
-# -*- mode: snippet -*-
-# name: pystr session
-# uuid: pystrs
-# key: pystr_s
-# --
-#+begin_src python :results value verbatim :session ${1:name}
-$0
-#+end_src

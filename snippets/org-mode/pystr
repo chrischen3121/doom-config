@@ -1,8 +1,0 @@
-# -*- mode: snippet -*-
-# name: pystr
-# uuid: pystr
-# key: pystr
-# --
-#+begin_src python :results value verbatim
-$0
-#+end_src
