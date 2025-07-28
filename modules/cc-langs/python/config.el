@@ -13,7 +13,8 @@
     python-indent-offset cc/python-indent-offset)
 
   (add-hook! 'python-mode-hook
-             #'cc/python-set-default-capf)
+             #'cc/python-set-default-capf
+             #'whole-line-or-region-local-mode)
   (add-hook! 'lsp-completion-mode-hook #'cc/python-set-lsp-capf)
 
   ;; set default python interpreter
@@ -40,15 +41,22 @@
         :desc "Disassemble region/buffer" "C-c c d"
         #'cc/python-dis-region-or-buffer)
 
-  (when (modulep! :lang rst)
-    (use-package! sphinx-doc
-      :hook (python-mode . sphinx-doc-mode)
-      :config
-      (setq! sphinx-doc-include-types t
-             sphinx-doc-python-indent cc/python-indent-offset)
-      (map! :map sphinx-doc-mode-map
-            :desc "Insert docstring" "C-c i d"
-            #'sphinx-doc)))
+  ;; (use-package! sphinx-doc
+  ;;   :hook (python-mode . sphinx-doc-mode)
+  ;;   :config
+  ;;   (setq! sphinx-doc-include-types t
+  ;;          sphinx-doc-python-indent cc/python-indent-offset)
+  ;;   (map! :map sphinx-doc-mode-map
+  ;;         :desc "Insert docstring" "C-c i d"
+  ;;         #'sphinx-doc))
+
+  (use-package! python-insert-docstring
+    :commands (python-insert-docstring-with-google-style-at-point)
+    :init
+    (map! :map python-mode-map
+          :desc "Insert docstring" "C-c i d"
+          #'python-insert-docstring-with-google-style-at-point))
+
   )
 
 (when (modulep! :lang python +poetry)
