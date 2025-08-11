@@ -41,22 +41,14 @@
         :desc "Disassemble region/buffer" "C-c c d"
         #'cc/python-dis-region-or-buffer)
 
-  ;; (use-package! sphinx-doc
-  ;;   :hook (python-mode . sphinx-doc-mode)
-  ;;   :config
-  ;;   (setq! sphinx-doc-include-types t
-  ;;          sphinx-doc-python-indent cc/python-indent-offset)
-  ;;   (map! :map sphinx-doc-mode-map
-  ;;         :desc "Insert docstring" "C-c i d"
-  ;;         #'sphinx-doc))
-
-  (use-package! python-insert-docstring
-    :commands (python-insert-docstring-with-google-style-at-point)
-    :init
-    (map! :map python-mode-map
+  (use-package! sphinx-doc
+    :hook (python-mode . sphinx-doc-mode)
+    :config
+    (setq! sphinx-doc-include-types nil
+           sphinx-doc-python-indent cc/python-indent-offset)
+    (map! :map sphinx-doc-mode-map
           :desc "Insert docstring" "C-c i d"
-          #'python-insert-docstring-with-google-style-at-point))
-
+          #'sphinx-doc))
   )
 
 (when (modulep! :lang python +poetry)

@@ -10,5 +10,4 @@
  pyimport
  py-isort)
 
-;; (package! sphinx-doc)
-(package! python-insert-docstring)
+(package! sphinx-doc)
