@@ -6,7 +6,10 @@
 
 (package! rainbow-mode)
 
-(package! copilot)
+(package! copilot
+  :recipe (:host github
+           :repo "copilot-emacs/copilot.el"
+           :files ("*.el")))
 
 ;; (package! codeium
 ;;   :recipe (:host github
