@@ -3,6 +3,8 @@
 # uuid: asyncmain
 # key: asyncmain
 # --
+import asyncio
+
 async def main():
     ${0:pass}
 
