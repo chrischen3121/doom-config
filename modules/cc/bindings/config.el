@@ -266,10 +266,8 @@
                    (not (modulep! :tools lsp +eglot)))
          :map lsp-mode-map
          :desc "Action" "a" #'lsp-execute-code-action
-         (:prefix ("l" . "<lsp>")
-          :desc "Organize imports" "i" #'lsp-organize-imports
-          :desc "Rename" "r" #'lsp-rename
-          :desc "Inlay Hints Mode" "I" #'lsp-inlay-hints-mode)
+         :desc "Rename" "r" #'lsp-rename
+         :desc "Inlay Hints Mode" "I" #'lsp-inlay-hints-mode
          (:prefix ("s". "<lsp-session>")
           :desc "Describe session" "?" #'lsp-describe-session
           :desc "Disconnect" "q" #'lsp-disconnect
