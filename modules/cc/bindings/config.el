@@ -188,9 +188,9 @@
          :desc "Jump to definition" "." #'+lookup/definition
          :desc "Jump to references" "r" #'+lookup/references
          :desc "Jump to documentation" "k" #'+lookup/documentation
-         :desc "Find implementations" "i" #'+lookup/implementations
          :desc "Find type definition" "t" #'+lookup/type-definition
-         :desc "Search imenu" "m" #'consult-imenu
+         :desc "Find implementations" "c" #'+lookup/implementations
+         :desc "Search imenu" "i" #'consult-imenu
          :desc "Search online" "o" #'+lookup/online
          :desc "Search dictionary" "d" #'+lookup/dictionary-definition)
        (:when (and (modulep! :completion vertico)
