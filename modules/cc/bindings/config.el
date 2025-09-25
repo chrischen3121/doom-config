@@ -190,6 +190,7 @@
          :desc "Jump to documentation" "k" #'+lookup/documentation
          :desc "Find implementations" "i" #'+lookup/implementations
          :desc "Find type definition" "t" #'+lookup/type-definition
+         :desc "Search imenu" "m" #'consult-imenu
          :desc "Search online" "o" #'+lookup/online
          :desc "Search dictionary" "d" #'+lookup/dictionary-definition)
        (:when (and (modulep! :completion vertico)

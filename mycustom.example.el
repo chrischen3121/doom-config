@@ -2,7 +2,7 @@
 ;;; mycustom.el
 
 ;; cc-ui
-(setq! cc/mono-font "Hack Nerd Font Mono"
+(setq! cc/mono-font "Hack"
        cc/unicode-font "Source Han Sans CN"
        cc/emoji-font "Noto Color Emoji"
        cc/font-size 24
